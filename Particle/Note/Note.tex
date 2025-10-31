@@ -1,0 +1,404 @@
+% !TEX program = xelatex
+\documentclass[12pt,oneside]{ctexart}
+
+% ---- 页面布局与边注 ----
+\usepackage[
+  a4paper,
+  left=50mm,
+  right=25mm,
+  top=25mm,
+  bottom=28mm,
+  marginparwidth=36mm,
+  marginparsep=6mm
+]{geometry}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{2em}
+
+% 边注：固定在左侧
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\small\itshape}
+\reversemarginpar
+\newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
+
+% ---- 数学与结构 ----
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\setlist{nosep}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{定理}
+\theoremstyle{remark}
+\newtheorem{example}[definition]{例}
+
+% ---- 页眉页脚 ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 粒子物理笔记}
+\rhead{\footnotesize \leftmark}
+\cfoot{\thepage}
+
+% ---- 颜色与超链接 ----
+\usepackage{xcolor}
+\definecolor{link}{RGB}{17,85,204}
+\usepackage[
+  colorlinks=true,
+  linkcolor=link,
+  urlcolor=link,
+  citecolor=link
+]{hyperref}
+
+% ---- 附加推导环境（保留你的开关）----
+\newif\ifshowderiv
+\showderivtrue
+\newcommand{\derivdefaulttitle}{额外说明}
+\newenvironment{derivationnote}[1][\derivdefaulttitle]{%
+  \ifshowderiv\begin{quote}\small\itshape
+  \noindent\textbf{#1}\;\par
+}{%
+  \end{quote}\fi
+}
+
+% ---- 章节标题 ----
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+
+% ---- 文档信息 ----
+\title{粒子物理笔记}
+\author{Leonard Hsiao}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% 目录页左侧边注（提示结构）
+\tableofcontents
+
+\section{中微子振荡的基本概念与性质}
+弱相互作用过程产生或被探测到的中微子称为\emph{味本征态}：
+\[
+\nu_\alpha,\quad \alpha=e,\mu,\tau,
+\]
+自由传播的中微子具有确定质量，称为\emph{质量本征态}：
+\[
+\nu_i,\quad i=1,2,3,\ \text{质量 } m_i.
+\]
+二者通过酉矩阵（PMNS）联系：
+\begin{equation}\label{eq:pmns}
+\nu_\alpha=\sum_{i=1}^3 U_{\alpha i}\,\nu_i,\qquad
+\nu_i=\sum_{\alpha=e,\mu,\tau}U^{*}_{\alpha i}\,\nu_\alpha.
+\end{equation}
+\paragraph{物理含义}
+对中微子的探测一般依赖于检测对应的轻子信号，也就是观测味本征态。一般的粒子，味本征态是哈密顿量的本征态，所以传播过程前后对味道的观测会得到相同的结果。
+但是中微子不同，中微子的味道不是传播哈密顿量的本征态，只有质量是哈密顿量的本征态，味本征态要表示为质量本征态的叠加态，因此在传播过程中不同质量态会积累不同的相位，导致味道发生变化，这就是中微子振荡现象。
+在 $t=0$ 由弱相互作用产生的某一味道（如 $\nu_e$）通常不是单一质量态，而是多个质量态的\emph{相干叠加}。
+每个质量本征态按自由传播相位演化
+\begin{equation}\label{eq:phase}
+\nu_i(t)=e^{-iE_i t}\,\nu_i(0),\qquad
+E_i\simeq p+\frac{m_i^{2}}{2E}\quad(\text{相对论近似}).
+\end{equation}
+由于 $m_i$ 不同，$E_i$ 略有差异，传播后各分量间产生\emph{相位差}，在探测点重新叠加时发生量子干涉，于是被测到的味道随传播“基线比” $L/E$ 呈\textbf{周期性变化（振荡）}。
+
+\section{两种中微子振荡的规律与推导}
+为清晰起见考虑两味情形（以 $\nu_e$--$\nu_\mu$ 为例），质量态为 $\nu_1,\nu_2$，混合角为 $\theta$：
+\begin{equation}\label{eq:2mix}
+\begin{pmatrix}\nu_e\\[2pt]\nu_\mu\end{pmatrix}
+=
+\begin{pmatrix}\cos\theta & \sin\theta\\[2pt]-\sin\theta & \cos\theta\end{pmatrix}
+\begin{pmatrix}\nu_1\\[2pt]\nu_2\end{pmatrix}.
+\end{equation}
+
+\subsection{从时间演化到转化概率}
+
+若在初始时刻 $t=0$ 产生的是电子中微子 $\nu_e$，则其味本征态可用质量本征态 $\nu_1$、$\nu_2$ 表示为
+\[
+\nu_e = \cos\theta \cdot \nu_1 + \sin\theta \cdot \nu_2.
+\]
+经过时间 $t$ 传播后，每个质量本征态按平面波演化，即 $\nu_j(t) = e^{-i E_j t} \nu_j$，因此
+\[
+\nu_e(t) = \cos\theta \cdot e^{-i E_1 t} \nu_1 + \sin\theta \cdot e^{-i E_2 t} \nu_2.
+\]
+
+将 $\nu_e(t)$ 投影到 $\nu_\mu$ 态上。由于 $\nu_\mu = -\sin\theta \cdot \nu_1 + \cos\theta \cdot \nu_2$，可得跃迁振幅
+\begin{align*}
+A_{e \to \mu}(t) &= \langle \nu_\mu | \nu_e(t) \rangle \\
+&= (-\sin\theta)(\cos\theta e^{-i E_1 t}) + (\cos\theta)(\sin\theta e^{-i E_2 t}) \\
+&= \sin\theta\cos\theta \left( e^{-i E_2 t} - e^{-i E_1 t} \right).
+\end{align*}
+
+于是转化概率为
+\begin{align*}
+P_{e\mu}(t) &= |A_{e \to \mu}(t)|^2 \\
+&= \sin^2\theta\cos^2\theta \left| e^{-i E_2 t} - e^{-i E_1 t} \right|^2.
+\end{align*}
+计算模平方：
+\begin{align*}
+\left| e^{-i E_2 t} - e^{-i E_1 t} \right|^2 
+&= \left( e^{-i E_2 t} - e^{-i E_1 t} \right) \left( e^{i E_2 t} - e^{i E_1 t} \right) \\
+&= 2 - e^{-i (E_2 - E_1) t} - e^{i (E_2 - E_1) t} \\
+&= 2 - 2\cos\big( (E_2 - E_1) t \big).
+\end{align*}
+利用三角恒等式 $1 - \cos 2\phi = 2\sin^2\phi$，取 $\phi = \frac{E_2 - E_1}{2} t$，可得
+\[
+\left| e^{-i E_2 t} - e^{-i E_1 t} \right|^2 = 4 \sin^2\!\left( \frac{E_2 - E_1}{2} t \right).
+\]
+同时 $\sin^2\theta\cos^2\theta = \frac{1}{4} \sin^2 2\theta$，因此
+\[
+P_{e\mu}(t) = \sin^2(2\theta) \cdot \sin^2\!\left( \frac{E_2 - E_1}{2} t \right).
+\]
+即
+\begin{equation}\label{eq:probEt}
+P_{e\mu}(t) = \sin^2(2\theta) \, \sin^2\!\left( \frac{E_2 - E_1}{2} t \right).
+\end{equation}
+
+在相对论近似下（中微子质量远小于能量，$m_j \ll E$），有
+\begin{align*}
+E_j &= \sqrt{p^2 + m_j^2} \approx p + \frac{m_j^2}{2E},
+\end{align*}
+因此能量差
+\begin{align*}
+E_2 - E_1 &\approx \frac{m_2^2 - m_1^2}{2E} = \frac{\Delta m^2}{2E},
+\end{align*}
+其中 $\Delta m^2 = m_2^2 - m_1^2$。又因中微子以接近光速传播，可取 $L \simeq t$（自然单位制 $c=1$）。代入上式得
+\[
+P_{e\mu}(L,E) = \sin^2(2\theta) \, \sin^2\!\left( \frac{\Delta m^2 L}{4E} \right).
+\]
+而电子中微子存活概率 $P_{ee}$ 由概率归一化条件给出：
+\[
+P_{ee} = 1 - P_{e\mu}.
+\]
+于是得到标准的两味振荡公式：
+\begin{equation}\label{eq:2flavor}
+\boxed{
+P_{e\mu}(L,E) = \sin^2(2\theta) \, \sin^2\!\left( \frac{\Delta m^2 L}{4E} \right), \qquad
+P_{ee} = 1 - P_{e\mu}.
+}
+\end{equation}
+
+不难看出，中微子的振荡概率由其传播距离周而复始的变化，精确的实验可以测量到这种变化，从而推断出混合角 $\theta$ 和质量平方差 $\Delta m^2$ 的数值。
+\begin{derivationnote}[实际束流的平均效应]
+上述推导假设中微子束流是单色的。实际实验中，中微子束流具有能量分布 $\phi(E)$，观测到的概率需要对该分布进行平均：
+\[
+\langle \mathcal{P}_{\alpha\beta}(L) \rangle = \int \mathcal{P}_{\alpha\beta}(L, E) \phi(E) dE
+\]
+
+这种能量平均效应会导致振荡振幅随距离增加而衰减，特别是在 $\Delta m^2 \gg E/L$ 区域，不同能量的中微子干涉相消，使得远距离观测到的振荡现象被"抹平"。
+\end{derivationnote}
+
+\section{一般（三味）中微子振荡规律}
+
+\subsection{PMNS 矩阵与味混合}
+
+在三代中微子框架下，描述味本征态 ($\nu_e, \nu_\mu, \nu_\tau$) 与质量本征态 ($\nu_1, \nu_2, \nu_3$) 之间变换关系的矩阵称为PMNS矩阵（Pontecorvo-Maki-Nakagawa-Sakata矩阵），这是一个 $3\times 3$ 的酉矩阵：
+
+\begin{equation}\label{eq:pmns_def}
+U_{\mathrm{PMNS}} = \begin{pmatrix}
+U_{e1} & U_{e2} & U_{e3} \\
+U_{\mu 1} & U_{\mu 2} & U_{\mu 3} \\
+U_{\tau 1} & U_{\tau 2} & U_{\tau 3}
+\end{pmatrix}
+\end{equation}
+
+该矩阵可以分解为三个欧拉转动的乘积，并包含一个可能的CP破坏相位 $\delta_{\mathrm{CP}}$：
+\begin{equation}\label{eq:pmns_decomp}
+U_{\mathrm{PMNS}} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & c_{23} & s_{23} \\
+0 & -s_{23} & c_{23}
+\end{pmatrix}
+\begin{pmatrix}
+c_{13} & 0 & s_{13}e^{-i\delta} \\
+0 & 1 & 0 \\
+-s_{13}e^{i\delta} & 0 & c_{13}
+\end{pmatrix}
+\begin{pmatrix}
+c_{12} & s_{12} & 0 \\
+-s_{12} & c_{12} & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\end{equation}
+其中 $c_{ij} = \cos\theta_{ij}$, $s_{ij} = \sin\theta_{ij}$，$\theta_{12}, \theta_{23}, \theta_{13}$ 是三个混合角，$\delta$ 是CP破坏相位。
+
+矩阵元 $U_{\alpha i}$ 的物理意义是：味本征态 $\nu_\alpha$ 中包含质量本征态 $\nu_i$ 的量子振幅。因此，$\nu_\alpha$ 态可以表示为：
+\begin{equation}\label{eq:flavor_superposition}
+\nu_\alpha = \sum_{i=1}^3 U_{\alpha i} \nu_i
+\end{equation}
+
+\subsection{三味振荡概率的详细推导}
+
+考虑在 $t=0$ 时刻产生一个纯的 $\nu_\alpha$ 味本征态。根据式~\eqref{eq:flavor_superposition}，其初始状态为：
+\[
+|\nu_\alpha(0)\rangle = \sum_{i=1}^3 U_{\alpha i} |\nu_i\rangle
+\]
+
+经过时间 $t$（传播距离 $L \approx t$）后，每个质量本征态按平面波演化：
+\[
+|\nu_i(t)\rangle = e^{-iE_i t} |\nu_i\rangle
+\]
+其中 $E_i = \sqrt{p^2 + m_i^2} \approx p + \frac{m_i^2}{2E}$（相对论近似）。
+
+因此，$t$ 时刻的态矢量为：
+\[
+|\nu_\alpha(t)\rangle = \sum_{i=1}^3 U_{\alpha i} e^{-iE_i t} |\nu_i\rangle
+\]
+
+在探测点测量到 $\nu_\beta$ 味的振幅为：
+\[
+A_{\alpha\to\beta}(t) = \langle\nu_\beta|\nu_\alpha(t)\rangle = \sum_{i=1}^3 U_{\alpha i} e^{-iE_i t} \langle\nu_\beta|\nu_i\rangle
+\]
+由于 $\langle\nu_\beta|\nu_i\rangle = U_{\beta i}^*$（酉矩阵的性质），我们有：
+\[
+A_{\alpha\to\beta}(t) = \sum_{i=1}^3 U_{\alpha i} U_{\beta i}^* e^{-iE_i t}
+\]
+
+转化概率为振幅的模平方：
+\begin{align*}
+\mathcal{P}_{\alpha\beta}(t) &= \left|\sum_{i=1}^3 U_{\alpha i} U_{\beta i}^* e^{-iE_i t}\right|^2 \\
+&= \sum_{i=1}^3 \sum_{j=1}^3 U_{\alpha i} U_{\beta i}^* U_{\alpha j}^* U_{\beta j} e^{-i(E_i - E_j)t}
+\end{align*}
+
+利用酉矩阵的完备性关系 $\sum_i U_{\alpha i} U_{\beta i}^* = \delta_{\alpha\beta}$，并分离实部和虚部，经过代数运算可得标准形式：
+\begin{equation}\label{eq:3flavor_full}
+\boxed{
+\begin{aligned}
+\mathcal{P}_{\alpha\beta}(L,E) &= \delta_{\alpha\beta} \\
+&\quad - 4 \sum_{i < j} \Re\left(U_{\alpha i}^* U_{\beta i} U_{\alpha j} U_{\beta j}^*\right) \sin^2\left( \frac{\Delta m_{ij}^2 L}{4E} \right) \\
+&\quad + 2 \sum_{i < j} \Im\left(U_{\alpha i}^* U_{\beta i} U_{\alpha j} U_{\beta j}^*\right) \sin\left( \frac{\Delta m_{ij}^2 L}{2E} \right)
+\end{aligned}
+}
+\end{equation}
+其中 $\Delta m_{ij}^2 = m_i^2 - m_j^2$，$L \approx t$。
+
+\subsection{振荡行为的参数依赖与观测条件}
+
+\begin{equation}\label{eq:key_observation}
+\boxed{
+\begin{aligned}
+&\text{\textbf{振荡灵敏度与} $\Delta m^2$ \textbf{的关系：}} \\
+&\bullet\ \Delta m^2 \sim E/L:\quad \text{振荡最明显（最佳灵敏度）} \\
+&\bullet\ \Delta m^2 \ll E/L:\quad \text{距离不够，振荡尚未发生} \\
+&\bullet\ \Delta m^2 \gg E/L:\quad \text{距离过远，振荡被平均化}
+\end{aligned}
+}
+\end{equation}
+
+\begin{equation}\label{eq:observation_conditions}
+\boxed{
+\begin{aligned}
+&\text{\textbf{观测到中微子振荡的两个必要条件：}} \\
+&\bullet\ \text{混合角 $\theta_{ij}$ 不能太小（保证足够的振荡振幅）} \\
+&\bullet\ \text{实验的 $L/E$ 值与 $\Delta m^2_{ij}$ 匹配（保证振荡周期可观测）}
+\end{aligned}
+}
+\end{equation}
+
+不同实验中微子源对应的典型参数范围如下表所示：
+
+\begin{derivationnote}[CP破坏与反中微子振荡]
+中微子振荡公式中的第三项（虚部项）具有重要的物理意义：它代表了CP破坏效应。当我们将混合矩阵 $U$ 替换为其复共轭 $U^*$（对应于反中微子情况）时：
+\begin{itemize}
+\item 第一行（$\delta_{\alpha\beta}$项）保持不变
+\item 第二行（实部项）保持不变（CP守恒部分）
+\item 第三行（虚部项）改变符号（CP破坏部分）
+\end{itemize}
+
+这意味着，如果CP破坏相位 $\delta \neq 0$ 或 $\pi$，则中微子与反中微子的振荡概率将存在差异：
+\[
+\mathcal{P}_{\nu_\alpha \to \nu_\beta} \neq \mathcal{P}_{\bar{\nu}_\alpha \to \bar{\nu}_\beta}
+\]
+
+这种CP不对称性的大小由 $\sin\delta$ 决定，是当前和未来中微子实验（如DUNE、Hyper-Kamiokande）的重要研究目标，对于理解宇宙中物质-反物质不对称性具有重要意义。
+\end{derivationnote}
+
+
+\section{中微子的螺旋度、手征性和majorana中微子}
+
+\subsection{基本定义}
+
+\paragraph{螺旋度的定义}
+螺旋度是描述自旋为 $1/2$ 的费米子自旋方向与其运动方向相对关系的物理量，数学上定义为：
+\begin{equation}\label{eq:helicity_def}
+h = \frac{\vec{s} \cdot \vec{p}}{|\vec{p}|}
+\end{equation}
+其中 $\vec{s}$ 是自旋算符，$\vec{p}$ 是动量矢量。对于自旋 $1/2$ 的粒子，螺旋度理论上可取 $\pm 1/2$ 两个本征值：
+\begin{itemize}
+\item $h = +1/2$：\textbf{右旋}，自旋方向与动量方向相同
+\item $h = -1/2$：\textbf{左旋}，自旋方向与动量方向相反
+\end{itemize}
+
+\paragraph{手征性的定义}
+手征性是量子场论中更为基本的概念，通过手征投影算符来定义：
+\begin{equation}\label{eq:chirality_def}
+P_L = \frac{1}{2}(1 - \gamma^5), \quad P_R = \frac{1}{2}(1 + \gamma^5)
+\end{equation}
+其中 $\gamma^5$ 是狄拉克矩阵。一个狄拉克旋量场 $\psi$ 可以分解为左手征部分和右手征部分：
+\begin{equation}\label{eq:chiral_decomp}
+\psi_L = P_L \psi, \quad \psi_R = P_R \psi
+\end{equation}
+手征性在洛伦兹变换下保持不变，是\emph{洛伦兹不变量}。
+
+\subsection{螺旋度与手征性的关系与区别}
+
+\begin{equation}\label{eq:relation_box}
+\boxed{
+\begin{aligned}
+&\text{\textbf{螺旋度 vs. 手征性：}} \\
+&\bullet\ \text{螺旋度：依赖于参考系的运动学量} \\
+&\bullet\ \text{手征性：洛伦兹不变的动力学量} \\
+&\bullet\ \text{对无质量粒子：两者重合} \\
+&\bullet\ \text{对有质量粒子：手征态是螺旋度态的叠加}
+\end{aligned}
+}
+\end{equation}
+
+对于\emph{无质量}的自由费米子（如假设中微子质量为零），手征态与螺旋度本征态完全重合：
+\begin{itemize}
+\item 左手征态 $\psi_L$ 对应左螺旋态（$h = -1/2$）
+\item 右手征态 $\psi_R$ 对应右螺旋态（$h = +1/2$）
+\end{itemize}
+
+然而对于\emph{有质量}的粒子，情况变得复杂。由于质量项在狄拉克方程中混合了左手征和右手征分量，一个有质量的粒子其手征态不再是螺旋度的本征态。具体来说，一个有质量的左螺旋粒子实际上是左手征态和右手征态的量子叠加：
+\begin{equation}\label{eq:mass_mixing}
+|\text{左螺旋}\rangle = \cos\theta |\psi_L\rangle + \sin\theta |\psi_R\rangle
+\end{equation}
+其中混合角 $\theta$ 与粒子质量相关。
+
+根据螺旋度的定义，有质量粒子很容易通过洛伦兹变换改变其运动方向，从而改变螺旋度的符号，但手征性是数学构造出来的，是洛伦兹不变量，非0质量粒子下二者解耦。
+
+\begin{derivationnote}[宇称不守恒的起源]
+一般的费米子由Dirac旋量描述，四个自由度（正反粒子和对应的两个螺旋度），如果中微子严格无质量，则可用外尔的二分量理论描述，此时自然界只存在 $\nu_L$ 和 $\bar{\nu}_R$ ，也就是左手中微子和右手反中微子两个物理态。在这种图像下，空间反演（宇称变换）会将左旋中微子 $\nu_L$ 变为自然界不存在的右旋中微子 $\nu_R$，这直接导致了弱相互作用中的宇称不守恒现象。
+\end{derivationnote}
+\subsection{中微子质量的影响与现代观点}
+
+中微子振荡的发现证明中微子具有微小但非零的质量，这对螺旋度与手征性的关系产生了重要影响：
+
+\begin{itemize}
+\item 由于质量非零，中微子的手征态不再是螺旋度的本征态
+\item 左手征的中微子包含一小部分右螺旋分量
+\item 这使得手征翻转过程成为可能，为无中微子双$\beta$衰变等新物理现象提供了理论基础
+\item 实际观测到的"纯左手中微子"实际上是弱相互作用只耦合到左手征分量的结果
+\end{itemize}
+
+当前中微子物理的核心问题之一就是理解这种微小质量的起源及其对手征性的影响。
+
+\subsection{马约拉纳中微子与无中微子双$\beta$衰变}
+
+Diac理论认为中微子和反中微子是两种粒子，要用四个分量来描述，但是marajona理论认为中微子就是反中微子，只需要两个分量来描述，这样的粒子称为马约拉纳粒子。马约拉纳中微子可以通过无中微子双$\beta$衰变实验来探测，这种衰变过程违反了轻子数守恒，是寻找新物理的重要途径。
+但是李和杨发现的宇称不守恒说明实验中只存在左手征的中微子和右手征的反中微子，由于手征不匹配的关系这禁止了双$\beta$衰变发生。中微子有两个分量的描述是基于它无质量，但是中微子振荡为中微子有质量提供了实验证据，因此中微子是否为马约拉纳粒子仍然是一个悬而未决的问题。
+\begin{equation}\label{eq:current_status}
+\boxed{
+\begin{aligned}
+&\text{\textbf{当前中微子物理未解之谜：}} \\
+&\bullet\ \text{中微子质量的大小和起源？} \\
+&\bullet\ \text{中微子是否为马约拉纳粒子？} \\
+&\bullet\ \text{中微子是否导致宇宙物质-反物质不对称？}
+\end{aligned}
+}
+\end{equation}
+
+中微子振荡是目前唯一确凿的超出标准模型的实验证据，对其性质的深入研究是发现新物理的重要突破口。
+\end{document}

@@ -1,0 +1,1361 @@
+% !TEX program = xelatex
+\documentclass[12pt,oneside]{ctexart}
+
+% ---- 页面布局与边注 ----
+\usepackage[
+  a4paper,
+  left=50mm,           % 左边留白，留出边注区
+  right=25mm,
+  top=25mm,
+  bottom=28mm,
+  marginparwidth=36mm, % 边注栏宽度
+  marginparsep=6mm     % 边注与正文间距
+]{geometry}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{2em}
+
+% 边注：固定在左侧
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\small\itshape}
+\reversemarginpar
+\newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
+
+% ---- 数学与结构 ----
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\setlist{nosep}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{定理}
+\theoremstyle{remark}
+\newtheorem{example}[definition]{例}
+
+% ---- 页眉页脚 ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 天体物理中的辐射过程学习笔记}
+\rhead{\footnotesize \leftmark}
+\cfoot{\thepage}
+
+% ---- 颜色与超链接 ----
+\usepackage{xcolor}
+\definecolor{link}{RGB}{17,85,204}
+\usepackage[
+  colorlinks=true,
+  linkcolor=link,
+  urlcolor=link,
+  citecolor=link
+]{hyperref}
+
+% ---- 附加推导环境（可自定义标题 & 可一键隐藏）----
+\newif\ifshowderiv
+\showderivtrue                 % 全局开关：隐藏时改为 \showderivfalse
+
+\newcommand{\derivdefaulttitle}{额外说明}
+
+\newenvironment{derivationnote}[1][\derivdefaulttitle]{%
+  % 开始：开启跨环境条件，false 时整段内容都会被跳过
+  \ifshowderiv\begin{quote}\small\itshape
+  \noindent\textbf{#1}\;\par
+}{%
+  \end{quote}\fi
+}
+
+
+% ---- 章节标题 ----
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+
+% ---- 文档信息 ----
+\title{天体物理中的辐射过程学习笔记}
+\author{Leonhard Hsiao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\section{辐射和辐射转移的基本知识}
+
+\n{
+\textbf{光的波粒二象性}：
+光既表现为波动性，又表现为粒子性。
+\\[0.5em]
+\textbf{波动性参数：} 频率 $\nu$、波长 $\lambda$；
+\\[0.3em]
+\textbf{粒子性参数：} 能量 $\varepsilon$、动量 $p$。
+\\[0.5em]
+二者关系：
+\[
+\varepsilon = h\nu,\quad p = \frac{\varepsilon}{c}
+\]
+}
+
+光具有波粒二象性，其波动性可用特征参数 $\nu,\lambda$ 描述；
+粒子性可用能量 $\varepsilon$ 与动量 $p$ 描述。二者的联系如下：
+\[
+\varepsilon = h\nu,\qquad p = \frac{\varepsilon}{c}.
+\]
+由此可得：
+\[
+m = \frac{h\nu}{c^2},\quad m_0=0,\qquad 
+p = \frac{h\nu}{c} = \frac{h}{\lambda}.
+\]
+这反映了光子作为无静质量粒子的能量与动量关系。
+
+\subsection{本课程对辐射的处理方法}
+
+本课程中关于辐射的理论处理方式，大体可分为以下几类：
+
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item \textbf{经典辐射理论}：
+  用电磁场来描述辐射，适用于光子能量较低、辐射行为可视为连续波动的情形。
+  \begin{itemize}
+    \item 原子辐射可见光时，电子能量约为 $10\,\mathrm{eV}$；
+    \item 对应波长为紫外或可见光，此时经典电磁理论可较好地描述。
+  \end{itemize}
+
+  \item \textbf{半经典辐射理论}：
+  在此理论中，带电粒子的运动仍采用量子力学处理，
+  而辐射场则视为经典电磁场。
+  常用于计算电子运动所产生的辐射，如同步辐射与轫致辐射。
+
+  \item \textbf{经典与量子理论的适用范围}：
+  \begin{itemize}
+    \item 经典电磁辐射理论：用麦克斯韦方程描述电磁场的强度（$E, B$），
+          适用于粒子数多、辐射能量较低的情况；
+    \item 量子辐射理论：当光子的能量与带电粒子动能相当时，
+          必须引入光子概念，使用量子电动力学（QED）进行处理。
+  \end{itemize}
+
+  \item \textbf{常量电子理论的作用}：
+  在辐射理论中常采用“常量电子理论”近似，
+  即认为电子动能远大于辐射能量，从而忽略辐射反作用。
+  该近似在研究高能天体物理辐射（如同步辐射、康普顿散射）时非常有用。
+\end{enumerate}
+
+\subsection{Einstein的AB系数}
+Einstein用A、B系数描述粒子与辐射场相互作用的微观过程，其中，相互作用被大致分为三类：
+\begin{itemize}
+  \item \textbf{自发辐射}：粒子从高能态跃迁到低能态，释放出光子，过程与外界辐射场无关。
+  \item \textbf{受激辐射}：粒子在外界辐射场的作用下，从高能态跃迁到低能态，释放出光子。
+  \item \textbf{吸收}：粒子从低能态跃迁到高能态，吸收外界辐射场中的光子。
+\end{itemize}
+由此，Einstein定义了描述粒子发射与吸收性质的AB系数：
+\begin{itemize}
+    \item \textbf{自发发射系数$A_{21}$}: 描述单位时间内，粒子从能级2跃迁到能级1并发射一个光子的概率。
+    \item \textbf{受激发射系数$B_{21}$}: 单位时间内，粒子受辐射场$J_\nu$影响，从能级2跃迁到能级1并发射一个光子的概率为$B_{21} J_\nu$。
+    \item \textbf{吸收系数$B_{12}$}: 单位时间内，粒子吸收辐射场$J_\nu$中的光子，从能级1跃迁到能级2的概率为$B_{12} J_\nu$。
+\end{itemize}
+
+\subsubsection{Einstein系数之间的关系}
+\n{严格证明要使用量子力学的方法，参考李德民ppt，这里仅使用热力学方法给出结果。}
+设在热平衡状态下，能级 1 和 2 上的原子数分别为 $n_1$ 与 $n_2$。
+系统中辐射能量密度为 $J_\nu$。  
+则单位时间内：
+\begin{itemize}
+  \item 吸收跃迁数：$n_1 B_{12} J_\nu$；
+  \item 受激辐射数：$n_2 B_{21} J_\nu$；
+  \item 自发辐射数：$n_2 A_{21}$。
+\end{itemize}
+
+\n{
+\textbf{结论概要：}\par
+三者关系：\par $A_{21} = \dfrac{8\pi h\nu^3}{c^3} B_{21}$ \par
+$g_1 B_{12} = g_2 B_{21}$\par
+这些关系保证了热平衡下的辐射满足 Planck 分布。
+}
+
+
+
+在热平衡状态下，吸收与辐射过程达到平衡，即
+\[
+n_1 B_{12} J_\nu = n_2 A_{21} + n_2 B_{21} J_\nu.
+\]
+由此解得辐射能量密度：
+\[
+J_\nu = \frac{A_{21}/B_{21}}{(n_1/n_2)(B_{12}/B_{21}) - 1}.
+\]
+
+
+在热平衡时，能级粒子数遵循 Maxwell–Boltzmann 分布：
+\[
+\frac{n_2}{n_1} = \frac{g_2}{g_1} \exp\!\left(-\frac{h\nu}{kT}\right),
+\]
+其中 $g_i$ 为能级简并度。  
+代入上式得：
+\[
+J_\nu = 
+\frac{A_{21}/B_{21}}
+{(g_1 B_{12}/g_2 B_{21}) \exp(h\nu/kT) - 1}.
+\]
+\n{
+\textbf{麦克斯韦–玻尔兹曼分布：}\par
+描述处于热平衡的粒子在各能级上的分布规律。\par
+能级 $i$ 的粒子数比例为
+$\,n_i \propto g_i e^{-E_i/kT}\,$，
+其中 $g_i$ 为简并度，$E_i$ 为能量。\par
+反映高能粒子数随温度升高而增加的趋势。
+}
+由于在热平衡时辐射能量密度应满足 Planck 定律：
+\[
+J_\nu = \frac{2h\nu^3}{c^2} \frac{1}{e^{h\nu/kT} - 1}.
+\]
+对比两式可得爱因斯坦系数的比例关系：
+
+\[
+\boxed{
+g_1 B_{12} = g_2 B_{21}, \qquad 
+A_{21} = \frac{8\pi h\nu^3}{c^3} B_{21}.
+}
+\]
+这表明：
+\begin{itemize}
+  \item 吸收与受激辐射的几率之比仅由能级简并度决定；
+  \item 自发辐射系数与受激辐射系数成 $\nu^3$ 比例；
+\end{itemize}
+
+\subsubsection{发射吸收系数和爱因斯坦系数的关系}
+前文中构建的发射系数和吸收系数是一个相当唯象的描述，Einstein系数从微观角度出发给出了粒子发射吸收之间的关系，不难想到，两者之间是有关系的。
+
+\n{
+\textbf{要点：}
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21}\phi(\nu),
+\]
+其中 $\phi(\nu)$ 为归一化谱线分布函数。
+}
+
+发射系数（Emission Coefficient）是衡量辐射强度的重要物理量，其单位为 $\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}$。它表示在单位时间、单位体积内、沿单位立体角方向、频率在 $\nu$ 到 $\nu + d\nu$ 之间的辐射能量。对于能级跃迁 $2 \to 1$ 的辐射过程，若能级 2 上的粒子数密度为 $n_2$，则每个粒子在单位时间内以概率 $A_{21}$ 发生自发辐射，产生能量 $h\nu$。因此单位时间、单位体积内释放的总能量为 $n_2 A_{21} h\nu$。由于辐射在各个方向上是各向同性分布的，所以每个方向上辐射的能量密度仅占全部的 $1/4\pi$，由此得到
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21}.
+\]
+\n{这个部分和MICA的卷积有关系，后面要仔细研究研究。}
+在实际情况下，能级间的跃迁辐射并非严格单色，而是在中心频率 $\nu_0 = (E_2 - E_1)/h$ 附近存在一定的展宽 $\Delta \nu$。这种展宽可能来源于多普勒效应、碰撞展宽等物理机制。为了描述这种非单色性，引入谱线的分布函数 $\phi(\nu)$，它刻画了辐射能量在不同频率间的分布，并满足归一化条件
+\[
+\int \phi(\nu)\, d\nu = 1.
+\]
+因此，发射系数的实际表达式应写为
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu),
+\]
+这便是发射系数与爱因斯坦自发辐射系数之间的关系式。它表明辐射强度不仅取决于跃迁几率 $A_{21}$ 和上能级的粒子数 $n_2$，还与谱线展宽函数 $\phi(\nu)$ 有关。该式在辐射传输方程中起着关键作用，是描述热辐射和非热辐射过程的基础。
+
+
+\n{
+\textbf{要点：}\par
+吸收系数 $\alpha_\nu$ 表示辐射在传播中单位长度内被吸收的相对能量损失。\par
+利用爱因斯坦吸收系数 $B_{12}$，有
+\[
+\alpha_\nu = \frac{h\nu}{4\pi} n_1 B_{12}\phi(\nu),
+\]
+其中 $\phi(\nu)$ 为归一化谱线分布函数。
+}
+
+吸收系数（Absorption Coefficient）用于描述辐射强度在介质中传播时的衰减规律。设辐射强度为 $I_\nu$，沿传播方向 $s$ 的变化率定义为
+\[
+\alpha_\nu I_\nu = -\frac{dI_\nu}{ds},
+\]
+其中 $\alpha_\nu$ 的量纲为 $\mathrm{cm^{-1}}$，表示单位路径长度内被吸收的辐射能量比例。
+
+根据爱因斯坦的吸收系数定义，单位时间内单位体积中的粒子从能级 1 吸收频率为 $\nu$ 的辐射能量为
+\[
+\frac{h\nu}{4\pi} n_1 B_{12} J_\nu \phi(\nu),
+\]
+其中 $n_1$ 是处于能级 1 的粒子数密度，$J_\nu$ 为平均辐射能量密度。由于吸收过程导致辐射强度沿路径减弱，因此吸收系数可表示为
+\[
+\alpha_\nu = \frac{h\nu}{4\pi} n_1 B_{12}\phi(\nu).
+\]
+
+同理，对于受激辐射过程，能级 2 上的粒子以概率 $B_{21}$ 发生受激跃迁，释放与吸收相同频率的辐射。相应的“受激发射系数”可写为
+\[
+\alpha_{\mathrm{em}} = -\,\frac{h\nu}{4\pi} n_2 B_{21}\phi(\nu),
+\]
+其中负号表示受激辐射会使辐射强度增加。
+
+在推导中假设发射、吸收与受激辐射的谱线展宽相同，其轮廓函数均为 $\phi(\nu)$。  
+这使得不同辐射过程在频谱上具有一致的分布形式，从而便于在辐射传输方程中统一描述。
+
+\begin{derivationnote}[吸收系数和单位体积内能量损失的关系]
+比强度 $I_\nu(\Omega)$ 的定义是：沿方向 $\Omega$，每单位时间、单位投影面积、单位频率、
+单位立体角通过的能量。沿光线方向的传输方程为
+\[
+\frac{d I_\nu}{ds}=-\alpha_\nu I_\nu + \cdots .
+\]
+取一薄层，厚度 $ds$、截面积 $dA$，体积 $dV=dA\,ds$。在时间 $dt$、频带 $d\nu$、方向元
+$d\Omega$ 内，强度减少 $-dI_\nu=\alpha_\nu I_\nu\,ds$，相应能量损失为
+\[
+dE_{\mathrm{loss}} = (-dI_\nu)\,(dA\cos\theta)\,dt\,d\nu\,d\Omega
+= \alpha_\nu I_\nu\,ds\,dA\cos\theta\,dt\,d\nu\,d\Omega .
+\]
+两边除以 $dV\,dt\,d\nu$，得到\emph{每单位体积、单位时间、单位频率}的损失：
+\[
+\frac{1}{dV}\frac{dE_{\mathrm{loss}}}{dt\,d\nu}
+= \alpha_\nu I_\nu \cos\theta\, d\Omega .
+\]
+对所有方向求和（积分）便得总损失
+\[
+\frac{1}{dV}\frac{dE_{\mathrm{loss}}}{dt\,d\nu}
+= \alpha_\nu \int I_\nu(\Omega)\, d\Omega
+= 4\pi\,\alpha_\nu\,J_\nu,
+\qquad
+J_\nu \equiv \frac{1}{4\pi}\int I_\nu(\Omega)\,d\Omega .
+\]
+这一步把“沿光线的微分衰减”转换为“单位体积的能量损失”，从而可与微观的
+$h\nu\,n_1B_{12}J_\nu\phi(\nu)$ 匹配，解出 $\alpha_\nu$。
+\end{derivationnote}
+
+\subsubsection{净吸收系数与爱因斯坦系数；辐射转移方程的表示}
+
+
+吸收通常指光在介质中传播时的净减少，其中既包含真实吸收（由 $B_{12}$ 引起）也包含受激辐射对强度的“负吸收”（由 $B_{21}$ 引起）。因此净吸收系数写成
+\[
+\alpha_\nu=\frac{h\nu}{4\pi}\,\phi(\nu)\,[\,n_1B_{12}-n_2B_{21}\,],
+\]
+这里 $\phi(\nu)$ 为归一化线型函数，默认发射、吸收与受激发射使用相同的线型。利用爱因斯坦关系
+\[
+g_1B_{12}=g_2B_{21},\qquad A_{21}=\frac{2h\nu^3}{c^2}B_{21},
+\]
+可将上式改写为
+\[
+\alpha_\nu=\frac{h\nu}{4\pi}\,\phi(\nu)\left(\frac{n_1g_2}{g_1}-n_2\right)\frac{c^2}{2h\nu^3}A_{21}.
+\]
+另一方面，自发发射系数由
+\[
+j_\nu=\frac{h\nu}{4\pi}\,n_2A_{21}\phi(\nu)
+\]
+给出。把 $\alpha_\nu$ 与 $j_\nu$ 代入辐射转移方程，就得到由爱因斯坦系数直接表出的形式
+\[
+\boxed{\;
+\frac{dI_\nu}{ds}
+= -\,\frac{h\nu}{4\pi}\,(n_1B_{12}-n_2B_{21})\,I_\nu\,\phi(\nu)
++ \frac{h\nu}{4\pi}\,n_2A_{21}\phi(\nu)\; }.
+\]
+这说明只要知道三种爱因斯坦系数中的任意两个并给定粒子数分布，就能确定谱线附近的吸收与发射，从而唯一确定该频段的辐射传输。
+
+\subsubsection{总结}
+
+% 三种过程与系数定义
+\vspace{0.5em}
+\noindent\textbf{① 三种过程与系数定义}
+\begin{itemize}
+  \item \textbf{自发辐射}：$A_{21}$ —— 单位时间内从能级 2 到能级 1 的自发跃迁概率。
+  \item \textbf{受激辐射}：$B_{21} J_\nu$ —— 受辐射场激发的跃迁概率。
+  \item \textbf{吸收}：$B_{12} J_\nu$ —— 吸收光子从能级 1 到能级 2 的概率。
+\end{itemize}
+
+% Einstein 系数关系
+\vspace{0.5em}
+\noindent\textbf{② Einstein 系数关系（热平衡推导）}
+\[
+\boxed{
+\begin{aligned}
+g_1 B_{12} &= g_2 B_{21}, \\[4pt]
+A_{21} &= \frac{8\pi h\nu^3}{c^3} B_{21}.
+\end{aligned}
+}
+\]
+
+% 宏观量联系
+\vspace{0.5em}
+\noindent\textbf{③ 与宏观量的联系}
+\begin{itemize}
+  \item \textbf{发射系数}：
+  \[
+  j_\nu = \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu)
+  \]
+  \item \textbf{吸收系数}：
+  \[
+  \alpha_\nu = \frac{h\nu}{4\pi} (n_1 B_{12} - n_2 B_{21}) \phi(\nu)
+  \]
+  \item \textbf{谱线展宽}：$\phi(\nu)$ 需归一化：
+  \[
+  \int \phi(\nu)\, d\nu = 1
+  \]
+\end{itemize}
+
+% 辐射转移方程
+\vspace{0.5em}
+\noindent\textbf{④ 辐射转移方程（Einstein 系数形式）}
+\[
+\boxed{
+\frac{dI_\nu}{ds}
+= -\frac{h\nu}{4\pi}(n_1 B_{12} - n_2 B_{21}) I_\nu \phi(\nu)
++ \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu)
+}
+\]
+
+\subsection{散射（Scattering）}
+\subsubsection{基本定义和各项同性散射}
+光的散射是指光子与介质粒子碰撞后，光子的传播方向和能量（频率）发生改变，
+但光子的数目并不减少。  
+因此，散射可以视作“吸收”和“发射”的复合过程：  
+沿原方向传播的光强减少（类比吸收），同时光被重新分配到其他方向（类比发射）。
+一般散射有以下几种类型：
+\begin{itemize}
+  \item \textbf{弹性散射（elastic scattering）}：  
+    又称单色散射（monochromatic scattering）或相干散射（coherent scattering）。  
+    散射前后光子的频率（能量）保持不变。  
+    本节讨论的主要是这种情形。
+  \item \textbf{非弹性散射（non-elastic scattering）}：  
+    亦称“康普顿化”（Comptonization），光子能量在散射中发生变化。
+\end{itemize}
+天体物理中最重要的散射过程是\textbf{自由电子对光子的散射}。
+\textbf{纯散射}是指忽略介质的纯吸收和纯发射所讨论的仅有介质对强度重新分配的过程。
+在同一方向上，散射也会引起强度的净减少或增加，所以也可以用发射系数和吸收系数来描述散射过程。
+
+\paragraph{(1) 散射吸收项}
+由于散射使沿原方向的光强减少，定义\textbf{散射系数} $\sigma_\nu$：
+\[
+\frac{dI_\nu}{ds} = -\sigma_\nu I_\nu,
+\]
+表示单位长度上、单位立体角内单色辐射强度的\textbf{相对衰减率}。
+
+\paragraph{(2) 散射发射项}
+散射同时会使其他方向的辐射强度增加。  
+定义\textbf{散射发射系数} $j_\nu(\Omega)$，表示每单位体积、每单位立体角内因散射而“发射”的辐射强度。
+对于\textbf{弹性散射}，介质单位体积内的总“发射”量与“吸收”量相等：
+\[
+\int_{4\pi} j_\nu(\Omega)\, d\Omega
+= \int_{4\pi} \sigma_\nu I_\nu(\Omega)\, d\Omega.
+\]
+
+\n{
+\textbf{$\sigma_\nu$和$j_\nu$的关系} :\par
+在各向同性关系下，某个方向上的散射增强来自于各个方向的辐射强度叠加，因为吸收系数是相对减少量，所以等于吸收系数乘以其他方向强度的叠加，
+又因为只在乎某个方向的出射强度，所以要对方向做平均除以$4\pi$，也就是乘以平均辐射流量强度。
+}
+
+上式表明散射并不产生或损失能量，只重新分配辐射方向。通过这个隐函数，可以用散射吸收系数来描述散射发射系数。
+散射发射系数和散射吸收系数的关系在各向同性的情况下可以简化，
+若假设介质对光子的散射与方向无关（$\sigma_\nu$ 不随方向变化），
+即\textbf{各向同性散射}，
+则散射发射系数可写为：
+\[
+j_\nu = \frac{\sigma_\nu}{4\pi} \int_{4\pi} I_\nu(\Omega)\, d\Omega
+      = \sigma_\nu J_\nu,
+\]
+其中
+\[
+J_\nu = \frac{1}{4\pi}\int_{4\pi} I_\nu(\Omega)\, d\Omega
+\]
+是\textbf{各方向平均的辐射强度}。此时，如果入射场同样是各向同性的，辐射场强度改变为：
+\begin{align}
+  dI_\nu &= -\sigma_\nu I_\nu ds + j_\nu ds \nonumber \\
+         &= -\sigma_\nu I_\nu ds + \sigma_\nu J_\nu ds \nonumber\\
+         &=0
+\end{align}
+即各向同性的入射场在各向同性散射介质中不会改变强度分布。对于非各向同性入射的复杂情况，就需要求解辐射转移方程了。
+不难列出纯散射情况下各向同性介质的辐射转移方程,
+\begin{align}
+  \frac{d_\nu}{ds} &= -\sigma_\nu I_\nu +j_\nu \nonumber\\
+  &= -\sigma_\nu I_\nu + \sigma_\nu J_\nu \nonumber\\
+  &= -\sigma_\nu (I_\nu - J_\nu)
+\end{align}
+这是一个积分微分方程，可以先用随机游动模型做半定量分析，再用近似方法求解。
+% ------------------------
+\subsubsection{随机游动（Random Walks）}
+
+\n{在散射光厚的介质中，光子的运动不再用概率单次描述，而需用统计意义的随机游动模型刻画整体输运行为。}
+
+前面对吸收过程的讨论表明，光强随光深呈指数衰减：
+\[
+I_\nu = I_{\nu,0} e^{-\tau_\nu}, \qquad \frac{dI_\nu}{d\tau_\nu} = -I_\nu.
+\]
+这意味着单个光子穿过光深为 $\tau$ 的介质而\textbf{不被吸收或散射}的概率为 $e^{-\tau}$。
+因此，$1-e^{-\tau}$ 表示光子被散射或吸收的概率。
+光束的整体衰减行为（如强度下降）是所有光子与介质粒子微观相互作用的统计平均结果。  
+当介质\textbf{散射光学厚}时，单次散射的概率描述失效，
+此时光子会在介质中经历大量散射，其传播路径可视为\textbf{随机游动过程}。
+
+\paragraph{(1) 光子的随机位移}
+考虑光子在\textbf{无限大均匀介质}中传播。  
+光子经历 $N$ 次散射后，其净位移矢量为：
+\[
+\mathbf{R} = \mathbf{r}_1 + \mathbf{r}_2 + \cdots + \mathbf{r}_N,
+\]
+其中每一步 $\mathbf{r}_i$ 的方向随机、长度平均为平均自由程 $l=1/\sigma_\nu$。  
+由于散射方向完全随机，所有光子的平均位移矢量 $\langle \mathbf{R} \rangle = 0$，  
+因此定义\textbf{均方位移}：
+\[
+R_*^2 \equiv \langle R^2 \rangle = 
+\langle r_1^2 + r_2^2 + \cdots + r_N^2 + 2\mathbf{r}_1\!\cdot\!\mathbf{r}_2 + \cdots \rangle.
+\]
+
+\paragraph{(2) 各向同性散射条件下的推导}
+若散射是各向同性的，则任意两步方向无关：
+\[
+\langle \mathbf{r}_i \!\cdot\! \mathbf{r}_j \rangle = 0 \quad (i\neq j),
+\qquad
+\langle r_i^2 \rangle = l^2.
+\]
+代入上式得：
+\[
+\boxed{R_*^2 = N l^2.}
+\]
+即光子经历 $N$ 次散射后的\textbf{均方根净位移}为：
+\[
+R_* = \sqrt{N}\, l.
+\]
+
+\paragraph{(3) 光子在有限介质中的散射次数}
+若介质的物理尺度为 $L$，当光子逃出介质时，其平均净位移应满足 $R_* \sim L$。  
+因此：
+\[
+L^2 \sim N l^2 \quad \Rightarrow \quad 
+\boxed{N = \left(\frac{L}{l}\right)^2 = (\sigma_\nu L)^2 = \tau^2.}
+\]
+这表明在光学厚介质中（$\tau \gg 1$），光子典型的散射次数 $N = \tau^2$。
+
+而当介质光学薄（$\tau \ll 1$）时，光子平均只发生一次或极少散射：
+\[
+N \approx \tau.
+\]
+因此对任意光深可写为经验公式：
+\[
+\boxed{N \approx \max\{\tau,\, \tau^2\}},
+\qquad
+\text{或 } N \approx \tau + \tau^2.
+\]
+
+\paragraph{(4) 光子滞留时间与能量输运}
+光子在介质中的平均滞留时间为：
+\[
+\Delta T = \frac{N l}{c} = \frac{l}{c} \max\{\tau, \tau^2\}.
+\]
+当 $\tau \gg 1$ 时，$\Delta T$ 极长，光子多次散射被“困”于介质中，
+使出射辐射强度明显减弱。
+
+\begin{derivationnote}[物理含义]
+\begin{itemize}
+  \item $l=1/\sigma_\nu$：平均自由程；
+  \item $N$：平均散射次数；
+  \item $R_*=\sqrt{N}l$：光子的均方根净位移；
+  \item $\tau = \sigma_\nu L$：散射光深；
+  \item $\Delta T$：光子在介质中滞留时间；
+  \item 光学厚时，能量通过随机扩散形式传输，为辐射扩散理论的基础。
+\end{itemize}
+\end{derivationnote}
+
+\subsubsection{吸收与散射共存的辐射转移方程}
+
+当吸收、自发发射和各向同性散射介质同时存在时，辐射转移方程推广为：
+\[
+\frac{dI_\nu}{ds}
+= -(\alpha_\nu + \sigma_\nu) I_\nu + j_\nu + \sigma_\nu J_\nu.
+\]
+
+定义微分光深：
+\[
+d\tau_\nu = (\alpha_\nu + \sigma_\nu) ds,
+\quad\Rightarrow\quad
+\frac{dI_\nu}{d\tau_\nu} = -I_\nu + S_\nu,
+\]
+其中源函数为：
+\[
+S_\nu = \frac{j_\nu + \sigma_\nu J_\nu}{\alpha_\nu + \sigma_\nu}
+      = \epsilon_\nu B_\nu + (1 - \epsilon_\nu) J_\nu,
+\]
+并定义
+\[
+\epsilon_\nu = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}
+\]
+表示光子走完一个自由程被真吸收的概率。
+
+\subsubsection*{有效光深与包含散射的热平衡系统辐射}
+
+\n{当介质中既有吸收又有散射时，光子在逃逸前会多次相互作用，
+其平均迁移长度不再由单一吸收长度决定，而应由“有效光深”表征。}
+
+\paragraph{(1) 有效光深的定义}
+
+若光子在均匀介质中平均经过 $N_a$ 个自由程后被吸收，
+则 $N_a$ 为光子在吸收消失前平均经历的散射次数。
+吸收与消光系数之比给出：
+\[
+N_a = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}.
+\]
+
+光子被吸收前的平均位移长度 $l_*$ 称为\textbf{有效自由程 (effective mean free path)}，
+由随机游动原理：
+\[
+l_* = \sqrt{N_a}\, l
+     = \frac{1}{\sqrt{\alpha_\nu(\alpha_\nu+\sigma_\nu)}}.
+\]
+于是定义\textbf{有效光深 (effective optical depth)}：
+\[
+\tau_* = \frac{L}{l_*}
+       = L\sqrt{\alpha_\nu(\alpha_\nu+\sigma_\nu)}
+       = \sqrt{\tau_a(\tau_a+\tau_s)}.
+\]
+
+\begin{derivationnote}[物理含义]
+$l_*$ 代表光子在介质中从发射点到被吸收前的平均净位移；
+$\tau_*$ 代表光子在吸收前所经历的“有效阻光厚度”。
+当散射主导时，$\tau_* \gg \tau_a$，光子需经过多次散射才能被吸收。
+\end{derivationnote}
+
+\paragraph{(2) 包括散射的均匀热平衡系统辐射}
+
+\n{在包含散射的热平衡系统中，辐射出射强度不再由单纯吸收决定，
+而由有效光深共同调控。}
+
+对于局域热平衡 (LTE) 系统，若 $\tau_* \ll 1$，
+介质为光学薄，其单位体积内的单色辐射功率为：
+\[
+j_\nu = \alpha_\nu B_\nu.
+\]
+因此出射通量可写为：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu V.
+\]
+\n{$j_\nu = \sigma_\nu B_\nu$是基尔霍夫定理}
+若介质光学厚 ($\tau_* \gg 1$)，
+大部分光子被困于介质内部，辐射从近表层逸出：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu A l_*,
+\]
+其中 $A$ 为介质表面积。
+
+\begin{derivationnote}[]
+$l_*$ 起到“有效厚度”的作用。
+散射越强，$l_*$ 越短，光子从更浅层逃逸；
+这就是为什么强散射介质的谱偏离黑体分布。
+\end{derivationnote}
+
+\paragraph{(3) 有效光厚时的近似估算}
+
+\n{在强散射系统中，光子多次散射后逐渐热化，
+可近似把系统视作厚度为 $l_*$ 的准黑体层。}
+
+当 $\tau_* \gg 1$ 时，表层辐射趋于黑体形式：
+\[
+L_\nu \simeq 4\pi \alpha_\nu B_\nu A l_*.
+\]
+
+若定义 $\sqrt{\epsilon_\nu} = \sqrt{\alpha_\nu / (\alpha_\nu+\sigma_\nu)}$，
+则：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu A l_* 
+     = 4\pi A B_\nu l \sqrt{\frac{\alpha_\nu}{\alpha_\nu+\sigma_\nu}}
+     = 4\pi A B_\nu l \sqrt{\epsilon_\nu}.
+\]
+可见：当吸收占主导 ($\epsilon_\nu\!\to\!1$)，$L_\nu\!\to\!4\pi A B_\nu l$；
+当散射占主导 ($\epsilon_\nu\!\ll\!1$)，$L_\nu$ 显著降低。
+
+\begin{derivationnote}[]
+有效光深 $\tau_*$ 综合体现了吸收与散射的双重作用。  
+散射增大光子路径但减弱出射；
+吸收控制能量热化与释放。  
+因此，强散射下的辐射既不透明也非完全黑体，而处于\textbf{“准黑体”状态}。
+\end{derivationnote}
+\section{辐射扩散 Radiative Diffusion}
+
+\n{在光学厚介质中，辐射在局域热平衡条件下以扩散形式传输。
+不同近似描述了光场在不同尺度或边界条件下的平均行为。}
+
+辐射扩散研究的是热平衡系统中由于温度梯度导致的辐射能量输运问题，
+典型情形包括恒星内部或吸积盘深层。
+在局域热平衡下，源函数可写为：
+\[
+S_\nu = \epsilon_\nu B_\nu + (1 - \epsilon_\nu) J_\nu, 
+\quad \epsilon_\nu = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}.
+\]
+辐射能流由温度梯度驱动，满足扩散形式的能量传输方程。
+
+% 在 \subsection{罗斯兰近似（Rosseland Approximation）} 之后添加以下内容
+
+\subsection{扩散过程的普适理论}
+
+\n{扩散是自然界中最普遍的输运现象之一，描述了由随机运动导致的梯度消失过程。
+从微观的随机游走到宏观的扩散方程，体现了统计物理的强大预测能力。}
+
+扩散过程描述了由于微观粒子的随机运动导致的宏观量的均质化过程。这种过程在自然界中无处不在，从分子在液体中的扩散到热量在固体中的传导，再到光子在天体物理介质中的能量传输，都遵循着相似的数学规律。
+
+\subsubsection*{微观基础：随机游走模型}
+
+扩散的微观本质是大量粒子的无规则随机运动。考虑一维随机游走模型：
+\begin{itemize}
+  \item 粒子每步随机向左或向右移动 $\Delta x$，概率各为 $1/2$
+  \item 每步时间间隔为 $\Delta t$
+  \item 经过 $N$ 步后，时间 $t = N\Delta t$
+\end{itemize}
+
+统计性质为：
+\begin{align*}
+\text{平均位移} &\quad \langle x \rangle = 0 \\
+\text{均方位移} &\quad \langle x^2 \rangle = N(\Delta x)^2 = \frac{(\Delta x)^2}{\Delta t} t
+\end{align*}
+
+定义\textbf{扩散系数}：
+\[
+D = \frac{(\Delta x)^2}{2\Delta t}
+\]
+则扩散的特征标度律为：
+\[
+\boxed{x_{\text{rms}} = \sqrt{\langle x^2 \rangle} = \sqrt{2Dt}}
+\]
+
+$\delta x$是平均自由程，而$\Delta t$就是平均自由时间，这两个系数是有介质决定的，藏在扩散系数中。这个 $\sqrt{t}$ 的标度关系是扩散过程的标志性特征，与波动传播的线性关系 $x \propto t$ 形成鲜明对比。
+
+
+
+这个公式的物理意义清晰：扩散效率正比于运动速度和能够自由运动的距离，反比于空间维度（高维空间中随机游走更"低效"）。
+
+\paragraph{不同物理过程中的扩散系数}
+
+\begin{table}[h]
+\centering
+\caption{不同物理过程中的扩散系数对比}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{过程} & \textbf{载流子} & \textbf{扩散系数} & \textbf{物理意义} \\
+\hline
+分子扩散 & 分子 & $D = \frac{1}{3} v_m l_m$ & $v_m$: 分子热速度，$l_m$: 分子平均自由程 \\
+热传导 & 声子/分子 & $\alpha = \frac{\kappa}{\rho c_p}$ & 热扩散系数，描述温度均匀化 \\
+电导率 & 电子 & $D = \frac{1}{3} v_F l_e$ & $v_F$: 费米速度，$l_e$: 电子平均自由程 \\
+辐射扩散 & 光子 & $D_{\text{rad}} = \frac{c}{3\alpha_R}$ & 光速 $c$，罗斯兰平均不透明度 $\alpha_R$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\n{广义扩散系数 $D = \frac{1}{3} v l$ 中的 $1/3$ 因子来源于三维空间各向同性散射的统计平均。
+在一维和二维情况下，这个因子分别变为 $1$ 和 $1/2$。}
+
+\paragraph{特征时间尺度}
+对于系统尺度 $L$，扩散的特征时间为：
+\[
+\tau_{\text{diff}} \sim \frac{L^2}{D}
+\]
+这个标度关系解释了为什么：
+- 糖在水中扩散需要几分钟（$L \sim \text{cm}$）
+- 热量在地球内部扩散需要百万年（$L \sim 10^3 \text{km}$）
+- 光子从太阳中心扩散需要数百万年（$L \sim R_\odot$）
+
+\begin{derivationnote}[量纲分析推导]
+从扩散方程 $\partial u/\partial t = D\nabla^2 u$ 的量纲分析：
+\[
+[u]/[t] = [D][u]/[L]^2 \Rightarrow [D] = [L]^2/[T]
+\]
+因此特征时间 $\tau \sim L^2/D$，与详细推导一致。
+\end{derivationnote}
+
+% ------------------------------------------------------------
+\subsection{罗斯兰近似（Rosseland Approximation）}
+
+\n{物理思想：在\textbf{光学厚}、\textbf{近似 LTE} 的介质深处，$I_\nu$ 在一个平均自由程上变化很小，
+可把辐射场看作对局域黑体场 $B_\nu(T)$ 的\textbf{微小扰动}。能流来自 $T$ 的缓慢空间梯度，
+其频率加权由“越透明的频段贡献越大”决定。}
+
+\subsubsection*{物理思想与物理图像}
+
+罗斯兰近似的核心物理思想是，在光学极厚的介质中，辐射能量的传输本质上是一种扩散过程。这种扩散行为的物理根源在于光子的随机游走特性。在恒星内部这样的光学厚环境中，光子的平均自由程远远小于系统的特征尺度，每个光子都会经历无数次的吸收、再发射和散射过程。虽然单个光子以光速运动，但由于运动方向的不断随机化，能量的净传输速度远远低于光速，整体上表现为缓慢的扩散过程。
+
+这种扩散图像与分子热传导有着深刻的相似性。在气体热传导中，能量通过分子的随机碰撞传递；在辐射扩散中，能量通过光子的随机游走传递。两者都满足相同形式的扩散方程，只是其中的输运系数不同。辐射热导率由光子的平均自由程和辐射能容对温度的导数共同决定，而特征性的1/3因子则来源于三维空间中随机游走的几何统计。
+
+罗斯兰近似的精妙之处在于它同时处理了两个看似矛盾的要求：一方面，在光学厚介质深处，频繁的相互作用使得辐射场在能量密度层面接近局域黑体分布；另一方面，温度梯度的存在又要求有净的能量流动。这个看似矛盾的要求通过将辐射强度分解为各向同性的黑体部分和微小的各向异性修正来同时满足。各向同性部分维持了辐射能量密度接近黑体值，而各向异性部分则承担了能量输运的任务。这种分解在数学上是自洽的，在物理上对应着“在维持近热平衡的前提下实现能量输运的最经济方式”。
+
+\subsubsection*{设定与基本方程（平行层、含散射）}
+
+考虑平行层介质，物理量仅随 $z$ 变化。把路径方向用
+$\mu=\cos\theta$ 表示，转移方程写作
+\[
+\mu \frac{\partial I_\nu}{\partial z}
+= -(\alpha_\nu+\sigma_\nu)\, (I_\nu - S_\nu),
+\qquad
+S_\nu = \epsilon_\nu B_\nu + (1-\epsilon_\nu)J_\nu,
+\quad \epsilon_\nu\equiv\frac{\alpha_\nu}{\alpha_\nu+\sigma_\nu}.
+\]
+其中 $\alpha_\nu$、$\sigma_\nu$ 分别为吸收与散射系数，$S_\nu$ 为源函数。
+
+\subsubsection*{深层近似与一阶展开}
+
+\n{深层（$\tau_\ast\gg1$）$I_\nu$ 近似各向同性且与 $B_\nu(T)$ 仅差一个小量。令
+$I_\nu = B_\nu + \delta I_\nu$，并在一平均自由程 $l=(\alpha_\nu+\sigma_\nu)^{-1}$ 上对 $z$ 作一阶展开。}
+
+在 LTE 深层，$J_\nu\simeq B_\nu$，进而 $S_\nu\simeq B_\nu$。把 $I_\nu=B_\nu+\delta I_\nu$ 代回：
+\[
+\mu \frac{\partial (B_\nu+\delta I_\nu)}{\partial z}
+= -(\alpha_\nu+\sigma_\nu)\big[(B_\nu+\delta I_\nu)-B_\nu \big]
+= -(\alpha_\nu+\sigma_\nu)\,\delta I_\nu .
+\]
+忽略高阶项并解得微小各向异性部分
+\[
+\boxed{
+\delta I_\nu \;\simeq\; -\,\frac{\mu}{\alpha_\nu+\sigma_\nu}\,\frac{\partial B_\nu}{\partial z}
+}
+\qquad\Rightarrow\qquad
+\boxed{
+I_\nu \;\simeq\; B_\nu(T) \;-\; \frac{\mu}{\alpha_\nu+\sigma_\nu}\,\frac{\partial B_\nu}{\partial z}
+}
+\]
+这体现了：$I_\nu$ 对 $z$ 的变化主要来自 $T(z)$ 的渐变。
+
+\begin{derivationnote}[近似的两条关键假设]
+深层近似的成立依赖于两个基本假设：首先是光学厚度足够大以保证辐射场近似各向同性，这使得平均辐射场 $J_\nu$ 接近黑体函数 $B_\nu(T)$；其次是温度梯度足够缓慢，使得黑体函数在一个平均自由程尺度上的变化很小，可以进行一阶泰勒展开。这两个假设共同保证了我们可以将复杂的角各向异性压缩进简单的线性修正项中。
+\end{derivationnote}
+
+\subsubsection*{单色能流与扩散形式}
+
+\n{能流是角动量一阶矩：$F_\nu \!=\!2\pi\!\int_{-1}^{1}\!\mu I_\nu d\mu$，零阶的 $B_\nu$ 项因奇偶性给零。}
+
+\[
+F_\nu(z)
+= 2\pi \int_{-1}^1 \mu \left[B_\nu - \frac{\mu}{\alpha_\nu+\sigma_\nu}\frac{\partial B_\nu}{\partial z}\right] d\mu
+= -\,\frac{4\pi}{3(\alpha_\nu+\sigma_\nu)}\,\frac{\partial B_\nu}{\partial z}.
+\]
+把 $\partial B_\nu/\partial z$ 换成温度梯度：
+\[
+\boxed{
+F_\nu(z) = -\,\frac{4\pi}{3(\alpha_\nu+\sigma_\nu)}\,
+\frac{\partial B_\nu}{\partial T}\,\frac{dT}{dz}
+}
+\]
+
+此时我们已经可以清晰地看到扩散方程的形式。能流与温度梯度成正比，比例系数中包含了介质的吸收和散射特性。特别值得注意的是其中的1/3因子，这个因子来源于三维随机游走的几何统计，是扩散过程的一个特征性标志。
+
+\subsubsection*{对频率积分与罗斯兰平均}
+
+\n{频率积分时，越透明的频段（$1/(\alpha_\nu+\sigma_\nu)$ 大）贡献越大；
+权重不是 $B_\nu$，而是 $\partial B_\nu/\partial T$。这正是“罗斯兰权重”。}
+
+\[
+F(z) \equiv \int_0^\infty F_\nu\, d\nu
+= -\frac{4\pi}{3}\left[
+\frac{\displaystyle \int_0^\infty 
+\frac{1}{\alpha_\nu+\sigma_\nu}\frac{\partial B_\nu}{\partial T}\, d\nu}
+{\displaystyle 1}
+\right]\frac{dT}{dz}.
+\]
+定义\textbf{罗斯兰平均吸收系数}
+\[
+\boxed{
+\frac{1}{\alpha_R} \;\equiv\;
+\frac{\displaystyle \int_0^\infty \frac{1}{\alpha_\nu+\sigma_\nu}
+\frac{\partial B_\nu}{\partial T} \, d\nu}
+{\displaystyle \int_0^\infty \frac{\partial B_\nu}{\partial T} \, d\nu}
+}
+\]
+并利用恒等式
+\(
+\displaystyle \int_0^\infty \frac{\partial B_\nu}{\partial T}\, d\nu
+= \frac{4\sigma_\mathrm{SB}}{\pi} T^3
+\)
+（$\sigma_\mathrm{SB}$ 为斯特藩–玻尔兹曼常数），得到
+\[
+\boxed{
+F(z) \;=\; -\,\frac{16\,\sigma_\mathrm{SB}\, T^3}{3\,\alpha_R}\,\frac{dT}{dz}
+}
+\]
+这就是\textbf{罗斯兰扩散方程}，它在形式上与傅里叶热传导定律完全一致，清晰地表明了辐射扩散过程的本质。
+
+\begin{derivationnote}[罗斯兰权重的物理直觉]
+罗斯兰权重的选择体现了深刻的物理洞察。在扩散近似下，能流主要由黑体辐射对温度变化的线性响应主导，因此权重与 $\partial B_\nu/\partial T$ 成正比，这反映了不同频段对温度变化的敏感程度。同时，越透明的频段（即 $1/(\alpha_\nu+\sigma_\nu)$ 越大）对能流的贡献越大，因为光子在这些频段能够更自由地传播。这两种效应的结合就构成了罗斯兰权重，确保了辐射扩散由最透明的频段主导，即使这些频段在总的黑体辐射中只占很小的比例。
+\end{derivationnote}
+
+\subsubsection*{与扩散过程的深刻联系}
+
+罗斯兰近似最深刻的洞见在于揭示了辐射在光学厚介质中的传输本质上是扩散过程。这一认识来源于对辐射输运方程在光学厚极限下的渐近分析。
+
+
+\n{关键对比：分子热导率 $\kappa = \frac{1}{3} \bar{v} \lambda \rho c_v$，辐射热导率 $\kappa_{\text{rad}} = \frac{1}{3} c l \frac{du}{dT}$，其中 $l = 1/\alpha_R$，$\frac{du}{dT} = 16\sigma T^3$。}
+
+从数学形式上看，罗斯兰扩散方程：
+\[
+F = -\frac{16\sigma T^3}{3\alpha_R} \frac{dT}{dz}
+\]
+与经典的傅里叶热传导定律：
+\[
+q = -\kappa \frac{dT}{dz}
+\]
+具有完全相同的结构。这种相似性不是巧合，而是反映了能量输运的普适规律。
+
+将罗斯兰结果与分子热传导系数 $\kappa = \frac{1}{3} \bar{v} \lambda \rho c_v$ 对比，可以识别出：
+- $\bar{v} \rightarrow c$：分子热运动速度变为光速
+- $\lambda \rightarrow 1/\alpha_R$：分子平均自由程变为光子平均自由程  
+- $\rho c_v \rightarrow 16\sigma T^3$：物质热容变为辐射能容对温度的导数
+
+这种对应关系表明，罗斯兰近似描述的是**辐射能量的扩散**。光子虽然以光速运动，但由于频繁的散射和吸收，其净能量传输表现为缓慢的扩散过程。
+
+辐射扩散的典型特征是时间尺度与距离的平方成正比：$\tau \propto R^2$。这正是扩散过程的标志性行为，解释了为什么太阳内部光子需要数百万年才能"扩散"到表面，而不是以光速瞬间逃逸。
+
+\n{扩散时间尺度：$\tau_{\text{diff}} \sim R^2/D$，其中扩散系数 $D = \kappa/(\rho c_v)$ 对分子热传导，$D = \kappa_{\text{rad}}/(du/dT)$ 对辐射扩散。}
+\subsubsection*{适用条件与局限性}
+
+罗斯兰近似的成立需要满足几个关键条件。首先是光学厚度足够大，通常要求有效光深远大于1，这样才能保证辐射场有足够的时间与物质达到局域热平衡。其次是温度梯度要足够缓慢，使得黑体函数在一个平均自由程内的变化很小，这样才能保证微扰展开的有效性。此外，还需要介质近似满足局域热平衡条件，以及几何上的对称性以保证角分布的各向同性近似成立。
+
+在实际的天体物理环境中，罗斯兰近似在恒星内部和吸积盘深层等光学厚区域表现良好，但在表层区域（光学厚度接近或小于1）、存在强外部辐射源、或者温度梯度极大的情况下会失效。在这些情况下，需要采用更精确的辐射转移方法，如双流近似或完整的数值转移方程求解。
+
+特别需要指出的是，经典的罗斯兰近似没有显式包含外部辐射源项，这基于一个重要的物理假设：在光学厚介质深处，任何外部辐射在经过多次散射和吸收后都会被完全热化，从而融入局域辐射场中。只有在表层区域或者当外部辐射极强时，才需要显式考虑外部源的影响。
+
+
+\section{辐射场基本理论概述}
+\subsection{电磁辐射谱}
+
+\n{观测量与理论量：望远镜测的是\emph{能量/功率在频率上的分布}，理论上我们从电磁场强度出发建立联系。}
+\paragraph{(1) 观测量与基本定义}
+天文观测在给定时间间隔 $\Delta t$ 与空间观测点，记录某一频率带宽 $\Delta\omega$ 内的辐射能量（或功率）。为将之与电磁场联系，需要从\emph{电场随时间的变化} $E(t)$ 出发来定义“谱”。由于真空中 $\mathbf{E}$ 与 $\mathbf{B}$ 的地位对称、信息等价，以下以 $E(t)$ 为代表。
+
+\medskip
+\noindent
+\textbf{傅里叶表示：}任意\emph{方差有限}的时间信号 $E(t)$ 都可以写作不同频率与相位的波的叠加，称其\emph{傅里叶频谱}
+\begin{equation}
+  E(t) = \int_{-\infty}^{+\infty} E(\omega)\,e^{-i\omega t}\,d\omega ,
+  \qquad
+  E(\omega) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} E(t)\,e^{+i\omega t}\,dt .
+\end{equation}
+$E(\omega)$ 一般为\emph{复数}，幅度给出该频率成分强度，相位承载不同成分的相对位相信息；若 $E(t)$ 为实函数，则 $E(-\omega)=E^*(\omega)$。
+
+\begin{derivationnote}[为何可以用傅里叶积分展开？]
+在 $L^2(\mathbb{R})$（可平方可积）意义下，复指数 $e^{-i\omega t}$ 构成完备正交基，任意 $E(t)$ 都可在该基底上展开；逆变换式由正交关系
+$\int e^{-i\omega t}e^{+i\omega' t}dt=2\pi\,\delta(\omega-\omega')$ 给出。
+\end{derivationnote}
+
+\paragraph{(2) 能量与谱：从坡印廷矢量到\;谱能量密度}
+\n{单位时间单位面积通量 $S$ 与 $E^2$ 成正比；把 $E^2(t)$ 的时间积分换到频域用 Parseval 定理。}
+在真空中，瞬时辐射能流密度（坡印廷矢量的模）为
+\begin{equation}
+  S(t)=\frac{c}{4\pi}\,E^2(t)\qquad(\text{cgs 制}).
+\end{equation}
+于是通过单位面积 $A$、在时间区间 $dt$ 内的辐射能量增量为
+\begin{equation}
+  \frac{dW}{dA\,dt}=S(t)=\frac{c}{4\pi}E^2(t).
+\end{equation}
+对时间积分得到总能量（单位面积）：
+\begin{equation}
+  \frac{dW}{dA}=\frac{c}{4\pi}\int_{-\infty}^{+\infty} E^2(t)\,dt .
+\end{equation}
+由 Parseval 定理（能量守恒在时域/频域的等价）
+\begin{equation}
+  \int_{-\infty}^{+\infty}E^2(t)\,dt
+  = 2\pi\int_{-\infty}^{+\infty}\!\!\! |E(\omega)|^2\,d\omega ,
+\end{equation}
+可得
+\begin{equation}
+  \frac{dW}{dA} = c \int_{-\infty}^{+\infty} |E(\omega)|^2\,d\omega .
+\end{equation}
+\emph{因此}，\textbf{单位面积的单色谱能量密度}（每单位频率间隔的能量）为
+\begin{equation}
+  \boxed{\;\frac{dW}{dA\,d\omega}=c\,|E(\omega)|^2\;}
+\end{equation}
+它正是观测上“谱能量”（或功率谱）的基本理论对应量。若更关心\emph{平均功率谱}，可在足够长时间上取平均（稳态情况下等价）。
+
+\begin{derivationnote}[Parseval 的一个一行证明模板]
+代入 $E(t)=\int E(\omega)e^{-i\omega t}d\omega$，
+\(
+\int E^2(t)dt=\int\!\!\int\!\!\int
+E(\omega)E^*(\omega')e^{-i(\omega-\omega')t}\,d\omega\,d\omega'\,dt
+=2\pi\int |E(\omega)|^2 d\omega .
+\)
+\end{derivationnote}
+
+\paragraph{(3) 周期脉冲的谱：傅里叶级数与离散谱}
+\n{周期 $T$ 的信号 $\Rightarrow$ 谱在 $\omega_n=n\omega_0$ 处为离散线；能量/功率以系数模方之和度量。}
+若 $E(t)$ 为周期 $T$ 的脉冲列（每周期出现一次），其傅里叶展开为
+\begin{equation}
+  E(t)=\sum_{n=-\infty}^{+\infty} E_n\,e^{-in\omega_0 t},
+  \qquad
+  \omega_0=\frac{2\pi}{T},
+  \qquad
+  E_n=\frac{1}{T}\int_0^T E(t)\,e^{+in\omega_0 t}\,dt .
+\end{equation}
+相应 Parseval 定理在一周期上的形式为
+\begin{equation}
+  \int_0^T E^2(t)\,dt
+  = 2\pi \sum_{n=-\infty}^{+\infty} |E_n|^2 .
+\end{equation}
+于是\emph{一周期内的单位面积能量}为
+\begin{equation}
+  \left(\frac{dW}{dA}\right)_{\!\text{1 周期}}
+  = \frac{c}{4\pi}\int_0^T E^2(t)\,dt
+  = \frac{cT}{2}\sum_{n=-\infty}^{+\infty}|E_n|^2 ,
+\end{equation}
+而\emph{周期平均功率}（除以 $T$）为
+\begin{equation}
+  \boxed{\;
+  \left\langle \frac{dW}{dA\,dt}\right\rangle
+  = \frac{c}{2} \sum_{n=-\infty}^{+\infty}|E_n|^2 \;}
+\end{equation}
+这说明离散谱线上每个谐波 $n$ 的“线强”正比于 $|E_n|^2$。当 $T$ 很大（$\omega_0\!\to\!0$）时，相邻谱线间隔变得极小，离散谱趋于\emph{准连续}，对应地回到傅里叶积分的连续谱情形。
+
+\paragraph{(4) 物理解释与使用要点（精炼版）}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{谱的本质：}$E(\omega)$ 给出各频率成分的\emph{复幅}；观测到的“能量/功率谱”与 $|E(\omega)|^2$ 成正比，\emph{相位}则在不同频率分量的干涉、调制与成像中起作用。
+  \item \textbf{从场到通量：}通过 $S(t)=\frac{c}{4\pi}E^2(t)$ 把场强与能流联系，再用 Parseval 把\emph{时间平均}转换为\emph{频率积分/求和}，得到可直接比较的谱量。
+  \item \textbf{周期与非周期统一：}周期信号 $\Rightarrow$ 离散谱（傅里叶级数系数 $E_n$）；非周期/单脉冲 $\Rightarrow$ 连续谱（傅里叶积分 $E(\omega)$）。$T\!\uparrow$ 时离散谱 $\to$ 连续谱是两者的桥梁。
+  \item \textbf{单位与制式：}以上常用 cgs；若改用 SI，$S(t)=\frac{1}{\mu_0}\mathbf{E}\times\mathbf{B}$，相应常数需要替换，但\emph{谱 $\propto |E(\omega)|^2$ 的结论不变}。
+\end{itemize}
+
+\begin{derivationnote}[单色波的检查]
+若 $E(t)=\Re\{ \tilde{E}\,e^{-i\omega t}\}$，则 $E(\omega)=\tilde{E}\,\delta(\omega-\omega_0)$，
+从而 $\frac{dW}{dA\,d\omega}=c\,|\tilde{E}|^2\,\delta(\omega-\omega_0)$，
+与“所有能量集中在 $\omega_0$ 处”的直觉一致。
+\end{derivationnote}
+
+\subsection{偏振（Polarization）}
+
+\n{偏振描述电磁波的电场矢量随时间的取向规律。}
+\paragraph{(1) 基本定义与表示}
+偏振指电磁波的电场（或磁场）矢量在传播过程中随时间的变化规律。
+若电场仅沿一个方向振荡，称为\emph{线偏振}（linear polarization）。
+
+设平面单色波
+\begin{equation}
+  \mathbf{E} = \hat{\mathbf{a}}_1 E_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)}, \qquad
+  \mathbf{B} = \hat{\mathbf{a}}_2 B_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)} .
+\end{equation}
+若电场具有两个互相垂直的分量（如沿 $x$ 与 $y$ 方向），并且它们的振幅与相位不同，则波的电矢量端点随时间描绘出椭圆轨迹，称为\emph{椭圆偏振波}（elliptically polarized wave）：
+\begin{equation}
+  E_x(t,z) = A_1 e^{i(\phi_1 - kz + \omega t)},\qquad
+  E_y(t,z) = A_2 e^{i(\phi_2 - kz + \omega t)} .
+\end{equation}
+取其实部表示真实电场（$z=0$）：
+\begin{equation}
+  \mathbf{E}(t)
+  = A_1 \cos(\omega t - \phi_1)\,\hat{\mathbf{e}}_1
+  + A_2 \cos(\omega t - \phi_2)\,\hat{\mathbf{e}}_2 .
+\end{equation}
+
+\paragraph{(2) 椭圆轨迹方程与几何特征}
+\n{电场分量幅度与相位差决定椭圆的长短轴和方向。}
+电矢量的大小与方向随时间变化，其端点形成椭圆：
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1 .
+\]
+图形中的椭圆由两个参数确定：
+\begin{itemize}[leftmargin=2em]
+  \item 长短轴长度 $a,b$；
+  \item 椭圆长轴与坐标轴夹角 $\chi$。
+\end{itemize}
+
+为使坐标系与椭圆长短轴对齐，将坐标轴旋转 $\chi$：
+\begin{equation}
+\begin{aligned}
+  \hat{\mathbf{e}}'_1 &= \cos\chi\,\hat{\mathbf{e}}_1 + \sin\chi\,\hat{\mathbf{e}}_2,\\
+  \hat{\mathbf{e}}'_2 &= -\sin\chi\,\hat{\mathbf{e}}_1 + \cos\chi\,\hat{\mathbf{e}}_2.
+\end{aligned}
+\end{equation}
+
+在该旋转坐标系下，电场具有标准形式：
+\begin{equation}
+  \mathbf{E}(t,0)
+  = E_0\cos\beta\cos(\omega t)\,\hat{\mathbf{e}}'_1
+  - E_0\sin\beta\sin(\omega t)\,\hat{\mathbf{e}}'_2,
+  \qquad -\frac{\pi}{2}\le \beta\le \frac{\pi}{2}.
+\end{equation}
+其中 $E_0\cos\beta$ 与 $E_0\sin\beta$ 为椭圆长、短轴幅度，$\tan\beta$ 表示椭圆的偏率（椭圆率）。
+
+\paragraph{(3) 参数与原始电场关系}
+由原式
+\[
+E_1 = A_1\cos(\omega t-\phi_1), \quad E_2 = A_2\cos(\omega t-\phi_2)
+\]
+与上式等价比较可得
+\begin{align*}
+A_1\cos\phi_1 &= E_0\cos\beta\cos\chi, & A_1\sin\phi_1 &= E_0\sin\beta\sin\chi,\\
+A_2\cos\phi_2 &= E_0\cos\beta\sin\chi, & A_2\sin\phi_2 &= E_0\sin\beta\cos\chi.
+\end{align*}
+给定 $A_1, A_2, \phi_1, \phi_2$，即可反算出 $E_0, \beta, \chi$。
+
+\begin{derivationnote}[从两分量到椭圆参数的确定]
+将 $E_1, E_2$ 同时平方并消去时间项 $\omega t$，得椭圆的一般方程。
+进一步化简可求出长轴方向 $\tan(2\chi)$ 与相位差 $\delta=\phi_2-\phi_1$ 的关系：
+\[
+\tan(2\chi) = \frac{2A_1A_2\cos\delta}{A_1^2 - A_2^2},\quad
+\tan(2\beta) = \frac{2A_1A_2\sin\delta}{A_1^2 + A_2^2}.
+\]
+\end{derivationnote}
+
+\paragraph{(4) 平均能流与偏振能量密度}
+\n{平均能流正比于 $E_0^2$，偏振态不影响能量守恒。}
+时间平均的坡印廷矢量模量
+\begin{equation}
+\langle E^2(t,0)\rangle = \frac{1}{2}(E_0^2\cos^2\beta + E_0^2\sin^2\beta)
+= \frac{E_0^2}{2}.
+\end{equation}
+因此偏振仅改变电场方向随时间的变化，而不改变平均辐射能流大小。定义辐射能流（或辐射强度）$I\propto E_0^2$。
+
+\paragraph{(5) 特殊情形与旋转方向}
+\n{线偏振、圆偏振、右旋与左旋。}
+\begin{itemize}[leftmargin=2em]
+  \item 当 $\beta=0$ 或 $\pi/2$ 时，电场沿单一方向振荡，为\emph{线偏振波}。
+  \item 当 $\beta=\pm\pi/4$ 时，$|E_x|=|E_y|$，椭圆退化为圆，称\emph{圆偏振波}。
+\end{itemize}
+
+一般情况下，$\beta$ 同时决定：
+\begin{enumerate}[leftmargin=2em]
+  \item 椭圆的偏率；
+  \item 电矢量随时间旋转方向：
+  \begin{itemize}
+    \item 若 $0<\beta<\pi/2$，随时间增加电矢量沿椭圆\emph{顺时针}旋转，称\textbf{右旋（右圆偏振）}；
+    \item 若 $-\pi/2<\beta<0$，则电矢量\emph{逆时针}旋转，称\textbf{左旋（左圆偏振）}。
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{(6) 物理解释与总结}
+\begin{itemize}[leftmargin=2em]
+  \item 偏振反映了电场矢量的\emph{几何演化}特征，与能量强度无关；
+  \item 线偏振、圆偏振、椭圆偏振是同一物理量连续变化的不同极限；
+  \item 在天体物理中，偏振度与偏振方向常用于推断磁场方向、散射几何与辐射机制。
+\end{itemize}
+
+\subsection{偏振（Polarization）}
+
+\n{偏振描述电磁波的电场矢量随时间的取向规律。}
+\paragraph{(1) 基本定义与表示}
+偏振指电磁波的电场（或磁场）矢量在传播过程中随时间的变化规律。
+若电场仅沿一个方向振荡，称为\emph{线偏振}（linear polarization）。
+
+设平面单色波
+\begin{equation}
+  \mathbf{E} = \hat{\mathbf{a}}_1 E_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)}, \qquad
+  \mathbf{B} = \hat{\mathbf{a}}_2 B_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)} .
+\end{equation}
+若电场具有两个互相垂直的分量（如沿 $x$ 与 $y$ 方向），并且它们的振幅与相位不同，则波的电矢量端点随时间描绘出椭圆轨迹，称为\emph{椭圆偏振波}（elliptically polarized wave）：
+\begin{equation}
+  E_x(t,z) = A_1 e^{i(\phi_1 - kz + \omega t)},\qquad
+  E_y(t,z) = A_2 e^{i(\phi_2 - kz + \omega t)} .
+\end{equation}
+取其实部表示真实电场（$z=0$）：
+\begin{equation}
+  \mathbf{E}(t)
+  = A_1 \cos(\omega t - \phi_1)\,\hat{\mathbf{e}}_1
+  + A_2 \cos(\omega t - \phi_2)\,\hat{\mathbf{e}}_2 .
+\end{equation}
+
+\paragraph{(2) 椭圆轨迹方程与几何特征}
+\n{电场分量幅度与相位差决定椭圆的长短轴和方向。}
+电矢量的大小与方向随时间变化，其端点形成椭圆：
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1 .
+\]
+图形中的椭圆由两个参数确定：
+\begin{itemize}[leftmargin=2em]
+  \item 长短轴长度 $a,b$；
+  \item 椭圆长轴与坐标轴夹角 $\chi$。
+\end{itemize}
+
+为使坐标系与椭圆长短轴对齐，将坐标轴旋转 $\chi$：
+\begin{equation}
+\begin{aligned}
+  \hat{\mathbf{e}}'_1 &= \cos\chi\,\hat{\mathbf{e}}_1 + \sin\chi\,\hat{\mathbf{e}}_2,\\
+  \hat{\mathbf{e}}'_2 &= -\sin\chi\,\hat{\mathbf{e}}_1 + \cos\chi\,\hat{\mathbf{e}}_2.
+\end{aligned}
+\end{equation}
+
+在该旋转坐标系下，电场具有标准形式：
+\begin{equation}
+  \mathbf{E}(t,0)
+  = E_0\cos\beta\cos(\omega t)\,\hat{\mathbf{e}}'_1
+  - E_0\sin\beta\sin(\omega t)\,\hat{\mathbf{e}}'_2,
+  \qquad -\frac{\pi}{2}\le \beta\le \frac{\pi}{2}.
+\end{equation}
+其中 $E_0\cos\beta$ 与 $E_0\sin\beta$ 为椭圆长、短轴幅度，$\tan\beta$ 表示椭圆的偏率（椭圆率）。
+
+\paragraph{(3) 参数与原始电场关系}
+由原式
+\[
+E_1 = A_1\cos(\omega t-\phi_1), \quad E_2 = A_2\cos(\omega t-\phi_2)
+\]
+与上式等价比较可得
+\begin{align*}
+A_1\cos\phi_1 &= E_0\cos\beta\cos\chi, & A_1\sin\phi_1 &= E_0\sin\beta\sin\chi,\\
+A_2\cos\phi_2 &= E_0\cos\beta\sin\chi, & A_2\sin\phi_2 &= E_0\sin\beta\cos\chi.
+\end{align*}
+给定 $A_1, A_2, \phi_1, \phi_2$，即可反算出 $E_0, \beta, \chi$。
+
+\begin{derivationnote}[从两分量到椭圆参数的确定]
+将 $E_1, E_2$ 同时平方并消去时间项 $\omega t$，得椭圆的一般方程。
+进一步化简可求出长轴方向 $\tan(2\chi)$ 与相位差 $\delta=\phi_2-\phi_1$ 的关系：
+\[
+\tan(2\chi) = \frac{2A_1A_2\cos\delta}{A_1^2 - A_2^2},\quad
+\tan(2\beta) = \frac{2A_1A_2\sin\delta}{A_1^2 + A_2^2}.
+\]
+\end{derivationnote}
+
+\paragraph{(4) 平均能流与偏振能量密度}
+\n{平均能流正比于 $E_0^2$，偏振态不影响能量守恒。}
+时间平均的坡印廷矢量模量
+\begin{equation}
+\langle E^2(t,0)\rangle = \frac{1}{2}(E_0^2\cos^2\beta + E_0^2\sin^2\beta)
+= \frac{E_0^2}{2}.
+\end{equation}
+因此偏振仅改变电场方向随时间的变化，而不改变平均辐射能流大小。定义辐射能流（或辐射强度）$I\propto E_0^2$。
+
+\paragraph{(5) 特殊情形与旋转方向}
+\n{线偏振、圆偏振、右旋与左旋。}
+\begin{itemize}[leftmargin=2em]
+  \item 当 $\beta=0$ 或 $\pi/2$ 时，电场沿单一方向振荡，为\emph{线偏振波}。
+  \item 当 $\beta=\pm\pi/4$ 时，$|E_x|=|E_y|$，椭圆退化为圆，称\emph{圆偏振波}。
+\end{itemize}
+
+一般情况下，$\beta$ 同时决定：
+\begin{enumerate}[leftmargin=2em]
+  \item 椭圆的偏率；
+  \item 电矢量随时间旋转方向：
+  \begin{itemize}
+    \item 若 $0<\beta<\pi/2$，随时间增加电矢量沿椭圆\emph{顺时针}旋转，称\textbf{右旋（右圆偏振）}；
+    \item 若 $-\pi/2<\beta<0$，则电矢量\emph{逆时针}旋转，称\textbf{左旋（左圆偏振）}。
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{(6) 物理解释与总结}
+\begin{itemize}[leftmargin=2em]
+  \item 偏振反映了电场矢量的\emph{几何演化}特征，与能量强度无关；
+  \item 线偏振、圆偏振、椭圆偏振是同一物理量连续变化的不同极限；
+  \item 在天体物理中，偏振度与偏振方向常用于推断磁场方向、散射几何与辐射机制。
+\end{itemize}
+
+\subsection{斯托克斯参数与偏振概述}\label{subsec:stokes}
+
+\n{Stokes 四参量：用可测强度刻画偏振。}
+\paragraph{（1）}在实际光学与射电观测中，直接测量电场振幅与相位通常困难；更便利的是测量\emph{辐射能流（强度）}。因此引入\textbf{斯托克斯参数} $\{I,Q,U,V\}$ 来替代对电场的刻画，它们均为\emph{可观测、实数}并具有能流量纲。
+
+设在某一正交基 $\{\mathbf e_1,\mathbf e_2\}$ 上，复电场分量为
+\[
+E_1(t,z)=A_1 e^{i(\phi_1 - \omega t + kz)},\qquad
+E_2(t,z)=A_2 e^{i(\phi_2 - \omega t + kz)} .
+\]
+时间平均 $\langle\cdot\rangle$ 记作在多个波周期上的平均，则 Stokes 量定义为
+\begin{align}
+I &= \langle E_1 E_1^\ast\rangle + \langle E_2 E_2^\ast\rangle = A_1^2 + A_2^2, \\
+Q &= \langle E_1 E_1^\ast\rangle - \langle E_2 E_2^\ast\rangle = A_1^2 - A_2^2, \\
+U &= \langle E_1 E_2^\ast\rangle + \langle E_2 E_1^\ast\rangle = 2A_1A_2\cos(\phi_2-\phi_1),\\
+V &= -i\!\left(\langle E_1 E_2^\ast\rangle - \langle E_2 E_1^\ast\rangle\right)=2A_1A_2\sin(\phi_2-\phi_1).
+\end{align}
+
+\begin{derivationnote}[与椭圆偏振参数的联系]
+设偏振椭圆的偏振面取为 $x$–$y$ 平面。用\emph{椭圆倾角} $\chi\in[-\pi/4,\pi/4]$（圆偏振 $\chi=\pm\pi/4$，线偏振 $\chi=0$）与\emph{主轴方位角} $\psi\in[0,\pi)$ 参数化，则在旋转至主轴的坐标系后有
+\[
+I=E_0^2,\quad Q=E_0^2\cos2\beta\cos2\chi,\quad U=E_0^2\cos2\beta\sin2\chi,\quad V=E_0^2\sin2\beta,
+\]
+其中 $E_0$ 为总振幅，$2\beta$ 表示\emph{圆偏振分量权重角}（等价于椭圆离心率参数化）。常用的几何关系是
+\[
+\tan 2\chi = \frac{U}{Q},\qquad \frac{V}{I}=\sin 2\beta,\qquad I^2=Q^2+U^2+V^2\; (\text{完全偏振}).
+\]
+\end{derivationnote}
+
+\paragraph{（2）物理意义与符号约定}
+\n{Q/U：线偏振的方向与相位；V：旋向。}
+\begin{itemize}[leftmargin=2em]
+  \item $I$：与辐射能流（或强度）正比。
+  \item $Q$：表示相对于参考轴（通常取 $x$ 轴）\emph{线偏振}的取向差异：$Q>0$ 表示偏振主轴更接近 $x$ 轴，$Q<0$ 更接近 $y$ 轴。
+  \item $U$：相当于将参考轴旋转 $45^\circ$ 后的线偏振取向信息。$\tan 2\psi = U/Q$ 给出\emph{线偏振角} $\psi$。
+  \item $V$：表示\emph{圆偏振}的旋向与强度；$V>0$ 常规取右旋（$0<\beta<\pi/2$），$V<0$ 左旋。
+\end{itemize}
+
+\paragraph{（3）坐标轴旋转下的变换规律}
+\n{围绕传播方向转轴 $\theta$：$Q+iU$ 取相位 $e^{-i2\theta}$.}
+若将参考轴在传播方向上旋转角 $\theta$，则
+\begin{align}
+I'&=I,\qquad V'=V,\\
+Q'&=Q\cos2\theta+U\sin2\theta,\qquad
+U'=-Q\sin2\theta+U\cos2\theta.
+\end{align}
+\begin{derivationnote}[群表示法简证]
+记 $P\equiv Q+iU$，则旋转作用为 $P'\!=\!P\,e^{-i2\theta}$，这反映了 $Q,U$ 组成自旋权数 $s=\pm2$ 的二分量。$I,V$ 为旋转不变标量。
+\end{derivationnote}
+
+\paragraph{（4）任意（部分偏振）波的 Stokes 量}
+\n{非相干叠加：强度相加，交叉项平均为零。}
+辐射场常由多列（部分/完全）偏振波的\emph{非相干叠加}构成。设第 $k$ 列波的电场为 $\mathbf E^{(k)}$，则
+\[
+\mathbf E_{\rm tot}=\sum_k \mathbf E^{(k)},\qquad
+\langle E_i E_j^\ast\rangle=\sum_k \langle E_i^{(k)} E_j^{(k)\ast}\rangle,
+\]
+不同列之间的交叉项因随机相位平均为 $0$。因此 Stokes 参数对非相干叠加\emph{线性}：
+\[
+I=\sum_k I_k,\quad Q=\sum_k Q_k,\quad U=\sum_k U_k,\quad V=\sum_k V_k.
+\]
+对完全偏振的各列波成立 $I_k^2=Q_k^2+U_k^2+V_k^2$，进而可证
+\[
+I^2\ge Q^2+U^2+V^2,
+\]
+等号当且仅当合成波为完全偏振。
+
+\paragraph{（5）分解：自然波 + 椭圆偏振波}
+\n{最简两项分解：一项各向等概率，另一项携带全部偏振。}
+任何\emph{部分偏振波}都可作如下分解（强度矩阵表述）：
+\[
+\begin{bmatrix} I\\ Q\\ U\\ V\end{bmatrix}
+=
+\underbrace{\begin{bmatrix} I-\sqrt{Q^2+U^2+V^2}\\ 0\\ 0\\ 0\end{bmatrix}}_{\text{自然（非偏振）}}
++
+\underbrace{\begin{bmatrix} \sqrt{Q^2+U^2+V^2}\\ Q\\ U\\ V\end{bmatrix}}_{\text{椭圆偏振（完全偏振）}} .
+\]
+等式左第一项表示\emph{非偏振}（各方向等概率，无优选方向）；第二项为与 $\{Q,U,V\}$ 同向的\emph{完全偏振}分量。
+
+\paragraph{（6）偏振度（总、线、圆）}
+\n{偏振度 $\Pi$ 是偏振强度与总强度之比。}
+\[
+\Pi \equiv \frac{\sqrt{Q^2+U^2+V^2}}{I},\qquad
+\Pi_L \equiv \frac{\sqrt{Q^2+U^2}}{I},\qquad
+\Pi_C \equiv \frac{|V|}{I}.
+\]
+\begin{itemize}[leftmargin=2em]
+  \item $0\le \Pi \le 1$；完全偏振波 $\Pi=1$，自然波 $\Pi=0$。
+  \item 偏振面由电矢量与传播方向构成的平面（通常取 $V=0$ 时对应线偏振，位于 $x$ 轴方向）。方向由 $\tan 2\psi=U/Q$ 给出。
+\end{itemize}
+
+\begin{derivationnote}[从电场到 $\Pi$ 的不等式]
+对完全偏振波，$Q=E_0^2\cos2\beta\cos2\psi$，$U=E_0^2\cos2\beta\sin2\psi$，$V=E_0^2\sin2\beta$，于是
+$\sqrt{Q^2+U^2+V^2}=E_0^2=I$；对非相干叠加应用 Minkowski 不等式得到 $I\ge\sqrt{Q^2+U^2+V^2}$。
+\end{derivationnote}
+
+\paragraph{（7）另一种三项分解：自然 + 线偏振 + 圆偏振}
+\n{将偏振强度拆为线与圆：便于观测分离。}
+\[
+\begin{bmatrix} I\\ Q\\ U\\ V\end{bmatrix}
+=
+\underbrace{\begin{bmatrix} I-\sqrt{Q^2+U^2}-|V|\\ 0\\ 0\\ 0\end{bmatrix}}_{\text{自然}}
++
+\underbrace{\begin{bmatrix} \sqrt{Q^2+U^2}\\ Q\\ U\\ 0\end{bmatrix}}_{\text{线偏振}}
++
+\underbrace{\begin{bmatrix} |V|\\ 0\\ 0\\ \operatorname{sgn}(V)|V|\end{bmatrix}}_{\text{圆偏振}} .
+\]
+
+\paragraph{（8）部分\;线偏振（$V=0$）的观测与公式}
+\n{线偏振片法：$I_{\max}$ 与 $I_{\min}$.}
+当 $V=0$（无圆分量）时，有
+\[
+\begin{bmatrix} I\\ Q\\ U\\ 0\end{bmatrix}
+=
+\begin{bmatrix} I-\sqrt{Q^2+U^2}\\ 0\\ 0\\ 0\end{bmatrix}
++
+\begin{bmatrix} \sqrt{Q^2+U^2}\\ Q\\ U\\ 0\end{bmatrix}.
+\]
+用理想\emph{线偏振片}测量：调节偏振片方位角，使透过强度出现最小与最大值
+\[
+I_{\min} = I_{\rm unpol},\qquad
+I_{\max} = I_{\rm unpol} + I_{\rm pol},
+\]
+其中 $I_{\rm pol}=\frac12(I_{\max}-I_{\min})$，$I_{\rm unpol}=\frac12(I_{\max}+I_{\min})$，并有
+\[
+I=I_{\rm unpol}+I_{\rm pol}=I_{\max}+I_{\min}\over 2 + {I_{\max}-I_{\min}\over 2}.
+\]
+由此得到\textbf{总偏振度}与\textbf{线偏振度}的等价观测公式
+\[
+\Pi=\frac{I_{\rm pol}}{I}
+=\frac{I_{\max}-I_{\min}}{I_{\max}+I_{\min}},\qquad
+\Pi_L=\Pi,\quad (V=0).
+\]
+\begin{derivationnote}[马吕斯定律与 $I_{\max/\min}$]
+对纯线偏振入射，透过强度 $I(\theta)=I_0\cos^2(\theta-\psi)$（马吕斯定律）。对\emph{部分线偏振}而言，相当于在同一方向上的完全偏振强度 $I_{\rm pol}$ 与各向无偏的 $I_{\rm unpol}$ 叠加，于是
+$ I_{\max}= I_{\rm unpol} + I_{\rm pol}$（当 $\theta=\psi$），
+$ I_{\min}= I_{\rm unpol}$（当 $\theta=\psi+\pi/2$），
+从而导出上式。
+\end{derivationnote}
+
+\paragraph{（9）实验与表述要点（实践提示）}
+\begin{itemize}[leftmargin=2em]
+  \item 设定参考轴与右手系；说明 $V>0$ 的旋向约定（天体物理通常取\emph{右旋为正}）。
+  \item 报告结果时给出 $(I,\Pi,\psi,\operatorname{sgn}V)$ 或等价的 $(I,Q,U,V)$；在多频段观测中，注意 $Q,U$ 的\emph{旋转}带来的 Faraday 旋转校正。
+  \item 对谱线偏振，需区分辐射传输与 Zeeman 分裂贡献；对连续谱偏振，常由散射、磁场取向与辐射几何共同决定（此处略）。
+\end{itemize}
+
+\end{document}
