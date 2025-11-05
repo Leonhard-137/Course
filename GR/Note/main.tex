@@ -1,0 +1,86 @@
+\documentclass[12pt,oneside]{ctexart}
+
+% ---- 页面布局与边注 ----
+\usepackage[
+  a4paper,
+  left=50mm,           % 左边留白，留出边注区
+  right=25mm,
+  top=25mm,
+  bottom=28mm,
+  marginparwidth=36mm, % 边注栏宽度
+  marginparsep=6mm     % 边注与正文间距
+]{geometry}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{2em}
+
+% 边注：固定在左侧
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\small\itshape}
+\reversemarginpar
+\newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
+
+% ---- 数学与结构 ----
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{physics}
+
+\setlist{nosep}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{定理}
+\theoremstyle{remark}
+\newtheorem{example}[definition]{例}
+
+% ---- 页眉页脚 ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 广义相对论笔记}
+\rhead{\footnotesize \leftmark}
+\cfoot{\thepage}
+
+% ---- 颜色与超链接 ----
+\usepackage{xcolor}
+\definecolor{link}{RGB}{17,85,204}
+\usepackage[
+  colorlinks=true,
+  linkcolor=link,
+  urlcolor=link,
+  citecolor=link
+]{hyperref}
+
+% ---- 附加推导环境（可自定义标题 & 可一键隐藏）---- 
+\newif\ifshowderiv
+\showderivtrue                 % 全局开关：隐藏时改为 \showderivfalse
+
+\newcommand{\derivdefaulttitle}{额外说明}
+
+\newenvironment{derivationnote}[1][\derivdefaulttitle]{%
+  \ifshowderiv\begin{quote}\small\itshape
+  \noindent\textbf{#1}\;\par
+}{%
+  \end{quote}\fi
+}
+
+% ---- 章节标题 ----
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+
+% ---- 文档信息 ----
+\title{广义相对论笔记}
+\author{Leonhard Hsiao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\input{Chapters/Math}
+\input{Chapters/Einsteineq}
+
+\end{document}

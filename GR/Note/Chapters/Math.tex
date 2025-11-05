@@ -1,85 +1,3 @@
-\documentclass[12pt,oneside]{ctexart}
-
-% ---- 页面布局与边注 ----
-\usepackage[
-  a4paper,
-  left=50mm,           % 左边留白，留出边注区
-  right=25mm,
-  top=25mm,
-  bottom=28mm,
-  marginparwidth=36mm, % 边注栏宽度
-  marginparsep=6mm     % 边注与正文间距
-]{geometry}
-\setlength{\parskip}{0.4em}
-\setlength{\parindent}{2em}
-
-% 边注：固定在左侧
-\usepackage{marginnote}
-\renewcommand*{\marginfont}{\small\itshape}
-\reversemarginpar
-\newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
-
-% ---- 数学与结构 ----
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{bm}
-\usepackage{enumitem}
-\usepackage{tikz}
-\usepackage{physics}
-
-\setlist{nosep}
-
-\theoremstyle{definition}
-\newtheorem{definition}{定义}[section]
-\theoremstyle{plain}
-\newtheorem{theorem}[definition]{定理}
-\theoremstyle{remark}
-\newtheorem{example}[definition]{例}
-
-% ---- 页眉页脚 ----
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\footnotesize 广义相对论笔记}
-\rhead{\footnotesize \leftmark}
-\cfoot{\thepage}
-
-% ---- 颜色与超链接 ----
-\usepackage{xcolor}
-\definecolor{link}{RGB}{17,85,204}
-\usepackage[
-  colorlinks=true,
-  linkcolor=link,
-  urlcolor=link,
-  citecolor=link
-]{hyperref}
-
-% ---- 附加推导环境（可自定义标题 & 可一键隐藏）---- 
-\newif\ifshowderiv
-\showderivtrue                 % 全局开关：隐藏时改为 \showderivfalse
-
-\newcommand{\derivdefaulttitle}{额外说明}
-
-\newenvironment{derivationnote}[1][\derivdefaulttitle]{%
-  \ifshowderiv\begin{quote}\small\itshape
-  \noindent\textbf{#1}\;\par
-}{%
-  \end{quote}\fi
-}
-
-% ---- 章节标题 ----
-\usepackage{titlesec}
-\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
-\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
-
-% ---- 文档信息 ----
-\title{广义相对论笔记}
-\author{Leonhard Hsiao}
-\date{\today}
-
-\begin{document}
-\maketitle
-\tableofcontents
-
 \section{张量分析与微分几何基础}
   \subsection{流形和张量}
     \begin{definition}[光滑流形]
@@ -748,7 +666,7 @@ D_\rho G^\rho_\mu = 0
 
 这正是爱因斯坦在构造引力场方程时需要的性质。
 
-  \subsection{微分同胚映射与李导数的引入}
+  \subsection{微分同胚映射与李导数}
 
 设 $f: M \rightarrow M'$ 为微分同胚（diffeomorphism），若 $f$ 是一一对应且 $f$ 与 $f^{-1}$ 均为 $C^\infty$ 映射，则称 $M$ 与 $M'$ 互为微分同胚。
 
@@ -786,7 +704,7 @@ x'^{\mu} = x^{\mu} + \epsilon\,\xi^{\mu}(x) \nonumber
 \begin{align}
 x'^{\mu}=\phi_\epsilon^\mu(x)=x^\mu+\epsilon\,\xi^\mu(x)+\mathcal{O}(\epsilon^2) \nonumber
 \end{align}
-其中 $\xi^\mu(x)$ 为任意 $C^\infty$ 矢量场，称为该流的生成矢量场。把点 $P$ 送到 $Q=\phi_\epsilon(P)$ 的同时，也可视为一次被动坐标变换；在 $\epsilon\!\to\!0$ 的极限下两种观点等价。
+其中 $\xi^\mu(x)$ 为任意 $C^\infty$ 矢量场，称为该流的生成矢量场。把点 $P$ 送到 $Q=\phi_\epsilon(P)$ 的同时，也可视为一次被动坐标变换；在 $\epsilon\Rightarrow0$ 的极限下两种观点等价。
 \end{definition}
 
 \begin{derivationnote}[符号说明]
@@ -798,23 +716,23 @@ x'^{\mu}=\phi_\epsilon^\mu(x)=x^\mu+\epsilon\,\xi^\mu(x)+\mathcal{O}(\epsilon^2)
 \end{itemize}
 \end{derivationnote}
 
-为比较同一点的张量值，引入记号 $T(P\!\to\!Q)$：先在变换下把 $T$ 拖到 $Q$，再把其值回比较到 $P$。沿矢量场 $\xi$ 的\emph{李导数}定义为
+为比较同一点的张量值，引入记号 $T(P\Rightarrow Q)$：先在变换下把 $T$ 拖到 $Q$，再把其值回比较到 $P$。沿矢量场 $\xi$ 的\emph{李导数}定义为
 \begin{align}
-\mathcal{L}_\xi T \equiv \lim_{\epsilon\to 0}\frac{T(Q)-T(P\!\to\!Q)}{\epsilon} \nonumber
+\mathcal{L}_\xi T \equiv \lim_{\epsilon\to 0}\frac{T(Q)-T(P\Rightarrow Q)}{\epsilon} \nonumber
 \end{align}
 它描述了张量场在 $\xi$ 生成的流下的一阶变化率。
 
-\paragraph{标量场。}
-对标量 $f$，有 $F(P\!\to\!Q)=F(P)=f(P)$，因此
+\paragraph{标量场:}
+对标量 $f$，有 $F(P\Rightarrow Q)=F(P)=f(P)$，因此
 \begin{align}
 \mathcal{L}_\xi f=\xi^\mu\partial_\mu f . \nonumber
 \end{align}
 
-\paragraph{逆变矢量（切矢）。}
+\paragraph{逆变矢量（切矢）:}
 取曲线 $x^\mu(\lambda)$ 的切矢 $k^\mu=\frac{dx^\mu}{d\lambda}$。在
 $x^\mu\mapsto x^\mu+\epsilon\,\xi^\mu(x)$ 下，
 \begin{align}
-k^\mu(P\!\to\!Q)
+k^\mu(P\Rightarrow Q)
 &=\frac{d}{d\lambda}\!\left[x^\mu+\epsilon\,\xi^\mu(x)\right]_{P} \nonumber\\
 &= k^\mu(P)+\epsilon\,k^\nu\partial_\nu\xi^\mu\big|_{P}. \nonumber
 \end{align}
@@ -825,20 +743,19 @@ k^\mu(Q)=k^\mu(P)+\epsilon\,\xi^\nu\partial_\nu k^\mu\big|_{P}. \nonumber
 于是
 \begin{align}
 (\mathcal{L}_\xi k)^\mu
-=\lim_{\epsilon\to 0}\frac{k^\mu(Q)-k^\mu(P\!\to\!Q)}{\epsilon}
+=\lim_{\epsilon\to 0}\frac{k^\mu(Q)-k^\mu(P\Rightarrow Q)}{\epsilon}
 =\xi^\nu\partial_\nu k^\mu-k^\nu\partial_\nu\xi^\mu .
 \tag{1}
 \end{align}
 
-\paragraph{协变矢量。}
-令 $p_\mu$ 为 $1$-形式。由 Leibniz 相容性（见下）与
+\paragraph{协变矢量:}由 Leibniz 相容性（见下）与
 $\mathcal{L}_\xi(p_\mu k^\mu)=\xi^\nu\partial_\nu(p_\mu k^\mu)$，结合式(1) 得
 \begin{align}
 (\mathcal{L}_\xi p)_\mu=\xi^\nu\partial_\nu p_\mu+p_\nu\,\partial_\mu\xi^\nu .
 \tag{2}
 \end{align}
 
-\begin{derivationnote}[一般张量的分量公式]
+\begin{derivationnote}[一般张量的李导数]
 李导数与张量运算（张量积、缩并、指标置换）相容，并在标量上退化为方向导数。
 据此从式(1)(2) 推广到任意 $(r,s)$ 型张量 $T$：
 \begin{align}
@@ -860,7 +777,7 @@ $\mathcal{L}_\xi(p_\mu k^\mu)=\xi^\nu\partial_\nu(p_\mu k^\mu)$，结合式(1) �
   &= \xi^\rho\partial_\rho g_{\mu\nu}
   + g_{\rho\nu}\partial_\mu\xi^\rho
   + g_{\mu\rho}\partial_\nu\xi^\rho \nonumber\\
-  &= \nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu . \nonumber
+  &= \nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu . \label{eq:killing}
   \end{align}
 \end{itemize}
 \begin{figure}[htbp]
@@ -868,5 +785,147 @@ $\mathcal{L}_\xi(p_\mu k^\mu)=\xi^\nu\partial_\nu(p_\mu k^\mu)$，结合式(1) �
   \includegraphics[width=0.6\textwidth]{figs/M.png}
   \caption{主要数学结构及其关系示意图。}
 \end{figure}
-\end{document}
+
+\subsection{等度规映射与Killing矢量场}
+
+\begin{definition}[等度规映射]
+对于黎曼空间$(M,g_{\mu\nu})$，保持度规张量不变的微分同胚变换称为等度规映射（isometry）。由于微分同胚变化与张量运算的相容性，可得：
+\begin{align}
+g_{\mu\nu}(P \Rightarrow Q) = g_{\mu\nu}(Q)
+\end{align}
+\end{definition}
+这其实就是说度规的李导数为0，根据\ref{eq:killing}可得$Killing$方程：
+\n{Killing方程是超定的，方程给出的约束条件个数大于未知函数个数，因此一般解不存在，只有在高度对称的空间中才可能存在非平凡解。}
+\begin{theorem}[Killing方程]
+等度规映射的无穷小形式由Killing方程描述：
+\begin{align}
+\mathcal{L}_\xi g_{\mu\nu} = \nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu = 0
+\end{align}
+满足$Killing$方程的微分矢量场$\xi^\mu(x)$称为Killing矢量场，是等度规变换的生成元。
+\end{theorem}
+
+\begin{example}[欧式平面的Killing矢量场]
+对于欧式平面度规$g_{ij} = \delta_{ij}$，求解Killing方程可得3个线性独立的Killing矢量场：
+\begin{align}
+\xi_{(1)}^\mu &= (1,0) \quad \text{（x方向平移）} \\
+\xi_{(2)}^\mu &= (0,1) \quad \text{（y方向平移）} \\
+\xi_{(3)}^\mu &= (-y,x) \quad \text{（绕原点转动）}
+\end{align}
+这对应于欧式平面的3个独立几何对称性。
+\end{example}
+
+\begin{example}[闵可夫斯基时空的Killing矢量场]
+对于闵氏度规$g_{\mu\nu} = \eta_{\mu\nu}$，存在10个线性独立的Killing矢量场，分别对应于：
+\begin{itemize}
+\item 4个平移变换（时空平移对称性）
+\item 6个Lorentz变换（3个空间转动和3个boost变换）
+\end{itemize}
+时间平移对应的Killing矢量为：
+\begin{align}
+\xi^\mu = (1,0,0,0)
+\end{align}
+\end{example}
+
+\begin{definition}[稳定时空]
+如果时空区域存在类时Killing矢量场$\xi^\mu$，即满足：
+\begin{align}
+g_{\mu\nu}\xi^\mu\xi^\nu < 0
+\end{align}
+则称该时空区域是稳定的（stationary）。
+\end{definition}
+
+\begin{theorem}[适配坐标系与时间平移不变性]
+对于类时Killing矢量场$\xi^\mu$，可以构造适配坐标系，使得：
+\begin{align}
+\xi^\mu(x) = \frac{dx^\mu}{d\lambda}
+\end{align}
+在适配坐标系下，度规不显含时间坐标：
+\begin{align}
+\partial_0 g_{\mu\nu} = 0
+\end{align}
+从而时间平移变换$x^0 \to x^0 + b$是等度规变换。
+\end{theorem}
+
+\begin{derivationnote}[适配坐标系的构造细节]
+\end{derivationnote}
+
+
+
+\begin{definition}[循环坐标与守恒量]
+不显含于度规场中的坐标称为循环坐标,从而度规对这个坐标的偏导数为0对应一种守恒量。
+\end{definition}
+时间平移不变性（由类时Killing矢量场描述）将导致能量守恒，这是广义相对论框架下的诺特定理的具体体现。
+\begin{definition}[最大对称空间]
+具有最大数目独立Killing矢量场的空间称为最大对称空间。n维黎曼空间最多有$\frac{n(n+1)}{2}$个独立Killing矢量场。
+\end{definition}
+
+
+\subsection{黎曼空间中的常用计算}
+
+在黎曼几何中，度规张量$g_{\mu\nu}$的行列式通常简记为$g$，即：
+\begin{align}
+g \equiv \det(g_{\mu\nu})
+\end{align}
+由于在物理应用中度规通常具有负号约定，实际计算中常用的是$\-g$。
+
+
+\n{度规行列式$g$包含了度规张量的全部信息，在坐标变换下按特定规律变换。}
+
+\begin{theorem}[度规行列式的导数]
+度规行列式$g$对度规分量的偏导数为：
+\begin{align}
+\frac{\partial g}{\partial g_{\mu\nu}} = \Delta^{\mu\nu} = g g^{\mu\nu}
+\end{align}
+其中$\Delta^{\mu\nu}$是$g_{\mu\nu}$的代数余子式。由此可得行列式对坐标的偏导数：
+\begin{align}
+\partial_\rho g = g g^{\mu\nu} \partial_\rho g_{\mu\nu} = -g g_{\mu\nu} \partial_\rho g^{\mu\nu}
+\end{align}
+\end{theorem}
+\n{一般度规的行列式是负的，因此$-g$是正值。}
+\begin{theorem}[Christoffel联络的缩并]
+Christoffel联络$\Gamma^\mu_{\rho\mu}$的缩并形式为：
+\begin{align}
+\Gamma^\mu_{\rho\mu} = \frac{1}{2} g^{\mu\nu} \partial_\rho g_{\mu\nu} = \frac{1}{2g} \partial_\rho g = \partial_\rho \ln\sqrt{-g} = \frac{1}{\sqrt{-g}} \partial_\rho \sqrt{-g}
+\end{align}
+这个结果在协变散度的计算中具有核心重要性。
+\end{theorem}
+
+\begin{definition}[协变散度]
+对于任意张量场，其协变散度定义为该张量的协变导数在某个指标上的缩并。以逆变矢量场$J^\mu(x)$为例，其协变散度为：
+\begin{align}
+\nabla_\rho J^\rho = \partial_\rho J^\rho + \Gamma^\mu{}_{\rho\mu} J^\rho
+\end{align}
+\end{definition}
+
+\begin{theorem}[矢量场的协变散度简化]
+利用Christoffel联络的缩并关系，逆变矢量场的协变散度可简化为：
+\begin{align}
+\nabla_\rho J^\rho = \frac{1}{\sqrt{-g}} \partial_\rho (\sqrt{-g} J^\rho)
+\end{align}
+当$\nabla_\rho J^\rho = 0$时，称$J^\mu$为守恒流。
+\end{theorem}
+
+\n{这个简化形式极大方便了实际计算，将复杂的张量运算转化为普通导数运算。}
+
+在广义相对论中，能量-动量张量的协变散度为零对应着局域能量-动量守恒定律。对于电磁场，四电流密度的协变散度为零对应着电荷守恒。
+
+\begin{theorem}[二阶张量场的协变散度]
+对于二阶逆变张量场$T^{\mu\nu}(x)$，其协变散度为：
+\begin{align}
+\nabla_\rho T^{\rho\nu} = \frac{1}{\sqrt{-g}} \partial_\rho (\sqrt{-g} T^{\rho\nu}) + \Gamma^\nu{}_{\mu\rho} T^{\rho\mu}
+\end{align}
+特别地，当$T^{\mu\nu}$是反对称张量时，第二项为零，简化为：
+\begin{align}
+\nabla_\rho T^{\rho\nu} = \frac{1}{\sqrt{-g}} \partial_\rho (\sqrt{-g} T^{\rho\nu})
+\end{align}
+\end{theorem}
+
+\begin{theorem}[全反称张量场的协变散度]
+对于任意阶的全反称逆变张量场$H^{\mu\nu\cdots\sigma}(x)$，其协变散度满足：
+\begin{align}
+\nabla_\rho H^{\rho\nu\cdots\sigma} = \frac{1}{\sqrt{-g}} \partial_\rho (\sqrt{-g} H^{\rho\nu\cdots\sigma})
+\end{align}
+这一结果可以视为前述定理在高阶反对称张量情形的推广。
+\end{theorem}
+
 

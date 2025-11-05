@@ -1,0 +1,97 @@
+\section{爱因斯坦场方程和广义相对论的实验检验}
+
+\subsection{引力几何化与弱场近似}
+\label{subsec:grav_geom_weak_field}
+
+等效原理告诉我们，引力和惯性里局域不可区分，所以我们可以把引力效应等价于坐标变换的效应，最终归纳于时空的几何效应。考虑自由粒子在惯性系中的运动方程：
+\begin{align}
+\frac{d^2 X^\mu}{d\tau^2} = 0,
+\end{align}
+其中 \(X^\mu\) 是闵可夫斯基坐标。通过一般坐标变换 \(x^\mu = x^\mu(X^\nu)\) 引入非惯性系后，运动方程变为
+\begin{align}
+\frac{d^2 x^\mu}{d\tau^2} = - \Gamma^\mu_{\nu\lambda} \frac{dx^\nu}{d\tau} \frac{dx^\lambda}{d\tau}
+\end{align}
+把这个方程与牛顿方程对比，可得联络在此处的作用类似于惯性力的场强，由等效原理，引力效应也可以通过联络来描述，联络蕴含了时空的几何结构，因此这种思想就是引力的几何化。粒子物理无论是在惯性力场还是引力场中，其运动方程都是测地线方程，力的效应在联络中称为时空本身的性质。
+联络是引力场强，度规的导数，对比电势和电场，度规就是相对论框架下的引力势。
+\subsubsection*{弱场近似下的运动方程}
+
+在弱场近似中，引入以下条件：
+\begin{enumerate}
+\item 引力场弱：\(g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\)，且 \(|h_{\mu\nu}| \ll 1\)。
+\item 引力场稳态：\(h_{\mu\nu,0} = 0\)。
+\item 引力场空间缓变：\(|h_{\mu\nu,i}| \ll 1\)，其中拉丁指标 \(i,j,k\) 表示空间坐标。
+\item 粒子低速运动：\(\left| \frac{dx^i}{dx^0} \right| \ll 1\)。
+\end{enumerate}
+
+在这些条件下，联络可近似为：
+\begin{align}
+\Gamma^\mu{}_{\nu\lambda} = \frac{1}{2} \eta^{\mu\rho} (\partial_\lambda h_{\rho\nu} + \partial_\nu h_{\rho\lambda} - \partial_\rho h_{\nu\lambda}).
+\end{align}
+测地线方程可简化为：
+\begin{align}
+\frac{d^2 x^0}{d\tau^2} &= 0, \\
+\frac{d^2 x^i}{d\tau^2} &= -\Gamma^i{}_{00} \left( \frac{dx^0}{d\tau} \right)^2.
+\end{align}
+利用 \(x^0 = t\)（时间坐标）和低速条件，得到：
+\begin{align}
+\frac{d^2 x^i}{dt^2} = -\partial_i \varphi,
+\end{align}
+其中牛顿引力势 \(\varphi\) 与度规扰动的关系为(自然单位制)：
+\begin{align}
+\varphi = -\frac{1}{2} h_{00}, \quad g_{00} = -1 - 2\varphi = -(1-\frac{2GM}{r})
+\end{align}
+还原光速，$g_00$等于0时，$R_g = \frac{2GM}{c^2}$称为施瓦西半径，当距离远大于施瓦西半径时，度规退化为Minkovski度规。这表明在弱场低速近似下，广义相对论还原为牛顿引力理论。
+
+\begin{example}[太阳的引力半径]
+对于质量为 \(M\) 的球对称引力源，牛顿引力势为 \(\varphi = -GM/r\)。弱场条件要求 \(r \gg R_g\)，其中引力半径（史瓦西半径）为：
+\begin{align}
+R_g = \frac{2GM}{c^2}.
+\end{align}
+太阳的质量 \(M \approx 2 \times 10^{33} \, \text{g}\)，引力半径 \(R_g \approx 3 \, \text{km}\)，而实际半径约 \(7 \times 10^5 \, \text{km}\)，故弱场条件高度满足。
+\end{example}
+
+\subsubsection*{爱因斯坦场方程及其弱场极限}
+
+\begin{theorem}[爱因斯坦场方程]
+引力场方程的最一般形式为：
+\begin{align}
+G_{\mu\nu} + \Lambda g_{\mu\nu} = \kappa T_{\mu\nu},
+\end{align}
+其中 \(G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R\) 是爱因斯坦张量，\(\Lambda\) 是宇宙学常数，\(\kappa\) 是相对论引力常数，\(T_{\mu\nu}\) 是能量动量张量。当 \(\Lambda = 0\) 时，方程为：
+\begin{align}
+G_{\mu\nu} = \kappa T_{\mu\nu}.
+\end{align}
+在真空区域（\(T_{\mu\nu} = 0\)），场方程简化为 \(R_{\mu\nu} = 0\)，对应 Ricci 平坦时空。
+\end{theorem}
+
+流体四速度满足归一化条件$g_{\mu\nu} u^\mu u^\nu = -1$。
+静止流体三矢量均为0，可得$g_{00}u^0u^0 = -1$。
+可得其四速度为：
+\begin{align}
+u^\mu = (-g_{00})^{-1/2} (1, 0, 0, 0).
+\end{align}
+由此可得对应的能量动量张量，其非零分量为：
+\begin{align}
+T^{00} = \rho (-g_{00})^{-1}, \quad T = g_{\mu\nu} T^{\mu\nu} = -\rho.
+\end{align}
+在弱场近似下，爱因斯坦场方程的 00 分量化为：
+\begin{align}
+    R^{00} = \kappa \left( T^{00} - \frac{1}{2} g^{00} T \right)
+\end{align}
+带入可得，
+\begin{align}
+\nabla^2 \varphi = \frac{1}{2} \kappa \rho.
+\end{align}
+与牛顿引力场方程 \(\nabla^2 \varphi = 4\pi G \rho\) 对比，可得：
+\begin{align}
+\kappa = 8\pi G.
+\end{align}
+恢复光速后，\(\kappa = 8\pi G / c^4\).
+
+\begin{derivationnote}[宇宙学常数的影响]
+若保留宇宙学常数项，弱场近似下牛顿方程修正为：
+\begin{align}
+\nabla^2 \varphi = 4\pi G \rho - \Lambda.
+\end{align}
+观测表明 \(\Lambda\) 极小，在太阳系尺度可忽略。
+\end{derivationnote}
