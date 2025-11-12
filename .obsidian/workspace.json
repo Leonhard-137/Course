@@ -6,7 +6,7 @@
       {
         "id": "d4ab317dde7c1a51",
         "type": "tabs",
-        "dimension": 53.86819484240688,
+        "dimension": 53.86819484240687,
         "children": [
           {
             "id": "d4974c4e7c2d6820",
@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Particle/Note/第五章 对称性和守恒律.md",
+                "file": "GR/Homework/HW2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "第五章 对称性和守恒律"
+              "title": "HW2"
             }
           }
         ]
@@ -27,7 +27,7 @@
       {
         "id": "58f43269aa3f37f3",
         "type": "tabs",
-        "dimension": 46.13180515759313,
+        "dimension": 46.13180515759312,
         "children": [
           {
             "id": "38eba55fb508e38f",
@@ -203,10 +203,11 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "d4974c4e7c2d6820",
+  "active": "eef6ca3fd781b0f5",
   "lastOpenFiles": [
-    "Particle/PPT/Section5.1.pdf.pdf",
+    "GR/Homework/HW2.md",
     "Particle/Note/第五章 对称性和守恒律.md",
+    "Particle/PPT/Section5.1.pdf.pdf",
     "Particle/PPT/Lectures2025/第三章(16-9).pdf",
     "Particle/Note/第四章 强子和强子间相互作用.md",
     "Particle/PPT/Section4.2.pdf.pdf",
