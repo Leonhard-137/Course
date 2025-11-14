@@ -4,57 +4,42 @@
     "type": "split",
     "children": [
       {
-        "id": "d4ab317dde7c1a51",
+        "id": "5fa4f1b763aa68af",
         "type": "tabs",
-        "dimension": 53.86819484240687,
         "children": [
           {
-            "id": "d4974c4e7c2d6820",
+            "id": "0919fd1049bc8fe3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GR/Homework/HW2.md",
+                "file": "GR/Note/md_note/第一章.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "HW2"
+              "title": "第一章"
             }
           }
         ]
       },
       {
-        "id": "58f43269aa3f37f3",
+        "id": "d4ab317dde7c1a51",
         "type": "tabs",
-        "dimension": 46.13180515759312,
         "children": [
           {
-            "id": "38eba55fb508e38f",
+            "id": "d4974c4e7c2d6820",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Particle/PPT/Lectures2025/第三章(16-9).pdf"
+                "file": "GR/Books/广义相对论讲义.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "第三章(16-9)"
-            }
-          },
-          {
-            "id": "eef6ca3fd781b0f5",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Particle/PPT/Section5.1.pdf.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Section5.1.pdf"
+              "title": "广义相对论讲义"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -203,11 +188,14 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "eef6ca3fd781b0f5",
+  "active": "0919fd1049bc8fe3",
   "lastOpenFiles": [
+    "GR/Books/广义相对论讲义.pdf",
+    "GR/Note/md_note/第一章.md",
     "GR/Homework/HW2.md",
-    "Particle/Note/第五章 对称性和守恒律.md",
+    "未命名.md",
     "Particle/PPT/Section5.1.pdf.pdf",
+    "Particle/Note/第五章 对称性和守恒律.md",
     "Particle/PPT/Lectures2025/第三章(16-9).pdf",
     "Particle/Note/第四章 强子和强子间相互作用.md",
     "Particle/PPT/Section4.2.pdf.pdf",
