@@ -95,3 +95,456 @@ T^{00} = \rho (-g_{00})^{-1}, \quad T = g_{\mu\nu} T^{\mu\nu} = -\rho.
 \end{align}
 观测表明 \(\Lambda\) 极小，在太阳系尺度可忽略。
 \end{derivationnote}
+
+\subsection{检验粒子在引力场中的运动}
+
+\n[2em]{把待研究的物体看成质量远小于引力源的“检验粒子”，可以忽略它对时空背景的反作用，只需要在已知的度规上讨论其测地运动。}
+
+\subsubsection{时空对称性与守恒量}
+
+对称性可以简化计算，在广义相对论中也不例外，这里我们需要借助Killing矢量得到守恒量。考虑具有静质量的检验粒子，其质量记为 $m$。令 $\tau$ 为质点的固有时，$x^\mu(\tau)$ 为其世界线坐标，则四速度和逆变四动分别为
+\begin{align}
+u^\mu &= \frac{dx^\mu}{d\tau} \\
+p^\mu &= m u^\mu = m \frac{dx^\mu}{d\tau} 
+\end{align}
+
+\begin{theorem}[Killing 矢量与守恒量]
+若质点沿测地线运动，其四动量为 $p^\mu$，而 $\xi^\mu$ 是一个 Killing 矢量，则量
+\begin{align}
+C = p_\mu \xi^\mu
+\end{align}
+在质点的世界线上保持不变，即
+\begin{align}
+\frac{d}{d\tau}\left(p_\mu \xi^\mu\right) = 0 .
+\end{align}
+\end{theorem}
+
+\begin{proof}
+沿世界线使用协变导数，可以写成
+\begin{align}
+\frac{d}{d\tau}\left(p_\mu \xi^\mu\right)
+&= u^\nu \nabla_\nu\!\left(p_\mu \xi^\mu\right) \\
+&= u^\nu \bigl( \xi^\mu \nabla_\nu p_\mu + p_\mu \nabla_\nu \xi^\mu \bigr) \\
+&= m \bigl(u^\nu \xi^\mu \nabla_\nu u_\mu + u^\nu u_\mu \nabla_\nu \xi^\mu \bigr)
+\end{align}
+注意这里第一项其实就是测地线方程乘以$\xi^{\mu}$，第二项又killing方程，是反对称张量的收缩为0。
+\end{proof}
+
+这一守恒量的物理意义是：若时空在某个方向上具有对称性，则检验粒子沿该方向对应的动量分量在运动中保持不变。
+
+\n{在具体问题中，识别出哪些坐标是循环坐标，就等价于找到了运动中的能量、角动量等守恒量。这在弯曲时空中求解测地线尤为重要。}
+
+现在考虑具有循环坐标的情形。设时空存在一组坐标 $x^\mu$，其中 $x^k$ 只以其导数出现而不显含在度规中，则 $x^k$ 为循环坐标。这可以理解为对 $x^k$ 方向做无穷小平移
+\begin{align}
+x'^{\mu} =
+\begin{cases}
+x^\mu , & \mu \neq k ,\\[0.3em]
+x^k + \varepsilon , & \mu = k ,
+\end{cases}
+\end{align}
+度规保持不变，所以它导出的Killing矢量就是
+\begin{align}
+\xi^\mu = \delta^{\mu k} ,
+\end{align}
+此时守恒量
+\begin{align}
+p_\mu \xi^\mu = p_k
+\end{align}
+正是四动量在循环坐标方向上的协变分量。
+
+\subsubsection{史瓦西时空中点粒子的运动}
+\paragraph{史瓦西时空中的守恒量与运动方程}
+考虑质量为 $M$ 的球对称引力源，其外部时空由史瓦西度规描述。度规与 $t$ 与 $\varphi$ 无显含关系，这两个坐标是循环坐标，对应的 Killing 矢量分别为 $\partial_t$ 与 $\partial_\varphi$。因此有两个守恒量：
+\begin{align}
+p_t &= g_{t\mu} p^\mu = g_{tt} p^t
+    = -m \left(1 - \frac{2GM}{r}\right)\frac{dt}{d\tau} \\
+p_\varphi &= g_{\varphi\mu} p^\mu = g_{\varphi\varphi} p^\varphi
+          = m r^2 \sin^2\theta \,\frac{d\varphi}{d\tau} 
+\end{align}
+在非相对论极限$r \rightarrow 0$且$ c \rightarrow \inf$时，可以验证 $-p_t$ 对应于质点的能量，而 $p_\varphi$ 给出角动量的第三分量。
+
+\n{广义相对论中，引力会扭曲时空，所以很难在不同的时空点使用同一参考系描述时空坐标，这里能量和角动量以无穷远处（平坦时空）的静止观测者为参考，只对那个观测者有意义。}
+记为
+\begin{align}
+\left(1 - \frac{2GM}{r}\right)\frac{dt}{d\tau} &= E \\
+r^2 \sin^2\theta \,\frac{d\varphi}{d\tau} &= L 
+\end{align}
+
+由于引力源球对称，我们可以选择质点的轨道位于赤道面 $\theta=\pi/2$，于是
+\begin{align}
+\frac{d\varphi}{d\tau} = \frac{L}{r^2} \\
+\frac{d\theta}{d\tau} = 0 \\
+\frac{d t}{d \tau} = \left(1 - \frac{2GM}{r}\right)^{-1}E
+\end{align}
+\n{这里考察运动应该用测地线方程的，但是它用的四速度归一化条件，难道这两个方程有什么联系？}
+再加上四速度的归一化条件，
+\begin{align}
+g_{\mu\nu} u^\mu u^\nu = -1
+\end{align}
+在史瓦西度规中具体写为
+\begin{align}
+- \left(1 - \frac{2GM}{r} \right)\left(\frac{dt}{d\tau}\right)^2
++ \left(1 - \frac{2GM}{r} \right)^{-1}\left(\frac{dr}{d\tau}\right)^2
++ r^2 \left(\frac{d\varphi}{d\tau}\right)^2
+= -1 .
+\end{align}
+将 $dt/d\tau$ 与 $d\varphi/d\tau$ 代入得
+\begin{align}
+    \left(\frac{dr}{d\tau}\right)^2
+&= E^2 - \left(1 - \frac{2GM}{r}\right)\left(1 + \frac{L^2}{r^2}\right) \\
+\frac{d\theta}{d\tau} &= 0 \\
+\frac{d\varphi}{d\tau} &= \frac{L}{r^2} \\
+\frac{dt}{d\tau} &= \left(1 - \frac{2GM}{r}\right)^{-1} E 
+\end{align}
+这四个一阶方程给出了质点在史瓦西时空中的完整运动。
+
+\paragraph{牛顿情形中的径向有效势}
+
+为了理解上式的物理含义，先回顾牛顿引力中质点在球对称场中的运动。设 $E_n$ 为牛顿力学中的单位质量总能量，$L$ 仍表示单位质量角动量，则在极平面上有
+\begin{align}
+\frac{d\theta}{dt} &= 0 \\
+\frac{d\varphi}{dt} &= \frac{L}{r^2} \\
+\left(\frac{dr}{dt}\right)^2 &= 2E_n + \frac{2GM}{r} - \frac{L^2}{r^2} 
+\end{align}
+引入牛顿情形下的径向有效势 $V_{eff}(r)$：
+\begin{align}
+V(r) = -\frac{GM}{r} + \frac{L^2}{2r^2} .
+\end{align}
+则径向方程可化为
+\begin{align}
+\frac{1}{2}\left(\frac{dr}{dt}\right)^2 &= E_n - V_{eff}(r) \\
+&= -\frac{1}{\widetilde{r}} + \frac{\widetilde{L}^2}{2\widetilde{r}^2}
+\end{align}
+其中最后一部作了无量纲化处理$\widetilde{r} = r/GM$， $\widetilde{L} = L/GM$
+经典力学中，质点的径向运动只允许发生在 $E_n \geq V(r)$ 的区域内。
+
+\n{在牛顿情形下，有效势是引力吸引势与离心势的简单叠加，势垒的存在与否决定了粒子是被散射出去还是能够被捕获。}
+
+利用 $V(r)$ 的图像，可以总结出牛顿情形下径向运动的分类：
+\begin{enumerate}
+  \item $L = 0$：无角动量，仅有径向自由度。若 $E_n < 0$，粒子只能被吸向力心；若 $E_n \geq 0$，则可能逃向无穷远。
+  \item $L \neq 0,\; E_n < 0$：束缚态，对应椭圆或类椭圆轨道。
+  \item $L \neq 0,\; E_n \geq 0$：散射态，粒子自远处而来，经引力偏折后再次远离。
+\end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/NtGscaL0.jpg} % 图1文件名
+    \label{fig:NtGscaL0}
+  \end{minipage}\hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/NtGscaL00.jpg} % 图2文件名
+    \label{fig:NtGscaL00}
+  \end{minipage}
+  \caption{牛顿引力散射}
+\end{figure}
+
+\paragraph{广义相对论中的有效势与轨道类型}
+
+\n{与牛顿情形相比，多出了 $-2GM L^2/r^3$ 这一项。它在小 $r$ 区域占主导，使有效势的深部结构发生改变，从而允许出现“直接坠入黑洞”的轨道。}
+
+在史瓦西时空中，也可以将径向方程重写成类似“能量减去势能”的形式。定义广义相对论情形下的径向有效势 $U(r)$ 为
+\begin{align}
+U^2(r)
+&= \left(1 - \frac{2GM}{r}\right)\left(1 + \frac{L^2}{r^2}\right) \\
+&= 1 - \frac{2GM}{r} + \frac{L^2}{r^2} - \frac{2GM L^2}{r^3} .
+\end{align}
+于是径向方程可写成
+\begin{align}
+\left(\frac{dr}{d\tau}\right)^2 = E^2 - U^2(r) .
+\end{align}
+
+从形式上看，$U^2$ 与牛顿有效势 $V$ 的最大差别就在于 $-2GM L^2/r^3$ 这一强场修正项；常数项 $1$ 反映了相对论静能量基准（静止粒子的 $E^2=1$）。引入无量纲变量后，有效势可写为
+\begin{align}
+U^2(\tilde{r}) = 1 - \frac{2}{\tilde{r}} + \frac{\tilde{L}^2}{\tilde{r}^2} - \frac{2\tilde{L}^2}{\tilde{r}^3} .
+\end{align}
+
+通过考察 $U^2(\tilde{r})$ 随 $\tilde{r}$ 的曲线，可以发现当 $\tilde{L}$ 足够大时，曲线具有一个峰值 $U_m^2$，形成势垒；随着 $\tilde{L}$ 变小，势垒逐渐降低并最终消失。相应地，轨道类型可分为：
+
+\begin{enumerate}
+  \item $\tilde{L} > 4$：有效势存在一个峰值 $U_m^2>1$ 的势垒。此时可能的运动分为三类：
+  \begin{align}
+  E^2 &< 1 &&\text{束缚态；}\\
+  1 \leq E^2 &< U_m^2 &&\text{散射态；}\\
+  E^2 &\geq U_m^2 &&\text{吸收态。}
+  \end{align}
+  \item $2\sqrt{3} \leq \tilde{L} \leq 4$：势垒仍存在，但峰值满足 $U_m^2\leq 1$。此时只有两种可能：
+  \begin{align}
+  E^2 &< U_m^2 &&\text{束缚态；}\\
+  E^2 &\geq U_m^2 &&\text{吸收态（若 }E^2<1\text{ 则粒子必然撞向中心）。}
+  \end{align}
+  \item $\tilde{L} < 2\sqrt{3}$：势垒完全消失，只剩吸收态，
+  \begin{align}
+  E^2 \geq 0 , \qquad &\text{粒子最终都会落向引力中心（若 }E^2<1\text{ 则不可能逃离）。}
+  \end{align}
+\end{enumerate}
+
+\n{与牛顿情形相比，广义相对论中势垒更低甚至可以完全消失，因而粒子被引力源“吞噬”的几率显著增加。这一事实是相对论天体物理中吸积盘和物质落入黑洞等现象的理论基础。}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/EsGscaL0.jpg} % 图1文件名
+    \label{fig:EsGscaL0}
+  \end{minipage}\hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/EsGscaL00.jpg} % 图2文件名
+    \label{fig:EsGscaL00}
+  \end{minipage}\hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/EsGscaL000.jpg} % 图2文件名
+    \label{fig:EsGscaL000}
+  \end{minipage}
+  \caption{爱因斯坦引力散射}
+\end{figure}
+
+在 $\tilde{L}$ 较大的情形下，$U^2(\tilde{r})$ 随 $\log r$ 的曲线呈现出明显的势垒结构；随着 $\tilde{L}$ 减小，势垒的高度和宽度逐渐降低直至消失。图像上，曲线在远处都趋近于 $U^2\to 1$，对应无穷远处静止粒子的能量基准。
+
+\subsection{广义相对论的实验验证}
+\subsubsection{行星轨道的近日点进动}
+
+\paragraph{牛顿情形下的轨道方程}
+
+从牛顿径向能量方程出发，将角向方程代入，得到（$E_n$ 为牛顿能量，$L$ 为单位质量角动量）
+\begin{align}
+\left(\frac{d}{d\varphi}\frac{1}{r}\right)^2
+= \frac{2E_n}{L^2} + \frac{2GM}{rL^2} - \frac{1}{r^2} .
+\end{align}
+
+对 $\varphi$ 再求导得
+\begin{align}
+2\left(\frac{d}{d\varphi}\frac{1}{r}\right)\frac{d^2}{d\varphi^2}\frac{1}{r}
+&= \frac{2GM}{L^2}\left(\frac{d}{d\varphi}\frac{1}{r}\right)
+ -\frac{2}{r}\left(\frac{d}{d\varphi}\frac{1}{r}\right) ,
+\end{align}
+若 $\frac{d}{d\varphi}(1/r)\neq0$，可写成标准 Binet 方程
+\begin{align}
+\frac{d^2}{d\varphi^2}\frac{1}{r} + \frac{1}{r} = \frac{GM}{L^2} .
+\end{align}
+
+为了无量纲化，引入
+\begin{align}
+u := \frac{GM}{r} .
+\end{align}
+则上式化为
+\begin{align}
+\frac{d^2 u}{d\varphi^2} + u = \tilde{L}^{-2},
+\qquad
+\tilde{L} := \frac{L}{GM} .
+\end{align}
+
+该线性方程的通解为
+\begin{align}
+u = \tilde{L}^{-2}\left(1 + e\cos\varphi\right),
+\end{align}
+其中 $e$ 为偏心率。当 $|e|<1$ 时轨道为椭圆。
+
+\n{牛顿情形中，Binet 方程具有严格周期性，因此轨道闭合；而广义相对论修正破坏了这一周期性，产生近日点进动。}
+
+\paragraph{广义相对论情形的轨道方程}
+
+将 Schwarzschild 有效势加入径向方程，得到
+\begin{align}
+\left(\frac{d}{d\varphi}\frac{1}{r}\right)^2
+= \frac{E^2-1}{L^2} + \frac{2GM}{rL^2} - \frac{1}{r^2} + \frac{2GM}{r^3} .
+\end{align}
+
+与牛顿推导类似，可得到修正后的 Binet 方程
+\begin{align}
+\frac{d^2}{d\varphi^2}\frac{1}{r} + \frac{1}{r}
+= \frac{GM}{L^2} + \frac{3GM}{r^2} .
+\end{align}
+以 $u=GM/r$ 表示，则为
+\begin{align}
+\frac{d^2 u}{d\varphi^2} + u = \tilde{L}^{-2} + 3u^2 .
+\end{align}
+
+最后一项 $3u^2$ 即为广义相对论修正。
+
+\paragraph{水星近日点进动的计算}
+
+对太阳而言，量级估算
+\begin{align}
+GM = 1.5\times10^3\ \mathrm{m},
+\qquad
+r \approx 5\times10^{10}\ \mathrm{m},
+\end{align}
+故 $u=GM/r\sim10^{-7}$，$u^2$ 更小，可采用微扰法。这里使用水星的原因其实是因为水星的轨道半径小，u大，那么水星的轨道进动应该更容易观测。
+取$\widetilde{L}^{-2}$为展开系数，则可设解展开为
+\begin{align}
+u = \tilde{L}^{-2}u_1 + \tilde{L}^{-4}u_2 + \cdots ,
+\end{align}
+其中$u_1$为牛顿引力的解$1+e\cos\varphi$，代入修正方程得到二阶展开的方程
+\begin{align}
+\tilde{L}^{-2}\left(d_\varphi^2 u_2 + u_2\right)
+= 3\tilde{L}^{-4}(1+e\cos\varphi)^2
+\approx 3\tilde{L}^{-4}(1 + 2e\cos\varphi).
+\end{align}
+这里假设了偏心率$e \ll 1$
+
+于是得到摄动后的轨道
+\begin{align}
+u \approx \tilde{L}^{-2}(1+e\cos\varphi)
++ 3\tilde{L}^{-4}\left[1 + e\cos\varphi - 3\tilde{L}^{-2} e\varphi\sin\varphi\right].
+\end{align}
+
+注意到 $\varphi$ 出现了线性增长项 $\,\varphi\sin\varphi$，说明周期略大于 $2\pi$，导致轨道不再闭合。近日点条件是
+\begin{align}
+\left.\frac{du}{d\varphi}\right|_{\varphi=\varphi_0}=0 ,
+\end{align}
+由此可得两次相邻近日点间的相位差
+\begin{align}
+\Delta\varphi
+= 2\pi \left(1 - 3\tilde{L}^{-2}\right)^{-1}
+\approx 2\pi + 6\pi\left(\frac{GM}{L}\right)^2 .
+\end{align}
+
+于是近日点相对于牛顿轨道的进动量为
+\begin{align}
+\delta\varphi
+= 6\pi\left(\frac{GM}{L}\right)^2 .
+\end{align}
+
+在天文单位下，可写成常用公式
+\begin{align}
+\delta\varphi
+= \frac{6\pi GM}{a(1-e^2)c^2} ,
+\end{align}
+其中 $a$ 为轨道半长轴，$e$ 为偏心率。将水星数据代入，每世纪进动约 $43''$，与观测高度一致。
+
+\subsubsection{光线的引力偏折}
+
+\n[2em]{广义相对论预言：光线在引力场中不会直线传播，而会发生弯曲。这是由于时空本身的弯曲导致光线的测地线不再是平直的。实验上，这一效应在太阳掠射的星光观测中得到验证。}
+
+\paragraph{光子运动方程的构建}
+
+光子的静质量为零，其世界线为类光线，无法取用固有时 $\tau$ 作为参数，但可引入仿射参数 $\lambda$。于是光子的逆变四动量定义为
+\begin{align}
+p^\mu = \frac{dx^\mu}{d\lambda} .
+\end{align}
+
+若时空存在 Killing 矢量场 $\xi^\mu$，则类似于有质量粒子的情形，可证明
+\begin{align}
+\frac{d}{d\lambda}(p_\mu \xi^\mu) = 0 ,
+\end{align}
+即 $p_\mu\xi^\mu$ 在光子运动中保持不变。
+
+在史瓦西时空中，由于度规与 $t$ 和 $\varphi$ 无显含关系，分别存在两个守恒量
+\begin{align}
+p_t &= -E , \\
+p_\varphi &= L ,
+\end{align}
+它们对应于能量与角动量守恒。代入度规得
+\begin{align}
+\left(1 - \frac{2GM}{r}\right)\frac{dt}{d\lambda} &= E , \\
+r^2\frac{d\varphi}{d\lambda} &= L .
+\end{align}
+
+\n{这里 $E$ 为光子能量常数，$L$ 为角动量常数。引力势对光子的作用表现为时空几何对测地线的弯曲。}
+
+光线满足类光条件
+\begin{align}
+g_{\mu\nu}p^\mu p^\nu = 0 .
+\end{align}
+代入史瓦西度规得
+\begin{align}
+-\left(1 - \frac{2GM}{r}\right)\left(\frac{dt}{d\lambda}\right)^2
++ \left(1 - \frac{2GM}{r}\right)^{-1}\left(\frac{dr}{d\lambda}\right)^2
++ r^2\left(\frac{d\varphi}{d\lambda}\right)^2 = 0 .
+\end{align}
+将守恒量代入消去 $t,\varphi$ 导数后化为
+\begin{align}
+E^2
+= \left(\frac{dr}{d\lambda}\right)^2
+ + \left(1 - \frac{2GM}{r}\right)\frac{L^2}{r^2} .
+\end{align}
+定义无量纲有效势
+\begin{align}
+U^2(r)
+= \left(1 - \frac{2GM}{r}\right)\frac{L^2}{r^2} ,
+\end{align}
+则方程形式与有质量粒子的相似：
+\begin{align}
+\left(\frac{dr}{d\lambda}\right)^2 = E^2 - U^2(r) .
+\end{align}
+
+\begin{example}[有效势的峰值]
+对 $U^2(r)$ 求极值：
+\begin{align}
+\frac{dU^2}{dr} = 0
+\quad \Rightarrow \quad
+r = 3GM ,
+\end{align}
+此处为不稳定圆轨道半径，$U^2_{\max} = \frac{1}{27}\left(\frac{L}{GM}\right)^2$。
+若 $E^2 < U^2_{\max}$，光线被散射；若 $E^2 \ge U^2_{\max}$，则被吸入黑洞。
+\end{example}
+
+由角动量守恒 $r^2 \frac{d\varphi}{d\lambda}=L$，可得
+\begin{align}
+\frac{dr}{d\lambda}
+= \frac{dr}{d\varphi}\frac{d\varphi}{d\lambda}
+= \frac{L}{r^2}\frac{dr}{d\varphi} .
+\end{align}
+代入前式得轨道方程
+\begin{align}
+\left(\frac{d}{d\varphi}\frac{1}{r}\right)^2
+= \frac{E^2}{L^2} - \frac{1}{r^2} + \frac{2GM}{r^3} .
+\end{align}
+令 $u = 1/r$，得
+\begin{align}
+\frac{d^2u}{d\varphi^2} + u = 3GMu^2 .
+\end{align}
+
+这就是光线在史瓦西时空中的轨道方程。其右端 $3GMu^2$ 项是广义相对论修正项，反映出引力对光线传播方向的弯曲效应。
+
+\subsubsection{掠日光线的偏折角}
+
+考虑掠过太阳表面的星光，太阳半径 $R$ 远大于 $GM$，令 $u$ 较小，可采用微扰法。设解为：
+\begin{align}
+    u = \varepsilon u_0 + \varepsilon^2 u_1 + \cdot
+\end{align}
+代入可得零级近似：
+\begin{align}
+u_0 = u_0\cos\varphi, \qquad u_0 = \frac{GM}{R} ,
+\end{align}
+由零级近似可得一级微扰方程
+\begin{align}
+\frac{d^2u_1}{d\varphi^2} + u_1 = 3u_0^2\cos^2\varphi .
+\end{align}
+利用 $\cos^2\varphi = \frac{1}{2}(1+\cos2\varphi)$ 得通解
+\begin{align}
+u_1 = u_0^2\left(1 + \frac{1}{2}\sin^2\varphi\right) .
+\end{align}
+于是总解近似为
+\begin{align}
+u \approx u_0\cos\varphi + u_0^2(1 + \sin^2\varphi) .
+\end{align}
+
+\n{光线在远离引力源时，轨迹趋近直线。引力导致的弯曲使入射与出射方向不再共线，从而产生可观测的偏折角。}
+
+在无穷远处 $u\to0$，设$\phi = \frac{\pi}{2} + \delta$，代入可得
+\begin{align}
+\delta \approx 2u_0 .
+\end{align}
+故光线偏折角为
+\begin{align}
+\Delta\theta = 2\delta = \frac{4GM}{R} .
+\end{align}
+
+将太阳参数代入：
+\begin{align}
+\Delta\theta \approx 1.75'' ,
+\end{align}
+与观测结果符合良好。
+
+\begin{figure}
+    \centering
+    \includegraphics[width = .8\linewidth]{figs/PhoGCur.jpg}
+    \caption{光子引力偏折}
+\end{figure}
