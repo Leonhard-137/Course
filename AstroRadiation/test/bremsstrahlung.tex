@@ -1,0 +1,399 @@
+\documentclass[12pt,oneside]{ctexart}
+
+% ---- 页面布局与边注 ----
+\usepackage[
+  a4paper,
+  left=50mm,           % 左边留白，留出边注区
+  right=25mm,
+  top=25mm,
+  bottom=28mm,
+  marginparwidth=36mm, % 边注栏宽度
+  marginparsep=6mm     % 边注与正文间距
+]{geometry}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{2em}
+
+% 边注：固定在左侧
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\small\itshape}
+\reversemarginpar
+\newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
+
+% ---- 数学与结构 ----
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{tcolorbox}
+\setlist{nosep}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{定理}
+\theoremstyle{remark}
+\newtheorem{example}[definition]{例}
+
+% ---- 页眉页脚 ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 广义相对论笔记}
+\rhead{\footnotesize \leftmark}
+\cfoot{\thepage}
+
+% ---- 颜色与超链接 ----
+\usepackage{xcolor}
+\definecolor{link}{RGB}{17,85,204}
+\usepackage[
+  colorlinks=true,
+  linkcolor=link,
+  urlcolor=link,
+  citecolor=link
+]{hyperref}
+
+% ---- 附加推导环境（可自定义标题 & 可一键隐藏）---- 
+\newif\ifshowderiv
+\showderivtrue                 % 全局开关：隐藏时改为 \showderivfalse
+
+\newcommand{\derivdefaulttitle}{额外说明}
+
+\newenvironment{derivationnote}[1][\derivdefaulttitle]{%
+  \ifshowderiv\begin{quote}\small\itshape
+  \noindent\textbf{#1}\;\par
+}{%
+  \end{quote}\fi
+}
+
+% ---- 章节标题 ----
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+
+% ---- 文档信息 ----
+\title{辐射机制笔记}
+\author{Leonhard Hsiao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{韧致辐射}
+\subsection{韧致辐射及其主导过程}
+在天体物理的热等离子体中，介质由带正电的粒子与带负电的粒子共同构成。记每个粒子的电荷为 $q_i$、质量为 $m_i$、位置矢量为 $\boldsymbol r_i$。
+\begin{definition}{韧致辐射}
+    带电粒子在另一带电粒子的库伦场中获得加速度产生的辐射。
+\end{definition}
+能够在库仑力作用下产生加速度、从而可能产生辐射的两体相互作用，大体可以分为三类：
+\begin{itemize}
+  \item 负电粒子与正电粒子之间的相互作用，例如电子与离子；
+  \item 负电粒子之间的相互作用，例如电子--电子；
+  \item 正电粒子之间的相互作用，例如离子--离子。
+\end{itemize}
+但是并非所有的相互作用情况导致的辐射都是同等重要的，考虑带电粒子之间的库仑相互作用相等，可以得到总电偶极距对时间的二阶导数为：
+\begin{align}
+    \ddot{d} = \frac{q_1}{m_1}F - \frac{q_2}{m_2}F
+\end{align}
+则同荷质比的粒子相互作用不产生辐射，经典电磁辐射理论告诉我们，单个带电粒子的辐射强度与加速度的平方成正比，因此质量越小的粒子在同一库仑力作用下辐射越强。
+
+在等离子体中：
+\begin{enumerate}
+  \item 电子与正离子之间存在库仑引力，容易发生近距离的相对运动，电子质量极小，因此其加速度很大，电子在这种碰撞过程中的辐射就非常显著。
+  \item 负电粒子之间、以及正电粒子之间则以库仑斥力为主，这种斥力使得粒子难以真正靠近，典型碰撞距离较大、相互作用力减弱，导致加速度较小；再加上离子本身质量远大于电子，相应的辐射可近似忽略。
+\end{enumerate}
+
+综合以上几点，在无外加强磁场的热等离子体中，\emph{电子与正离子之间的近距离库仑散射所产生的辐射}，构成了单电荷刹致辐射的主要来源。还有需要注意的一点是，辐射的能力来源是带点粒子的动能，如果系统没有能量的补充，韧致辐射就会不断带走系统的能量使之冷却。
+
+\begin{derivationnote}[关于“加速度$\Rightarrow$必然辐射”的澄清]
+  既然每个带电粒子只要具有加速度就会辐射，为什么同种类的两粒子相互作用时，辐射可以互相抵消？关键在于：\emph{真正参与能量输运的是总电磁场的平方，而总场是各粒子辐射场的矢量和}。
+  相同荷质比的两粒子在对称轨道上运动时，它们产生的辐射电场在远区往往具有\emph{大小相等、方向相反}的关系，于是总辐射电场
+  \begin{align}
+    \boldsymbol E_{\mathrm{rad}}^{\mathrm{(tot)}} \approx \boldsymbol 0,
+  \end{align}
+  相应的坡印廷矢量与辐射能流密度也随之趋近于零。也就是说，\emph{能量并不是简单地把每个粒子“单独辐射”的能量相加，而是要先叠加场，再计算能流}，这就是“同种类两粒子辐射相互抵消”的根本原因。
+\end{derivationnote}
+
+\subsection{单带电粒子的韧致辐射}
+电子与离子的库伦相互作用并不是持续的，而是在二者靠近时产生强烈的相互作用，这是一个时间的脉冲。时间脉冲的傅里叶逆变换时频率的脉冲，这告诉我们，计算谱分布应该更关心那些在展宽内的频率，其他频率对辐射的贡献可以忽略不记。
+\paragraph{带电粒子辐射谱密度的求解方式}
+单粒子辐射功率为：
+\begin{align}
+  P = \frac{2\ddot{d}^2}{3c^3}.
+  \label{eq:larmor_power}
+\end{align}
+式\eqref{eq:larmor_power} 即经典 Larmor 公式，描述了非相对论带电粒子因加速度所产生的辐射功率。
+对 $P(t)$ 进行傅里叶变换可以得到辐射光子的频谱分布，总辐射能量为：
+\begin{align}
+  W = \int_{-\infty}^{+\infty} P(t)\,dt
+    = \int_{-\infty}^{+\infty} \frac{2\ddot{d}^2(t)}{3c^3}\,dt.
+\end{align}
+
+利用 Parseval 定理：
+\begin{align}
+  \int_{-\infty}^{+\infty} |f(t)|^2 dt
+  = 4\pi \int_0^{\infty} |f(\omega)|^2 d\omega,
+\end{align}
+则可将时间域积分转化为频域形式：
+\begin{align}
+  W = \frac{2}{3c^3} \int_{-\infty}^{+\infty} \ddot{d}^2(t)\,dt
+  = \frac{8\pi}{3c^3} \int_0^{\infty} \omega^4 |d(\omega)|^2 d\omega.
+\end{align}
+后面一步利用了等式$\ddot{d(\omega)} = -\omega d(\omega)$，下为证明
+\begin{proof}
+    时间函数的傅里叶变换为：
+    \begin{align}
+        d(t) = \int e^{-i\omega t}d(\omega)d\omega
+    \end{align}
+    对时间求二阶导数：
+    \begin{align}
+        \ddot{d}(t) = - \int \omega^2 d(\omega) e^{-i\omega t}d\omega
+    \end{align}
+    而$\ddot{d}(t)$本身的傅里叶变换为：
+    \begin{align}
+        \ddot{d}(t) = \int \ddot{d}(\omega) e^{-i\omega t} d\omega
+    \end{align}
+由此可得二者相等：
+\boxed{
+    \ddot{d}(t) = - \omega^2 d(\omega)
+}
+\end{proof}
+
+由此可得单位频率间隔内的辐射能量为：
+\begin{align}
+  \frac{dW}{d\omega}
+  = \frac{8\pi}{3c^3} |\dot{d}(\omega)|^2
+  = \frac{8\pi}{3c^3} \omega^4 |d(\omega)|^2.
+  \label{eq:spec_energy}
+\end{align}
+
+\paragraph{电偶极矩的谱分解}
+当电子以速度 $v$ 接近带电 $Ze$ 的离子时，库仑力使电子轨迹发生偏折，并在短时间内产生显著加速度。设碰撞冲量作用时间约为 $T \sim b/v$，其中 $b$ 为最近距离。则电子的速度和辐射场在此时间内迅速变化，对应的谱宽约满足 $\omega \tau \lesssim 1$。
+
+对高频分量 ($\omega T \gg 1$) 辐射迅速衰减，因此主要关注 $\omega T \le 1$ 的频段。
+计算求解所需的电偶极矩，设电子的电偶极矩为 $\boldsymbol d = -e\boldsymbol r$，对时间求导得
+\begin{align}
+  \ddot{\boldsymbol d} = -e\boldsymbol \dot{v}
+\end{align}
+则频域表达为
+\begin{align}
+  \ddot{\boldsymbol d}(\omega)
+  = -\frac{e}{2\pi} \int_{-\infty}^{+\infty} \boldsymbol \dot{v}(t)e^{i\omega t}dt
+\end{align}
+电子和离子的相互作用时标为$\tau = b/v$，先考虑$\omega \tau \ll 1$的部分，这时指数项趋近于1，只用计算速度的改变量即可。而对$\omega \tau \gg 1$的部分，这时指数项会快速升高，让整个函数急速振荡导致积分为0。
+所以其实我们只考虑了那些低频率的辐射。
+\n{这个“低频”是相对于时标的规定而言的，不一定趋近于0。}
+\paragraph{小结：辐射谱能量密度和物理特征}
+单位频率辐射能量完整表达为：
+\begin{align}
+  \frac{dW}{d\omega}
+  = \begin{cases}
+    \dfrac{8Z^2 e^6}{3\pi c^3 m^2 v^2 b^2}, & b \ll \dfrac{v}{\omega},\\[1em]
+    0, & b \gg \dfrac{v}{\omega}.
+  \end{cases}
+  \label{eq:single_brem_spectrum_b}
+\end{align}
+总结而言，辐射谱分布有一下特征：
+\begin{itemize}
+  \item 电子能量（速度 $v$）越大，辐射功率与谱宽越大；
+  \item 碰撞参数 $b$ 越小，对应更近距离散射，辐射强度越高；
+  \item 当 $\omega \tau \le 1$ 时（即 $\omega \lesssim v/b$），该频率范围内的辐射最显著；
+  \item 对高频区 ($\omega \tau \gg 1$)，辐射迅速衰减，谱分布呈幂次下降。
+  \item 单电子韧致辐射谱主要集中在 $\omega \lesssim v/b$ 的区间内，描述电子在库仑场作用下短暂加速所释放的连续辐射能量。
+\end{itemize}
+
+\subsection{带电粒子系的韧致辐射}
+\n{这个不太对劲呀，耦合进多离子要考虑单离子会损耗带电粒子流的能量呀，怎么能都用v呢？}
+上一节给定的是速度为v的单个带电粒子在离子库伦势内产生的韧致辐射，现在将其扩展为一群速度皆为v的带电粒子在静止的离子气体库伦势内的韧致辐射。
+思路上这样考虑，对单离子势，带电粒子流产生的韧致辐射就是不同碰撞参数处韧致辐射的积分，如果认为辐射的损耗不大，这个结果再乘以离子密度就可以得到总的韧致辐射。
+另外一个要注意的就是碰撞参数的积分上下限，上限由辐射展宽决定，下限有两方面的限制，一是辐射能量源自于动能，所以不能大于电子能量，二是这是一个经典问题，要避免积分到量子尺度。
+
+\subsubsection{固定离子产生的单色辐射功率}
+
+设空间中给定一个离子，电子数密度为 $n_e$。电子以速度 $v$ 沿某方向“流过”该离子时，考虑在离子周围、碰撞参数介于 $b$ 与 $b+db$ 之间的电子：
+\begin{align}
+  dN_e = n_e v\,dt \, 2\pi b\,db,
+\end{align}
+其中 $2\pi b\,db$ 是以离子为轴线、半径在 $[b,b+db]$ 内的圆环面积，$dt$ 为时间间隔。
+
+这些电子各自与离子作用一次，单次作用在频率 $\omega$ 处辐射的能量为 $dW(b)/d\omega$，因此该离子在时间 $dt$ 内、频率 $\omega$ 处辐射的能量为
+\begin{align}
+  dE_\omega
+  &= dN_e \,\frac{dW(b)}{d\omega}
+   = n_e v\,dt\,2\pi b\,db\,\frac{dW(b)}{d\omega}.
+\end{align}
+于是，该离子产生的\emph{单色辐射功率（单位时间辐射能量）}为
+\begin{align}
+  \frac{dP_\omega(b)}{d\omega}
+  = n_e v\,2\pi b\,\frac{dW(b)}{d\omega}.
+  \label{eq:single_ion_power_b}
+\end{align}
+
+\n{单位体积内有很多离子：把单离子结果乘以 $n_i$ 并对 $b$ 积分}
+设离子数密度为 $n_i$，则单位体积内含有 $n_i$ 个离子。对于每一个离子都可以写出式\eqref{eq:single_ion_power_b}，因此单位体积、单位时间、单位频率的总辐射能量为
+\begin{align}
+  \frac{dW}{d\omega\,dV\,dt}
+  &= n_i \int_{b_{\min}}^{b_{\max}}
+     \frac{dP_\omega(b)}{d\omega}\,db \notag\\
+  &= n_i n_e 2\pi v
+     \int_{b_{\min}}^{b_{\max}}
+     \frac{dW(b)}{d\omega}\,b\,db,
+  \label{eq:spec_power_density_general}
+\end{align}
+
+将式\eqref{eq:single_brem_spectrum_b} 代入\eqref{eq:spec_power_density_general}，注意到只有在 $b\ll v/\omega$ 时有非零贡献，因此积分上限可以截断为
+\begin{align}
+  b_{\max} \equiv \frac{v}{\omega},
+\end{align}
+相应的谱功率密度变为
+\begin{align}
+  \frac{dW}{d\omega\,dV\,dt}
+  &= n_i n_e 2\pi v
+     \int_{b_{\min}}^{b_{\max}}
+     \frac{8Z^{2}e^{6}}{3\pi c^{3}m^{2}v^{2}b^{2}}\,
+     b\,db.
+    &= \frac{16 e^{6}}{3 c^{3}m^{2}v}\,
+       n_e n_i Z^{2}
+       \int_{b_{\min}}^{b_{\max}}
+       \frac{db}{b} \notag\\
+    &= \frac{16 e^{6}}{3 c^{3}m^{2}v}\,
+       n_e n_i Z^{2}
+       \ln\!\left(\frac{b_{\max}}{b_{\min}}\right).
+    \label{eq:spec_power_log}
+\end{align}
+  对数因子 $\ln(b_{\max}/b_{\min})$ 反映了结果对碰撞参数上下限并不敏感。
+
+\subsubsection{最大与最小碰撞参数}
+
+\paragraph{最大碰撞参数 $b_{\max}$.}
+
+由式\eqref{eq:single_brem_spectrum_b} 可见，当 $b\gg v/\omega$ 时，电子与离子的相互作用很弱，对给定频率 $\omega$ 的辐射贡献可以忽略。因此对频率 $\omega$ 的谱功率而言，只有满足
+\begin{align}
+  b \lesssim \frac{v}{\omega}
+\end{align}
+的近距离散射才是重要的。于是通常取
+\begin{align}
+  b_{\max} = \frac{v}{\omega}.
+  \label{eq:bmax_def}
+\end{align}
+
+\paragraph{最小碰撞参数 $b_{\min}$.}
+
+  对电子与离子的库仑散射，存在两个物理上不同的最小碰撞参数：
+  \begin{align}
+    b_{\min}^{(1)} &= \frac{Z e^{2}}{m v^{2}},
+    &&\text{（直线近似的经典下限）},\\
+    b_{\min}^{(2)} &= \frac{\hbar}{m v},
+    &&\text{（由不确定性原理给出的量子下限）},
+  \end{align}
+
+经典直线轨道近似要求电子速度变化量 $\Delta v$ 远小于入射速度 $v$，由冲量估算可得
+\begin{align}
+  \Delta v \sim \frac{Z e^{2}}{m v b},
+\end{align}
+要求 $\Delta v \ll v$ 即给出 $b\gg Z e^{2}/(m v^{2})$，从而得到 $b_{\min}^{(1)}$。而量子力学的不确定性关系
+\begin{align}
+  \Delta x\,\Delta p \gtrsim \hbar
+\end{align}
+若取 $\Delta x\sim b$、$\Delta p\sim m v$，则得到 $b\gtrsim\hbar/(m v)$，即 $b_{\min}^{(2)}$。
+
+综合两者，实际计算时应取
+\begin{align}
+  b_{\min}
+  = \max\!\left(
+      b_{\min}^{(1)},\,
+      b_{\min}^{(2)}
+    \right)
+  = \max\!\left(
+      \frac{Z e^{2}}{m v^{2}},\,
+      \frac{\hbar}{m v}
+    \right).
+  \label{eq:bmin_final}
+\end{align}
+
+\begin{derivationnote}[经典与量子描写的适用范围]
+\n{比较 $b_{\min}^{(1)}$ 与 $b_{\min}^{(2)}$：决定是否需要量子修正}
+由
+\begin{align}
+  b_{\min}^{(1)} &= \frac{Z e^{2}}{m v^{2}}, &
+  b_{\min}^{(2)} &= \frac{\hbar}{m v},
+\end{align}
+若要经典直线轨道近似成立，需要
+\begin{align}
+  b_{\min}^{(1)} \gg b_{\min}^{(2)}
+  \quad\Longrightarrow\quad
+  \frac{Z e^{2}}{m v^{2}} \gg \frac{\hbar}{m v}
+  \quad\Longrightarrow\quad
+  Z e^{2} \gg \hbar v.
+\end{align}
+两边同时乘以
+\(
+  \dfrac{m v}{2\hbar^{2}}
+\)
+可得
+\begin{align}
+  \frac{1}{2} m v^{2}
+  \ll
+  Z^{2}\,\frac{m e^{4}}{2\hbar^{2}}
+  \equiv Z^{2}\,\mathrm{Ry},
+\end{align}
+其中
+\begin{align}
+  \mathrm{Ry}
+  = \frac{m_e e^{4}}{2\hbar^{2}}
+\end{align}
+称为\emph{氢原子的 Rydberg 能量}（Rydberg energy），记作 $\mathrm{Ry}$，
+数值上约为 $13.6~\mathrm{eV}$。这里特意用大写字母 ``Ry'' 作为符号，以区别于波数形式的 Rydberg 常数 $R_{\infty}$。
+
+因此，当
+\begin{align}
+  \frac{1}{2}m v^{2} \ll Z^{2}\mathrm{Ry}
+\end{align}
+时，电子动能远低于特征能量 $Z^{2}\mathrm{Ry}$，直线近似与经典散射描写适用，取
+\(
+  b_{\min}\approx b_{\min}^{(1)}
+\) 即可。
+
+反之，若
+\begin{align}
+  b_{\min}^{(1)} \ll b_{\min}^{(2)},
+\end{align}
+即
+\(
+  \tfrac{1}{2}m v^{2} \gg Z^{2}\mathrm{Ry}
+\)，
+则量子效应变得重要，最小碰撞参数应取
+\(
+  b_{\min}\approx b_{\min}^{(2)}
+\)。
+此时式\eqref{eq:spec_power_log} 仍给出正确的量级，但对数因子
+\(
+  \ln(b_{\max}/b_{\min})
+\)
+的精确形式需要由更系统的量子散射理论给出。
+\end{derivationnote}
+
+\subsubsection{Gaunt因子}
+我们计算辐射谱分布的时候，做了小角度近似且忽略了量子效应，更为精确的修正可以引入Gaunt因子，在任意条件（经典或量子、小角散射或更精确的轨道）下，电子气体与离子气体产生的韧致辐射谱功率密度可以统一写成
+  \begin{align}
+    \frac{dW}{d\omega\,dV\,dt}
+    = \frac{16\pi e^{6}}{3\sqrt{3}\,c^{3}m^{2}v}\,
+      n_e n_i Z^{2}\,
+      g_{\mathrm{ff}}(v,\omega),
+    \label{eq:spec_power_gaunt}
+  \end{align}
+  其中 $g_{\mathrm{ff}}(v,\omega)$ 为\emph{自由--自由 Gaunt 因子}。
+
+Gaunt 因子 $g_{\mathrm{ff}}(v,\omega)$ 中隐含了 $b_{\min}$、$b_{\max}$ 等所有关于散射几何与量子修正的信息。在经典极限下，它与式\eqref{eq:spec_power_log} 的对数因子满足
+\begin{align}
+  g_{\mathrm{ff}}(v,\omega)
+  = \frac{\sqrt{3}}{\pi}
+    \ln\!\left(\frac{b_{\max}}{b_{\min}}\right),
+  \label{eq:gaunt_classical}
+\end{align}
+此时式\eqref{eq:spec_power_gaunt} 退化为我们之前得到的经典小角散射结果\eqref{eq:spec_power_log}。
+
+实际应用中，$g_{\mathrm{ff}}(v,\omega)$ 通常作为缓慢变化的修正因子出现在谱功率密度中，对数值的影响只体现在对数因子及其量子修正上，常通过查表或图形给出。这样，带电粒子气体的韧致辐射问题便在一个统一的框架下得到了简洁而实用的描述。
+
+\end{document}

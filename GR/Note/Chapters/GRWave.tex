@@ -1,0 +1,582 @@
+\section{引力波物理}
+\subsection{谐和坐标条件的线性近似}
+
+\subsubsection{场方程的自由度和规范选取}
+
+考虑四维时空中的度规张量 $g_{\mu\nu}$ 是对称张量，一共有 $10$ 个独立分量。作为关于度规的场方程，爱因斯坦方程写为
+\begin{align}
+G_{\mu\nu} = 8\pi G\,T_{\mu\nu}\,,
+\end{align}
+其中 $G_{\mu\nu}$ 为爱因斯坦张量，$T_{\mu\nu}$ 为能量动量张量，$G$ 为万有引力常数。由于 $G_{\mu\nu}$ 也是一个对称二阶张量，表面上这给出了 $10$ 个标量方程。
+
+然而实际上，Bianchi 恒等式
+\begin{align}
+\nabla_{\nu}G^{\mu\nu} = 0\,,
+\end{align}
+以及物质场的协变守恒
+\begin{align}
+\nabla_{\nu}T^{\mu\nu} = 0\,,
+\end{align}
+使得爱因斯坦方程的 $10$ 个分量中只有 $6$ 个是独立的：对 $G_{\mu\nu}=8\pi G T_{\mu\nu}$ 取协变散度后，上述两个恒等式保证其中有 $4$ 个分量是由其余分量自动满足的“兼容条件”。
+
+\noindent
+方程少了 $4$ 个真正独立的约束，正好与坐标（规范）自由度的 $4$ 个函数自由度相配合。广义相对论在任意坐标变换
+\begin{align}
+x^{\mu} \;\longrightarrow\; \widetilde{x}^{\mu} = \widetilde{x}^{\mu}(x)
+\end{align}
+下保持形式不变，这反映了理论的微分同胚不变性。将其写成无穷小形式，有
+\begin{align}
+x^{\mu} \;\longrightarrow\; \widetilde{x}^{\mu} = x^{\mu} + \xi^{\mu}(x)\,,
+\end{align}
+其中 $\xi^{\mu}(x)$ 是任意四个足够光滑的小函数，用来描述坐标变换的生成矢量场。因此，度规 $g_{\mu\nu}$ 的 $10$ 个分量中，有 $4$ 个自由方向实际上是坐标选择带来的 \emph{规范自由度}；只有在给定一定的坐标（规范）条件后，场方程才能具体决定度规的形式。
+
+\paragraph{de Donder 规范与谐和坐标}
+
+记 $g := \det(g_{\mu\nu})$，定义
+\begin{align}
+\Gamma^{\lambda} := g^{\mu\nu}\,\Gamma^{\lambda}{}_{\mu\nu}\,,
+\end{align}
+其中 $\Gamma^{\lambda}{}_{\mu\nu}$ 为 Levi--Civita 联络的 Christoffel 符号。可以证明
+\begin{align}
+\Gamma^{\lambda}
+=
+-\frac{1}{\sqrt{-g}}\,
+\partial_{\rho}
+\left(
+  \sqrt{-g}\,g^{\rho\lambda}
+\right)\,.
+\end{align}
+\begin{proof}
+    
+\begin{align}
+\Gamma^{\lambda} &= g^{\mu\nu} \frac{1}{2} g^{\lambda\rho} \left( \partial_{\mu} g_{\rho\nu} + \partial_{\mu} g_{\rho\nu} - \partial_{\rho} g_{\mu\nu} \right) \\
+&= g^{\lambda\rho} g^{\mu\nu} \partial_{\mu} g_{\rho\nu} - \frac{1}{2} g^{\mu\nu} g^{\lambda\rho} \partial_{\rho} g_{\mu\nu} \\
+&= - g^{\rho\lambda} g_{\rho\nu} \partial_{\mu} g^{\mu\nu} - \frac{1}{2} g^{\rho\lambda} \frac{1}{g} \partial_{\rho} g \\
+&= - \delta^{\rho}_{\nu} \partial_{\mu} g^{\mu\nu} - g^{\lambda\rho} \partial_{\rho} \ln \sqrt{-g} \\
+&= - \frac{1}{\sqrt{-g}} \sqrt{-g} \partial_{\mu} g^{\mu\nu} - \frac{1}{\sqrt{-g}} g^{\rho\lambda} \partial_{\rho} \sqrt{-g} \\
+&= - \frac{1}{\sqrt{-g}} \partial_{\mu} (\sqrt{-g} g^{\mu\nu})
+\end{align}
+
+\end{proof}
+
+
+\begin{definition}[de Donder 规范]
+    若坐标系满足
+    \begin{align}
+        \Gamma^{\lambda} := g^{\mu\nu}\,\Gamma^{\lambda}{}_{\mu\nu} = 0\,,
+    \end{align}
+    则称在该坐标系下采用了 \emph{de Donder 规范}（又称谐和坐标规范或引力的 Lorenz 规范）。
+\end{definition}
+
+对任意标量场 $\phi$，定义 d'Alembert 算子为
+\begin{align}
+\Box\phi
+:=
+\nabla_{\mu}\nabla^{\mu}\phi
+=
+\frac{1}{\sqrt{-g}}
+\partial_{\rho}
+\left(
+  \sqrt{-g}\,
+  g^{\rho\lambda}
+  \partial_{\lambda}\phi
+\right)\,.
+\end{align}
+利用上面关于 $\Gamma^{\lambda}$ 的结果，可以将其改写为
+\begin{align}
+\Box\phi
+&=
+\frac{1}{\sqrt{-g}}
+\partial_{\rho}
+\left(
+  \sqrt{-g}\,
+  g^{\rho\lambda}
+\right)\partial_{\lambda}\phi
++
+g^{\rho\lambda}\partial_{\rho}\partial_{\lambda}\phi
+\\[0.3em]
+&=
+-\Gamma^{\lambda}\,\partial_{\lambda}\phi
++
+g^{\rho\lambda}\partial_{\rho}\partial_{\lambda}\phi\,,
+\end{align}
+即
+\begin{align}
+\Box\phi
+=
+g^{\rho\lambda}\partial_{\rho}\partial_{\lambda}\phi
+-
+\Gamma^{\lambda}\,\partial_{\lambda}\phi\,.
+\end{align}
+
+\begin{derivationnote}[“坐标看作标量函数”的含义]
+在流形上，一个坐标系可以看作一组映射
+\begin{align}
+x^{\mu} : M \longrightarrow \mathbb{R}\,,
+\end{align}
+其中 $\mu=0,1,2,3$。对每一个固定的 $\mu$，$x^{\mu}(p)$ 只是把点 $p$ 映到实数的一个函数，因此在张量意义上是一个标量场；其“上标 $\mu$”只是用来标记是哪一个坐标函数，而不是张量指标。这样，对于每个 $\mu$，都有
+\begin{align}
+\partial_{\lambda}x^{\mu} = \delta^{\mu}{}_{\lambda}\,,
+\end{align}
+而协变导数作用在标量上与普通偏导无异：
+\begin{align}
+\nabla_{\lambda}x^{\mu} = \partial_{\lambda}x^{\mu} = \delta^{\mu}{}_{\lambda}\,.
+\end{align}
+一般的标量场 $\phi(x)$ 不满足 $\partial_{\lambda}\phi = \delta^{\mu}{}_{\lambda}$ 这样的关系，只有坐标函数本身具有这一特殊性质。
+\end{derivationnote}
+
+现在可以自然地引入谐和坐标的概念。
+
+\begin{definition}[谐和坐标]
+若一组坐标函数 $x^{\mu}$（视作四个标量场）满足
+\begin{align}
+\Box x^{\mu} = 0\,,
+\end{align}
+则称 $x^{\mu}$ 为\emph{谐和坐标}。
+\end{definition}
+
+\begin{theorem}[谐和坐标与 de Donder 规范的等价性]
+    取谐和坐标相当于挑选了de Donder规范。
+\end{theorem}
+\begin{proof}
+    把 $\phi$ 取为坐标函数 $x^{\mu}$，利用
+\begin{align}
+\partial_{\lambda}x^{\mu} = \delta^{\mu}{}_{\lambda}\,,\qquad
+\partial_{\rho}\partial_{\lambda}x^{\mu} = 0\,,
+\end{align}
+在
+\begin{align}
+\Box\phi
+=
+g^{\rho\lambda}\partial_{\rho}\partial_{\lambda}\phi
+-
+\Gamma^{\lambda}\,\partial_{\lambda}\phi
+\end{align}
+中代入，得到
+\begin{align}
+\Box x^{\mu}
+&=
+g^{\rho\lambda}\partial_{\rho}\partial_{\lambda}x^{\mu}
+-
+\Gamma^{\lambda}\,\partial_{\lambda}x^{\mu}
+\\[0.3em]
+&=
+0
+-
+\Gamma^{\lambda}\,\delta^{\mu}{}_{\lambda}
+=
+-\,\Gamma^{\mu}\,.
+\end{align}
+    对任意坐标系，有恒等式
+    \begin{align}
+        \Box x^{\mu} = -\Gamma^{\mu}\,.
+    \end{align}
+    因此，谐和坐标条件
+    \begin{align}
+        \Box x^{\mu} = 0
+    \end{align}
+    与 de Donder 规范条件
+    \begin{align}
+        \Gamma^{\mu} = 0
+    \end{align}
+    完全等价。
+\end{proof}
+\subsubsection{弱场线性近似方程}
+
+假设时空接近闵氏时空，
+\begin{align}
+g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\,,
+\end{align}
+其中 $\eta_{\mu\nu}$ 为闵氏度规，$h_{\mu\nu}$ 为小扰动（$|h_{\mu\nu}|\ll 1$）。指标的升降均使用 $\eta_{\mu\nu}$ 与 $\eta^{\mu\nu}$。在只保留一阶 $h_{\mu\nu}$ 的线性近似下，Christoffel 符号化为
+\begin{align}
+\Gamma^{\mu}{}_{\alpha\beta}
+=
+\frac{1}{2}\,
+\eta^{\mu\nu}
+\left(
+  \partial_{\alpha}h_{\nu\beta}
+  + \partial_{\beta}h_{\nu\alpha}
+  - \partial_{\nu}h_{\alpha\beta}
+\right)\,.
+\end{align}
+Ricci 张量 $R_{\mu\nu}$ 为
+\begin{align}
+R_{\mu\nu}
+&=
+\partial_{\lambda}\Gamma^{\lambda}{}_{\mu\nu}
+-
+\partial_{\nu}\Gamma^{\lambda}{}_{\mu\lambda}
+\\[0.3em]
+&=
+-\frac{1}{2}
+\Big(
+  \partial_{\alpha}\partial^{\alpha}h_{\mu\nu}
+  + \partial_{\mu}\partial_{\nu}h
+  - \partial_{\alpha}\partial_{\mu}h^{\alpha}{}_{\nu}
+  - \partial_{\alpha}\partial_{\nu}h^{\alpha}{}_{\mu}
+\Big)\,,
+\end{align}
+其中
+\begin{align}
+h := \eta^{\mu\nu}h_{\mu\nu}
+\end{align}
+是扰动的迹，$\partial^{\alpha} := \eta^{\alpha\beta}\partial_{\beta}$。
+
+为简化记号，引入\emph{迹反}操作:
+\begin{definition}[迹反扰动张量]
+度规扰动 $h_{\mu\nu}$ 的迹反定义为
+\begin{align}
+\overline{h}_{\mu\nu}
+:=
+h_{\mu\nu}
+-
+\frac{1}{2}\,
+\eta_{\mu\nu}h\,.
+\end{align}
+\end{definition}
+
+\begin{derivationnote}[四维中迹反操作的自反性]
+在四维闵氏空间中，再次对 $\overline{S}_{\mu\nu}$ 做迹反，有
+\begin{align}
+\overline{\overline{S}}_{\mu\nu}
+&=
+\overline{S}_{\mu\nu}
+-
+\frac{1}{2}\eta_{\mu\nu}\,\overline{S}^{\alpha}{}_{\alpha}
+\\[0.3em]
+&=
+\left(
+  S_{\mu\nu}
+  -
+  \frac{1}{2}\eta_{\mu\nu}S^{\alpha}{}_{\alpha}
+\right)
+-
+\frac{1}{2}\eta_{\mu\nu}
+\left(
+  S^{\alpha}{}_{\alpha}
+  -
+  2 S^{\alpha}{}_{\alpha}
+\right)
+\\[0.3em]
+&=
+S_{\mu\nu}\,,
+\end{align}
+这里用到了 $\eta^{\mu\nu}\eta_{\mu\nu}=4$。因此在四维中迹反操作是自反的：$\overline{\overline{S}}_{\mu\nu}=S_{\mu\nu}$。
+\end{derivationnote}
+
+\paragraph{谐和坐标条件的线性化形式}
+
+在线性近似中，$\Gamma^{\mu}$ 写为
+\begin{align}
+\Gamma^{\mu}
+=
+g^{\alpha\beta}\Gamma^{\mu}{}_{\alpha\beta}
+\simeq
+\eta^{\alpha\beta}\Gamma^{\mu}{}_{\alpha\beta}
+=
+\partial_{\alpha}h^{\mu\alpha}
+-
+\frac{1}{2}\partial^{\mu}h\,,
+\end{align}
+其中 $h^{\mu\alpha}=\eta^{\mu\rho}\eta^{\alpha\sigma}h_{\rho\sigma}$。谐和坐标条件 $\Gamma^{\mu}=0$ 在线性阶给出
+\begin{align}
+\partial_{\alpha}h^{\mu\alpha}
+-
+\frac{1}{2}\partial^{\mu}h
+=0\,.
+\end{align}
+用迹反扰动 $\overline{h}_{\mu\nu}$ 表示，注意
+\begin{align}
+\overline{h}^{\mu\alpha}
+=
+h^{\mu\alpha}
+-
+\frac{1}{2}\eta^{\mu\alpha}h\,,
+\end{align}
+可得谐和条件的等价形式
+\begin{align}
+\partial_{\alpha}\overline{h}^{\mu\alpha} = 0\,.
+\end{align}
+这就是说，在线性化的形式下，如果需要取谐和坐标，只需要满足线性扰动之逆反的四散度为0即可。
+\paragraph{线性化爱因斯坦方程}
+
+线性化的 Ricci 张量可以用迹反扰动 $\overline{h}_{\mu\nu}$ 重写，从而爱因斯坦张量线性部分 $G^{(1)}_{\mu\nu}$ 在谐和坐标下大幅简化。最终的线性化爱因斯坦方程可写为
+\begin{align}
+\overline{R}_{\mu\nu}
+=
+8\pi G\,T_{\mu\nu}\,,
+\end{align}
+整理后得到（原始形式仅作记录）
+\begin{align}
+\frac{1}{2}
+\left(
+  \partial_{\alpha}\partial^{\alpha}\overline{h}_{\mu\nu}
+  +
+  \eta_{\mu\nu}\partial_{\alpha}\partial_{\beta}\overline{h}^{\alpha\beta}
+  -
+  \partial_{\nu}\partial_{\alpha}\overline{h}_{\mu}{}^{\alpha}
+  -
+  \partial_{\mu}\partial_{\alpha}\overline{h}_{\nu}{}^{\alpha}
+\right)
+=
+-8\pi G\,T_{\mu\nu}\,.
+\end{align}
+在谐和条件
+\begin{align}
+\partial_{\alpha}\overline{h}^{\mu\alpha}=0
+\end{align}
+下，含 $\partial_{\alpha}\overline{h}^{\mu\alpha}$ 的项全部消失，方程简化为
+\begin{align}
+\partial_{\alpha}\partial^{\alpha}\overline{h}_{\mu\nu}
+=
+-16\pi G\,T_{\mu\nu}\,.
+\end{align}
+记 d'Alembert 算子 $\Box := \partial_{\alpha}\partial^{\alpha}$，则
+\begin{align}
+\Box\,\overline{h}_{\mu\nu}
+=
+-16\pi G\,T_{\mu\nu}\,.
+\end{align}
+
+\begin{derivationnote}[与电磁学 Lorenz 规范的类比形式]
+电磁势 $A_{\mu}$ 在 Lorenz 规范 $\partial_{\mu}A^{\mu}=0$ 下满足
+\begin{align}
+\Box A^{\mu}
+=
+-4\pi j^{\mu}\,,
+\end{align}
+其中 $j^{\mu}$ 为电流四矢量。线性化引力扰动 $\overline{h}_{\mu\nu}$ 在谐和坐标（也称 de Donder 规范、引力的 Lorenz 规范）下满足
+\begin{align}
+\Box\,\overline{h}_{\mu\nu}
+=
+-16\pi G\,T_{\mu\nu}\,,
+\end{align}
+两者在方程形式上非常相似。这种形式上的对应对于建立物理直觉有帮助：$\overline{h}_{\mu\nu}$ 在一定意义上扮演了“引力势”的角色，$T_{\mu\nu}$ 则扮演“源”的角色。
+\end{derivationnote}
+
+\paragraph{电动力学中的残余规范自由度}
+
+\n{先在更熟悉的电磁场中看一眼“选完规范之后还剩下什么自由度”，再类比到引力。}
+
+\begin{definition}[电磁规范变换与 Lorenz 规范]
+设 $A_{\mu}$ 为电磁四势，$F_{\mu\nu}$ 为电磁场强张量，定义
+\begin{align}
+F_{\mu\nu}
+=
+\partial_{\mu}A_{\nu}
+-
+\partial_{\nu}A_{\mu}\,.
+\end{align}
+在规范变换
+\begin{align}
+A_{\mu} \;\longrightarrow\; A'_{\mu}
+=
+A_{\mu} + \partial_{\mu}\chi
+\end{align}
+下，$F_{\mu\nu}$ 不变，其中 $\chi$ 为任意标量函数，这体现了电磁场的规范不变性。
+
+在四维闵氏时空中引入 Lorenz 规范条件
+\begin{align}
+\partial_{\mu}A^{\mu} = 0\,.
+\end{align}
+\end{definition}
+
+在此规范下，四维 Maxwell 方程
+\begin{align}
+\partial_{\mu}F^{\mu\nu} = 4\pi j^{\nu}
+\end{align}
+可以写成对电磁势的波动方程
+\begin{align}
+\Box A^{\nu} = -4\pi j^{\nu}\,,
+\end{align}
+其中 d'Alembert 算子定义为
+\begin{align}
+\Box := \partial_{\mu}\partial^{\mu}\,.
+\end{align}
+
+\begin{derivationnote}[Lorenz 规范下的残余规范函数]
+现在考虑在已经满足 Lorenz 规范 $\partial_{\mu}A^{\mu}=0$ 的基础上，再做一次规范变换
+\begin{align}
+A_{\mu} \;\longrightarrow\; A'_{\mu}
+=
+A_{\mu} + \partial_{\mu}\chi\,,
+\end{align}
+其中 $\chi$ 为尚未指定的标量函数。新的四势 $A'_{\mu}$ 是否依然满足 Lorenz 规范，取决于 $\chi$。
+
+先计算
+\begin{align}
+\partial_{\mu}A'^{\mu}
+&=
+\partial_{\mu}\big(A^{\mu} + \partial^{\mu}\chi\big)
+\\[0.3em]
+&=
+\partial_{\mu}A^{\mu}
++
+\partial_{\mu}\partial^{\mu}\chi
+\\[0.3em]
+&=
+\partial_{\mu}A^{\mu}
++
+\Box\chi\,.
+\end{align}
+若原势 $A_{\mu}$ 已经满足 $\partial_{\mu}A^{\mu}=0$，为了使变换后的 $A'_{\mu}$ 仍满足 Lorenz 规范，即
+\begin{align}
+\partial_{\mu}A'^{\mu} = 0\,,
+\end{align}
+就必须有
+\begin{align}
+\Box\chi = 0\,.
+\end{align}
+因此，在 Lorenz 规范已经施加之后，并不是所有的 $\chi$ 都被禁止，而是仍然可以进行满足
+\begin{align}
+\Box\chi = 0
+\end{align}
+的规范变换
+\begin{align}
+A_{\mu} \;\longrightarrow\; A'_{\mu}
+=
+A_{\mu} + \partial_{\mu}\chi\,.
+\end{align}
+这些“剩下允许的”规范函数 $\chi$ 就对应于电磁场在 Lorenz 规范下的\emph{残余规范自由度}。
+\end{derivationnote}
+
+\n{直觉上：我们用 Lorenz 规范 $\partial_{\mu}A^{\mu}=0$ 已经削掉了一部分规范自由度，但仍可以在满足 $\Box\chi=0$ 的前提下稍微“调整” $A_{\mu}$ 而不破坏这一规范条件，这部分自由度就是“残余”的那一块。电磁学里是标量 $\chi$，在线性化引力里会变成四分量的 $\xi^{\mu}$。}
+
+\paragraph{无穷小坐标变换与残余规范自由度}
+
+\n{即便已经选取了谐和坐标条件，仍然存在一些进一步的坐标变换不会破坏这一条件，它们对应的就是“残余规范自由度”。}
+
+考虑无穷小坐标变换
+\begin{align}
+x^{\mu}
+\;\longrightarrow\;
+\widetilde{x}^{\mu}
+=
+x^{\mu}
++
+\xi^{\mu}(x)\,,
+\end{align}
+其中 $\xi^{\mu}(x)$ 是小量。视此为\emph{被动}坐标变换，度规在两组坐标中的分量满足
+\begin{align}
+\widetilde{g}_{\mu\nu}(\widetilde{x})
+=
+\frac{\partial x^{\rho}}{\partial \widetilde{x}^{\mu}}
+\frac{\partial x^{\sigma}}{\partial \widetilde{x}^{\nu}}
+g_{\rho\sigma}(x)\,.
+\end{align}
+在弱场近似下，取
+\begin{align}
+g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\,,\qquad
+\widetilde{g}_{\mu\nu} = \eta_{\mu\nu} + \widetilde{h}_{\mu\nu}\,,
+\end{align}
+并只保留 $\xi^{\mu}$ 和 $h_{\mu\nu}$ 的一阶项，可得到扰动的规范变换
+\begin{align}
+\widetilde{h}_{\mu\nu}
+=
+h_{\mu\nu}
+-
+\partial_{\mu}\xi_{\nu}
+-
+\partial_{\nu}\xi_{\mu}\,,
+\end{align}
+其中 $\xi_{\mu} := \eta_{\mu\nu}\xi^{\nu}$。这是在闵氏背景下李导数的线性化结果。
+
+迹反扰动在该变换下的变化为
+\begin{align}
+\delta\overline{h}_{\mu\nu}
+&:=
+\widetilde{\overline{h}}_{\mu\nu}-\overline{h}_{\mu\nu}
+\\[0.3em]
+&=
+-\partial_{\mu}\xi_{\nu}
+-\partial_{\nu}\xi_{\mu}
++
+\eta_{\mu\nu}\partial_{\alpha}\xi^{\alpha}\,.
+\end{align}
+取散度：
+\begin{align}
+\partial^{\nu}\delta\overline{h}_{\mu\nu}
+&=
+-\partial^{\nu}\partial_{\mu}\xi_{\nu}
+-\partial^{\nu}\partial_{\nu}\xi_{\mu}
++
+\partial_{\mu}\partial_{\alpha}\xi^{\alpha}
+\\[0.3em]
+&=
+-\partial_{\mu}\partial_{\nu}\xi^{\nu}
+-\Box\xi_{\mu}
++
+\partial_{\mu}\partial_{\nu}\xi^{\nu}
+\\[0.3em]
+&=
+-\Box\xi_{\mu}\,.
+\end{align}
+
+如果原本的扰动满足谐和条件
+\begin{align}
+\partial^{\nu}\overline{h}_{\mu\nu} = 0\,,
+\end{align}
+则经过变换后的扰动满足
+\begin{align}
+\partial^{\nu}\widetilde{\overline{h}}_{\mu\nu}
+&=
+\partial^{\nu}\overline{h}_{\mu\nu}
++
+\partial^{\nu}\delta\overline{h}_{\mu\nu}
+=
+-\Box\xi_{\mu}\,.
+\end{align}
+要使新的扰动仍处于谐和规范中，必须有
+\begin{align}
+\partial^{\nu}\widetilde{\overline{h}}_{\mu\nu} = 0
+\quad\Longrightarrow\quad
+\Box\xi_{\mu} = 0\,.
+\end{align}
+
+\begin{definition}[谐和规范下的残余规范变换]
+在谐和坐标条件 $\partial_{\nu}\overline{h}^{\mu\nu}=0$ 已经被施加的前提下，仍允许进行满足
+\begin{align}
+\Box\xi^{\mu} = 0
+\end{align}
+的无穷小坐标变换
+\begin{align}
+x^{\mu}\;\longrightarrow\;\widetilde{x}^{\mu}
+=
+x^{\mu} + \xi^{\mu}(x)\,,
+\end{align}
+并保持谐和条件不变。这些变换对应的自由度称为\emph{谐和规范下的残余规范自由度}。
+\end{definition}
+
+\n{这一结论与电磁学中 Lorenz 规范下的残余规范变换完全平行：在 $\partial_{\mu}A^{\mu}=0$ 条件下，$A_{\mu}\to A_{\mu}+\partial_{\mu}\chi$ 仍保持规范，只要 $\chi$ 满足 $\Box\chi=0$。在引力的线性理论中，$\xi^{\mu}$ 扮演了电磁学中标量规范函数的角色。}
+
+综上，在弱场线性近似下：
+\begin{align}
+g_{\mu\nu}
+&=
+\eta_{\mu\nu} + h_{\mu\nu}\,,
+\\[0.3em]
+\overline{h}_{\mu\nu}
+&=
+h_{\mu\nu}
+-
+\frac{1}{2}\eta_{\mu\nu}h\,,
+\\[0.3em]
+\partial_{\nu}\overline{h}^{\mu\nu} &= 0\quad\text{（谐和坐标条件）}\,,
+\\[0.3em]
+\Box\overline{h}_{\mu\nu}
+&=
+-16\pi G\,T_{\mu\nu}\quad\text{（线性化爱因斯坦方程）}\,,
+\\[0.3em]
+\widetilde{h}_{\mu\nu}
+&=
+h_{\mu\nu}
+-
+\partial_{\mu}\xi_{\nu}
+-
+\partial_{\nu}\xi_{\mu}\,,
+\\[0.3em]
+\Box\xi^{\mu}
+&=
+0\quad\text{（保持谐和规范的残余自由度）}\,.
+\end{align}
+这组关系构成了“谱和谐和坐标条件线性近似”中最常用的一套工作公式。

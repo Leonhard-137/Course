@@ -28,6 +28,9 @@
 \usepackage{tcolorbox}
 \setlist{nosep}
 
+% 公式编号按 section 重新计数：第 1 节第 3 个公式为 (1.3)
+\numberwithin{equation}{section}
+
 \theoremstyle{definition}
 \newtheorem{definition}{定义}[section]
 \theoremstyle{plain}
@@ -82,5 +85,5 @@
 
 \input{Chapters/Math}
 \input{Chapters/Einsteineq}
-
+\input{Chapters/GRWave}
 \end{document}

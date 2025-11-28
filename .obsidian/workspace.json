@@ -4,67 +4,44 @@
     "type": "split",
     "children": [
       {
-        "id": "da5f464c8450a528",
+        "id": "9fa656016476b051",
         "type": "tabs",
+        "dimension": 72.49283667621776,
         "children": [
           {
-            "id": "e0e32e4be7292354",
+            "id": "135748b9a7c5080d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Particle/Note/第三章 对称性和守恒律.md",
-                "mode": "source",
-                "source": false
+                "file": "AstroRadiation/PPT/第九讲+同步辐射(1).pdf"
               },
-              "icon": "lucide-file",
-              "title": "第三章 对称性和守恒律"
+              "icon": "lucide-file-text",
+              "title": "第九讲+同步辐射(1)"
             }
           }
         ]
       },
       {
-        "id": "b1d8eb678d0bf309",
+        "id": "93a0049e71cd3262",
         "type": "tabs",
+        "dimension": 27.507163323782237,
         "children": [
           {
-            "id": "9bba79f58537c163",
+            "id": "675cd4ad6aa7ac75",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Particle/PPT/Lectures2025/第三章(16-9).pdf"
+                "file": "电动力学相对论形式笔记（高斯制，-+++度规）.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "第三章(16-9)"
-            }
-          },
-          {
-            "id": "dc8316202a720cac",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Particle/PPT/Section5.1.pdf.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Section5.1.pdf"
-            }
-          },
-          {
-            "id": "e94c376a30ff6464",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Particle/PPT/Section5.2.pdf.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Section5.2.pdf"
+              "icon": "lucide-file",
+              "title": "电动力学相对论形式笔记（高斯制，-+++度规）"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -213,25 +190,30 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e0e32e4be7292354",
+  "active": "135748b9a7c5080d",
   "lastOpenFiles": [
-    "Particle/PPT/Section5.2.pdf.pdf",
+    "AstroRadiation/test/test.synctex(busy)",
+    "AstroRadiation/test/xelatex21152.fls",
+    "电动力学相对论形式笔记（高斯制，-+++度规）.md",
+    "AstroRadiation/PPT/第九讲+同步辐射(1).pdf",
+    "AstroRadiation/test/Cyclotron Synchrotron.synctex(busy)",
+    "AstroRadiation/test/xelatex20932.fls",
+    "AstroRadiation/test/xelatex18180.fls",
+    "AstroRadiation/test/Cyclotron Synchrotron.xdv",
+    "AstroRadiation/test/Cyclotron Synchrotron.toc",
+    "AstroRadiation/test/Cyclotron Synchrotron.out",
+    "AstroRadiation/test/Cyclotron Synchrotron.log",
+    "AstroRadiation/test/Cyclotron Synchrotron.fls",
+    "Particle/Note/全同粒子与交换对称性.md",
+    "Particle/Note/正反粒子共轭变换与 CG 宇称.md",
+    "Particle/Note/正反粒子体系的 C 与 P 宇称.md",
     "Particle/Note/第三章 对称性和守恒律.md",
-    "Particle/PPT/Section5.1.pdf.pdf",
-    "Particle/PPT/Lectures2025/第三章(16-9).pdf",
-    "Particle/PPT/Section4.2.pdf.pdf",
     "Particle/Note/第五章 对称性和守恒律.md",
-    "Particle/PPT/Lectures2025/第四章第二节(16-9).pdf",
+    "AstroRadiation/Note/Note_md/韧致辐射.md",
     "GR/Homework/HW2.md",
-    "GR/Homework/HW1.pdf",
     "AstroRadiation/Note/Note_md/第五章 运动电子产生的电荷.md",
-    "AstroRadiation/PPT/第七讲+相对论电荷的辐射.pdf",
-    "各种单位制和度规下的电动力学.md",
     "GR/Note/md_note/第一章.md",
-    "GR/Books/广义相对论讲义.pdf",
     "未命名.md",
-    "Particle/PPT/Section4.1.pdf.pdf",
-    "Particle/Note/第五章 运动电子产生的电荷.pdf",
     "Pasted image 20251107143648.png",
     "Pasted image 20251107223856.png",
     "Pasted image 20251107223845.png",
