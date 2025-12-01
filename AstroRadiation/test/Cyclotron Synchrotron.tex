@@ -80,9 +80,8 @@
 \tableofcontents
 \section{同步辐射和回旋辐射}
 
-\subsection{回旋辐射与同步辐射}
 
-回旋辐射和同步辐射是带电粒子在磁场中受洛伦兹力加速运动而产生的辐射，其中：
+回旋辐射和同步辐射本质上都是带电粒子在磁场中受洛伦兹力作用做加速运动时产生的电磁辐射。根据电子的速度不同，辐射的特性也有所不同。
 \begin{itemize}
   \item 非相对论电子产生的辐射叫回旋辐射（Cyclotron radiation）
   \item 相对论电子产生的辐射叫同步辐射（Synchrotron radiation）
@@ -94,99 +93,40 @@
   \textbf{回旋辐射：} 非相对论电子在磁场中受洛伦兹力作用做加速运动时产生的辐射。其辐射频率低，功率小。
 \end{definition}
 
-\begin{example}
-  在太阳耀斑、白矮星的光学辐射、中子星的X射线辐射等强磁场天体中，回旋辐射不可忽视。
-\end{example}
-
-\subsubsection{回旋辐射的特征}
-
-\begin{itemize}
-  \item 非相对论电子的回旋辐射在天体物理中的重要性较小。
-  \item 一般天体磁场较弱，\(10^{-3} \sim 10^{-6} \, \text{G}\)，电子受洛伦兹力作用做回旋运动，运动频率 \(\omega_B = 1.76 \times 10^{7} \, \text{(B/1G)} \, \text{Hz}\)，远低于射电频率。
-  \item 非相对论电子的辐射功率较小。
-\end{itemize}
-
-\begin{theorem}
-  只有在强磁场的天体中，回旋辐射才不可忽视（如太阳耀斑、白矮星的光学辐射、中子星的X射线辐射等）。
-\end{theorem}
-
-\subsubsection{回旋辐射的角分布}
-
-电子受洛伦兹力做圆周运动：
-
-\[
-x = \frac{\upsilon_\perp}{\omega_B} \sin(\omega_B t + \delta) + x_0
-\]
-\[
-y = - \frac{\upsilon_\perp}{\omega_B} \cos(\omega_B t + \delta) + y_0
-\]
-
-圆周运动是两个方向垂直、频率相同、相位差为 \(\frac{\pi}{2}\) 的简谐振动的合成。低速圆周运动可看成二维的电偶极子，一个在X轴上加速运动，一个在y轴上加速运动。
-
-\begin{theorem}
-  辐射角分布：两个偶极子辐射的叠加，两分量在X分量和Y分量互相补充，在z轴上二者都达到最大，沿z轴辐射最强。
-\end{theorem}
-
-\subsubsection{回旋辐射的总功率}
-
-加速运动的非相对论电子的辐射总功率为：
-\[
-P = \frac{2q^2 \upsilon^2 B^2 \sin^2 \alpha}{3c^3}
-\]
-
-磁场中的非相对论电子，\(\gamma \approx 1\)，其中 \(r_0\) 为电子的经典半径，公式如下：
-\[
-r_0 = \frac{e^2}{mc^2}
-\]
-
-将光速值和经典电子半径值代入，得到：
-\[
-P = 1.6 \times 10^{-15} \beta^2 B^2 \sin^2 \alpha \, (\text{erg/s})
-\]
-假设电子速度分布是各向同性的，对不同方向的电子的辐射功率求平均，得到单电子辐射的平均总功率：
-\[
-\overline{P} = \frac{4}{9} r_0^2 c \beta^2 B^2 = 1.1 \times 10^{-15} \beta^2 B^2 \, (\text{erg/s})
-\]
-
-非相对论电子的回旋辐射功率与其动能成正比（即正比于 \(\beta^2\)），与磁场的能量密度（\(\propto B^2\)）成正比。
-
-\subsubsection{回旋辐射谱的特征与公式}
-
-通过解析计算，非相对论电子的回旋辐射谱一般具有以下特征：
-\[
-S = \frac{c}{4\pi} E \times H
-\]
-最终，我们得到回旋辐射的辐射谱分布公式：
-\[
-\frac{dP}{d\Omega} = \frac{q^2 \upsilon^2 B^2}{3c^3}
-\]
-
-\subsubsection{回旋辐射谱的分布特征}
-
-随着速度的增加，回旋辐射谱逐渐过渡到同步辐射谱。
-
-\begin{theorem}
-  随着速度增大，回旋辐射的谱分布会变得更为复杂，并逐渐过渡到同步辐射谱（见图\ref{fig:cyclotron_synchrotron_transition}）。
-\end{theorem}
-
-% \begin{figure}[h!]
-% \centering
-% \includegraphics[width=0.6\textwidth]{5cae5deb-00e0-47d9-8053-343a81b09b2e.png}
-% \caption{回旋辐射的谱分布特征随速度的增加而逐渐过渡到同步辐射谱。}
-% \label{fig:cyclotron_synchrotron_transition}
-% \end{figure}
-
-\subsubsection{回旋辐射谱的精确结果}
-
-回旋辐射谱由一系列的分立谱线组成，能量几乎全部集中于基频辐射中。
-
-\[
-P_s \approx \frac{8 \pi^2 e^2 \nu^2 B}{c} (s+1) s^2 \beta^{2s}
-\]
-
-\subsubsection{总结与思考}
-
-回旋辐射谱分布的特征与电子的运动速度密切相关，速度较慢的电子产生的是较简单的单色谱，而高速电子的辐射谱逐渐过渡到同步辐射谱。在强磁场环境中，回旋辐射对辐射能量的贡献不可忽视。
-
-
+\n{只有强磁场中的天体，回旋辐射才不可忽视，在太阳耀斑、白矮星的光学辐射、中子星的X射线辐射等强磁场天体中，回旋辐射不可忽视。
+}
+\subsection{相对论性电子在磁场中的运动}
+四维洛伦兹力为：
+\begin{align}
+  F^\mu = \frac{q}{c}F^{\mu\nu}U_\nu = \frac{1}{c}\gamma
+  \begin{pmatrix}
+    \vec{E}\cdot\vec{v}/c \\
+    \vec{E}c + \vec{v}\times\vec{B}
+  \end{pmatrix}
+\end{align}
+由此可列的
+\subsection{同步辐射}
+同步辐射本质上还是带电粒子做加速运动产生的辐射，可以用相对论性电磁的辐射功率求得同步辐射，
+\begin{align}
+  P = \frac{2q^2}{3c^3}\gamma^4(a_\perp^2 + \gamma^2 a_\parallel^2)
+\end{align}
+在磁场中的电子加速度垂直于速度，所以有：
+\begin{align}
+  p = \frac{2q^2}{3c^3}\gamma^2\frac{q^2B^2}{m^2c^2}v^2\sin^2\alpha
+\end{align}
+其中，$\alpha$ 是电子速度与磁场方向的夹角，称为\textbf{跃迁角}。对于电子，其特殊情况为：
+\begin{align}
+  P = \frac{2}{3}r_0^{2}cB^2\gamma^2\beta^2\sin^2\alpha = 1.6\times 10^{-15}B^2\gamma^2\beta^2\sin^2\alpha \text{ erg s}^{-1}
+\end{align}
+\n{注意粒子能量是 $E = \gamma mc^2$，磁场能量密度是 $U_B = B^2/8\pi$}
+其中，$r_0 = e^2/mc^2 = 2.82\times 10^{-13}$ cm 是经典电子半径。所以，电子的同步辐射功率与洛伦兹因子成正比，与磁场能量密度成正比。
+如果取非相对论极限，即 $\gamma \to 1$，$\beta \leqq 1$则上式退化为回旋辐射功率公式。
+\begin{align}
+  p = \frac{2}{3}\frac{e^4}{m^2c^5}v^2B^2\sin^2\alpha
+\end{align}
+不难发现，由于洛伦兹因子的存在，同步辐射的功率以$\gamma^2$倍大于回旋辐射功率。单电子辐射在各个方向上的平均是：
+\begin{align}
+  \langle P \rangle = \frac{4}{3}\sigma_T c U_B \gamma^2 \beta^2\gamma^2U_B
+\end{align}
+其中，$\sigma_T = (8\pi/3)r_0^2$ 是汤姆逊散射截面。
 \end{document}
