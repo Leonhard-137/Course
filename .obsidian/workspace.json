@@ -6,42 +6,68 @@
       {
         "id": "9fa656016476b051",
         "type": "tabs",
-        "dimension": 72.49283667621776,
         "children": [
           {
-            "id": "135748b9a7c5080d",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "AstroRadiation/PPT/第九讲+同步辐射(1).pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "第九讲+同步辐射(1)"
-            }
-          }
-        ]
-      },
-      {
-        "id": "93a0049e71cd3262",
-        "type": "tabs",
-        "dimension": 27.507163323782237,
-        "children": [
-          {
-            "id": "675cd4ad6aa7ac75",
+            "id": "e828b18456788e4f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "电动力学相对论形式笔记（高斯制，-+++度规）.md",
+                "file": "Particle/Note/CP变换.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "电动力学相对论形式笔记（高斯制，-+++度规）"
+              "title": "CP变换"
+            }
+          },
+          {
+            "id": "db798e9870a594f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Particle/Note/全同粒子与交换对称性.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "全同粒子与交换对称性"
             }
           }
-        ]
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "d1dd914bfb84a6f7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e27da3dc45f6b58b",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Particle/PPT/Section5.4.pdf.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Section5.4.pdf"
+            }
+          },
+          {
+            "id": "59a8fe1f50df41aa",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Particle/PPT/Lectures2025/第三章(16-9).pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "第三章(16-9)"
+            }
+          }
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -190,8 +216,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "135748b9a7c5080d",
+  "active": "db798e9870a594f0",
   "lastOpenFiles": [
+    "Particle/PPT/Lectures2025/第三章(16-9).pdf",
+    "Particle/Note/全同粒子与交换对称性.md",
+    "Particle/PPT/Section5.4.pdf.pdf",
+    "Particle/Note/CP变换.md",
+    "Particle/Note/正反粒子共轭变换与 CG 宇称.md",
+    "Particle/Note/第三章 对称性和守恒律.md",
     "AstroRadiation/test/test.synctex(busy)",
     "AstroRadiation/test/xelatex21152.fls",
     "电动力学相对论形式笔记（高斯制，-+++度规）.md",
@@ -201,13 +233,6 @@
     "AstroRadiation/test/xelatex18180.fls",
     "AstroRadiation/test/Cyclotron Synchrotron.xdv",
     "AstroRadiation/test/Cyclotron Synchrotron.toc",
-    "AstroRadiation/test/Cyclotron Synchrotron.out",
-    "AstroRadiation/test/Cyclotron Synchrotron.log",
-    "AstroRadiation/test/Cyclotron Synchrotron.fls",
-    "Particle/Note/全同粒子与交换对称性.md",
-    "Particle/Note/正反粒子共轭变换与 CG 宇称.md",
-    "Particle/Note/正反粒子体系的 C 与 P 宇称.md",
-    "Particle/Note/第三章 对称性和守恒律.md",
     "Particle/Note/第五章 对称性和守恒律.md",
     "AstroRadiation/Note/Note_md/韧致辐射.md",
     "GR/Homework/HW2.md",
