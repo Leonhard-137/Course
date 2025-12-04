@@ -1,0 +1,234 @@
+\section{相对论性天体物理}
+\subsection{球对称静态流体的内引力场和平衡（TOV 方程与常密度内解）}
+
+考虑一颗由各向同性完美流体构成的静态、球对称自引力天体。由Birkhoff定理，度规可取：
+\begin{align}
+\mathrm{d}s^{2}=-\mathrm{e}^{\nu(r)}\mathrm{d}t^{2}+\mathrm{e}^{\lambda(r)}\mathrm{d}r^{2}+r^{2}\bigl(\mathrm{d}\theta^{2}+\sin^{2}\theta\,\mathrm{d}\phi^{2}\bigr),\label{eq:metric}
+\end{align}
+其中 $\nu(r)$ 与 $\lambda(r)$ 为待定函数。理想流体应力能张量为
+\begin{align}
+T^{\mu}{}_{\nu}=(\rho+p)U^{\mu}U_{\nu}+p\,\delta^{\mu}{}_{\nu}
+=\mathrm{diag}\bigl(-\rho,p,p,p\bigr).\label{eq:stress}
+\end{align}
+引力场由爱因斯坦方程决定：
+\begin{align}
+R^{\mu}{}_{\nu}-\tfrac{1}{2}R\,\delta^{\mu}{}_{\nu}=8\pi G\,T^{\mu}{}_{\nu}\label{eq:einstein}
+\end{align}
+为了简化计算，我们还会引入能量动量守恒方程：
+\begin{align}
+\nabla_{\mu}T^{\mu}{}_{\nu}=0\label{eq:cons}
+\end{align}
+但是这个方程完全可以有爱因斯坦张量所满足的Bianchi恒等式导出，四个方程真正独立的只有三个。
+
+
+度规中的非零联络为
+\begin{align}
+\Gamma^{t}{}_{tr}=\tfrac{1}{2}\nu',\quad
+\Gamma^{r}{}_{tt}=\tfrac{1}{2}\mathrm{e}^{\nu-\lambda}\nu',\quad
+\Gamma^{r}{}_{rr}=\tfrac{1}{2}\lambda',\quad
+\Gamma^{r}{}_{\theta\theta}=-r\,\mathrm{e}^{-\lambda},\quad
+\Gamma^{\theta}{}_{r\theta}=\Gamma^{\phi}{}_{r\phi}=r^{-1},\label{eq:christoffel}
+\end{align}
+其中 $'$ 表示 $\partial_{r}$。据此可求 $R^{\mu}{}_{\nu}$ 的独立分量并代入场方程，得到三条常微分方程
+\begin{align}
+8\pi G\,\rho&= \mathrm{e}^{-\lambda}\!\left(\frac{\lambda'}{r}-\frac{1}{r^{2}}\right)+\frac{1}{r^{2}},\label{eq:rho-eq}\\
+8\pi G\,p&=\mathrm{e}^{-\lambda}\!\left(\frac{\nu'}{r}+\frac{1}{r^{2}}\right)-\frac{1}{r^{2}},\label{eq:p-eq1}\\
+8\pi G\,p&=\tfrac{1}{2}\mathrm{e}^{-\lambda}\!\left(\nu''+\tfrac{1}{2}\nu'^{2}-\tfrac{1}{2}\nu'\lambda'+\frac{\nu'-\lambda'}{r}\right).\label{eq:p-eq2}
+\end{align}
+此外，由能量动量守恒可以得到相对论静力平衡方程，
+\begin{theorem}[相对论静力平衡方程]
+    根据能量动量守恒方程$\nabla_{\mu}T^{\mu}{}_{\nu}=0$，可以得到相对论静力平衡方程：
+    \begin{align}
+    p'=-\frac{\nu'}{2}\,(\rho+p).\label{eq:hydro-final}
+    \end{align}
+\end{theorem}
+\begin{proof}
+    \begin{align}
+    \nabla_{\mu}T^{\mu}{}_{r}=0
+    &\;\;\Longleftrightarrow\;\;
+    \frac{1}{\sqrt{-g}}\partial_{\mu}\!\bigl(\sqrt{-g}\,T^{\mu}{}_{r}\bigr)
+    -\Gamma^{\sigma}{}_{r\mu}\,T^{\mu}{}_{\sigma}=0,\label{eq:cons-mixed}
+    \end{align}
+    其中 $\sqrt{-g}$ 为度规行列式的平方根。对静态球对称度规
+\begin{align}
+\mathrm{d}s^{2}=-\mathrm{e}^{\nu(r)}\mathrm{d}t^{2}+\mathrm{e}^{\mu(r)}\mathrm{d}r^{2}
++r^{2}\bigl(\mathrm{d}\theta^{2}+\sin^{2}\theta\,\mathrm{d}\phi^{2}\bigr),\label{eq:metric-munu}
+\end{align}
+有
+\begin{align}
+\sqrt{-g}=\mathrm{e}^{(\mu+\nu)/2}\,r^{2}\sin\theta.\label{eq:sqrtg}
+\end{align}
+结合能量动量张量有
+\begin{align}
+T^{\mu}{}_{\nu}=\mathrm{diag}\bigl(-\rho(r),\,p(r),\,p(r),\,p(r)\bigr),\label{eq:T-mixed}
+\end{align}
+因此
+\begin{align}
+T^{\mu}{}_{r}=0\ (\mu\neq r),\qquad T^{r}{}_{r}=p(r).\label{eq:Tr}
+\end{align}
+将\eqref{eq:sqrtg}--\eqref{eq:Tr} 代入\eqref{eq:cons-mixed} 的第一项得
+\begin{align}
+\frac{1}{\sqrt{-g}}\partial_{\mu}\!\bigl(\sqrt{-g}\,T^{\mu}{}_{r}\bigr)
+&=\frac{1}{\sqrt{-g}}\partial_{r}\!\bigl(\sqrt{-g}\,p\bigr)\nonumber\\
+&=\frac{1}{\mathrm{e}^{(\mu+\nu)/2}r^{2}\sin\theta}\,
+\partial_{r}\!\Bigl(\mathrm{e}^{(\mu+\nu)/2}r^{2}\sin\theta\,p\Bigr)\nonumber\\
+&=p'+\left(\frac{\mu'+\nu'}{2}+\frac{2}{r}\right)p.\label{eq:first-term}
+\end{align}
+再计算第二项。用到的非零联络为
+\begin{align}
+\Gamma^{t}{}_{rt}=\tfrac{1}{2}\nu',\qquad
+\Gamma^{r}{}_{rr}=\tfrac{1}{2}\mu',\qquad
+\Gamma^{\theta}{}_{r\theta}=\Gamma^{\phi}{}_{r\phi}=\frac{1}{r}.\label{eq:gamma-needed}
+\end{align}
+于是
+\begin{align}
+\Gamma^{\sigma}{}_{r\mu}\,T^{\mu}{}_{\sigma}
+&=\Gamma^{t}{}_{rt}\,T^{t}{}_{t}
++\Gamma^{r}{}_{rr}\,T^{r}{}_{r}
++\Gamma^{\theta}{}_{r\theta}\,T^{\theta}{}_{\theta}
++\Gamma^{\phi}{}_{r\phi}\,T^{\phi}{}_{\phi}\nonumber\\
+&=\tfrac{1}{2}\nu'(-\rho)+\tfrac{1}{2}\mu' p+\frac{1}{r}p+\frac{1}{r}p\label{eq:second-term}\\
+&=-\tfrac{1}{2}\nu'\rho+\left(\tfrac{1}{2}\mu'+\frac{2}{r}\right)p.\nonumber
+\end{align}
+将\eqref{eq:first-term} 与\eqref{eq:second-term} 代回\eqref{eq:cons-mixed}：
+\begin{align}
+0&=p'+\left(\frac{\mu'+\nu'}{2}+\frac{2}{r}\right)p
+-\left[-\tfrac{1}{2}\nu'\rho+\left(\tfrac{1}{2}\mu'+\frac{2}{r}\right)p\right]\nonumber\\
+&=p'+\frac{\nu'}{2}p+\frac{\nu'}{2}\rho,\label{eq:hydro-step}
+\end{align}
+从而得到相对论静力平衡方程
+\begin{align}
+p'=-\frac{\nu'}{2}\,(\rho+p).\label{eq:hydro-final}
+\end{align}
+\end{proof}
+但是需要注意的是，我们要求的未知量有三个（压强、能量密度和两个度规中的函数），但是独立的方程只有三个，所以一般还需要补充物态方程求解：
+\begin{align}
+p=p(\rho).\label{eq:eos}
+\end{align}
+
+\begin{theorem}[Tolman--Oppenheimer--Volkoff（TOV）方程]\label{thm:TOV}
+在静态球对称度规\eqref{eq:metric} 与完美流体应力能张量\eqref{eq:stress} 的假设下，星体内部的压强满足
+\begin{align}
+\frac{\mathrm{d}p}{\mathrm{d}r}
+=-\frac{(\rho+p)\,\bigl(G\,m(r)+4\pi G r^{3}p\bigr)}{r\bigl[r-2G\,m(r)\bigr]}.\label{eq:TOV}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+由场方程的 $tt$ 与 $rr$ 分量（即\eqref{eq:rho-eq} 与\eqref{eq:p-eq1}）可写为
+\begin{align}
+8\pi G\,\rho&= \mathrm{e}^{-\lambda}\!\left(\frac{\lambda'}{r}-\frac{1}{r^{2}}\right)+\frac{1}{r^{2}},\label{eq:rho-eq-proof}\\
+8\pi G\,p&=\mathrm{e}^{-\lambda}\!\left(\frac{\nu'}{r}+\frac{1}{r^{2}}\right)-\frac{1}{r^{2}}.\label{eq:p-eq1-proof}
+\end{align}
+将两式相减以消去 $r^{-2}$ 项，得到
+\begin{align}
+\mathrm{e}^{-\lambda}\frac{\lambda'+\nu'}{r}=8\pi G(\rho+p).\label{eq:minus-result-proof}
+\end{align}
+再由\eqref{eq:rho-eq-proof} 重排得
+\begin{align}
+\frac{1-\mathrm{e}^{-\lambda}}{r^{2}}+\mathrm{e}^{-\lambda}\frac{\lambda'}{r}=8\pi G\rho.\label{eq:rho-eq-lam}
+\end{align}
+
+\begin{definition}
+定义包围质量函数 $m(r)$ 为
+\begin{align}
+\mathrm{e}^{-\lambda(r)}\equiv 1-\frac{2G\,m(r)}{r}
+\quad\Longleftrightarrow\quad
+m(r)=\frac{r}{2G}\Bigl(1-\mathrm{e}^{-\lambda(r)}\Bigr).\label{eq:m-def-proof}
+\end{align}
+\end{definition}
+
+对\eqref{eq:m-def-proof} 求导：
+\begin{align}
+\partial_{r}\!\left(1-\mathrm{e}^{-\lambda}\right)
+&=\partial_{r}\!\left(\frac{2Gm}{r}\right)
+=2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right),\label{eq:der1-proof}\\
+\lambda'\mathrm{e}^{-\lambda}
+&=2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right).\label{eq:der2-proof}
+\end{align}
+把\eqref{eq:m-def-proof} 与\eqref{eq:der2-proof} 代入\eqref{eq:rho-eq-lam}：
+\begin{align}
+\frac{2Gm/r}{r^{2}}+\frac{1}{r}\,2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right)
+=8\pi G\rho
+\quad\Rightarrow\quad
+m'(r)=4\pi r^{2}\rho(r).\label{eq:mprime-proof}
+\end{align}
+
+由\eqref{eq:minus-result-proof} 消去 $\lambda'$，先写成
+\begin{align}
+\nu'=8\pi G r\,\mathrm{e}^{\lambda}(\rho+p)-\lambda'.\label{eq:nupre-proof}
+\end{align}
+从\eqref{eq:rho-eq-lam} 解出 $\lambda'$：
+\begin{align}
+\mathrm{e}^{-\lambda}\frac{\lambda'}{r}
+=8\pi G\rho-\frac{1-\mathrm{e}^{-\lambda}}{r^{2}}
+\quad\Rightarrow\quad
+\lambda'
+=r\,\mathrm{e}^{\lambda}\left(8\pi G\rho-\frac{1-\mathrm{e}^{-\lambda}}{r^{2}}\right).\label{eq:lambdapre-proof}
+\end{align}
+将\eqref{eq:lambdapre-proof} 代回\eqref{eq:nupre-proof}：
+\begin{align}
+\nu'
+&=8\pi G r\,\mathrm{e}^{\lambda}(\rho+p)
+-r\,\mathrm{e}^{\lambda}\left(8\pi G\rho-\frac{1-\mathrm{e}^{-\lambda}}{r^{2}}\right)\nonumber\\
+&=8\pi G r\,\mathrm{e}^{\lambda}p+\mathrm{e}^{\lambda}\frac{1-\mathrm{e}^{-\lambda}}{r}.\label{eq:nufinal1-proof}
+\end{align}
+利用\eqref{eq:m-def-proof} 中 $\mathrm{e}^{-\lambda}=1-2Gm/r$ 化简得
+\begin{align}
+\nu'
+=\frac{2Gm}{r^{2}}\mathrm{e}^{\lambda}+8\pi G r\,\mathrm{e}^{\lambda}p
+=\frac{2\bigl(Gm+4\pi G r^{3}p\bigr)}{r\bigl(r-2Gm\bigr)}.\label{eq:nuderiv-proof}
+\end{align}
+
+另一方面，能量动量守恒（径向分量）给出相对论静力平衡式\eqref{eq:hydro-final}：
+\begin{align}
+p'=-\frac{\nu'}{2}(\rho+p).\label{eq:hydro-proof}
+\end{align}
+将\eqref{eq:nuderiv-proof} 代入\eqref{eq:hydro-proof}，立刻得到
+\begin{align}
+\frac{\mathrm{d}p}{\mathrm{d}r}
+=-\frac{(\rho+p)\,\bigl(G\,m(r)+4\pi G r^{3}p\bigr)}{r\bigl[r-2G\,m(r)\bigr]},\nonumber
+\end{align}
+即\eqref{eq:TOV}。证明完毕。
+\end{proof}
+
+\subsubsection{极限、近似与物理解读}
+\begin{align}
+\text{(i) 弱场极限：}\qquad & 2Gm/r\ll1,\; p\ll\rho\ \Rightarrow\ p'\simeq-\rho\,\frac{Gm}{r^{2}},\label{eq:newton}\\
+\text{(ii) 围壳贡献：}\qquad & 4\pi r^{3}p\ \text{项体现流体本身的“压强引力”。}\label{eq:pressure-grav}
+\end{align}
+\n{式\eqref{eq:newton} 回到牛顿静力学；式\eqref{eq:pressure-grav} 说明在广义相对论中压强同样作为引力源参与平衡。}
+
+\subsubsection{例子与检验：常密度（Schwarzschild interior）}
+令
+\begin{align}
+\rho(r)=\rho_{0}=\text{const},\qquad 0\le r\le R,\qquad M\equiv m(R),\label{eq:const-rho}
+\end{align}
+并取边界条件 $p(R)=0$ 与度规时间分量在 $r=R$ 处与外部 Schwarzschild 解连续：$\mathrm{e}^{\nu(R)}=1-2GM/R$。由\eqref{eq:m-prime} 得
+\begin{align}
+m(r)=\frac{4\pi}{3}\rho_{0}r^{3},\qquad \mathrm{e}^{-\lambda}=1-\frac{2Gm(r)}{r}=1-\frac{2GM\,r^{2}}{R^{3}}.\label{eq:const-m}
+\end{align}
+将\eqref{eq:const-m} 代入 TOV 方程\eqref{eq:TOV} 并分离变量，积分得压强分布
+\begin{align}
+p(r)=\rho_{0}\,
+\frac{\sqrt{1-\dfrac{2GM r^{2}}{R^{3}}}-\sqrt{1-\dfrac{2GM}{R}}}
+{3\sqrt{1-\dfrac{2GM}{R}}-\sqrt{1-\dfrac{2GM r^{2}}{R^{3}}}}\,,\label{eq:p-const}
+\end{align}
+相应的时间分量由\eqref{eq:hydro-redshift} 或\eqref{eq:nuderiv} 得到
+\begin{align}
+\mathrm{e}^{\nu/2}(r)=\tfrac{1}{2}\!\left[3\sqrt{1-\frac{2GM}{R}}-\sqrt{1-\frac{2GM r^{2}}{R^{3}}}\right],\qquad
+\mathrm{e}^{-\lambda}(r)=1-\frac{2GM r^{2}}{R^{3}}.\label{eq:metric-const}
+\end{align}
+由\eqref{eq:p-const} 得中心压强
+\begin{align}
+p_{c}\equiv p(0)=\rho_{0}\,\frac{1-\sqrt{1-\dfrac{2GM}{R}}}{3\sqrt{1-\dfrac{2GM}{R}}-1}.\label{eq:p-center}
+\end{align}
+当分母 $\bigl(3\sqrt{1-2GM/R}-1\bigr)\to0^{+}$ 时 $p_{c}\to+\infty$，即
+\begin{align}
+\sqrt{1-\frac{2GM}{R}}=\frac{1}{3}\ \Rightarrow\ \frac{2GM}{R}=\frac{8}{9}.\label{eq:buchdahl-bound}
+\end{align}
+这给出常密度内解存在静力平衡所需的紧致度上界：$2GM/R<8/9$。
+\n{更一般的各向同性静态星体满足 Buchdahl 不等式 $2GM/R<8/9$；常密度解达到其极限，因而是检验计算的良好“标尺”。}
+
+\paragraph{小结}
+从球对称静态度规\eqref{eq:metric} 与完美流体应力能张量\eqref{eq:stress} 出发，利用\eqref{eq:einstein} 与守恒律\eqref{eq:cons} 推得密度方程\eqref{eq:rho-eq}、压强方程\eqref{eq:p-eq1}–\eqref{eq:p-eq2} 与红移平衡\eqref{eq:hydro-redshift}。通过质量函数定义\eqref{eq:m-def}--\eqref{eq:m-prime}，严格得到 TOV 方程\eqref{eq:TOV}。在常密度情形，我们得到了解析内解\eqref{eq:metric-const} 与压强分布\eqref{eq:p-const}，并由中心压强\eqref{eq:p-center} 推出紧致度上界\eqref{eq:buchdahl-bound}。这些结果刻画了相对论星体的静力学结构与“压强也产生引力”的核心物理含义。
