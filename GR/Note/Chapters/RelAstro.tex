@@ -1,5 +1,5 @@
 \section{相对论性天体物理}
-\subsection{球对称静态流体的内引力场和平衡（TOV 方程与常密度内解）}
+\subsection{球对称静态流体的内引力场和平衡——TOV 方程与常密度内解}
 
 考虑一颗由各向同性完美流体构成的静态、球对称自引力天体。由Birkhoff定理，度规可取：
 \begin{align}
@@ -105,7 +105,7 @@ p'=-\frac{\nu'}{2}\,(\rho+p).\label{eq:hydro-final}
 \begin{align}
 p=p(\rho).\label{eq:eos}
 \end{align}
-
+结合物态方程就可以尝试给出描述该球体的方程组的解，其结果就是著名的TOV方程，也成为奥本海默方程。
 \begin{theorem}[Tolman--Oppenheimer--Volkoff（TOV）方程]\label{thm:TOV}
 在静态球对称度规\eqref{eq:metric} 与完美流体应力能张量\eqref{eq:stress} 的假设下，星体内部的压强满足
 \begin{align}
@@ -128,31 +128,20 @@ p=p(\rho).\label{eq:eos}
 \begin{align}
 \frac{1-\mathrm{e}^{-\lambda}}{r^{2}}+\mathrm{e}^{-\lambda}\frac{\lambda'}{r}=8\pi G\rho.\label{eq:rho-eq-lam}
 \end{align}
-
-\begin{definition}
-定义包围质量函数 $m(r)$ 为
+左右两边同时乘以$r^2$除以2G，得到
+\begin{align}
+    LHS &= \frac{1-\mathrm{e}^{-\lambda}}{2G} + \frac{r}{2G} \mathrm{e}^{-\lambda} \lambda' = \partial_r \left( \frac{r}{2G} (1 - \mathrm{e}^{-\lambda}) \right ) \\
+    RHS &= 4 \pi r^2 \rho
+\end{align}
+\begin{definition}[包围质量函数]
+定义$m(r)$ 为
 \begin{align}
 \mathrm{e}^{-\lambda(r)}\equiv 1-\frac{2G\,m(r)}{r}
 \quad\Longleftrightarrow\quad
 m(r)=\frac{r}{2G}\Bigl(1-\mathrm{e}^{-\lambda(r)}\Bigr).\label{eq:m-def-proof}
 \end{align}
+不难看出它的物理意义是半径r内的总质量。
 \end{definition}
-
-对\eqref{eq:m-def-proof} 求导：
-\begin{align}
-\partial_{r}\!\left(1-\mathrm{e}^{-\lambda}\right)
-&=\partial_{r}\!\left(\frac{2Gm}{r}\right)
-=2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right),\label{eq:der1-proof}\\
-\lambda'\mathrm{e}^{-\lambda}
-&=2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right).\label{eq:der2-proof}
-\end{align}
-把\eqref{eq:m-def-proof} 与\eqref{eq:der2-proof} 代入\eqref{eq:rho-eq-lam}：
-\begin{align}
-\frac{2Gm/r}{r^{2}}+\frac{1}{r}\,2G\left(\frac{m'}{r}-\frac{m}{r^{2}}\right)
-=8\pi G\rho
-\quad\Rightarrow\quad
-m'(r)=4\pi r^{2}\rho(r).\label{eq:mprime-proof}
-\end{align}
 
 由\eqref{eq:minus-result-proof} 消去 $\lambda'$，先写成
 \begin{align}
@@ -192,33 +181,45 @@ p'=-\frac{\nu'}{2}(\rho+p).\label{eq:hydro-proof}
 即\eqref{eq:TOV}。证明完毕。
 \end{proof}
 
-\subsubsection{极限、近似与物理解读}
-\begin{align}
-\text{(i) 弱场极限：}\qquad & 2Gm/r\ll1,\; p\ll\rho\ \Rightarrow\ p'\simeq-\rho\,\frac{Gm}{r^{2}},\label{eq:newton}\\
-\text{(ii) 围壳贡献：}\qquad & 4\pi r^{3}p\ \text{项体现流体本身的“压强引力”。}\label{eq:pressure-grav}
-\end{align}
-\n{式\eqref{eq:newton} 回到牛顿静力学；式\eqref{eq:pressure-grav} 说明在广义相对论中压强同样作为引力源参与平衡。}
+% 正文部分
+\subsubsection{非相对论极限与牛顿对应}
 
+广义相对论效应在强引力场（如中子星）中至关重要，但在普通恒星（如太阳）中，TOV 方程应退化为经典的牛顿流体静力学方程。
+
+在非相对论极限下，我们需要同时满足以下两个物理条件：
+\begin{itemize}
+    \item \textbf{弱场近似：}  $2Gm/r \ll 1$，表示半径远小于施瓦西半径。
+    \item \textbf{压强远小于质量密度：} $p \ll \rho$。
+\end{itemize}
+
+将上述近似代入 TOV 方程\eqref{eq:TOV}：
+\begin{align}
+\frac{\mathrm{d}p}{\mathrm{d}r}
+&=-\frac{G}{r^{2}}\,\underbrace{(\rho+p)}_{\approx \rho}\,
+\underbrace{\bigl(m(r)+4\pi r^{3}p\bigr)}_{\approx m(r)}\,
+\underbrace{\left(1-\frac{2G\,m(r)}{r}\right)^{-1}}_{\approx 1} \nonumber \\
+&\simeq -\frac{G\,\rho(r)\,m(r)}{r^{2}}. \label{eq:newton-limit}
+\end{align}
+这就完美回到了牛顿引力下的流体静力平衡方程。
+
+\begin{derivationnote}[压强在爱因斯坦与牛顿引力中的作用]
+    弱场近似中意外的要求$p \ll \rho$，首先，在自然单位制中，质量密度与压强具有相同的量纲——能量密度。在牛顿的情况中，压强变大意味着粒子的能量升高致使与容器壁的动量转移变强。而在相对论中，能量的提升意味着总质量（动质量和静质量）的提升，总质量产生引力，所以压强的提升必然带来动质量密度的提高（或者说能量密度），也就带来更强的引力效应，而非相对论极限中这部分引力可以修正，所以要求：
+    \begin{align}
+        \rho +p \rightarrow \rho
+    \end{align}
+\end{derivationnote}
 \subsubsection{例子与检验：常密度（Schwarzschild interior）}
 令
 \begin{align}
 \rho(r)=\rho_{0}=\text{const},\qquad 0\le r\le R,\qquad M\equiv m(R),\label{eq:const-rho}
 \end{align}
-并取边界条件 $p(R)=0$ 与度规时间分量在 $r=R$ 处与外部 Schwarzschild 解连续：$\mathrm{e}^{\nu(R)}=1-2GM/R$。由\eqref{eq:m-prime} 得
-\begin{align}
-m(r)=\frac{4\pi}{3}\rho_{0}r^{3},\qquad \mathrm{e}^{-\lambda}=1-\frac{2Gm(r)}{r}=1-\frac{2GM\,r^{2}}{R^{3}}.\label{eq:const-m}
-\end{align}
-将\eqref{eq:const-m} 代入 TOV 方程\eqref{eq:TOV} 并分离变量，积分得压强分布
+将\eqref{eq:const-rho} 代入 TOV 方程\eqref{eq:TOV} 并分离变量，积分得压强分布
 \begin{align}
 p(r)=\rho_{0}\,
 \frac{\sqrt{1-\dfrac{2GM r^{2}}{R^{3}}}-\sqrt{1-\dfrac{2GM}{R}}}
 {3\sqrt{1-\dfrac{2GM}{R}}-\sqrt{1-\dfrac{2GM r^{2}}{R^{3}}}}\,,\label{eq:p-const}
 \end{align}
-相应的时间分量由\eqref{eq:hydro-redshift} 或\eqref{eq:nuderiv} 得到
-\begin{align}
-\mathrm{e}^{\nu/2}(r)=\tfrac{1}{2}\!\left[3\sqrt{1-\frac{2GM}{R}}-\sqrt{1-\frac{2GM r^{2}}{R^{3}}}\right],\qquad
-\mathrm{e}^{-\lambda}(r)=1-\frac{2GM r^{2}}{R^{3}}.\label{eq:metric-const}
-\end{align}
+
 由\eqref{eq:p-const} 得中心压强
 \begin{align}
 p_{c}\equiv p(0)=\rho_{0}\,\frac{1-\sqrt{1-\dfrac{2GM}{R}}}{3\sqrt{1-\dfrac{2GM}{R}}-1}.\label{eq:p-center}
@@ -227,8 +228,113 @@ p_{c}\equiv p(0)=\rho_{0}\,\frac{1-\sqrt{1-\dfrac{2GM}{R}}}{3\sqrt{1-\dfrac{2GM}
 \begin{align}
 \sqrt{1-\frac{2GM}{R}}=\frac{1}{3}\ \Rightarrow\ \frac{2GM}{R}=\frac{8}{9}.\label{eq:buchdahl-bound}
 \end{align}
-这给出常密度内解存在静力平衡所需的紧致度上界：$2GM/R<8/9$。
-\n{更一般的各向同性静态星体满足 Buchdahl 不等式 $2GM/R<8/9$；常密度解达到其极限，因而是检验计算的良好“标尺”。}
+由此可得$2GM/R<8/9$，这就是说中心压强不为无穷的要求限制天体的半径必须大于其施瓦西半径的$9/8$倍，虽然这是由常密度求得的，但是可以证明（略）其他物态方程给出的天体也要满足这个条件
 
-\paragraph{小结}
-从球对称静态度规\eqref{eq:metric} 与完美流体应力能张量\eqref{eq:stress} 出发，利用\eqref{eq:einstein} 与守恒律\eqref{eq:cons} 推得密度方程\eqref{eq:rho-eq}、压强方程\eqref{eq:p-eq1}–\eqref{eq:p-eq2} 与红移平衡\eqref{eq:hydro-redshift}。通过质量函数定义\eqref{eq:m-def}--\eqref{eq:m-prime}，严格得到 TOV 方程\eqref{eq:TOV}。在常密度情形，我们得到了解析内解\eqref{eq:metric-const} 与压强分布\eqref{eq:p-const}，并由中心压强\eqref{eq:p-center} 推出紧致度上界\eqref{eq:buchdahl-bound}。这些结果刻画了相对论星体的静力学结构与“压强也产生引力”的核心物理含义。
+\subsection{白矮星与多方球模型}
+
+\subsubsection{TOV 方程的牛顿极限与多方近似}
+
+在非相对论极限下，白矮星可视为由简并电子气支撑的自引力流体球。我们从牛顿流体静力平衡方程出发：
+\begin{align}
+\frac{\mathrm{d}p}{\mathrm{d}r} &= -\frac{G M(r)}{r^2}\rho, \label{eq:hydro-newton} \\
+\frac{\mathrm{d}M(r)}{\mathrm{d}r} &= 4\pi r^2 \rho. \label{eq:mass-newton}
+\end{align}
+将\eqref{eq:hydro-newton} 变形为 $M(r) = -\frac{r^2}{G\rho}\frac{\mathrm{d}p}{\mathrm{d}r}$ 并代入\eqref{eq:mass-newton}，消去质量 $M(r)$ 可得结构方程：
+\begin{align}
+\frac{1}{r^2}\frac{\mathrm{d}}{\mathrm{d}r}\left(\frac{r^2}{\rho}\frac{\mathrm{d}p}{\mathrm{d}r}\right) = -4\pi G \rho. \label{eq:structure-diff}
+\end{align}
+
+
+现在考虑一个满足多方关系星体的物态方程：
+\begin{align}
+p = K \rho^{\gamma} = K \rho^{1+\frac{1}{n}}, \label{eq:polytrope}
+\end{align}
+其中 $n$ 为多方指数。对于非相对论性简并电子气，$n=1.5$ ($\gamma=5/3$)；对于相对论性简并电子气，$n=3$ ($\gamma=4/3$)。
+
+\n{关于边界条件，$\theta(0) = 0$ 是说中心处的密度等于中心密度，这毫无疑问。第二项$\theta'(0) = 0$源自于星体的球对称性，不严格地说这使得$\theta$为$r$的偶函数，所以要求原点的导数为0。}
+\begin{theorem}[Lane-Emden 方程]
+    引入无量纲变量：
+    \begin{align}
+    \rho = \rho_c \theta^n, \quad r = \alpha \xi, \label{eq:scaling-vars}
+    \end{align}
+    其中 $\rho_c$ 为中心密度，特征长度尺度 $\alpha$ 定义为
+    \begin{align}
+    \alpha = \left[ \frac{(n+1)K \rho_c^{\frac{1}{n}-1}}{4\pi G} \right]^{1/2}, \label{eq:alpha-def}
+    \end{align}
+    则结构方程\eqref{eq:structure-diff} 化为无量纲的 Lane-Emden 方程：
+    \begin{align}
+    \frac{1}{\xi^2}\frac{\mathrm{d}}{\mathrm{d}\xi}\left(\xi^2 \frac{\mathrm{d}\theta}{\mathrm{d}\xi}\right) = -\theta^n. \label{eq:lane-emden}
+    \end{align}
+    边界条件为 $\theta(0)=1, \theta'(0)=0$。
+\end{theorem}
+
+\begin{proof}
+    首先利用链式法则计算压力梯度项。由 $p = K \rho^{1+1/n}$：
+    \begin{align}
+    \frac{\mathrm{d}p}{\mathrm{d}r} 
+    &= K(1+\frac{1}{n})\rho^{1/n}\frac{\mathrm{d}\rho}{\mathrm{d}r} \nonumber \\
+    &= K\frac{n+1}{n}(\rho_c \theta^n)^{1/n} \cdot \rho_c n \theta^{n-1} \frac{\mathrm{d}\theta}{\mathrm{d}r} \nonumber \\
+    &= K(n+1)\rho_c^{1+1/n} \theta^n \frac{\mathrm{d}\theta}{\mathrm{d}r}. \label{eq:dp-chain}
+    \end{align}
+    代入方程左边 $\frac{r^2}{\rho}\frac{\mathrm{d}p}{\mathrm{d}r}$：
+    \begin{align}
+    \text{LHS项} &= \frac{r^2}{\rho_c \theta^n} \left[ K(n+1)\rho_c^{1+1/n} \theta^n \frac{\mathrm{d}\theta}{\mathrm{d}r} \right] \nonumber \\
+    &= r^2 K(n+1)\rho_c^{1/n} \frac{\mathrm{d}\theta}{\mathrm{d}r}.
+    \end{align}
+    将其代入\eqref{eq:structure-diff} 并利用 $r=\alpha\xi$：
+    \begin{align}
+    \frac{1}{\alpha^2 \xi^2} \frac{1}{\alpha}\frac{\mathrm{d}}{\mathrm{d}\xi} \left( \alpha^2 \xi^2 K(n+1)\rho_c^{1/n} \frac{1}{\alpha}\frac{\mathrm{d}\theta}{\mathrm{d}\xi} \right) &= -4\pi G \rho_c \theta^n.
+    \end{align}
+    整理常数项：
+    \begin{align}
+    \frac{K(n+1)\rho_c^{1/n}}{\alpha^2} \left[ \frac{1}{\xi^2}\frac{\mathrm{d}}{\mathrm{d}\xi}\left(\xi^2 \theta' \right) \right] &= -4\pi G \rho_c \theta^n.
+    \end{align}
+    令方括号前的系数等于 $4\pi G \rho_c$ 以消去密度项，即可解出\eqref{eq:alpha-def} 中的 $\alpha$ 定义，同时方程简化为 Lane-Emden 形式。
+\end{proof}
+
+Lane-Emden 方程在该边界条件下的解是Lane-Emden函数：
+\begin{align}
+\theta(\xi) = 1 - \frac{\xi^2}{6} + \frac{n}{120}\xi^4 - \frac{n(8n-5)}{15120}\xi^6 + \cdots \label{eq:lane-emden-solution}
+\end{align}
+这个函数的第一个根记为$\xi_1$。
+\subsubsection{质量-半径关系}
+
+\begin{theorem}[质量-半径关系]
+    多方球体的总质量 $M$ 与总半径 $R$ 满足如下关系：
+    \begin{align}
+    M \propto R^{\frac{3-n}{1-n}}. \label{eq:MR-scaling}
+    \end{align}
+    特别地，对于 $n=1.5$（非相对论），$M \propto R^{-3}$；对于 $n=3$（极端相对论），$M$ 与 $R$ 无关（即 Chandrasekhar 极限质量）。
+\end{theorem}
+
+\begin{proof}
+    星体表面定义为 $\theta(\xi_1)=0$ 的位置，物理半径 $R = \alpha \xi_1$。
+    总质量为密度的积分：
+    \begin{align}
+    M &= \int_0^R 4\pi r^2 \rho \,\mathrm{d}r 
+    = 4\pi \alpha^3 \rho_c \int_0^{\xi_1} \xi^2 \theta^n \,\mathrm{d}\xi.
+    \end{align}
+    利用 Lane-Emden 方程 $\xi^2 \theta^n = -(\xi^2 \theta')'$，积分项为：
+    \begin{align}
+    \int_0^{\xi_1} -(\xi^2 \theta')' \,\mathrm{d}\xi = -\xi_1^2 \theta'(\xi_1).
+    \end{align}
+    故 $M = 4\pi \alpha^3 \rho_c (-\xi_1^2 \theta'(\xi_1))$。
+    
+    为了消去 $\rho_c$，由 $\alpha$ 定义式\eqref{eq:alpha-def} 反解 $\rho_c$：
+    \begin{align}
+    \rho_c \propto \alpha^{\frac{2}{1/n-1}} = \alpha^{\frac{2n}{1-n}}.
+    \end{align}
+    代入质量公式：
+    \begin{align}
+    M \propto \alpha^3 \cdot \alpha^{\frac{2n}{1-n}} = \alpha^{3 + \frac{2n}{1-n}} = \alpha^{\frac{3-3n+2n}{1-n}} = \alpha^{\frac{3-n}{1-n}}.
+    \end{align}
+    由于 $R \propto \alpha$（$\xi_1$ 为常数），故 $M \propto R^{\frac{3-n}{1-n}}$。
+\end{proof}
+
+\begin{derivationnote}[物理图景：不稳定性与简并压]
+    由关系式 $M \propto R^{\frac{3-n}{1-n}}$ 可见：
+    \begin{itemize}
+        \item 当 $n=1.5$ ($\gamma=5/3$) 时，指数为 $-3$。质量增加，$R$ 减小，密度增加，能够建立新的平衡。
+        \item 当 $n=3$ ($\gamma=4/3$) 时，指数为 $0$。这意味着质量 $M$ 是一个常数（与半径无关）。这对应了 \textbf{Chandrasekhar 极限}。如果恒星质量超过此值，相对论简并压将无法提供足够的支撑力（因为它不再随半径收缩而“更快”地增长），导致引力坍缩成中子星或黑洞。
+    \end{itemize}
+\end{derivationnote}
