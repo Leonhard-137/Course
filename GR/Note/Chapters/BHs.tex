@@ -1,0 +1,235 @@
+\section{黑洞}
+
+\subsection{史瓦西黑洞}
+
+广义相对论中黑洞有三种形成机制：
+\begin{enumerate}[label=(\arabic*)]
+    \item 原初黑洞：早期宇宙密度涨落形成的原初小黑洞。
+    \item 恒星级黑洞：大质量横线演化的一种结局。
+    \item 超大质量黑洞：星团或者星系核引力坍缩后形成的巨型黑洞。
+\end{enumerate}
+
+\subsubsection{史瓦西坐标系}
+
+在史瓦西坐标系中，史瓦西解的度规写作：
+\begin{align}
+\mathrm{d}s^{2}
+&=
+- \left(1 - \frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}t^{2}
++ \left(1 - \frac{r_{\mathrm{s}}}{r}\right)^{-1}\mathrm{d}r^{2}
++ r^{2}\,\mathrm{d}\Omega^{2}.
+\label{eq:schwarzschild-metric-rs}
+\end{align}
+这个度规表示一个永久黑洞（虽然并不存在）外的真空引力场，其中史瓦西半径为：
+\begin{align}
+r_{\mathrm{s}} \equiv 2GM.
+\label{eq:rs-def}
+\end{align}
+这个度规有两个奇异的点，$0$ 和 $r=r_{\mathrm{s}}$。$r=0$ 是一个真正的时空奇异点，而 $r=r_{\mathrm{s}}$ 只是坐标奇异点，源于史瓦西坐标系无法覆盖整个永久黑洞时空流形。
+
+为了证明 $r_{\mathrm{s}}$ 处不是物理奇异的，可以检验一个在史瓦西时空中运动的粒子。
+\begin{derivationnote}[史瓦西半径不是物理奇异点]
+    球对称情况下，只考虑径向，在史瓦西时空中运动粒子的运动方程是：
+    \begin{align}
+        \left(\frac{\mathrm{d}r}{\mathrm{d}\tau}\right)
+        &= -E^{2} - \left(1 + \frac{r_{\mathrm{s}}}{r}\right), \\
+        \left(\frac{\mathrm{d}t}{\mathrm{d}\tau}\right)
+        &= \frac{E}{1 - \frac{r_{\mathrm{s}}}{r}} .
+    \end{align}
+    那么对于处于无穷远处的观察者，在 $r\rightarrow r_{\mathrm{s}}$ 时，有：
+    \begin{align}
+        \left(\frac{\mathrm{d}r}{\mathrm{d}t} \right)^{2} &= E^{2}, \\
+        \frac{\mathrm{d}t}{\mathrm{d}\tau} &\rightarrow \infty, \\[4pt]
+        \Rightarrow\quad
+        \frac{\mathrm{d}r}{\mathrm{d}t} &\rightarrow 0 .
+    \end{align}
+    这说明对于无穷远处的观察者而言，粒子在接近史瓦西半径的时候，其速度会越来越慢直到“冻结”在史瓦西半径处。然而，如果我们取粒子本身的固有时，会发现 $\frac{\mathrm{d}r}{\mathrm{d}\tau}$ 并不趋于 $0$，而是有限值，所以在粒子本身看来，它可以毫无障碍地穿过史瓦西半径。取 $E^{2} = 1$ 的简单情况计算粒子从 $r = r_{0} \geq r_{\mathrm{s}}$ 到 $r = 0$ 处所花的时间，对于粒子掉落情况有：
+    \begin{align}
+        \frac{\mathrm{d}r}{\mathrm{d}\tau}
+        = -\sqrt{\frac{r_{\mathrm{s}}}{r}}
+        \quad\Rightarrow\quad
+        \Delta \tau
+        = (2GM)^{-1/2}\,\frac{2}{3}\,r_{0}^{3/2} .
+    \end{align}
+    这就是说对粒子本身而言，穿过史瓦西半径并不会遇见任何阻碍，这个奇点不是物理的。
+\end{derivationnote}
+
+考虑在史瓦西时空中径向运动的光子，可以画出时空中的光锥线。由 \eqref{eq:schwarzschild-metric-rs} 取类光条件 $\mathrm{d}s^{2}=0$ 得
+\begin{align}
+0
+&=
+- \left(1 - \frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}t^{2}
++ \left(1 - \frac{r_{\mathrm{s}}}{r}\right)^{-1}\mathrm{d}r^{2},
+\\[4pt]
+\Rightarrow\quad
+\frac{\mathrm{d}r}{\mathrm{d}t}
+&=
+\pm\left(1 - \frac{r_{\mathrm{s}}}{r}\right),
+\label{eq:radial-null-dr-dt}
+\end{align}
+两个方程正负分别对应粒子掉落黑洞和离开黑洞。由 \eqref{eq:radial-null-dr-dt} 得到
+\begin{align}
+\frac{\mathrm{d}t}{\mathrm{d}r}
+&=
+\pm\left(1 - \frac{r_{\mathrm{s}}}{r}\right)^{-1}
+=
+\pm\,\frac{r}{r-r_{\mathrm{s}}},
+\end{align}
+积分可得
+\begin{align}
+t
+&=
+\pm\left(r + r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|\right)
++ \text{const}.
+\label{eq:radial-null-integrated}
+\end{align}
+取 $+$ 时，$r$ 随着 $t$ 增大而增大，表示光子向外逃逸；取 $-$ 时，$r$ 随着 $t$ 增大而减小，表示光子掉入黑洞。
+
+为了描述的方便可以引入乌龟坐标 $r_{*}$，定义为
+\begin{align}
+r_{*}
+\equiv
+r + r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|.
+\label{eq:tortoise-def}
+\end{align}
+由此可得
+\begin{align}
+\mathrm{d}t
+&=
+\pm\,\mathrm{d}r_{*}
+\quad\Rightarrow\quad
+t \mp r_{*}
+=
+\text{const}.
+\label{eq:null-lines-tortoise}
+\end{align}
+这就是说对一条特定的光线而言，$t \mp r_{*}$ 是一个常数，这个常数可以标定一个光线族。不妨取
+\begin{align}
+u
+\equiv
+t - r_{*},
+\qquad
+v
+\equiv
+t + r_{*},
+\label{eq:null-coords-def}
+\end{align}
+这样 $u$、$v$ 分别对应向外、向内的光线。
+
+\subsubsection{爱丁顿坐标系}
+
+取坐标变换
+\begin{align}
+    \widetilde{r} &= r, \\
+    \widetilde{t} &= t + 2GM \ln\left|\frac{r}{2GM} - 1\right|.
+\end{align}
+在该坐标系下，时空线元为（不区分 $\mathrm{d}r$ 和 $\mathrm{d}\widetilde{r}$）：
+\begin{align}
+    \mathrm{d}s^{2}
+    = -\left(1 - \frac{2GM}{r}\right)\mathrm{d}t^{2}
+    + \frac{4GM}{r}\,\mathrm{d}r\,\mathrm{d}t
+    + \left(1+\frac{2GM}{r}\right)\mathrm{d}r^{2}
+    + r^{2}\,\mathrm{d}\Omega^{2}.
+\end{align}
+在类光条件 $\mathrm{d}s^{2} = 0$ 的条件下，解关于 $\frac{\mathrm{d}r}{\mathrm{d}t}$ 的一元二次方程组可以得到：
+\begin{align}
+    \frac{\mathrm{d}r}{\mathrm{d}t} &= -1, \qquad \text{内行解},\\
+    \frac{\mathrm{d}r}{\mathrm{d}t} &= \frac{1 - \frac{2GM}{r}}{1+\frac{2GM}{r}}, \qquad \text{外行解}.
+\end{align}
+考察 $r$ 随 $t$ 的变化关系就可以知道解的分类由来，积分可得所有的光锥线：
+\begin{align}
+    t + r &= V, \\
+    t - r - 4GM\ln\left|\frac{r}{2GM} -1\right| &= U.
+\end{align}
+对这个坐标系，粒子内行进入视界是毫无疑问可在有限时间穿过的，但是粒子外行穿过视界，会被“冻结”在视界上，也就是说它无法描述白洞的行为，由此被称为 \textbf{内行爱丁顿坐标}。
+
+类似的可以引入 \textbf{外行爱丁顿坐标}：
+\begin{align}
+    \widetilde{t} &= t - 2GM \ln\left|\frac{r}{2GM} - 1\right|, \\
+    \widetilde{r} &= r .
+\end{align}
+通过类似的讨论可以发现，这个坐标只能描述粒子外行通过视界的行为，而内行进入视界会被“冻结”。
+
+若进一步放弃“在 $r\rightarrow\infty$ 时度规显式回到闵氏形式”的要求，可以得到一个更加常用的形式，
+\begin{align}
+    \widetilde{t} &= t + r_{*}, \\
+    \widetilde{r} &= r .
+\end{align}
+对应的微分变换是：
+\begin{align}
+    \mathrm{d}t
+    = \mathrm{d}\widetilde{t}
+    - \frac{\mathrm{d}r}{1 - 2GM r^{-1}} .
+\end{align}
+此时内行和外行光锥线为：
+\begin{align}
+    \widetilde{t} &= V, \\
+    \widetilde{t} - 2r_{*} &= U.
+\end{align}
+同样地，这个坐标无法描述外行行为，称为 \textbf{内行爱丁顿坐标}，与之类似的可以定义 \textbf{外行爱丁顿坐标}：
+\begin{align}
+    \widetilde{t} = t - r_{*}.
+\end{align}
+爱丁顿坐标在一定程度上解决了坐标奇点的问题，外行和内行爱丁顿坐标可以分别描述向内和向外穿过视界的行为，但是无法同时描述两种行为。
+
+\subsubsection{Kruskal 坐标}
+
+虽然爱丁顿坐标已经能描述黑洞或白洞的一方，但要同时覆盖黑洞与白洞区域，消除坐标奇异性就需要引入 Kruskal 坐标。
+
+首先利用类光坐标 \eqref{eq:null-coords-def}，定义无量纲的类光坐标
+\begin{align}
+\widetilde{U}
+&\equiv
+- \exp\left(-\frac{\widetilde{u}}{2r_{\mathrm{s}}}\right),
+&
+\widetilde{V}
+&\equiv
+\exp\left(\frac{\widetilde{v}}{2r_{\mathrm{s}}}\right),
+\label{eq:kruskal-UV-def}
+\end{align}
+对应的微分关系为：
+\begin{align}
+\mathrm{d}\widetilde{u}
+&=
+-2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{U}}{\widetilde{U}},
+&
+\mathrm{d}\widetilde{v}
+&=
+2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{V}}{\widetilde{V}}.
+\label{eq:du-dv-UV}
+\end{align}
+由此度规可以写作：
+\begin{align}
+    \mathrm{d}s^{2}
+    = \frac{4r_{\mathrm{s}}^{3}}{r}\exp\!\left(-\frac{r}{r_{\mathrm{s}}}\right)
+      \mathrm{d}\widetilde{U}\,\mathrm{d}\widetilde{V}
+      + r^{2}\,\mathrm{d}\Omega^{2}.
+\end{align}
+在这个坐标系中视界不存在奇异性。此时坐标时间 $t$ 和面积半径 $r$ 都以隐函数的形式被决定：
+\begin{align}
+    \widetilde{U}\,\widetilde{V}
+    &= \left(\frac{r}{2GM} - 1\right)\exp\!\left(\frac{r}{2GM}\right),
+    \qquad
+    \frac{\widetilde{U}}{\widetilde{V}}
+    = e^{-\frac{t}{r_{\mathrm{s}}}} .
+\end{align}
+对 $\widetilde{U}$ 和 $\widetilde{V}$ 进行线性组合可以得到另一种形式的 Kruskal 坐标：
+\begin{align}
+    u &= \frac{1}{2}\bigl(\widetilde{V} + \widetilde{U}\bigr)
+       = \left(\frac{r}{r_{\mathrm{s}}}-1\right)
+         \exp\!\left(\frac{r}{r_{\mathrm{s}}}\right)
+         \cosh\!\left(\frac{t}{2r_{\mathrm{s}}}\right), \\
+    v &= \frac{1}{2}\bigl(\widetilde{V} - \widetilde{U}\bigr)
+       = \left(\frac{r}{r_{\mathrm{s}}}-1\right)
+         \exp\!\left(\frac{r}{r_{\mathrm{s}}}\right)
+         \sinh\!\left(\frac{t}{2r_{\mathrm{s}}}\right),
+\end{align}
+此时度规可写为
+\begin{align}
+    \mathrm{d}s^{2}
+    = \frac{4 r_{\mathrm{s}}^{3}}{r}\exp\!\left(-\frac{r}{r_{\mathrm{s}}}\right)
+      \bigl(-\mathrm{d}v^{2}+\mathrm{d}u^{2}\bigr)
+      + r^{2}\,\mathrm{d}\Omega^{2}.
+\end{align}
+
+\subsection{彭罗斯图}
