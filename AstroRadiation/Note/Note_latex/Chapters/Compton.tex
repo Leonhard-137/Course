@@ -1,0 +1,197 @@
+\section{电子-光子散射}
+\subsection{逆康普顿散射}
+
+\begin{definition}[逆康普顿散射]
+逆康普顿散射指相对论电子与低频光子碰撞时，电子将部分动能转移给光子，使光子能量（频率）显著升高的过程。
+\end{definition}
+
+为避免在实验室系 $K$ 中同时处理入射角与出射角带来的多参数复杂性，我们采用“两步法”：先在随电子运动的电子静止系 $\widetilde{K}$ 中描述散射动力学，再通过洛伦兹变换回到 $K$。设入射/出射光子在 $K$ 中频率分别为 $\nu_i,\nu_f$，其传播方向与电子速度方向夹角分别为 $\alpha_i,\alpha_f$。
+
+\n{核心思想：在 $\widetilde{K}$ 中散射关系最简单，而在 $K$ 中的“增能”主要来自两次相对论多普勒变换。}
+
+\subsubsection{一般逆康普顿频率比}
+在电子静止系 $\widetilde{K}$ 中，散射满足标准康普顿关系。令 $\widetilde{\theta}$ 为 $\widetilde{K}$ 中入射与出射光子夹角，则
+\begin{align}
+\widetilde{\nu}_f
+=
+\frac{\widetilde{\nu}_i}{1+\dfrac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)} .
+\label{eq:compton-in-tilde}
+\end{align}
+
+\begin{theorem}[逆康普顿散射的频率比]
+对逆康普顿过程，频率比满足
+\begin{align}
+\frac{\nu_f}{\nu_i}
+=
+\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)} .
+\label{eq:general-ics-theorem}
+\end{align}
+\end{theorem}
+\begin{proof}
+将 \eqref{eq:doppler-to-tilde} 应用于入射与出射光子，得
+\begin{align}
+\widetilde{\nu}_i
+=
+\gamma\nu_i\left(1-\beta\cos\alpha_i\right),
+\label{eq:nu_i_to_tilde}
+\\
+\widetilde{\nu}_f
+=
+\gamma\nu_f\left(1-\beta\cos\alpha_f\right).
+\label{eq:nu_f_to_tilde}
+\end{align}
+把 \eqref{eq:nu_i_to_tilde} 代入康普顿关系 \eqref{eq:compton-in-tilde}，并用 \eqref{eq:nu_f_to_tilde} 替换左边 $\widetilde{\nu}_f$，得到
+\begin{align}
+\gamma\nu_f\left(1-\beta\cos\alpha_f\right)
+=
+\frac{\gamma\nu_i\left(1-\beta\cos\alpha_i\right)}{1+\dfrac{h}{mc^2}\,\gamma\nu_i\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)} .
+\label{eq:substitute-step}
+\end{align}
+两边同除以 $\gamma$，并将分母移到左侧：
+\begin{align}
+\nu_f\left(1-\beta\cos\alpha_f\right)
+\left[
+1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+\right]
+=
+\nu_i\left(1-\beta\cos\alpha_i\right).
+\label{eq:expand-step}
+\end{align}
+对 \eqref{eq:expand-step} 展开并除以 $\nu_i$：
+\begin{align}
+\frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
++
+\frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+=
+\left(1-\beta\cos\alpha_i\right).
+\label{eq:collect-step}
+\end{align}
+将 \eqref{eq:collect-step} 中的 $\nu_f/\nu_i$ 提取出来：
+\begin{align}
+\frac{\nu_f}{\nu_i}
+\left[
+\left(1-\beta\cos\alpha_f\right)
++
+\left(1-\beta\cos\alpha_f\right)\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+\right]
+=
+\left(1-\beta\cos\alpha_i\right).
+\label{eq:factor-step}
+\end{align}
+因此
+\begin{align}
+\frac{\nu_f}{\nu_i}
+=
+\frac{1-\beta\cos\alpha_i}{\left(1-\beta\cos\alpha_f\right)\left[1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)\right]} .
+\label{eq:intermediate-result}
+\end{align}
+利用 \eqref{eq:doppler-to-tilde} 可把修正项写成以 $K$ 系频率为参量的等价形式。因为
+\begin{align}
+\frac{h\widetilde{\nu}_i}{mc^2}
+=
+\frac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right),
+\label{eq:tilde-xi}
+\end{align}
+将 \eqref{eq:tilde-xi} 代入 \eqref{eq:intermediate-result}，并把括号展开为“$1-\beta\cos\alpha_f$ 加上修正项”的形式：
+\begin{align}
+\left(1-\beta\cos\alpha_f\right)\left[1+\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)\right]
+=
+\left(1-\beta\cos\alpha_f\right)
++
+\left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right).
+\label{eq:denom-expand}
+\end{align}
+将 $\widetilde{\nu}_i$ 用 \eqref{eq:nu_i_to_tilde} 表示并整理，便得到常用写法
+\begin{align}
+\left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)
+=
+\frac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right),
+\label{eq:recoil-term}
+\end{align}
+代回 \eqref{eq:intermediate-result} 即得
+\begin{align}
+    \boxed{
+\frac{\nu_f}{\nu_i}
+=
+\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)}
+}
+\end{align}
+与 \eqref{eq:general-ics-theorem} 一致。\n{分母最后一项体现康普顿回冲：当 $h\widetilde{\nu}_i\ll mc^2$ 时可忽略，便回到汤姆逊极限。}
+\end{proof}
+
+电子静止系下如果光子满足低频条件：
+\begin{align}
+h\widetilde{\nu}_i \ll mc^2,
+\label{eq:thomson-condition}
+\end{align}
+此时 \eqref{eq:compton-in-tilde} 近似给出
+\begin{align}
+\widetilde{\nu}_f \approx \widetilde{\nu}_i .
+\label{eq:thomson-elastic-tilde}
+\end{align}
+由 \eqref{eq:doppler-to-tilde} 与 \eqref{eq:thomson-elastic-tilde} 得到实验室系频率比
+\begin{align}
+\boxed{
+\nu_f
+\approx
+\nu_i\,\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}
+}
+\label{eq:ics-thomson-ratio}
+\end{align}
+
+\paragraph{能量范围与上界}
+光子能量的增益源自于电子的能量，所以光子的能量增益不应大于电子能量，
+\begin{theorem}[汤姆逊极限下的能量上界]
+在满足 \eqref{eq:thomson-condition} 的汤姆逊极限中，
+\begin{align}
+0\le h\nu_f \le 4\gamma^2\,h\nu_i,
+\label{eq:range-theorem}
+\end{align}
+上界在 $\alpha_i=\pi$ 且 $\alpha_f=0$ 时取到。
+\end{theorem}
+\begin{proof}
+由 \eqref{eq:ics-thomson-ratio}，
+\begin{align}
+\frac{\nu_f}{\nu_i}\approx \frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}.
+\label{eq:ratio-start-proof}
+\end{align}
+因 $\cos\alpha\in[-1,1]$，有
+\begin{align}
+1-\beta\cos\alpha_i \le 1+\beta,
+\label{eq:numerator-bound}
+\\
+1-\beta\cos\alpha_f \ge 1-\beta.
+\label{eq:denominator-bound}
+\end{align}
+故
+\begin{align}
+\frac{\nu_f}{\nu_i}\lesssim \frac{1+\beta}{1-\beta}
+=
+\frac{(1+\beta)^2}{1-\beta^2}
+=
+\gamma^2(1+\beta)^2.
+\label{eq:ratio-upper}
+\end{align}
+当 $\gamma\gg 1$ 时 $\beta\to 1$，从而 $(1+\beta)^2\to 4$，得
+\begin{align}
+\frac{\nu_f}{\nu_i}\lesssim 4\gamma^2,
+\label{eq:4g2}
+\end{align}
+即
+\begin{align}
+\nu_f \lesssim 4\gamma^2\nu_i.
+\end{align}
+取等要求分子最大且分母最小，即 $\cos\alpha_i=-1$（$\alpha_i=\pi$）与 $\cos\alpha_f=1$（$\alpha_f=0$）。此时
+\begin{align}
+\nu_{f,\max}\approx \nu_i\frac{1+\beta}{1-\beta}\approx 4\gamma^2\nu_i,
+\label{eq:max-frequency}
+\end{align}
+与 \eqref{eq:range-theorem} 一致。
+\end{proof}
+一般考虑电子系下满足低频条件的情况，此时对于极端相对论电子，每次与光子作用都会使其增加$\gamma^2$倍。
+逆康普顿散射最重要的两个特征：
+\begin{enumerate}[label=(\arabic*)]
+    \item 方向性强
+    \item 作用后光子能量为之前的$\gamma^2$倍
+\end{enumerate}
