@@ -1,17 +1,17 @@
 \section{黑洞}
 
-\subsection{史瓦西黑洞}
+\subsection{Schwarzschild 黑洞}
 
 广义相对论中黑洞有三种形成机制：
 \begin{enumerate}[label=(\arabic*)]
     \item 原初黑洞：早期宇宙密度涨落形成的原初小黑洞。
-    \item 恒星级黑洞：大质量横线演化的一种结局。
+    \item 恒星级黑洞：大质量恒星演化的一种结局。
     \item 超大质量黑洞：星团或者星系核引力坍缩后形成的巨型黑洞。
 \end{enumerate}
 
-\subsubsection{史瓦西坐标系}
-
-在史瓦西坐标系中，史瓦西解的度规写作：
+\subsubsection{Schwarzschild 坐标系}
+\paragraph{Schwarzschild的奇点}
+在 Schwarzschild 坐标系中，Schwarzschild 时空的度规写作：
 \begin{align}
 \mathrm{d}s^{2}
 &=
@@ -20,41 +20,46 @@
 + r^{2}\,\mathrm{d}\Omega^{2}.
 \label{eq:schwarzschild-metric-rs}
 \end{align}
-这个度规表示一个永久黑洞（虽然并不存在）外的真空引力场，其中史瓦西半径为：
+这个度规表示一个永久黑洞（虽然并不存在）外的真空引力场，其中 Schwarzschild 半径为：
 \begin{align}
 r_{\mathrm{s}} \equiv 2GM.
 \label{eq:rs-def}
 \end{align}
-这个度规有两个奇异的点，$0$ 和 $r=r_{\mathrm{s}}$。$r=0$ 是一个真正的时空奇异点，而 $r=r_{\mathrm{s}}$ 只是坐标奇异点，源于史瓦西坐标系无法覆盖整个永久黑洞时空流形。
-
-为了证明 $r_{\mathrm{s}}$ 处不是物理奇异的，可以检验一个在史瓦西时空中运动的粒子。
-\begin{derivationnote}[史瓦西半径不是物理奇异点]
-    球对称情况下，只考虑径向，在史瓦西时空中运动粒子的运动方程是：
+这个度规有两个奇异的点，$0$ 和 $r=r_{\mathrm{s}}$。$r=0$ 是一个真正的时空奇异点，而 $r=r_{\mathrm{s}}$ 只是坐标奇异点，源于 Schwarzschild 坐标系无法覆盖整个永久黑洞时空流形。
+这一点类似于球坐标，球坐标南极和北极的方位角就是奇异的。判断一个点是不是真正的物理奇点可以通过计算坐标无关的物理量得到，比如Ricci标量，Schwarzschild时空的Ricci标量为：
+\begin{align}
+    R = 48GMr^{-6}
+\end{align}
+显然只有$r=0$一个奇点
+通过检验一个在 Schwarzschild 时空中运动的粒子， 也可以验证$r_{\mathrm{s}}$ 处不是物理奇异的。
+\begin{derivationnote}[Schwarzschild 半径不是物理奇异点]
+    球对称情况下，只考虑径向，在 Schwarzschild 时空中运动粒子的运动方程是：
     \begin{align}
-        \left(\frac{\mathrm{d}r}{\mathrm{d}\tau}\right)
-        &= -E^{2} - \left(1 + \frac{r_{\mathrm{s}}}{r}\right), \\
-        \left(\frac{\mathrm{d}t}{\mathrm{d}\tau}\right)
+        \left(\frac{\mathrm{d}r}{\mathrm{d}\tau}\right)^{2}
+        &= E^{2} - \left(1 - \frac{r_{\mathrm{s}}}{r}\right), \\
+        \frac{\mathrm{d}t}{\mathrm{d}\tau}
         &= \frac{E}{1 - \frac{r_{\mathrm{s}}}{r}} .
     \end{align}
     那么对于处于无穷远处的观察者，在 $r\rightarrow r_{\mathrm{s}}$ 时，有：
     \begin{align}
-        \left(\frac{\mathrm{d}r}{\mathrm{d}t} \right)^{2} &= E^{2}, \\
         \frac{\mathrm{d}t}{\mathrm{d}\tau} &\rightarrow \infty, \\[4pt]
         \Rightarrow\quad
-        \frac{\mathrm{d}r}{\mathrm{d}t} &\rightarrow 0 .
+        \frac{\mathrm{d}r}{\mathrm{d}t}
+        = \frac{\mathrm{d}r/\mathrm{d}\tau}{\mathrm{d}t/\mathrm{d}\tau}
+        &\rightarrow 0 .
     \end{align}
-    这说明对于无穷远处的观察者而言，粒子在接近史瓦西半径的时候，其速度会越来越慢直到“冻结”在史瓦西半径处。然而，如果我们取粒子本身的固有时，会发现 $\frac{\mathrm{d}r}{\mathrm{d}\tau}$ 并不趋于 $0$，而是有限值，所以在粒子本身看来，它可以毫无障碍地穿过史瓦西半径。取 $E^{2} = 1$ 的简单情况计算粒子从 $r = r_{0} \geq r_{\mathrm{s}}$ 到 $r = 0$ 处所花的时间，对于粒子掉落情况有：
+    这说明对于无穷远处的观察者而言，粒子在接近 Schwarzschild 半径的时候，其速度会越来越慢直到“冻结”在 Schwarzschild 半径处。然而，如果我们取粒子本身的固有时，会发现 $\frac{\mathrm{d}r}{\mathrm{d}\tau}$ 并不趋于 $0$，而是有限值，所以在粒子本身看来，它可以毫无障碍地穿过 Schwarzschild 半径。取 $E^{2} = 1$ 的简单情况计算粒子从 $r = r_{0} \geq r_{\mathrm{s}}$ 到 $r = 0$ 处所花的时间，对于粒子掉落情况有：
     \begin{align}
         \frac{\mathrm{d}r}{\mathrm{d}\tau}
         = -\sqrt{\frac{r_{\mathrm{s}}}{r}}
         \quad\Rightarrow\quad
         \Delta \tau
-        = (2GM)^{-1/2}\,\frac{2}{3}\,r_{0}^{3/2} .
+        = r_{\mathrm{s}}^{-1/2}\,\frac{2}{3}\,r_{0}^{3/2} .
     \end{align}
-    这就是说对粒子本身而言，穿过史瓦西半径并不会遇见任何阻碍，这个奇点不是物理的。
+    这就是说对粒子本身而言，穿过 Schwarzschild 半径并不会遇见任何阻碍，这个奇点不是物理的。
 \end{derivationnote}
-
-考虑在史瓦西时空中径向运动的光子，可以画出时空中的光锥线。由 \eqref{eq:schwarzschild-metric-rs} 取类光条件 $\mathrm{d}s^{2}=0$ 得
+\paragraph{Schwarzschild的因果结构}
+考虑在 Schwarzschild 时空中径向运动的光子，可以画出时空中的光锥线，进而讨论时空中的因果结构。由 \eqref{eq:schwarzschild-metric-rs} 取类光条件 $\mathrm{d}s^{2}=0$ 得
 \begin{align}
 0
 &=
@@ -85,7 +90,7 @@ t
 \end{align}
 取 $+$ 时，$r$ 随着 $t$ 增大而增大，表示光子向外逃逸；取 $-$ 时，$r$ 随着 $t$ 增大而减小，表示光子掉入黑洞。
 
-为了描述的方便可以引入乌龟坐标 $r_{*}$，定义为
+为了描述的方便可以引入乌龟坐标（tortoise coordinate）$r_{*}$，定义为
 \begin{align}
 r_{*}
 \equiv
@@ -116,40 +121,44 @@ t + r_{*},
 \end{align}
 这样 $u$、$v$ 分别对应向外、向内的光线。
 
-\subsubsection{爱丁顿坐标系}
+\subsubsection{Eddington 坐标系}
 
+前文已经论述 Schwarzschild 坐标在 Schwarzschild 半径处的奇异性源自于坐标的选择，现在寻找可以消除这一奇异性的坐标。
+
+\paragraph{Minkowski 渐进的 Eddington 坐标}
 取坐标变换
 \begin{align}
     \widetilde{r} &= r, \\
-    \widetilde{t} &= t + 2GM \ln\left|\frac{r}{2GM} - 1\right|.
+    \widetilde{t} &= t + r_{\mathrm{s}} \ln\left|\frac{r}{r_{\mathrm{s}}} - 1\right|.
 \end{align}
 在该坐标系下，时空线元为（不区分 $\mathrm{d}r$ 和 $\mathrm{d}\widetilde{r}$）：
 \begin{align}
     \mathrm{d}s^{2}
-    = -\left(1 - \frac{2GM}{r}\right)\mathrm{d}t^{2}
-    + \frac{4GM}{r}\,\mathrm{d}r\,\mathrm{d}t
-    + \left(1+\frac{2GM}{r}\right)\mathrm{d}r^{2}
+    = -\left(1 - \frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}\widetilde{t}^{2}
+    + \frac{2r_{\mathrm{s}}}{r}\,\mathrm{d}r\,\mathrm{d}\widetilde{t}
+    + \left(1+\frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}r^{2}
     + r^{2}\,\mathrm{d}\Omega^{2}.
 \end{align}
-在类光条件 $\mathrm{d}s^{2} = 0$ 的条件下，解关于 $\frac{\mathrm{d}r}{\mathrm{d}t}$ 的一元二次方程组可以得到：
+在类光条件 $\mathrm{d}s^{2} = 0$ 的条件下，解关于 $\frac{\mathrm{d}r}{\mathrm{d}\widetilde{t}}$ 的一元二次方程可以得到：
 \begin{align}
-    \frac{\mathrm{d}r}{\mathrm{d}t} &= -1, \qquad \text{内行解},\\
-    \frac{\mathrm{d}r}{\mathrm{d}t} &= \frac{1 - \frac{2GM}{r}}{1+\frac{2GM}{r}}, \qquad \text{外行解}.
+    \frac{\mathrm{d}r}{\mathrm{d}\widetilde{t}} &= -1, \qquad \text{内行解},\\
+    \frac{\mathrm{d}r}{\mathrm{d}\widetilde{t}} &= \frac{1 - \frac{r_{\mathrm{s}}}{r}}{1+\frac{r_{\mathrm{s}}}{r}}, \qquad \text{外行解}.
 \end{align}
-考察 $r$ 随 $t$ 的变化关系就可以知道解的分类由来，积分可得所有的光锥线：
+考察 $r$ 随 $\widetilde{t}$ 的变化关系就可以知道解的分类由来，积分可得所有的光锥线：
 \begin{align}
-    t + r &= V, \\
-    t - r - 4GM\ln\left|\frac{r}{2GM} -1\right| &= U.
+    \widetilde{t} + r &= V, \\
+    \widetilde{t} - r - 2r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}} -1\right| &= U.
 \end{align}
-对这个坐标系，粒子内行进入视界是毫无疑问可在有限时间穿过的，但是粒子外行穿过视界，会被“冻结”在视界上，也就是说它无法描述白洞的行为，由此被称为 \textbf{内行爱丁顿坐标}。
+对这个坐标系，粒子内行进入视界是毫无疑问可在有限时间穿过的，但是粒子外行穿过视界，会被“冻结”在视界上，也就是说它无法描述白洞的行为，由此被称为 \textbf{内行 Eddington 坐标}。
 
-类似的可以引入 \textbf{外行爱丁顿坐标}：
+类似的可以引入 \textbf{外行 Eddington 坐标}：
 \begin{align}
-    \widetilde{t} &= t - 2GM \ln\left|\frac{r}{2GM} - 1\right|, \\
+    \widetilde{t} &= t - r_{\mathrm{s}} \ln\left|\frac{r}{r_{\mathrm{s}}} - 1\right|, \\
     \widetilde{r} &= r .
 \end{align}
-通过类似的讨论可以发现，这个坐标只能描述粒子外行通过视界的行为，而内行进入视界会被“冻结”。
+通过类似的讨论可以发现，这个坐标只能描述粒子外行通过视界的行为，而内行进入视界会被“冻结”。这两个坐标分别描述了“黑洞”和“白洞”的行为。
 
+\paragraph{非 Minkowski 渐进的 Eddington 坐标}
 若进一步放弃“在 $r\rightarrow\infty$ 时度规显式回到闵氏形式”的要求，可以得到一个更加常用的形式，
 \begin{align}
     \widetilde{t} &= t + r_{*}, \\
@@ -159,41 +168,41 @@ t + r_{*},
 \begin{align}
     \mathrm{d}t
     = \mathrm{d}\widetilde{t}
-    - \frac{\mathrm{d}r}{1 - 2GM r^{-1}} .
+    - \frac{\mathrm{d}r}{1 - \frac{r_{\mathrm{s}}}{r}} .
 \end{align}
 此时内行和外行光锥线为：
 \begin{align}
     \widetilde{t} &= V, \\
     \widetilde{t} - 2r_{*} &= U.
 \end{align}
-同样地，这个坐标无法描述外行行为，称为 \textbf{内行爱丁顿坐标}，与之类似的可以定义 \textbf{外行爱丁顿坐标}：
+同样地，这个坐标无法描述外行行为，称为 \textbf{内行 Eddington 坐标}，与之类似的可以定义 \textbf{外行 Eddington 坐标}：
 \begin{align}
     \widetilde{t} = t - r_{*}.
 \end{align}
-爱丁顿坐标在一定程度上解决了坐标奇点的问题，外行和内行爱丁顿坐标可以分别描述向内和向外穿过视界的行为，但是无法同时描述两种行为。
+Eddington 坐标在一定程度上解决了坐标奇点的问题，外行和内行 Eddington 坐标可以分别描述向内和向外穿过视界的行为，但是无法同时描述两种行为。
 
 \subsubsection{Kruskal 坐标}
 
-虽然爱丁顿坐标已经能描述黑洞或白洞的一方，但要同时覆盖黑洞与白洞区域，消除坐标奇异性就需要引入 Kruskal 坐标。
+虽然 Eddington 坐标已经能描述黑洞或白洞的一方，但要同时覆盖黑洞与白洞区域，消除坐标奇异性就需要引入 Kruskal 坐标。当然，Schwarzschild 时空存在着物理奇点，这是无法被坐标选择消除的。
 
 首先利用类光坐标 \eqref{eq:null-coords-def}，定义无量纲的类光坐标
 \begin{align}
 \widetilde{U}
 &\equiv
-- \exp\left(-\frac{\widetilde{u}}{2r_{\mathrm{s}}}\right),
+- \exp\left(-\frac{u}{2r_{\mathrm{s}}}\right),
 &
 \widetilde{V}
 &\equiv
-\exp\left(\frac{\widetilde{v}}{2r_{\mathrm{s}}}\right),
+\exp\left(\frac{v}{2r_{\mathrm{s}}}\right),
 \label{eq:kruskal-UV-def}
 \end{align}
 对应的微分关系为：
 \begin{align}
-\mathrm{d}\widetilde{u}
+\mathrm{d}u
 &=
 -2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{U}}{\widetilde{U}},
 &
-\mathrm{d}\widetilde{v}
+\mathrm{d}v
 &=
 2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{V}}{\widetilde{V}}.
 \label{eq:du-dv-UV}
@@ -205,31 +214,74 @@ t + r_{*},
       \mathrm{d}\widetilde{U}\,\mathrm{d}\widetilde{V}
       + r^{2}\,\mathrm{d}\Omega^{2}.
 \end{align}
-在这个坐标系中视界不存在奇异性。此时坐标时间 $t$ 和面积半径 $r$ 都以隐函数的形式被决定：
+在这个坐标系中视界不存在奇异性。此时 Schwarzschild 坐标时间 $t$ 和面积半径 $r$ 都以隐函数的形式被决定：
 \begin{align}
-    \widetilde{U}\,\widetilde{V}
-    &= \left(\frac{r}{2GM} - 1\right)\exp\!\left(\frac{r}{2GM}\right),
+    -\,\widetilde{U}\,\widetilde{V}
+    &= \left(\frac{r}{r_{\mathrm{s}}} - 1\right)\exp\!\left(\frac{r}{r_{\mathrm{s}}}\right),
     \qquad
-    \frac{\widetilde{U}}{\widetilde{V}}
-    = e^{-\frac{t}{r_{\mathrm{s}}}} .
+    \frac{\widetilde{V}}{-\widetilde{U}}
+    = e^{\frac{t}{r_{\mathrm{s}}}} .
 \end{align}
-对 $\widetilde{U}$ 和 $\widetilde{V}$ 进行线性组合可以得到另一种形式的 Kruskal 坐标：
+对 $\widetilde{U}$ 和 $\widetilde{V}$ 进行线性组合可以得到另一种形式的 Kruskal 坐标（为避免与前文类光坐标 $u,v$ 混淆，这里用 $T,X$）：
 \begin{align}
-    u &= \frac{1}{2}\bigl(\widetilde{V} + \widetilde{U}\bigr)
-       = \left(\frac{r}{r_{\mathrm{s}}}-1\right)
-         \exp\!\left(\frac{r}{r_{\mathrm{s}}}\right)
-         \cosh\!\left(\frac{t}{2r_{\mathrm{s}}}\right), \\
-    v &= \frac{1}{2}\bigl(\widetilde{V} - \widetilde{U}\bigr)
-       = \left(\frac{r}{r_{\mathrm{s}}}-1\right)
-         \exp\!\left(\frac{r}{r_{\mathrm{s}}}\right)
-         \sinh\!\left(\frac{t}{2r_{\mathrm{s}}}\right),
+    T &= \frac{1}{2}\bigl(\widetilde{V} + \widetilde{U}\bigr), \\
+    X &= \frac{1}{2}\bigl(\widetilde{V} - \widetilde{U}\bigr),
 \end{align}
 此时度规可写为
 \begin{align}
     \mathrm{d}s^{2}
     = \frac{4 r_{\mathrm{s}}^{3}}{r}\exp\!\left(-\frac{r}{r_{\mathrm{s}}}\right)
-      \bigl(-\mathrm{d}v^{2}+\mathrm{d}u^{2}\bigr)
+      \bigl(-\mathrm{d}T^{2}+\mathrm{d}X^{2}\bigr)
       + r^{2}\,\mathrm{d}\Omega^{2}.
 \end{align}
+
+\paragraph{（数学形式）坐标之间的联系与用于作图的隐函数关系}
+\begin{align}
+    &\textbf{(1) Schwarzschild}\ (t,r):
+    &&\mathrm{d}s^{2}= -\left(1-\frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}t^{2}
+    +\left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}\mathrm{d}r^{2}+r^{2}\mathrm{d}\Omega^{2}.\\[4pt]
+    &\textbf{(2) 乌龟坐标}\ r_{*}(r):
+    &&r_{*}=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|,
+    \qquad
+    \frac{\mathrm{d}r_{*}}{\mathrm{d}r}=\left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}.
+\end{align}
+以 $r_{*}$ 显式化径向类光结构，定义类光坐标
+\begin{align}
+    &\textbf{(3) 类光坐标}\ (u,v):
+    &&u\equiv t-r_{*},\qquad v\equiv t+r_{*},
+    \qquad
+    \Rightarrow\quad t=\frac{1}{2}(u+v),\ \ r_{*}=\frac{1}{2}(v-u).
+\end{align}
+Eddington 坐标可视为对 $(u,v)$ 的\emph{单侧选取}（因此只能“顺着”某一方向跨越视界）：
+\begin{align}
+    &\textbf{(4) Eddington（常用，非 Minkowski 渐进）:}\\
+    &\qquad\text{内行（advanced）:}\ \ (v,r)\ \text{其中}\ v=t+r_{*};
+    &&\boxed{\,v-t=r_{*}(r)=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|\,}
+    \ \ \text{（作图时给定 $v$ 可隐式求 $t(r)$）},\\
+    &\qquad\text{外行（retarded）:}\ \ (u,r)\ \text{其中}\ u=t-r_{*};
+    &&\boxed{\,t-u=r_{*}(r)=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|\,}.
+\end{align}
+Minkowski 渐进的 Eddington 坐标与上述常用形式只差一个 $\pm r$ 的平移（仍是“单侧选取”）：
+\begin{align}
+    &\textbf{(5) Eddington（Minkowski 渐进）:}\\
+    &\qquad\text{内行:}\ \ (\widetilde{t},r),\ \ \widetilde{t}=t+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|=v-r;\\
+    &\qquad\text{外行:}\ \ (\widetilde{t},r),\ \ \widetilde{t}=t-r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|=u+r.
+\end{align}
+Kruskal 坐标则对 $(u,v)$ \emph{两侧同时指数化}，从而同时跨越两条视界，并给出作时空图最常用的隐函数关系：
+\begin{align}
+    &\textbf{(6) Kruskal}:\qquad
+    \widetilde{U}=-e^{-u/(2r_{\mathrm{s}})},\ \ \widetilde{V}=e^{v/(2r_{\mathrm{s}})}.\\
+    &\qquad\boxed{\ -\widetilde{U}\widetilde{V}
+    =\left(\frac{r}{r_{\mathrm{s}}}-1\right)e^{r/r_{\mathrm{s}}}\ }
+    \quad\text{（给定 $\widetilde{U}\widetilde{V}$ 可隐式求 $r$）},\\
+    &\qquad\boxed{\ \frac{\widetilde{V}}{-\widetilde{U}}=e^{t/r_{\mathrm{s}}}\ }
+    \quad\text{（给定 $\widetilde{U},\widetilde{V}$ 可隐式求 $t$）}.
+\end{align}
+其中 $\widetilde{U}=0$ 与 $\widetilde{V}=0$ 分别对应两条视界；再由
+\begin{align}
+    T=\frac{1}{2}(\widetilde{V}+\widetilde{U}),\qquad
+    X=\frac{1}{2}(\widetilde{V}-\widetilde{U})
+\end{align}
+即可在 $(T,X)$ 平面上绘制全局时空结构。
 
 \subsection{彭罗斯图}
