@@ -58,8 +58,9 @@ r_{\mathrm{s}} \equiv 2GM.
     \end{align}
     这就是说对粒子本身而言，穿过 Schwarzschild 半径并不会遇见任何阻碍，这个奇点不是物理的。
 \end{derivationnote}
+
 \paragraph{Schwarzschild的因果结构}
-考虑在 Schwarzschild 时空中径向运动的光子，可以画出时空中的光锥线，进而讨论时空中的因果结构。由 \eqref{eq:schwarzschild-metric-rs} 取类光条件 $\mathrm{d}s^{2}=0$ 得
+考虑在 Schwarzschild 时空中径向运动的光子，可以画出时空中的光锥线，进而讨论时空中的因果结构。由 \ref{eq:schwarzschild-metric-rs} 取类光条件 $\mathrm{d}s^{2}=0$ 得
 \begin{align}
 0
 &=
@@ -72,7 +73,7 @@ r_{\mathrm{s}} \equiv 2GM.
 \pm\left(1 - \frac{r_{\mathrm{s}}}{r}\right),
 \label{eq:radial-null-dr-dt}
 \end{align}
-两个方程正负分别对应粒子掉落黑洞和离开黑洞。由 \eqref{eq:radial-null-dr-dt} 得到
+两个方程正负分别对应粒子掉落黑洞和离开黑洞。由 \ref{eq:radial-null-dr-dt} 得到
 \begin{align}
 \frac{\mathrm{d}t}{\mathrm{d}r}
 &=
@@ -121,12 +122,49 @@ t + r_{*},
 \end{align}
 这样 $u$、$v$ 分别对应向外、向内的光线。
 
+\begin{derivationnote}[视界内外 $t$ 与 $r$ 的类时/类空角色交换]
+Schwarzschild 度规在 $r\neq 0$ 的区域满足同一真空 Einstein 方程，但在视界 $r=r_{\mathrm{s}}$ 的内外，其坐标的因果意义发生交换。
+
+当 $r>r_{\mathrm{s}}$ 时，$1-\frac{r_{\mathrm{s}}}{r}>0$，径向 $(t,r)$ 部分为
+\begin{align}
+\mathrm{d}s^{2}_{(t,r)}
+=
+- \left(1-\frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}t^{2}
++ \left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}\mathrm{d}r^{2},
+\end{align}
+从而
+\begin{align}
+g_{tt}=-\left(1-\frac{r_{\mathrm{s}}}{r}\right)<0,
+\qquad
+g_{rr}=\left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}>0,
+\end{align}
+即 $t$ 为类时方向、$r$ 为类空方向。
+
+当 $0<r<r_{\mathrm{s}}$ 时，$1-\frac{r_{\mathrm{s}}}{r}<0$，同一表达式可改写为
+\begin{align}
+\mathrm{d}s^{2}_{(t,r)}
+=
+\left(\frac{r_{\mathrm{s}}}{r}-1\right)\mathrm{d}t^{2}
+-
+\left(\frac{r_{\mathrm{s}}}{r}-1\right)^{-1}\mathrm{d}r^{2},
+\end{align}
+从而
+\begin{align}
+g_{tt}=\left(\frac{r_{\mathrm{s}}}{r}-1\right)>0,
+\qquad
+g_{rr}=-\left(\frac{r_{\mathrm{s}}}{r}-1\right)^{-1}<0,
+\end{align}
+时间方向应该是度规符号小于0的方向， 所以，$t$ 变为类空方向、$r$ 变为类时方向。
+\end{derivationnote}
+
+
+
 \subsubsection{Eddington 坐标系}
 
 前文已经论述 Schwarzschild 坐标在 Schwarzschild 半径处的奇异性源自于坐标的选择，现在寻找可以消除这一奇异性的坐标。
 
 \paragraph{Minkowski 渐进的 Eddington 坐标}
-取坐标变换
+在面积半径从内到外取进Schwarzschild半径时，坐标时间发散是因为$r_s\ln{|\frac{r}{r_s}-1}|$的发散。这提示我们取坐标变换
 \begin{align}
     \widetilde{r} &= r, \\
     \widetilde{t} &= t + r_{\mathrm{s}} \ln\left|\frac{r}{r_{\mathrm{s}}} - 1\right|.
@@ -182,31 +220,25 @@ t + r_{*},
 Eddington 坐标在一定程度上解决了坐标奇点的问题，外行和内行 Eddington 坐标可以分别描述向内和向外穿过视界的行为，但是无法同时描述两种行为。
 
 \subsubsection{Kruskal 坐标}
-
-虽然 Eddington 坐标已经能描述黑洞或白洞的一方，但要同时覆盖黑洞与白洞区域，消除坐标奇异性就需要引入 Kruskal 坐标。当然，Schwarzschild 时空存在着物理奇点，这是无法被坐标选择消除的。
-
-首先利用类光坐标 \eqref{eq:null-coords-def}，定义无量纲的类光坐标
+虽然 Eddington 坐标已经能描述黑洞或白洞的一方，但要同时覆盖黑洞与白洞区域，消除坐标奇异性就需要引入 Kruskal 坐标。
+在$\ref{eq:null-coords-def}$中我们得到了两个标定光线族的数，不难发现 Eddington 其实就是使坐标时间t变换为$u$或者$v$，所以我们可以同时取$u$和$v$为坐标。
+注意到在这种表示下，
+\begin{align}
+    ds^2 = -\left(1-\frac{r_s}{r}\right)du dv +r^2d\Omega^2
+\end{align}
+世界处仍然奇异，指数化得到：
 \begin{align}
 \widetilde{U}
 &\equiv
-- \exp\left(-\frac{u}{2r_{\mathrm{s}}}\right),
-&
+\exp\left(-\frac{u}{2r_{\mathrm{s}}}\right) =\left(\frac{r}{r_s}-1\right)^{1/2}e^{\frac{r-t}{2r_s}}\Rightarrow \mathrm{d}u = -2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{U}}{\widetilde{U}}
+\\
 \widetilde{V}
 &\equiv
-\exp\left(\frac{v}{2r_{\mathrm{s}}}\right),
+\exp\left(\frac{v}{2r_{\mathrm{s}}}\right) =\left(\frac{r}{r_s}-1\right)^{1/2}e^{\frac{r+t}{2r_s}}\Rightarrow \mathrm{d}v =
+2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{V}}{\widetilde{V}}
 \label{eq:kruskal-UV-def}
 \end{align}
-对应的微分关系为：
-\begin{align}
-\mathrm{d}u
-&=
--2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{U}}{\widetilde{U}},
-&
-\mathrm{d}v
-&=
-2r_{\mathrm{s}}\frac{\mathrm{d}\widetilde{V}}{\widetilde{V}}.
-\label{eq:du-dv-UV}
-\end{align}
+
 由此度规可以写作：
 \begin{align}
     \mathrm{d}s^{2}
@@ -215,17 +247,12 @@ Eddington 坐标在一定程度上解决了坐标奇点的问题，外行和内�
       + r^{2}\,\mathrm{d}\Omega^{2}.
 \end{align}
 在这个坐标系中视界不存在奇异性。此时 Schwarzschild 坐标时间 $t$ 和面积半径 $r$ 都以隐函数的形式被决定：
+
+对 $\widetilde{U}$ 和 $\widetilde{V}$ 进行线性组合可以得到另一种形式的 Kruskal 坐标：
 \begin{align}
-    -\,\widetilde{U}\,\widetilde{V}
-    &= \left(\frac{r}{r_{\mathrm{s}}} - 1\right)\exp\!\left(\frac{r}{r_{\mathrm{s}}}\right),
-    \qquad
-    \frac{\widetilde{V}}{-\widetilde{U}}
-    = e^{\frac{t}{r_{\mathrm{s}}}} .
-\end{align}
-对 $\widetilde{U}$ 和 $\widetilde{V}$ 进行线性组合可以得到另一种形式的 Kruskal 坐标（为避免与前文类光坐标 $u,v$ 混淆，这里用 $T,X$）：
-\begin{align}
-    T &= \frac{1}{2}\bigl(\widetilde{V} + \widetilde{U}\bigr), \\
-    X &= \frac{1}{2}\bigl(\widetilde{V} - \widetilde{U}\bigr),
+    X &= \frac{1}{2}\bigl(\widetilde{V} + \widetilde{U}\bigr) = \left(\frac{r}{r_s}-1\right)^{1/2}e^{\frac{r}{2r_s}}\cosh{\frac{t}{2r_s}},\\
+    T &= \frac{1}{2}\bigl(\widetilde{V} - \widetilde{U}\bigr) = \left(\frac{r}{r_s}-1\right)^{1/2}e^{\frac{r}{2r_s}}\sinh{\frac{t}{2r_s}},
+    \label{eq:XTandrs}
 \end{align}
 此时度规可写为
 \begin{align}
@@ -235,53 +262,258 @@ Eddington 坐标在一定程度上解决了坐标奇点的问题，外行和内�
       + r^{2}\,\mathrm{d}\Omega^{2}.
 \end{align}
 
-\paragraph{（数学形式）坐标之间的联系与用于作图的隐函数关系}
-\begin{align}
-    &\textbf{(1) Schwarzschild}\ (t,r):
-    &&\mathrm{d}s^{2}= -\left(1-\frac{r_{\mathrm{s}}}{r}\right)\mathrm{d}t^{2}
-    +\left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}\mathrm{d}r^{2}+r^{2}\mathrm{d}\Omega^{2}.\\[4pt]
-    &\textbf{(2) 乌龟坐标}\ r_{*}(r):
-    &&r_{*}=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|,
-    \qquad
-    \frac{\mathrm{d}r_{*}}{\mathrm{d}r}=\left(1-\frac{r_{\mathrm{s}}}{r}\right)^{-1}.
-\end{align}
-以 $r_{*}$ 显式化径向类光结构，定义类光坐标
-\begin{align}
-    &\textbf{(3) 类光坐标}\ (u,v):
-    &&u\equiv t-r_{*},\qquad v\equiv t+r_{*},
-    \qquad
-    \Rightarrow\quad t=\frac{1}{2}(u+v),\ \ r_{*}=\frac{1}{2}(v-u).
-\end{align}
-Eddington 坐标可视为对 $(u,v)$ 的\emph{单侧选取}（因此只能“顺着”某一方向跨越视界）：
-\begin{align}
-    &\textbf{(4) Eddington（常用，非 Minkowski 渐进）:}\\
-    &\qquad\text{内行（advanced）:}\ \ (v,r)\ \text{其中}\ v=t+r_{*};
-    &&\boxed{\,v-t=r_{*}(r)=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|\,}
-    \ \ \text{（作图时给定 $v$ 可隐式求 $t(r)$）},\\
-    &\qquad\text{外行（retarded）:}\ \ (u,r)\ \text{其中}\ u=t-r_{*};
-    &&\boxed{\,t-u=r_{*}(r)=r+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|\,}.
-\end{align}
-Minkowski 渐进的 Eddington 坐标与上述常用形式只差一个 $\pm r$ 的平移（仍是“单侧选取”）：
-\begin{align}
-    &\textbf{(5) Eddington（Minkowski 渐进）:}\\
-    &\qquad\text{内行:}\ \ (\widetilde{t},r),\ \ \widetilde{t}=t+r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|=v-r;\\
-    &\qquad\text{外行:}\ \ (\widetilde{t},r),\ \ \widetilde{t}=t-r_{\mathrm{s}}\ln\left|\frac{r}{r_{\mathrm{s}}}-1\right|=u+r.
-\end{align}
-Kruskal 坐标则对 $(u,v)$ \emph{两侧同时指数化}，从而同时跨越两条视界，并给出作时空图最常用的隐函数关系：
-\begin{align}
-    &\textbf{(6) Kruskal}:\qquad
-    \widetilde{U}=-e^{-u/(2r_{\mathrm{s}})},\ \ \widetilde{V}=e^{v/(2r_{\mathrm{s}})}.\\
-    &\qquad\boxed{\ -\widetilde{U}\widetilde{V}
-    =\left(\frac{r}{r_{\mathrm{s}}}-1\right)e^{r/r_{\mathrm{s}}}\ }
-    \quad\text{（给定 $\widetilde{U}\widetilde{V}$ 可隐式求 $r$）},\\
-    &\qquad\boxed{\ \frac{\widetilde{V}}{-\widetilde{U}}=e^{t/r_{\mathrm{s}}}\ }
-    \quad\text{（给定 $\widetilde{U},\widetilde{V}$ 可隐式求 $t$）}.
-\end{align}
-其中 $\widetilde{U}=0$ 与 $\widetilde{V}=0$ 分别对应两条视界；再由
-\begin{align}
-    T=\frac{1}{2}(\widetilde{V}+\widetilde{U}),\qquad
-    X=\frac{1}{2}(\widetilde{V}-\widetilde{U})
-\end{align}
-即可在 $(T,X)$ 平面上绘制全局时空结构。
+\subsection{其他的黑洞}
+\subsubsection{Reissner--Nordstr\"om 黑洞}
 
-\subsection{彭罗斯图}
+在爱因斯坦--麦克斯韦理论中，电真空（仅含电磁场、无物质源）满足
+\begin{align}
+T_{\mu\nu}
+&=
+\frac{1}{\mu_{0}}
+\left(
+F_{\mu}{}^{\rho}F_{\nu\rho}
+-\frac{1}{4}g_{\mu\nu}F^{\rho\sigma}F_{\rho\sigma}
+\right),
+\qquad
+\nabla_{\mu}F^{\mu\nu}=0 .
+\end{align}
+
+将电磁场能动张量带入Einstein场方程，在球对称情况下，可以得到静态球对称带电黑洞解为 Reissner--Nordstr\"om（RN）度规和对应的四维电势（取 $G=1$）：
+\begin{align}
+\mathrm{d}s^{2}
+&=
+-\left(1-\frac{2M}{r}+\frac{Q^{2}}{r^{2}}\right)\mathrm{d}t^{2}
++\frac{\mathrm{d}r^{2}}{-g_{tt}}
++r^{2}\mathrm{d}\Omega^{2} \\
+A_{\mu}&=\left(-\frac{Q}{r},\,0,\,0,\,0\right).
+\end{align}
+
+首先讨论其视界， $g_{tt}=0$ 时度规发散可得
+\begin{align}
+r^{2}-2Mr+Q^{2}=0
+\quad\Rightarrow\quad
+r_{\pm}=M\pm\sqrt{M^{2}-Q^{2}} .
+\end{align}
+可以发现：
+\begin{enumerate}[label=(\arabic*)]
+    \item $Q = 0$时，退化为Schwarzschild黑洞形式。
+    \item $0 < \abs{Q} < M$时，有两个奇点$r_\pm$。
+    \item $\abs{Q} = 0$时，$r_{\pm} = M$内外视界重合，这也被称为极端RN黑洞。
+    \item $\abs{Q}>M$，关于视界的方程没有实根，不存在视界。这时，唯一存在一个物理上的奇点，并且这个奇点裸露在外没有视界的包围，称为裸奇点。
+\end{enumerate}
+Roger Penrose提出宇宙监督猜想，认为这种裸奇点并不存在。简单来说，如果裸奇点存在，物理世界中的光锥会延伸到物理奇点并终止于此，因果也在此被截断。
+\paragraph{检验粒子测地线与有效势}
+RN 时空中的不带电检验粒子仍然满足测地线，类似于 Schwarzschild 情形的讨论可知仍然有守恒量 $p_{t}$ 和 $p_{3}$，且总可选取 $\theta=\pi/2$（平面运动）。特别地，对于有质量粒子，径向方程为
+\begin{align}
+\left(\frac{\mathrm{d}r}{\mathrm{d}\tau}\right)^{2}
+=
+E^{2}
+-\left(1-\frac{2M}{r}+\frac{Q^{2}}{r^{2}}\right)\left(1+\frac{L^{2}}{r^{2}}\right).
+\end{align}
+显然由于 $Q$ 的出现改变了 $r\to 0$ 时有效势的行为，使得 RN 黑洞的中心奇点有无穷高的势垒，不可能被检验粒子达到（除非是无质量且直接无角动量直接打向中心的粒子）。一般认为，RN 黑洞内视界之内的时空结构可能是不稳定的。
+
+\subsubsection{Kerr 黑洞}
+
+在真空爱因斯坦方程中，Kerr 于上世纪60年代得到了一个稳态轴对称解，其线元在 Boyer-Lindquist 坐标下为：
+\begin{align}
+\mathrm{d}s^{2} &= -\frac{\Delta}{\rho^{2}}(\mathrm{d}t - a\sin^{2}\theta \, \mathrm{d}\varphi)^{2} + \frac{\sin^{2}\theta}{\rho^{2}}[(r^{2}+a^{2})\mathrm{d}\varphi - a\mathrm{d}t]^{2} + \frac{\rho^{2}}{\Delta}\mathrm{d}r^{2} + \rho^{2}\mathrm{d}\theta^{2}, \label{eq:kerr_metric} \\
+\rho^{2} &= r^{2} + a^{2}\cos^{2}\theta, \quad \Delta = r^{2} - 2Mr + a^{2}.
+\end{align}
+此度规描述了一个带角动量 $J = aM$ 的旋转黑洞。当比角动量 $a=0$ 时，Kerr 度规退化为质量为 $M$ 的史瓦西度规。
+此度规的奇异性有两个情况$\rho^2 = 0$和$\Delta = 0$，分别对应物理奇异性和坐标奇异性。首先讨论其视界，坐标奇异性出现在 $\Delta=0$ 处，该处定义了 Kerr 黑洞的视界位置：
+\begin{align}
+r^{2} - 2Mr + a^{2} = 0 \quad \Rightarrow \quad r_{\pm} = M \pm \sqrt{M^{2} - a^{2}} .
+\end{align}
+可以发现：
+\begin{enumerate}[label=(\arabic*)]
+    \item $a = 0$ 时，退化为 Schwarzschild 黑洞形式，$r_{+} = 2M$ 和 $r_{-}=0$。
+    \item $0 < |a| < M$ 时，存在两个视界 $r_{+}$（外视界）和 $r_{-}$（内视界）。
+    \item $M = |a|$ 时，$r_{+} = r_{-} = M$，内外视界重合，称为极端 Kerr 黑洞。
+    \item $M < |a|$ 时，关于视界的方程无实根，不存在视界，只有一个裸奇点。
+\end{enumerate}
+
+Kerr 黑洞的物理奇异性出现在 $\rho^{2}=0$ 处，即：
+\begin{align}
+r=0,\quad \theta = \pi/2.
+\label{eq:sr in BL}
+\end{align}
+为看清其内禀结构，可通过坐标变换：
+\begin{align}
+\left\{\begin{array}{c}
+\tilde{t}=t-r+\displaystyle\int \frac{r^{2}+a^{2}}{\Delta} \mathrm{d}r \\
+x=(r \cos \tilde{\varphi}-a \sin \tilde{\varphi}) \sin \theta \\
+y=(r \sin \tilde{\varphi}+a \cos \tilde{\varphi}) \sin \theta \\
+z=r \cos \theta, \quad \tilde{\varphi}:=\varphi+\displaystyle\int \frac{a}{\Delta} \mathrm{d}r
+\end{array}\right.
+\end{align}
+在此“直角坐标”下，奇异性表现为一个半径为 $a$ 的圆环：
+\begin{align}
+x^{2}+y^{2}=a^{2},\quad z=0,
+\end{align}
+故称为 \textbf{奇环}，它类似于Schwarzschild的奇点但又有很大的不同。从$\ref{eq:sr in BL}$可以知道，这个“点”实际上是一个半径为0,极角为$\pi/2$的圆环，如果从$\theta \neq \pi/2$的方向靠近$r=0$,则不会产生奇异性。
+从对称性的角度也可以理解这一点，Schwarzschild黑洞是球对称的，奇点也有球对称性；Kerr黑洞是轴对称的，奇点就被角动量“展开”成一个具有轴对称性的环状结构。
+
+本征频率和无穷远观察者观察到的频率有关系：$\sqrt{-g_{tt}} v_p = v_\infty$，令$\sqrt{-g_{tt}}= 0$可得其无限红移面（静界）：
+\begin{align}
+    r_{\pm}^s = M \pm \sqrt{M^2 - a^2\cos^2{\theta}} 
+\end{align}
+除两极 ($\theta=0,\pi$) 外，静界与外视界 $r_{+}$ 并不重合。Boyer-Lindquist坐标是渐进Minkovski的，且可以通过Killing方程证明$\partial_t$是一个Killing矢量。
+Kerr黑洞的时空被其视界与无限红移面静界自然地划分为几个性质迥异的区域，其结构如下图所示（以赤道面切片示意）：
+\begin{enumerate}
+    \item \textbf{正常区（$r > r_+^s$）}：位于外无限红移面之外，观测者可以在此区域相对于无穷远保持静止，其物理行为与在弱场环境中类似。
+
+    \item \textbf{（外）拖拽能层（$r_+ < r < r_+^s$）}：此时$g_{00}>0$，$\partial_t$成为类空的Killing矢量。如果粒子在这个区域内保持与无穷远观测者的静止，则会导致超光速。所以，在拖拽能层的粒子一定会受到Kerr黑洞的拖拽，随时空流动而不能保持相对于无穷远观测者的静止。
+
+    \item \textbf{（外）单向膜区（$r_- < r < r_+$）}：此时度规径向分量为负，光锥朝向r的方向，为保证因果性，进入到此区域的粒子朝着r单向演化的方向运动，朝内的粒子一去不返。
+    
+    \item \textbf{内能层与内区（$r < r_-$）}：位于内视界之内,存在一个\textbf{内无限红移面}（$r_-^s$），它与内视界之间构成“内能层”。
+    
+    \item \textbf{奇环（$r = 0$且$\theta = \pi/2$）}
+\end{enumerate}
+
+\subsubsection{Kerr-Newman 黑洞}
+
+\paragraph{度规与电磁势}
+Kerr-Newman 黑洞是爱因斯坦-麦克斯韦理论（电真空爱因斯坦方程）中最一般的稳态轴对称解，在 Boyer-Lindquist 坐标下的线元与电磁四维势为：
+\begin{align}
+\mathrm{d}s^{2} &= -\frac{\Delta}{\rho^{2}}(\mathrm{d}t - a\sin^{2}\theta \, \mathrm{d}\varphi)^{2} 
++ \frac{\sin^{2}\theta}{\rho^{2}}\bigl[(r^{2}+a^{2})\mathrm{d}\varphi - a\mathrm{d}t\bigr]^{2} 
++ \frac{\rho^{2}}{\Delta}\mathrm{d}r^{2} + \rho^{2}\mathrm{d}\theta^{2} \label{eq:kn_metric1} \\
+&= -\Bigl(1-\frac{2Mr-Q^{2}}{\rho^{2}}\Bigr) \mathrm{d}t^{2}
+- 2\frac{(2Mr-Q^{2})a\sin^{2}\theta}{\rho^{2}} \mathrm{d}t\mathrm{d}\varphi \notag \\
+&\quad + \Bigl(r^{2}+a^{2}+\frac{(2Mr-Q^{2})a^{2}\sin^{2}\theta}{\rho^{2}}\Bigr) \sin^{2}\theta \, \mathrm{d}\varphi^{2}
++ \frac{\rho^{2}}{\Delta}\mathrm{d}r^{2} + \rho^{2}\mathrm{d}\theta^{2}, \label{eq:kn_metric2} \\
+A_{\mu} &= \Bigl(-\frac{Qr}{\rho^{2}},\; 0,\; 0,\; \frac{Qr a\sin^{2}\theta}{\rho^{2}}\Bigr), \label{eq:kn_potential}
+\end{align}
+其中
+\begin{align}
+\Delta &= r^{2} - 2Mr + a^{2} + Q^{2}, \quad 
+\rho^{2} = r^{2} + a^{2}\cos^{2}\theta, \quad
+a = \frac{J}{M}.
+\end{align}
+这里 $M$ 为黑洞质量，$Q$ 为电荷，$J$ 为角动量，$a$ 为单位质量的角动量。
+
+\paragraph{视界与极端条件}
+视界由 $\Delta=0$ 给出：
+\begin{align}
+r_{\pm} = M \pm \sqrt{M^{2} - a^{2} - Q^{2}}
+        = \frac{GM}{c^{2}} \pm \sqrt{\Bigl(\frac{GM}{c^{2}}\Bigr)^{2} 
+        - \Bigl(\frac{J}{Mc}\Bigr)^{2} - \frac{GQ^{2}}{c^{4}} } .
+\end{align}
+式中 $r_{+}$ 为外视界，$r_{-}$ 为内视界。黑洞参数需满足 $M^{2} \geq a^{2} + Q^{2}$ 以保证视界存在。当 $M^{2} = a^{2} + Q^{2}$ 时，内外视界重合，称为极端 Kerr-Newman 黑洞；若 $M^{2} < a^{2} + Q^{2}$，则不存在视界，出现裸奇点，违背宇宙监督假设。
+
+\paragraph{黑洞无毛定理与热力学类比}
+Kerr-Newman 解描述了一个带电荷 $Q$ 与角动量 $J$ 的旋转黑洞（简称 KN 黑洞），其时空结构与 Kerr 黑洞相似，但多了电荷的贡献。根据黑洞无毛定理，稳态黑洞仅由质量 $M$、电荷 $Q$ 和角动量 $J$ 三个宏观参数完全决定，其他任何细节信息（“毛发”）在引力坍缩过程中都会丢失。这一性质与热力学系统达到平衡态时仅由少数宏观参量描述相似。进一步，黑洞的演化趋向于稳态的过程，与非平衡系统趋向热平衡的过程在形式上高度相似，这为黑洞热力学的建立提供了基础。
+
+\subsection{时空的几何结构与彭罗斯图}
+\subsubsection{Kruskal图}
+根据Kruskal坐标与Schwarzschild坐标之间的隐函数关系$\ref{eq:XTandrs}$，可以得到：
+\begin{align}
+    X^2 - T^2 &= \widetilde{U} \widetilde{V} = \left(\frac{r}{r_2}-1\right)\exp(\frac{r}{r_s}) \\
+    \frac{X}{T} &= \tanh(\frac{t}{2r_s})
+\end{align}
+这就是说，在Kruskal坐标系中，“等时面”（时指Schwarzschild坐标系中的坐标时间）是经过原点的直线而“等距面”是双曲线。
+根据我们原来的定义，X和T都大于0,这里实际上给坐标作了一个延拓。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{figs/Krsl_Dgm.jpg}
+    \caption{Kruskal图。}
+\end{figure}
+可以看见，整个时空被kruskal坐标划分为四个区域：
+\begin{enumerate}[label = \Roman*.]
+    \item 外部宇宙：黑洞外部的宇宙，这就是我们所处的时空。
+    \item 黑洞内部：此时类时坐标指向奇点，粒子朝着物理奇点前进。Schwarzschild坐标系中，视界内外类时分量变成r，也就是说为保持因果粒子会不可避免的向奇点演化。Kruskal坐标中这一点体现在光锥是$45\degree$开口的，在区域$\mathrm{II}$中未来光锥一定会包含奇点面。
+    \item 白洞内部：这是一个与II完全相反的区域，黑洞的时间反演，也就是所谓的白洞。在这里，光锥的过去是奇点而未来是视界。
+    \item 对称宇宙的外部：白洞的外部，和我们的宇宙对称。
+\end{enumerate}
+
+\subsubsection{Einstein-Rosen桥}
+把坐标延拓到$\widetilde{U}$和$\widetilde{V}$小于0的区域，可以发现另一个宇宙。通过坐标时间$t=0$的切片，可以到处连接两个区域的Einstein-Rosen桥
+\paragraph{空间几何的嵌入与各向同性坐标}
+选取 Kruskal 时空的 $t=0$ 切片（对应 $U=V=0$ 的水平线）。在此切片上，原 Schwarzschild 空间度规（$r > 2GM$）为：
+\begin{equation}
+    ds^2 = \left(1 - \frac{2GM}{r}\right)^{-1} dr^2 + r^2 (d\theta^2 + \sin^2\theta d\phi^2) \label{eq:sch_spatial}
+\end{equation}
+为了描述跨越视界（$r=2GM$）的整体几何，引入新的径向坐标 $\rho$，定义如下变换：
+\begin{equation}
+    r = \rho \left(1 + \frac{GM}{2\rho}\right)^2 = \rho + GM + \frac{G^2M^2}{4\rho} \label{eq:iso_trans}
+\end{equation}
+该变换具有双值性：对于任意 $r > 2GM$，存在两个 $\rho$ 值（互为倒数关系 $\rho \leftrightarrow G^2M^2/4\rho$），视界 $r=2GM$ 对应于唯一不动点 $\rho = GM/2$。
+利用恒等式 $\left(1-\frac{2GM}{r}\right) = \frac{(1-GM/2\rho)^2}{(1+GM/2\rho)^2}$ 并计算微分 $dr$可得度规：
+\begin{equation}
+    ds^2 = \left(1 + \frac{GM}{2\rho}\right)^4 \left[ d\rho^2 + \rho^2 (d\theta^2 + \sin^2\theta d\phi^2) \right]
+\end{equation}
+\begin{enumerate}
+    \item \textbf{渐近行为：} 当 $\rho \to \infty$ 时，度规趋于平直欧几里得空间 $\mathbb{R}^3$；由于变换的对称性，当 $\rho \to 0$ 时，度规同样趋于平直 $\mathbb{R}^3$。这证实了时空连接着两个独立的渐近平直宇宙。
+    \item \textbf{喉部结构（Throat）：} 在 $\rho = GM/2$ 处，$r$ 取得最小值 $2GM$。此处是一个极小曲面，称为\textbf{分叉球（Bifurcation Sphere）}。
+    \item \textbf{爱因斯坦-罗森桥：} 这种几何结构即为连接两个宇宙的虫洞。但需注意，该虫洞不仅不可通过，且其路径是类空的。
+\end{enumerate}
+
+\subsubsection{嵌入图的时间演化：从连接到断裂（From Gemini）}
+
+为了理解虫洞的动态断裂过程（即图 A-E 的演化），我们需要在 Kruskal 度规下计算 $T = \text{const} \neq 0$ 的空间切片形状。
+
+\paragraph{1. 切片度规的导出}
+从 Kruskal 全时空线元出发：
+\begin{equation}
+    ds^2 = \frac{32M^3}{r} e^{-r/2M} (-dT^2 + dX^2) + r^2 d\Omega^2
+\end{equation}
+其中 $r$ 由隐函数关系定义：
+\begin{equation}
+    X^2 - T^2 = \left(\frac{r}{2M} - 1\right) e^{r/2M} \label{eq:kruskal_implicit}
+\end{equation}
+选取某一时刻 $T = T_0$（常数），则 $dT=0$。考察赤道面 $\theta = \pi/2$，度规简化为：
+\begin{equation}
+    dl^2_{slice} = \frac{32M^3}{r} e^{-r/2M} dX^2 + r^2 d\phi^2
+\end{equation}
+为了画出以 $r$ 为参数的形状，需将 $dX$ 转换为 $dr$。对式 \eqref{eq:kruskal_implicit} 两边微分（保持 $T$ 不变）：
+\begin{align}
+    2X dX &= \frac{d}{dr}\left[ \left(\frac{r}{2M} - 1\right) e^{r/2M} \right] dr \\
+    &= \frac{r}{4M^2} e^{r/2M} dr
+\end{align}
+从而得到变换关系：
+\begin{equation}
+    dX^2 = \frac{r^2 e^{r/M}}{64M^4 X^2} dr^2 = \frac{r^2 e^{r/M}}{64M^4 \left[ T^2 + (\frac{r}{2M}-1)e^{r/2M} \right]} dr^2
+\end{equation}
+将此代回切片度规，得到该时刻的纯空间线元：
+\begin{equation}
+    dl^2_{slice} = \left[ 1 + \frac{T^2}{T^2 + (\frac{r}{2M}-1)e^{r/2M}} \right] \left(1-\frac{2M}{r}\right)^{-1} dr^2 + r^2 d\phi^2
+    \label{eq:dynamic_metric}
+\end{equation}
+(注：此处经过了一定的代数化简，利用了 $1/(1-2M/r) = r/(r-2M)$ 的关系)。
+
+\paragraph{2. 嵌入方程与喉部动力学}
+将上述二维弯曲面嵌入三维欧几里得空间（圆柱坐标 $z, r, \phi$），线元匹配条件为：
+\begin{equation}
+    dl^2_{Euclid} = \left[ 1 + \left(\frac{dz}{dr}\right)^2 \right] dr^2 + r^2 d\phi^2
+\end{equation}
+比较 $dr^2$ 的系数，可得嵌入曲面 $z(r)$ 的斜率方程：
+\begin{equation}
+    \left(\frac{dz}{dr}\right)^2 = \frac{2M}{r-2M} + \frac{T^2}{(1-\frac{2M}{r})\left[ T^2 + (\frac{r}{2M}-1)e^{r/2M} \right]}
+\end{equation}
+这个复杂的式子决定了不同 $T$ 时刻切片的具体形状。然而，决定虫洞是否连通的关键在于\textbf{喉部（Throat）}的存在性。
+
+\begin{derivationnote}[喉部半径的演化]
+    几何上，喉部对应于嵌入图的最窄处，即 $r$ 无法取到更小值的点。在 Kruskal 图中，这对应于左右宇宙的分界线 $X=0$。
+    令 $X=0$，代入隐函数方程 \eqref{eq:kruskal_implicit}，我们得到喉部半径 $r_{min}$ 与时间 $T$ 的关系：
+    \begin{equation}
+        -T^2 = \left(\frac{r_{min}}{2M} - 1\right) e^{r_{min}/2M}
+    \end{equation}
+    定义函数 $f(r) = (r/2M - 1)e^{r/2M}$，其性质如下：
+    \begin{itemize}
+        \item 最小值：在 $r=0$ 处，$f(0) = -1$。
+        \item 零点：在 $r=2M$ 处，$f(2M) = 0$。
+    \end{itemize}
+    据此分析图 A-E 的物理过程：
+    \begin{enumerate}
+        \item \textbf{图 C ($T=0$)}：方程为 $f(r_{min}) = 0$，解得 $r_{min} = 2M$。此时虫洞最宽，连接完好。
+        \item \textbf{图 B, D ($0 < |T| < 1$)}：方程为 $f(r_{min}) = -T^2$（介于 $-1$ 和 $0$ 之间）。此时方程有唯一解 $0 < r_{min} < 2M$。说明虫洞依然连通，但喉部半径随着 $|T|$ 增大而迅速收缩。
+        \item \textbf{图 A, E ($|T| \geq 1$)}：方程变为 $f(r_{min}) \leq -1$。由于 $f(r)$ 的最小值为 $-1$（对应 $r=0$），当 $|T| > 1$ 时方程\textbf{无解}。物理上意味着切片在延伸到中心之前就已终止于奇点 ($r=0$)，空间不再连通，虫洞断裂为两个分离的尖点。
+    \end{enumerate}
+\end{derivationnote}
+\subsubsection{彭罗斯图}
+类似于Riemann球，彭罗斯图把无穷处的时空映射到有限的地方，取：
+\begin{align}
+    \widetilde{U} = \tan{\frac{\pi}{2}x} \\
+    \widetilde{V} = \tan{\frac{\pi}{2}y}
+\end{align}
