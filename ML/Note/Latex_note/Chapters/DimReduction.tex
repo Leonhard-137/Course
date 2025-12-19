@@ -8,8 +8,8 @@
 
 虽然两者都旨在降低维度，但在处理手段和结果上有本质区别。特征选择是从原始特征集合中选取一个子集，保持特征的原有意义；特征提取类似于线性映射$\mathbb{R}^n \rightarrow \mathbb{R}^m$
 ，把数据从高维的特征空间映射到地位空间，过程会创造新的特征。
-\subsection{特征选择：定义、框架与子集生成算法}
 
+\subsection{特征选择}
 \begin{definition}[特征选择问题]
     特征选择（Feature Selection）是指从原始的 $D$ 维特征集合中，挑选出一个包含 $d$ 个特征（$d < D$）的子集来表达模式的过程。其核心目标是在尽量减少信息损失的前提下：
     \begin{itemize}
@@ -19,7 +19,6 @@
     \end{itemize}
 \end{definition}
 
-\subsubsection{特征选择的通用框架}
 特征选择通常是一个迭代循环的过程，包含四个核心环节：
 \begin{enumerate}
     \item \textbf{子集生成}：按照某种搜索策略产生候选的特征子集。
@@ -38,13 +37,10 @@
 
 \paragraph{2. 单独最优特征组合}
 对每个特征 $x_i$ 分别进行单独评估，计算其评价得分 $J(x_i)$，然后按得分从大到小排序，选取前 $d$ 个特征。
-\begin{itemize}
-    \item \textbf{优点}：算法极简，计算量极低。
-    \item \textbf{缺点}：完全忽略了特征之间的相关性，无法处理特征冗余。
-\end{itemize}
+这样算法极简，计算量极低。但是完全忽略了特征之间的相关性，无法处理特征冗余。在这个算法中，年龄和出生日期这两个特征都会打高分并被选择，但是这就带来了冗余信息。
 
 \paragraph{3. 序贯搜索算法 (Sequential Search)}
-这是一种贪心算法，通过每一步的局部最优选择来逼近全局最优。
+本质上这是一种贪心算法，通过每一步的局部最优选择来逼近全局最优。
 
 \begin{algorithm}[H]
 \caption{前向序贯选择算法 (SFS)}
@@ -69,39 +65,21 @@
 \end{itemize}
 
 \paragraph{5. L-R 法 (Plus-L Minus-R)}
-为了克服 SFS 和 SBS “只进不出”或“只出不进”的单向性缺陷，L-R 法采用交替增减的策略：
-\begin{itemize}
-    \item \textbf{先 L 后 R}：每次先通过 SFS 增加 $L$ 个特征，再通过 SBS 减少 $R$ 个特征。
-    \item \textbf{策略逻辑}：若 $L > R$，最终特征数增加；若 $L < R$，最终特征数减少。
-    \item \textbf{公式表达}：每次寻优后的集合为 $X_d = X_{d1} + \{x_j\}_L - \{x_i\}_R$。
-    \item \textbf{广义 L-R ($ZL, ZR$)}：更进一步，增加 $L$ 个和减少 $R$ 个的过程分 $Z$ 步进行，通过复杂的步长控制来更深层地搜索特征组合空间。
-\end{itemize}
+为了克服 SFS 和 SBS “只进不出”或“只出不进”的单向性缺陷，L-R 法采用交替增减的策略。每次先通过 SFS 增加 $L$ 个特征，再通过 SBS 减少 $R$ 个特征。
+若 $L > R$，最终特征数增加；若 $L < R$，最终特征数减少。每次寻优后的集合为 $X_d = X_{d1} + \{x_j\}_L - \{x_i\}_R$。
+\textbf{广义 L-R ($ZL, ZR$)}更进一步，增加 $L$ 个和减少 $R$ 个的过程分 $Z$ 步进行，通过复杂的步长控制来更深层地搜索特征组合空间。
 
-\subsubsection{算法特性对比}
-\begin{table}[h]
-    \centering
-    \begin{tabular}{lp{6cm}p{4cm}}
-    \hline
-    \textbf{搜索算法} & \textbf{核心逻辑} & \textbf{主要局限} \\ \hline
-    穷举法 & 遍历所有 $2^D-1$ 种组合 & 计算复杂度爆炸 \\
-    单独最优 & 按单特征 $J$ 值排序 & 忽略特征间相关性 \\
-    SFS & 从 0 开始，逐个增加最优特征 & 无法剔除已入选的过期特征 \\
-    SBS & 从 D 开始，逐个剔除最差特征 & 无法找回已删除的潜在特征 \\
-    L-R 法 & 增加 $L$ 个再减少 $R$ 个 & 需手动调参 $L$ 和 $R$ \\ \hline
-    \end{tabular}
-\end{table}
-
-\subsection{特征评价准则：衡量特征子集的优劣}
+\subsubsection{特征评价准则}
 
 \begin{definition}[特征评价准则]
     特征评价准则是一个函数 $J(X_{selected})$，用于定量评估所选特征子集的分类贡献或表达能力。评价准则主要分为两类：
     \begin{itemize}
         \item \textbf{可分性度量}：利用类别间的几何距离、分布重叠度或统计相关性进行打分，常用于 Filter 框架。
-        \item \textbf{学习算法精度度量}：直接利用分类器的准确率（Accuracy）或错误率（Error Rate）作为得分，常用于 Wrapper 框架。
+        \item \textbf{学习算法精度度量}：直接利用分类器的准确率或错误率作为得分，常用于 Wrapper 框架。
     \end{itemize}
 \end{definition}
 
-\subsubsection{基于距离的可分性判据}
+\paragraph{基于距离的可分性判据}
 这类判据的核心思想是：好的特征子集应该使得“类内距离尽可能小，类间距离尽可能大”。这通常依赖于对样本散度矩阵的计算。
 
 \paragraph{1. 基础数据统计量}
@@ -115,11 +93,11 @@
     \[ S_b = \sum_{i=1}^c (m_i - m)(m_i - m)^T \]
 \end{itemize}
 
-\paragraph{2. 常用可分性判据 $J_f$}
+\paragraph{2. 常用可分性判据 Fisher鉴别$J_f$}
 \begin{itemize}
     \item \textbf{一维特征（两类）}：采用比值形式。
     \[ J_f = \frac{(m_1 - m_2)^2}{S_1^2 + S_2^2} \]
-    \item \textbf{多维特征子集}：常用的矩阵判据包括：
+    \item \textbf{多维特征子集}：原本也应该是$J_f = \frac{S_b}{S_w}$，但是结果是一个矩阵而不是值，下面是常用的取值：
     \begin{itemize}
         \item $J_1 = \text{tr}(S_w + S_b)$ ：总散度。
         \item $J_2 = \text{tr}(S_w^{-1} S_b)$ ：类间与类内散度的比率（最常用）。
@@ -129,18 +107,18 @@
     \end{itemize}
 \end{itemize}
 
-\subsubsection{基于概率分布的可分性判据}
-从类别概率密度函数的角度出发，衡量两个类别在特征空间中的交叠程度。重叠越少，距离越远，$J$ 值越大。
-
-\paragraph{1. 基本性质}
-一个合理的概率距离准则 $J$ 应满足：
+\paragraph{基于概率分布的可分性判据}
+这个判据依赖于类别在特征空间的概率密度函数。比如水果中西瓜这个特定的类别，水果有很多特征，重量、含糖量、外表颜色等，现在只关注重量这个特征，
+西瓜可以有不同的重量，这就构成了一个概率分布，橘子也有重量，也有对应的概率分布，西瓜一般来说重量自然是比橘子大的多，所以二者概率密度函数重叠并不高。
+但是对于梨子和苹果，二者的重量概率分布函数重叠很高，我们就很难用重量这个特征区分二者。在实际操作中，我们很难得到真正的概率分布，所以一般会通过数据假设概率分布函数形式并通过参数估计决定概率分布函数的具体形式。
+那么现在一个重要的问题就是如何选择一个合理的概率距离准则$J$。一个合理的概率距离准则 $J$ 应满足：
 \begin{enumerate}
     \item $J \ge 0$。
     \item 当类别完全不重叠（$p(x|\omega_1)p(x|\omega_2)=0$）时，$J$ 达到最大值 $J_{max}$。
     \item 当类别完全重合（$p(x|\omega_1)=p(x|\omega_2)$）时，$J = 0$。
 \end{enumerate}
 
-\paragraph{2. 常见的概率距离准则}
+常见的概率距离准则有以下几类：
 \begin{itemize}
     \item \textbf{Bhattacharyya 距离}：衡量概率分布的相似度。
     \[ J_B = -\ln \int [p(x|\omega_1)p(x|\omega_2)]^{1/2} dx \]
@@ -152,13 +130,151 @@
     \[ J_M = \left[ \int (\sqrt{p(x|\omega_1)} - \sqrt{p(x|\omega_2)})^2 dx \right]^{1/2} \]
 \end{itemize}
 
-\subsubsection{基于熵的判据（信息论视角）}
-利用信息论中的互信息来衡量特征变量 $X$ 与类别标签 $Y$ 之间的统计相关性。
+\paragraph{基于熵的判据（信息论视角）}
 
-\paragraph{1. 互信息 (Mutual Information)}
-衡量特征 $X$ 对消除类别 $Y$ 不确定性的贡献程度，反映了两者依存关系的强弱。
-\[ I(X;Y) = \sum_{x \in S_x} \sum_{y \in S_y} p(x,y) \ln \frac{p(x,y)}{p(x)p(y)} \]
+从信息论的角度看，特征选择的任务可以被视为一个“消灭不确定性”的过程。评价一个特征好坏可以利用“得到这个特征之后，我对判断的困惑程度增加了多少”来理解。
+这就是\textbf{互信息 (Mutual Information, $I(X;Y)$)}。
+互信息的核心思想是衡量特征 $X$ 与类别 $Y$ 的\textbf{关联程度}，他的一个核心表达式是：
+\[ h(x, y) = \frac{p(x,y)}{p(x)p(y)} \]
+\begin{itemize}
+    \item \textbf{独立情况（无价值）}：若 $X$ 与 $Y$ 完全无关，则联合概率等于概率乘积（$p(x,y) = p(x)p(y)$），比值为 1，$\log(1)=0$，互信息为 0。
+    \item \textbf{相关情况（有价值）}：若 $X$ 与 $Y$ 存在关联，比值将偏离 1。可以假设有与判断目标$Y$完全相关的特征$X$，则离散情况下，分布式为对角矩阵。
+                                    这个时候$p(x, y) = p(x) = p(y)$,对角元素为$1/p(x)$，说明特征$x$可以很好的决定$y=x$时的信息；对于非对角元素，结果是0,说明完全不提供$y \neq x$处的信息。
+\end{itemize}
 
-\paragraph{2. 条件互信息}
-在已知特征 $Z$ 的条件下，$X$ 和 $Y$ 的统计依存程度。
-\[ I(X;Y|Z) = \sum_{x \in S_x} \sum_{y \in S_y} \sum_{z \in S_z} p(x,y,z) \ln \frac{p(x,y|z)}{p(x|z)p(y|z)} \]
+对于特征 $X$ 和类别 $Y$，互信息的计算取决于数据的类型：
+
+\textbf{(1) 离散情况 (Discrete Case)}
+当特征和类别均为离散取值时，求和是对特征 $X$ 的所有可能状态（或区间）以及所有类别 $Y$ 的组合进行遍历：
+\[ I(X;Y) = \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y) \log \frac{p(x,y)}{p(x)p(y)} \]
+\textit{注：在实际操作中，概率 $p(x,y)$ 通常通过统计样本落在特定组合格子的频率来估算。}
+
+\textbf{(2) 连续情况 (Continuous Case)}
+若特征 $X$ 是连续数值（如温度、电压），公式转化为在特征空间上的二重积分：
+\[ I(X;Y) = \int_{\mathcal{X}} \int_{\mathcal{Y}} p(x,y) \log \frac{p(x,y)}{p(x)p(y)} dx dy \]
+\textit{注：由于连续概率密度函数 $p(x,y)$ 较难直接获得，工程上常通过“分箱（Binning）”将连续特征离散化，再利用离散公式进行计算。}
+
+另外一个重要的判据是条件互信息 (Conditional Mutual Information)
+在已知特征 $Z$ 的前提下，特征 $X$ 为判断类别 $Y$ 提供的额外信息量：
+\[ I(X;Y|Z) = \sum_{z \in \mathcal{Z}} p(z) \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y|z) \log \frac{p(x,y|z)}{p(x|z)p(y|z)} \]
+这常用于检测特征冗余：如果已知 $Z$ 后，$X$ 提供的额外信息几乎为 0，则说明 $X$ 相对于 $Z$ 是冗余特征。
+
+
+\subsubsection{特征选择方法}
+\paragraph{Filter 方法 (过滤式)}
+Filter 方法不依赖于后续的学习算法（如分类器）。它直接根据数据的统计特性（如距离、相关性、互信息等）构建评估函数，对特征子集进行评价。其逻辑是“先过滤，后训练”，即先从原始特征中选出最优子集，再将其输入学习器。
+其计算复杂度低，执行效率高，适用于大规模数据集。但是选择过程与学习算法解耦，可能导致选出的特征子集在特定模型上性能不是最优，且容易忽略特征间的冗余信息。
+
+
+\begin{example}[基于距离评价的特征选择流程]
+    假设有两类 3 维数据（$W_1$ 红色，$W_2$ 绿色），每个类别包含 3 个样本。我们的目标是从 3 个属性 $x_1, x_2, x_3$ 中选择最有用的特征。
+    
+    \begin{enumerate}
+        \item \textbf{1 维特征评估}：对每个特征独立计算 Fisher 判据 $J_f = \frac{(m_1 - m_2)^2}{S_1^2 + S_2^2}$。通过观察数据分布（Slide 40），发现 $x_2$ 在两类间的均值差异最大且类内分布紧凑。计算结果排序为：$J(x_2) > J(x_3) > J(x_1)$。
+        \item \textbf{子集组合评估}：当需要选择 2 维特征子集时，计算所有可能组合（如 $\{x_1, x_2\}, \{x_2, x_3\}$ 等）的矩阵迹判据 $J_2 = \text{tr}(S_w^{-1} S_b)$。
+        \item \textbf{结论}：选择 $J_2$ 得分最高的子集（如示例中的 53.2917 分组合），该子集在空间中能产生最佳的类别分离度。
+    \end{enumerate}
+
+    % 图示注释部分：待后续处理
+    % \begin{figure}[H]
+    %     \centering
+    %     \subfigure[1个属性情况]{\includegraphics[width=0.3\textwidth]{fig_1d.png}}
+    %     \subfigure[2个属性情况]{\includegraphics[width=0.3\textwidth]{fig_2d.png}}
+    %     \subfigure[3个属性情况]{\includegraphics[width=0.3\textwidth]{fig_3d.png}}
+    %     \caption{不同维度下的数据可分性可视化}
+    % \end{figure}
+\end{example}
+
+\begin{example}[Relief 算法]
+    Relief 算法通过计算特征对于“同类近邻”的凝聚能力和“异类近邻”的区分能力来评估特征权重。
+    
+    \begin{algorithm}[H]
+    \caption{Relief 算法流程}
+    \begin{algorithmic}[1]
+        \Require 样本集 $D$，迭代次数 $m$，阈值 $t$
+        \Ensure 特征权重向量 $w$
+        \State 初始化所有特征权重 $w_i \gets 0$
+        \For{$i = 1$ \textbf{to} $m$}
+            \State 随机抽取一个样本 $x$
+            \State 在 $x$ 的同类中寻找最近邻样本 $z^+$ (\textit{Near-hit})
+            \State 在 $x$ 的异类中寻找最近邻样本 $z^-$ (\textit{Near-miss})
+            \For{每个特征 $j$}
+                \State $w_j \gets w_j - \text{diff}(x_j, z^+_j)^2 + \text{diff}(x_j, z^-_j)^2$
+            \EndFor
+        \EndFor
+        \State \Return 满足 $w_j > t$ 的特征集合
+    \end{algorithmic}
+    \end{algorithm}
+    这个算法也是Filter的，因为FIlter的本质是直接选取某种方式，独立的评价某个特征的能力，并打分排序选择。再看$Relief$算法，
+    这个算法对每个特征的打分结果就是最终的权重，以某个特征是否可以合理的“推开非同类点”而"拉回同类点"进行打分。
+\end{example}
+对$Filter$算法而言，他并不依赖于具体的模型，不需要在模型上验证，所以是一种相对而言十分高效的算法，一般会先用$Filter$进行粗筛，其他算法进行细筛。
+
+\paragraph{Wrapper 方法 (包裹式)}
+Wrapper 方法（包裹式方案）的核心思想是将后续的学习算法（如分类器）直接作为特征评价准则的一部分。在该方案中，学习算法被视为一个“黑盒”，特征选择算法不断地产生不同的特征子集，并将其输入该黑盒中进行训练，最终利用模型在验证集上的性能（如准确率或错误率）作为该子集的评价得分。
+
+\begin{itemize}
+    \item \textbf{优点}：针对特定模型“量身定制”，能够捕捉到特征与学习算法之间的相互作用，因此选出的特征子集通常具有更好的预测性能。
+    \item \textbf{缺点}：计算复杂度极高。由于每评估一个子集都需要完整地训练一次模型，在处理高维数据或训练耗时较长的模型时（如深度学习），其执行速度非常缓慢。
+\end{itemize}
+
+\begin{example}[LVW (Las Vegas Wrapper) 算法]
+    LVW 是一种基于拉斯维加斯随机化策略（Las Vegas Algorithm）的包裹式特征选择方法。其特点是在搜索空间内随机采样特征子集，并通过模型精度来更新当前最优子集。其更新逻辑不仅关注错误率的降低，还兼顾了特征数量的精简（奥卡姆剃刀原则）。
+
+    \begin{algorithm}[H]
+    \caption{LVW (Las Vegas Wrapper) 算法流程}
+    \begin{algorithmic}[1]
+        \Require 数据集 $D$，学习算法 $\mathcal{L}$，停止准则（控制参数 $T$）
+        \Ensure 特征子集 $A^*$
+        \State 初始化：当前最优错误率 $E \gets \infty$，最优子集 $A^* \gets A$（全集），当前维度 $d \gets |A|$，计数器 $t \gets 0$
+        \While{$t < T$}
+            \State 随机产生特征子集 $A'$
+            \State 计算子集维度 $d' \gets |A'|$
+            \State 通过交叉验证（Cross-Validation）评估学习算法 $\mathcal{L}$ 在 $A'$ 上的错误率 $E'$
+            \If{($E' < E$) \textbf{或者} ($E' = E$ \textbf{且} $d' < d$)} \Comment{性能提升或维度更精简}
+                \State 更新 $t \gets 0$
+                \State 更新 $E \gets E'$，$d \gets d'$，$A^* \gets A'$
+            \Else
+                \State $t \gets t + 1$ \Comment{连续 $T$ 次尝试无提升则停止}
+            \EndIf
+        \EndWhile
+        \State \Return 最优特征子集 $A^*$
+    \end{algorithmic}
+    \end{algorithm}
+
+    \textbf{细节说明}：
+    \begin{itemize}
+        \item \textbf{停止准则}：算法在连续 $T$ 次尝试中未能找到更好的子集时，即认为达到了局部最优或搜索已饱和，从而停止。
+        \item \textbf{双重优化目标}：该算法第 9 行的判断逻辑体现了包裹式方案的精髓——首要目标是最小化泛化错误率 $E'$，次要目标是在性能持平时尽可能减少特征数量 $d'$，以提升模型的可理解性和降低过拟合风险。
+    \end{itemize}
+\end{example}
+
+\paragraph{嵌入式方法}
+
+\paragraph{嵌入式方法概述}
+嵌入式方法（Embedded Methods）将特征选择过程与学习器的训练过程融为一体，在模型的目标函数中直接引入正则化惩罚项。通过优化带有约束的目标函数，模型在学习过程中会自动调整特征权重，使不重要特征的权重收缩至零，从而实现特征的自动选择。
+
+\begin{itemize}
+    \item \textbf{优点}：计算效率高（只需一次训练过程），且由于选择过程直接受模型性能驱动，其准确率通常优于 Filter 方法。
+    \item \textbf{缺点}：高度依赖特定的学习器模型（如线性模型），通用性相对较弱。
+\end{itemize}
+
+\begin{example}[LASSO 和岭回归]
+    一般的损失函数就是误差项，而和是的正则化引入惩罚项目，不仅可以避免过拟合还能实现特征的“稀疏化”去除冗余特征。
+    一般目标函数表示为：
+    \[ \min_{w} \underbrace{\sum_{i=1}^{m} (y_i - w^T x_i)^2}_{\text{平方误差项 (RSS)}} + \lambda \underbrace{\|w\|_n}_{\text{L1 惩罚项}} \]
+    其中 $\lambda$ 是调节因子，控制模型在“预测精度”与“特征稀疏性”之间的平衡。
+
+    加入惩罚项之后，对误差项影响不大的权重会因为乘法项的存在而减小，事实上，如果存在相关性很高的特征，也可以通过这个算法消除冗余。一个需要关注的问题是，不同的正则项选择会影响算法是否能进行特征的真正系数使得权重$\omega = 0$。
+    取$w_1, w_2$ 二维权重空间，我们把损失函数分为两个部分，其一是误差项，因为特征相关性图中其等高线是椭圆，其二是正则项，不同正则项的等高线不同。对于某一个特定的误差等高线，它更容易在权重非零的时候与更小的$L_2$等高线达到平衡，但对于$L_1$等高线，权重更倾向于在坐标轴上达到平衡。
+
+    % 绘图注释：此处对应 PPT 第 48 页对比图
+    % \begin{figure}[H]
+    % \centering
+    % \includegraphics[width=0.5\textwidth]{lasso_geometry.png}
+    % \caption{L1 与 L2 正则化在权重空间中的几何碰撞对比}
+    % \end{figure}
+
+    \textbf{3. 算法求解}：
+    由于 $L_1$ 范数在原点处不可导（尖角特性），无法直接使用标准的梯度下降法。通常采用 \textbf{近端梯度下降（Proximal Gradient Descent, PGD）} 等优化算法，通过软阈值化操作来处理非导数点，确保权重的稀疏性更新。
+\end{example}
