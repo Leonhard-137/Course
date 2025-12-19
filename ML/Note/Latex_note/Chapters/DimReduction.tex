@@ -1,0 +1,164 @@
+\section{特征选择和特征降维}
+在机器学习任务中，原始数据往往拥有极高的维度，进行降维处理主要基于以下四个原因：
+\begin{itemize}
+    \item \textbf{维度灾难：} 随着维度 $d$ 的增加，样本空间体积呈指数级膨胀，导致数据在高维空间变得极其稀疏，模型就很难学到规律，而且有可能把噪声当作数据学习。
+    \item \textbf{冗余与噪声 ：} 噪声是指某些特征对于预测任务是无用的，还有可能干扰学习过程；某些特征之间存在高度相似性，比如年龄和出生日期，同时考虑他们两个是没有必要的。
+    \item \textbf{计算效率：} 减少特征数量可以显著降低模型训练和推理时的计算复杂度，节省内存与存储空间。
+\end{itemize}
+
+虽然两者都旨在降低维度，但在处理手段和结果上有本质区别。特征选择是从原始特征集合中选取一个子集，保持特征的原有意义；特征提取类似于线性映射$\mathbb{R}^n \rightarrow \mathbb{R}^m$
+，把数据从高维的特征空间映射到地位空间，过程会创造新的特征。
+\subsection{特征选择：定义、框架与子集生成算法}
+
+\begin{definition}[特征选择问题]
+    特征选择（Feature Selection）是指从原始的 $D$ 维特征集合中，挑选出一个包含 $d$ 个特征（$d < D$）的子集来表达模式的过程。其核心目标是在尽量减少信息损失的前提下：
+    \begin{itemize}
+        \item 提高数据的压缩率；
+        \item 提升学习机的预测性能（泛化能力）；
+        \item 加快学习速度并降低计算开销。
+    \end{itemize}
+\end{definition}
+
+\subsubsection{特征选择的通用框架}
+特征选择通常是一个迭代循环的过程，包含四个核心环节：
+\begin{enumerate}
+    \item \textbf{子集生成}：按照某种搜索策略产生候选的特征子集。
+    \item \textbf{子集评价}：利用评价准则 $J$ 对候选子集进行打分，衡量其优劣。
+    \item \textbf{停止准则}：判断当前搜索是否达到预期目标（如达到指定特征数或评价指标不再提升）。
+    \item \textbf{结果验证}：在独立的测试集上验证最终选定子集的有效性。
+\end{enumerate}
+
+\subsubsection{特征子集生成的搜索策略}
+从 $D$ 维特征中选择 $d$ 维特征，其可能的子集个数为组合数：
+\[ C_D^d = \frac{D!}{(D-d)!d!} \]
+当原始维度 $D$ 较大时，搜索空间呈指数级增长。例如，当 $D=100, d=10$ 时，组合数约为 $1.73 \times 10^{13}$。为了在有限时间内找到理想子集，需要采用不同的搜索策略。
+
+\paragraph{1. 穷举搜索 (Exhaustive Search)}
+计算特征的所有可能组合并逐一评价。虽然能找到最优子集，但总搜索数 $\sum_{d=1}^{D} C_D^d = 2^D - 1$ 计算量巨大，仅适用于 $D$ 非常小的情况。
+
+\paragraph{2. 单独最优特征组合}
+对每个特征 $x_i$ 分别进行单独评估，计算其评价得分 $J(x_i)$，然后按得分从大到小排序，选取前 $d$ 个特征。
+\begin{itemize}
+    \item \textbf{优点}：算法极简，计算量极低。
+    \item \textbf{缺点}：完全忽略了特征之间的相关性，无法处理特征冗余。
+\end{itemize}
+
+\paragraph{3. 序贯搜索算法 (Sequential Search)}
+这是一种贪心算法，通过每一步的局部最优选择来逼近全局最优。
+
+\begin{algorithm}[H]
+\caption{前向序贯选择算法 (SFS)}
+\begin{algorithmic}[1]
+    \Require 特征全集 $X = \{x_1, \dots, x_D\}$, 目标维度 $d$
+    \Ensure 最优特征子集 $X_{selected}$
+    \State 初始化 $X_{curr} \gets \emptyset$
+    \For{$k = 1$ \textbf{to} $d$}
+        \State 寻找 $x_j \in X \setminus X_{curr}$，使得 $J(X_{curr} + \{x_j\})$ 最大
+        \State $X_{curr} \gets X_{curr} \cup \{x_j\}$
+    \EndFor
+    \State \textbf{特点}：一旦特征被加入，后续步骤无法将其删除。
+    \State \Return $X_{curr}$
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{4. 其它序贯变体}
+\begin{itemize}
+    \item \textbf{GSFS (广义 SFS)}：每次不是加入 1 个特征，而是加入 $k$ 个特征，使得组合后性能最优。其计算量比标准 SFS 大。
+    \item \textbf{SBS (后向序贯选择)}：从全集开始，每次剔除一个特征 $x_j \in X_{curr}$，使得剩余特征集的评价准则 $J(X_{curr} - \{x_j\})$ 最大。其特点是“一旦删除，无法增加”。
+    \item \textbf{GSBS (广义 SBS)}：每次从当前集合中剔除 $k$ 个特征。
+\end{itemize}
+
+\paragraph{5. L-R 法 (Plus-L Minus-R)}
+为了克服 SFS 和 SBS “只进不出”或“只出不进”的单向性缺陷，L-R 法采用交替增减的策略：
+\begin{itemize}
+    \item \textbf{先 L 后 R}：每次先通过 SFS 增加 $L$ 个特征，再通过 SBS 减少 $R$ 个特征。
+    \item \textbf{策略逻辑}：若 $L > R$，最终特征数增加；若 $L < R$，最终特征数减少。
+    \item \textbf{公式表达}：每次寻优后的集合为 $X_d = X_{d1} + \{x_j\}_L - \{x_i\}_R$。
+    \item \textbf{广义 L-R ($ZL, ZR$)}：更进一步，增加 $L$ 个和减少 $R$ 个的过程分 $Z$ 步进行，通过复杂的步长控制来更深层地搜索特征组合空间。
+\end{itemize}
+
+\subsubsection{算法特性对比}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lp{6cm}p{4cm}}
+    \hline
+    \textbf{搜索算法} & \textbf{核心逻辑} & \textbf{主要局限} \\ \hline
+    穷举法 & 遍历所有 $2^D-1$ 种组合 & 计算复杂度爆炸 \\
+    单独最优 & 按单特征 $J$ 值排序 & 忽略特征间相关性 \\
+    SFS & 从 0 开始，逐个增加最优特征 & 无法剔除已入选的过期特征 \\
+    SBS & 从 D 开始，逐个剔除最差特征 & 无法找回已删除的潜在特征 \\
+    L-R 法 & 增加 $L$ 个再减少 $R$ 个 & 需手动调参 $L$ 和 $R$ \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{特征评价准则：衡量特征子集的优劣}
+
+\begin{definition}[特征评价准则]
+    特征评价准则是一个函数 $J(X_{selected})$，用于定量评估所选特征子集的分类贡献或表达能力。评价准则主要分为两类：
+    \begin{itemize}
+        \item \textbf{可分性度量}：利用类别间的几何距离、分布重叠度或统计相关性进行打分，常用于 Filter 框架。
+        \item \textbf{学习算法精度度量}：直接利用分类器的准确率（Accuracy）或错误率（Error Rate）作为得分，常用于 Wrapper 框架。
+    \end{itemize}
+\end{definition}
+
+\subsubsection{基于距离的可分性判据}
+这类判据的核心思想是：好的特征子集应该使得“类内距离尽可能小，类间距离尽可能大”。这通常依赖于对样本散度矩阵的计算。
+
+\paragraph{1. 基础数据统计量}
+假设特征选择后的样本向量为 $x'_j$，第 $i$ 类的平均向量为 $m_i$，总平均向量为 $m$，样本总数为 $n$。
+\begin{itemize}
+    \item \textbf{类内散度矩阵 (Within-class Scatter Matrix)}：表示第 $i$ 类样本内部的离散程度。
+    \[ S_i = \frac{1}{n_i} \sum_{j=1}^{n_i} (x'_j - m_i)(x'_j - m_i)^T \]
+    \item \textbf{总类内离散度矩阵 ($S_w$)}：各类别散度矩阵的加权和。
+    \[ S_w = \sum_{i=1}^c P_i S_i \quad (\text{$P_i$ 为第 $i$ 类的先验概率}) \]
+    \item \textbf{类间散度矩阵 ($S_b$)}：表示各类别中心相对于总平均值的离散程度。
+    \[ S_b = \sum_{i=1}^c (m_i - m)(m_i - m)^T \]
+\end{itemize}
+
+\paragraph{2. 常用可分性判据 $J_f$}
+\begin{itemize}
+    \item \textbf{一维特征（两类）}：采用比值形式。
+    \[ J_f = \frac{(m_1 - m_2)^2}{S_1^2 + S_2^2} \]
+    \item \textbf{多维特征子集}：常用的矩阵判据包括：
+    \begin{itemize}
+        \item $J_1 = \text{tr}(S_w + S_b)$ ：总散度。
+        \item $J_2 = \text{tr}(S_w^{-1} S_b)$ ：类间与类内散度的比率（最常用）。
+        \item $J_3 = \ln \frac{|S_b|}{|S_w|}$ ：行列式比值的对数。
+        \item $J_4 = \frac{\text{tr}(S_b)}{\text{tr}(S_w)}$ ：迹的比值。
+        \item $J_5 = \frac{|S_b - S_w|}{|S_w|}$ ：差值的比例。
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{基于概率分布的可分性判据}
+从类别概率密度函数的角度出发，衡量两个类别在特征空间中的交叠程度。重叠越少，距离越远，$J$ 值越大。
+
+\paragraph{1. 基本性质}
+一个合理的概率距离准则 $J$ 应满足：
+\begin{enumerate}
+    \item $J \ge 0$。
+    \item 当类别完全不重叠（$p(x|\omega_1)p(x|\omega_2)=0$）时，$J$ 达到最大值 $J_{max}$。
+    \item 当类别完全重合（$p(x|\omega_1)=p(x|\omega_2)$）时，$J = 0$。
+\end{enumerate}
+
+\paragraph{2. 常见的概率距离准则}
+\begin{itemize}
+    \item \textbf{Bhattacharyya 距离}：衡量概率分布的相似度。
+    \[ J_B = -\ln \int [p(x|\omega_1)p(x|\omega_2)]^{1/2} dx \]
+    \item \textbf{Chernoff 距离}：Bhattacharyya 的广义形式。
+    \[ J_C = -\ln \int p^s(x|\omega_1) p^{1-s}(x|\omega_2) dx \quad (0 \le s \le 1) \]
+    \item \textbf{散度 (Divergence)}：衡量两个分布之间的不对称性差异。
+    \[ J_D = \int [p(x|\omega_1) - p(x|\omega_2)] \ln \frac{p(x|\omega_1)}{p(x|\omega_2)} dx \]
+    \item \textbf{Matusita 距离}：
+    \[ J_M = \left[ \int (\sqrt{p(x|\omega_1)} - \sqrt{p(x|\omega_2)})^2 dx \right]^{1/2} \]
+\end{itemize}
+
+\subsubsection{基于熵的判据（信息论视角）}
+利用信息论中的互信息来衡量特征变量 $X$ 与类别标签 $Y$ 之间的统计相关性。
+
+\paragraph{1. 互信息 (Mutual Information)}
+衡量特征 $X$ 对消除类别 $Y$ 不确定性的贡献程度，反映了两者依存关系的强弱。
+\[ I(X;Y) = \sum_{x \in S_x} \sum_{y \in S_y} p(x,y) \ln \frac{p(x,y)}{p(x)p(y)} \]
+
+\paragraph{2. 条件互信息}
+在已知特征 $Z$ 的条件下，$X$ 和 $Y$ 的统计依存程度。
+\[ I(X;Y|Z) = \sum_{x \in S_x} \sum_{y \in S_y} \sum_{z \in S_z} p(x,y,z) \ln \frac{p(x,y|z)}{p(x|z)p(y|z)} \]

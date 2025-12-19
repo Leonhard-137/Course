@@ -22,8 +22,6 @@
 \usepackage{gensymb}
 \usepackage{tcolorbox}
 \usepackage{float}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
 \setlist{nosep}
 
 % ---- 3. 边注设置 ----
@@ -41,13 +39,13 @@
 \newtheorem{theorem}[definition]{定理}
 \theoremstyle{remark}
 \newtheorem{example}[definition]{例}
-\newtheorem{proposition}[definition]{命题}
+
 % ---- 5. 页眉页脚 ----
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 % 定义页眉内容
-\lhead{\footnotesize 机器学习笔记}
+\lhead{\footnotesize 广义相对论笔记}
 \rhead{\footnotesize \leftmark}
 \cfoot{\thepage}
 
@@ -82,7 +80,7 @@
 }
 
 % ---- 8. 文档信息 ----
-\title{\Huge \textbf{机器学习笔记}}
+\title{\Huge \textbf{广义相对论笔记}}
 \author{\Large Leonhard Hsiao}
 \date{\today}
 
@@ -117,6 +115,10 @@
 
 \pagestyle{fancy}
 
-% \input{Chapters/LinearClassification.tex}
-\input{Chapters/DimReduction.tex}
+% \input{Chapters/Math}
+% \input{Chapters/Einsteineq}
+% \input{Chapters/GRWave}
+% \input{Chapters/RelAstro.tex}
+\input{Chapters/BHs.tex}
+
 \end{document}
