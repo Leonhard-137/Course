@@ -517,3 +517,204 @@ Kerr-Newman 解描述了一个带电荷 $Q$ 与角动量 $J$ 的旋转黑洞（�
     \widetilde{U} = \tan{\frac{\pi}{2}x} \\
     \widetilde{V} = \tan{\frac{\pi}{2}y}
 \end{align}
+\subsubsection{Penrose 过程}
+
+Kerr 黑洞存在一个特殊的区域——\textbf{能层}，Roger Penrose 提出理论上可以从旋转黑洞中提取能量。具体的实现过程称为\textbf{Penrose 过程}。
+\n{默认使用Boyer-Lindquist坐标，这个坐标系中t相当于无穷远处的静止观测者经历的时间。}
+Kerr时空中存在对应于时间平移不变性的 Killing 矢量场 $\xi^{\mu} = (1, 0, 0, 0)$。对于一个在测地线上运动的粒子，其四动量为 $p^{\mu}$，则无穷远处的观测者测得的守恒能量 $E$ 定义为：
+\begin{align}
+E = -p_{\mu}\xi^{\mu} = -g_{\mu\nu}p^{\mu}\xi^{\nu}.
+\end{align}
+\n{Boyer-Lindquist坐标中有沿着时间方向的Killing矢量，粒子的测地线沿着Killing矢量的分量在无穷远观测者看来就是能量。}
+设想一个实验：从无穷远处的实验室向黑洞释放一个能量为 $E_0$ 的检验粒子（粒子0）。当粒子进入能层后，分裂为两个碎片，分别记为粒子1和粒子2。根据局域的四动量守恒 $p_0^{\mu} = p_1^{\mu} + p_2^{\mu}$，能量满足线性叠加关系：
+设能量为$E_0$的检验粒子释放向黑洞运动，进入能层后分裂为粒子1和粒子2,由四动量守恒
+\begin{align}
+    p^{\mu}_0 = p^{\mu}_1 + p^{\mu}_2
+\end{align}
+等式对$\xi_{\mu}$缩并有，
+\begin{align}
+E_0 = E_1 + E_2.
+\end{align}
+\n{此时还没进入视界内，通过势垒散射或者粒子1的能量转移可以让粒子2获取足够的能量逃离能层回到静界。}
+
+两个粒子其中一个粒子1掉落黑洞而粒子2逃离至无穷远，若 $E_1 < 0$，则逃逸回无穷远的粒子2的能量 $E_2 = E_0 - E_1$ 将大于初始能量 $E_0$，我们以损失粒子1为代价，将黑洞的能量转移到粒子2并提取出来。
+
+\paragraph{“负能”的存在}
+ 虽然使用Boyer-Lindquist 全局坐标系，但标量的值不依赖于坐标系选择，我们可以在时空中的某一点选取最简便的坐标系来判断其正负。
+
+\begin{enumerate}
+    \item \textbf{在能层外（$g_{00} < 0$）：}
+    Killing 矢量类时,由于 $E$ 是标量，我们选取一个随粒子运动的局域惯性系。在此参考系中，粒子静止，其四动量为 $\tilde{p}^{\mu} = (m, 0, 0, 0)$ ($m>0$)。
+    则在此坐标系中$\tilde{\xi}^{2} = -\tilde{\xi}^2_{t}+\tilde{\xi}^2_{i} < 0$，$\tilde{\xi}^t>0$，能量为：
+    \begin{align}
+        E = -\eta_{\mu\nu}\tilde{p}^{\mu}\tilde{\xi}^{\nu} = -(-1) \cdot m \cdot \tilde{\xi}^0 = m \tilde{\xi}^0 > 0.
+        \label{cond:xi}
+    \end{align}
+    \item \textbf{在能层内（$g_{00} > 0$）：}
+    此时Killing 矢量类空，不是因果保持的方向。没有类似\eqref{cond:xi}的限制，能量不必大于0，负能情况粒子处于极深的引力势井内，引力势能绝对值大于粒子动能与静能之和。
+\end{enumerate}
+这意味着在能层存在着“负能区域”，可以使得粒子1落入黑洞视界（$E_1 < 0$），粒子2逃逸到无穷远，观测者获得净能量。
+
+\paragraph{黑洞参数演化与效率极限}
+彭罗斯过程并非永动机，检验粒子忽略了粒子对黑洞的影响。但实际上，能量的提取是以消耗黑洞的能量为代价的。负能粒子的掉落会削减黑洞的质量，并且它的角动量与黑洞相反，会减缓黑洞的旋转，逐步缩小能层。最终Kerr黑洞退化为Schwarzschild黑洞，无法继续Penrose过程，因此Schwarzschild也被称为“死去的黑洞”。
+根据\textit{黑洞面积不减定理}，在经典过程中视界表面积 $A$ 不减。
+考虑一个初始为极端 Kerr 黑洞（$J=M^2$, $a=M$）的状态，通过反复的彭罗斯过程将角动量全部提取殆尽，使其退化为 Schwarzschild 黑洞（$J=0$）
+能量提取的最大效率 $\eta$ 为：
+\begin{align}
+\eta_{\text{max}} = \approx 29\%.
+\end{align}
+对于带电的Newmann黑洞，情况是类似的，Penrose过程使得黑洞带电量下降，视界面积上升，能层减小。
+
+\subsubsection{Kerr 时空中的粒子运动与ISCO}
+比起Schwarzschild时空，Kerr时空中时空交叉，所以更麻烦。但是，依然可以使用时空中的守恒量进行化简。
+由于 Kerr 时空具有时间平移不变性（1,0,0,0）和空间旋转不变性(0,0,1,0)，粒子运动存在两个守恒量,对于质量为 $m$ 的粒子，其四动量分量可以写为：
+\begin{align}
+p_t &= m g_{tt} \frac{d t}{d \tau} + m g_{t\phi} \frac{d\phi}{d\tau} = -mE, \\
+p_\phi &= m g_{\phi t} \dot{t} + m g_{\phi\phi} \dot{\phi} = mL.
+\end{align}
+这是一组关于 $\dot{t}$ 和 $\dot{\phi}$ 的线性方程组。解出 $\dot{t}$ 和 $\dot{\phi}$可以得到：
+\begin{align}
+\rho^2 \frac{dt}{d\tau} &= -a(aE\sin^2\theta - L) + (r^2+a^2)\frac{P}{\Delta}, \\
+\rho^2 \frac{d\phi}{d\tau} &= -\left(aE - \frac{L}{\sin^2\theta}\right) + \frac{aP}{\Delta}.
+\end{align}
+其中$\rho^2 = r^2 + a^2\cos^2\theta$， $P(r) = E(r^2+a^2) - aL$，$\Delta = r^2 -2Mr +a^2 + Q^2$
+
+将上述速度分量代入四速度的归一化条件 $g_{\mu\nu}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau} = -1$，可以得到：
+\begin{align}
+\left( -1 - \frac{2Mr(r^2+a^2)}{\Delta \rho^2} \right) E^2 + \frac{4Mar}{\Delta \rho^2}EL + \frac{\rho^2 - 2Mr}{\Delta \rho^2 \sin^2\theta}L^2 + \frac{\rho^2}{\Delta}\left(\frac{dr}{d\tau}\right)^2 + \rho^2 \left(\frac{d\theta}{d\tau}\right)^2 = -1.
+\end{align}
+仅有的轴对称性让粒子不一定做平面运动，这也是Kerr时空比Schwarzschild时空更复杂的地方。但是，不难察觉$\theta = \pi/2$的特殊平面运动仍然存在。此外，这个体系还有一个额外的守恒量——\textbf{Carter常数}。
+\n{类似氢原子几何上只有SO(3)对称性，但中心势场带来了一个额外的对称性以及以及对应的守恒量——Longe-Kuta矢量。}
+\paragraph{赤道面上的径向方程 ($\theta = \pi/2$)}
+此时 $\theta = \pi/2, \dot{\theta} = 0, \sin\theta = 1, \cos\theta = 0, \rho^2 = r^2$。
+代入主方程：
+\begin{align}
+r^4 \left(\frac{dr}{d\tau}\right)^2 - 2Mr(r^2+a^2)E^2 + 4Mra EL + (\Delta - a^2)L^2 = \Delta r^2 (E^2 - 1).
+\end{align}
+进一步整理为关于 $\left(\frac{dr}{d\tau}\right)^2$ 的显式：
+\n{这里的 $W(r)$ 类似经典力学中“有效动能”（常数 - 有效势能）}
+\begin{align}
+r^4 \left(\frac{dr}{d\tau}\right)^2 = r^2 \left[ (r^2+a^2)E^2 - L^2 - \Delta \right] + 2Mr(aE - L)^2 \\
+\left(\frac{dr}{d\tau}\right)^2 = E^2 - 1 + \frac{2M}{r} + \frac{a^2 E^2 - L^2 - a^2}{r^2} + \frac{2M}{r^3}(aE - L)^2 := W(r).
+\end{align}
+
+\paragraph{最小稳定圆轨道 (ISCO)}
+圆轨道的存在及其稳定性由 $W(r)$ 的性质决定：
+\begin{itemize}
+    \item \textbf{轨道存在条件}：$W = 0$（径向速度为零）。
+    \item \textbf{圆轨道条件}：$W' = dW/dr = 0$（径向受力平衡，势能极值点）。
+    \item \textbf{轨道稳定性}：$W'' < 0$ 对应不稳定平衡，$W'' > 0$ 对应稳定平衡。
+\end{itemize}
+
+ISCO是稳定与不稳定轨道的临界点，即势能的拐点：
+\begin{align}
+W(r) = 0, \quad W'(r) = 0, \quad W''(r) = 0.
+\end{align}
+联立这三个方程可以解出 ISCO 的半径 $r_{\text{ISCO}}$ 以及对应的能量 $E$ 和角动量 $L$。
+
+\textbf{极端Kerr黑洞(比角动量a=M)}的最小稳定圆轨道能量$E \approx 58\%$,粒子进入该轨道会释放$42\%$的能量。Kerr 黑洞的吸积过程是宇宙中极高效率的能量转换机制，这解释了类星体和活动星系核（AGN）的高光度来源。
+若粒子的角动量满足\textbf{$L = aE$}时，径向方程中的 $(aE-L)^2$ 项消失，方程极大简化：
+\begin{align}
+\left(\frac{dr}{d\tau}\right)^2 = E^2 - \left( 1 - \frac{2M}{r} + \frac{a^2}{r^2} \right).
+\end{align}
+\n{这一点不难想象，因为这种情况下粒子的角动量和黑洞角动量相同}
+若粒子落入黑洞，黑洞的质量变化 $\delta M = E$，角动量变化 $\delta J = L$。
+由于 $L = aE$，则有：
+    \begin{align}
+        \frac{\delta J}{\delta M} = \frac{L}{E} = a \quad \Rightarrow \quad \delta \left(\frac{J}{M}\right) = \delta a = 0.
+    \end{align}
+    这意味着吞噬此类粒子\textbf{不会改变黑洞的比角动量 $a$}。
+    对于 $L=aE$ 的粒子，其有效势能项包含 $+a^2/r^2$（排斥势）。当 $r \to 0$ 时，势垒趋于无穷大。因此，除非 $E$ 无穷大，否则粒子无法到达 $r=0$ 处。这体现了 Kerr 奇环的不可到达性（对于此类测地线而言）。
+\section{扩展}
+\subsection{作用量原理与引力场方程}
+考虑一个质量为 $m$ 的自由粒子在弯曲时空中的运动。其作用量 $I$ 正比于粒子世界线的固有长度（固有时 $\tau$）：
+\begin{align}
+I = -m \int d\tau = -m \int \sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{d\lambda} \frac{dx^\nu}{d\lambda}} \, d\lambda,
+\end{align}
+其中 $\lambda$ 为世界线的任意参数。
+令 $\delta I = 0$，即得\textbf{测地线方程}：
+\begin{align}
+\frac{d^2x^\sigma}{d\tau^2} + \Gamma^\sigma_{\mu\nu} \frac{dx^\mu}{d\tau} \frac{dx^\nu}{d\tau} = 0,
+\end{align}
+\n{不难验证这个作用量具有世界线重参数化不变性和电磁规范不变性}
+带电粒子在电磁场中的作用量为
+\begin{align}
+I = \int \left( -m\sqrt{-g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu} + q A_\mu(x) \dot{x}^\mu \right) d\lambda.
+\end{align}
+
+\paragraph{Einstein-Hilbert作用量}
+广义相对论中考虑弯曲时空，计算作用量需要考虑标量函数在时空流形上的积分：
+\n{不过我们没有交代标量函数在时空流形上的积分为什么是这个形式，那会牵扯太多的微分几何知识。但是这个形式满足的积分测度是微分同胚不变的，因为坐标变换下：
+\[det(g_{\mu \nu}) = |\frac{\partial \tilde{x}}{\partial x}|^2 \tilde{g} \]
+\[d^4 x = |\frac{\partial x}{\partial \tilde{x}}| d^4  \tilde{x}\]积分测度在坐标变换下不变。}
+\begin{align}
+    \int f(x) \sqrt{-g}d^4x
+\end{align}
+Einstein-Hilbert作用量为：
+\begin{align}
+I_G = \int R \sqrt{-g} \, d^4x = \int g^{\mu\nu} R_{\mu\nu} \sqrt{-g} \, d^4x.
+\end{align}
+对其进行变分：
+\begin{align}
+\delta I_G = \int \left( \delta g^{\mu\nu} R_{\mu\nu} + g^{\mu\nu} \delta R_{\mu\nu} + R \frac{\delta \sqrt{-g}}{\sqrt{-g}} \right) \sqrt{-g} \, d^4x.
+\end{align}
+这里需要用到两个关键的恒等式：
+\begin{enumerate}
+    \item \textbf{行列式的变分}：
+        \begin{align}
+            \delta \sqrt{-g} = -\frac{1}{2}\sqrt{-g} g_{\mu\nu} \delta g^{\mu\nu}
+        \end{align}
+    \item \textbf{Palatini 恒等式}（Ricci 张量的变分）：
+    \begin{align}
+    \delta R_{\mu\nu} = \nabla_\rho (\delta \Gamma^\rho_{\mu\nu}) - \nabla_\nu (\delta \Gamma^\rho_{\mu\rho}).
+    \end{align}
+\end{enumerate}
+
+\n{恒等式的证明，还需要再复习。}
+将 Palatini 恒等式代入作用量变分的中间项：
+\begin{align}
+\int g^{\mu\nu} \delta R_{\mu\nu} \sqrt{-g} d^4x = \int \nabla_\rho (g^{\mu\nu} \delta \Gamma^\rho_{\mu\nu} - g^{\mu\rho} \delta \Gamma^\nu_{\mu\nu}) \sqrt{-g} d^4x.
+\end{align}
+根据高斯定理，该项是一个全散度项，可以转化为边界上的积分。在经典的变分问题中，如果固定边界上的度规及其一阶导数（或引入 Gibbons-Hawking-York 边界项抵消），此项为零。
+于是，变分结果仅剩下：
+\begin{align}
+\delta I_G = \int \left( R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} \right) \delta g^{\mu\nu} \sqrt{-g} \, d^4x.
+\end{align}
+令 $\delta I_G = 0$，即得到真空场方程 $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = 0$。
+
+\paragraph{物质场的耦合与能量动量张量}
+当存在物质场时，总作用量为
+\begin{align}
+    I = \int \left(\frac{R}{16\pi G} + \mathcal{L}_{mat}\right)\sqrt{-g}d^4x
+\end{align}
+物质场的能量动量张量 $T^{\mu\nu}$ 是物质作用量对度规的变分导数：
+\n{这个定义与场论中由诺特荷定义的能动张量不一样，二者在简单的平直时空中才相同。}
+\begin{align}
+T_{\mu\nu} \equiv \frac{-2}{\sqrt{-g}} \frac{\delta }{\delta g^{\mu\nu}} \int \mathcal{L} \sqrt{-g} d^4x
+\end{align}
+总作用量的变分原理 $\delta I = 0$ 给出完整的爱因斯坦场方程：
+\begin{align}
+G_{\mu\nu} = 8\pi G T_{\mu\nu}.
+\end{align}
+
+\paragraph{实标量场的耦合}
+以质量为 $m$ 的自由实标量场 $\phi$ 为例，其拉格朗日量为：
+\begin{align}
+\mathcal{L}_{\text{mat}} = -\frac{1}{2} g^{\mu\nu} \nabla_\mu \phi \nabla_\nu \phi - \frac{1}{2} m^2 \phi^2.
+\end{align}
+利用上述定义计算 $T_{\mu\nu}$。注意到 $\frac{\delta g^{\alpha\beta}}{\delta g^{\mu\nu}} = \delta^\alpha_\mu \delta^\beta_\nu$，且 $\delta \sqrt{-g} = -\frac{1}{2}\sqrt{-g} g_{\mu\nu} \delta g^{\mu\nu}$。
+\n{标量场协变导数作用等同于普通导数}
+\begin{align}
+\delta (\mathcal{L}\sqrt{-g}) &= \delta \mathcal{L} \sqrt{-g} + \mathcal{L} \delta \sqrt{-g} \notag \\
+&= \left( -\frac{1}{2} \delta g^{\alpha\beta} \partial_\alpha \phi \partial_\beta \phi \right) \sqrt{-g} - \frac{1}{2} g_{\mu\nu} \delta g^{\mu\nu} \mathcal{L} \sqrt{-g} \notag \\
+&= -\frac{1}{2} \sqrt{-g} \delta g^{\alpha\beta} \left( \partial_\alpha \phi \partial_\beta \phi + g_{\alpha\beta} \mathcal{L} \right).
+\end{align}
+代入 $T_{\mu\nu}$ 的定义式：
+\begin{align}
+T_{\mu\nu} = \nabla_\mu \phi \nabla_\nu \phi - \frac{1}{2} g_{\mu\nu} \left( (\nabla\phi)^2 + m^2\phi^2 \right).
+\end{align}
+对于闵氏时空（Flat Space）中的静态场，考察其能量密度 $T^{00}$：
+\begin{align}
+T^{00} = (\partial_t \phi)^2 + \frac{1}{2} \left[ -(\partial_t \phi)^2 + (\nabla \phi)^2 + m^2 \phi^2 \right] = \frac{1}{2} \left[ (\partial_t \phi)^2 + (\nabla \phi)^2 + m^2 \phi^2 \right] > 0.
+\end{align}
+这表明该标量场满足能量密度为正的物理条件（弱能量条件）。

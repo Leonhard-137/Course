@@ -1,0 +1,173 @@
+\section{引力塌缩与黑洞形成：数学基础}
+
+
+\subsection{活动标架视角*}
+\subsubsection{活动标架的定义}
+坐标基底下，弯曲时空的度规往往是复杂且相互耦合的，这对计算极为不利。但是引入对时空间两点距离的另一种解读观点——活动标架，把度规张量的弯曲信息转移到基底上。考虑三维欧几里得空间的两点距离：
+\begin{equation}
+    ds^2 = dr^2 + r^2 d\theta^2 + r^2 \sin^2\theta d\phi^2
+\end{equation}
+这个线元给定了一个几何对象——度规张量 $g$，作为一个双线性映射，度规可以根据我们选择的基底不同，写成不同的张量积展开形式。
+\paragraph{坐标基底视角}
+首先看最熟悉的自然坐标基底。我们选取自然坐标的对偶基底 $\{dr, d\theta, d\phi\}$，此时度规张量 $g$ 展开为：
+\begin{equation}
+    g = 1 (dr \otimes dr) + r^2 (d\theta \otimes d\theta) + r^2\sin^2\theta (d\phi \otimes d\phi)
+\end{equation}
+\n{虽然这里解释活动标架利用了坐标系，但是活动标架就是一个满足特殊性质的矢量场集合（切空间的正交归一基），与坐标系的选取无关。}
+所以在这个视角下，时空的弯曲特性被完全体现在度规张量的分量$g_{\mu\nu}$中。
+\paragraph{活动标架视角}
+现在我们换一种思路。如果我们根据当前的几何特性，人为构造一组归一化的 1-形式基底（定义为余标架）$\{\theta^1, \theta^2, \theta^3\}$，其中 $\theta^1 = dr, \theta^2 = r d\theta, \theta^3 = r\sin\theta d\phi$。此时，度规张量 $g$ 的展开形式为：
+\begin{equation}
+    g = (\theta^1 \otimes \theta^1) + (\theta^2 \otimes \theta^2) + (\theta^3 \otimes \theta^3) = \delta_{ij} \theta^i \otimes \theta^j
+\end{equation}
+所以在这种视角下，度规于平直时空中的度规无异，时空的弯曲性质被体现在向量的基底上。
+\n{指标约定：\\
+$I, J$ 为标架指标（0-3），使用 $\eta_{IJ}$ 升降；\\
+$a, b$ 或 $\mu, \nu$ 为坐标指标，使用 $g_{ab}$ 升降。}
+
+\begin{definition}[正交标架与余标架]
+    取一个四维洛伦兹流形，若该流形上存在4个矢量场 $\{e_I\}_{I=0,1,2,3}$，在时空中处处满足：
+    \begin{equation}
+        g(e_I, e_J) = \eta_{IJ} = \text{diag}(-1, 1, 1, 1)
+    \end{equation}
+    则称 $\{e_I\}$ 为一组\textbf{正交标架}。
+    
+    其对应的对偶矢量场——余标架 $\{\theta^I\}$ 定义为满足下式的1-形式场：
+    \begin{equation}
+        \theta^I(e_J) = \delta^I_J
+    \end{equation}
+\end{definition}
+
+利用这组基底，时空度规 $g_{ab}$ 可以被分解为平直度规 $\eta_{IJ}$ 与余标架的组合。这在数学上等价于将切空间局部平直化：
+\begin{equation}
+    g_{ab} = \eta_{IJ} \theta^I_a \theta^J_b = -\theta^0_a \theta^0_b + \theta^1_a \theta^1_b + \theta^2_a \theta^2_b + \theta^3_a \theta^3_b
+\end{equation}
+
+\n{协变导数的求和用了爱因斯坦求和约定。}
+\subsubsection{协变导数、联络和曲率张量}
+\n{比起之前的定义，这里更加抽象，可以说前面的是一种特殊形式，更容易理解。}
+\paragraph{活动标架的非交换性} 原本选取的坐标基底，基向量是对易的，即 $[\partial_\mu, \partial_\nu] = 0$，或者说：
+\begin{align*}
+    \partial_\mu \partial_\nu f - \partial_\nu \partial_\mu f = 0
+\end{align*}
+但是对活动标架而言并非如此，活动标架是“带着系数的坐标基底”，还是以球坐标为例子，取其中两个基向量 $e_2 = \frac{1}{r} \partial_\theta, e_3 = \frac{1}{r\sin\theta} \partial_\phi$，则它们的对易子为：
+\begin{align*}
+    [e_2, e_3] = -\frac{\cot\theta}{r} e_3 \neq 0
+\end{align*}
+因为系数的存在，“偏导”不再具备可交换性，这也是时空弯曲特性被纳入基底的体现。
+
+\paragraph{协变导数与标架联络} 弯曲时空中的矢量场，没有全局平行的性质，就是说我们沿着不同路径移动一个矢量，最终得到的结果可能不同。这一点对标架也不例外，因此，需要了解标架在流形上移动时的变化。
+定义\textbf{协变导数}$\nabla_{e_K}e_J$，表示沿着标架方向 $e_K$ 平移基向量 $e_J$ 时的变化率。由于标架具备正交归一性，所以协变导数可以展开为：
+\begin{equation}
+    \nabla_{e_K} e_J = \tensor{\omega}{^I_{K J}} e_I
+\end{equation}
+\begin{theorem}[Koszul 公式与联络的唯一性]
+    在伪黎曼流形 $(M, g)$ 上，若仿射联络 $\nabla$ 满足以下两个条件：
+    \begin{enumerate}
+        \item \textbf{度规适配} (Metric Compatibility)：$\nabla g = 0$，即 $X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)$；
+        \item \textbf{无挠性} (Torsion-free)：$T(X, Y) = 0$，即 $\nabla_X Y - \nabla_Y X = [X, Y]$；
+    \end{enumerate}
+    则对于任意矢量场 $X, Y, Z$，联络由度规 $g$ 和李括号 $[\cdot, \cdot]$ 唯一确定，满足以下公式（Koszul 公式）：
+    \begin{equation}
+    \begin{aligned}
+        2g(\nabla_X Y, Z) &= X g(Y, Z) + Y g(Z, X) - Z g(X, Y) \\
+        &\quad - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
+    \end{aligned}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    利用度规适配性，我们将 $X g(Y, Z)$ 的指标进行三次轮换（Permutation）：
+    \begin{align}
+        X g(Y, Z) &= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) \label{eq:koszul1} \\
+        Y g(Z, X) &= g(\nabla_Y Z, X) + g(Z, \nabla_Y X) \label{eq:koszul2} \\
+        -Z g(X, Y) &= -g(\nabla_Z X, Y) - g(X, \nabla_Z Y) \label{eq:koszul3}
+    \end{align}
+    
+    将上述三式相加：$\eqref{eq:koszul1} + \eqref{eq:koszul2} + \eqref{eq:koszul3}$。
+    利用度规的对称性 $g(A, B) = g(B, A)$，我们将右边的项重新分组，配对成可以用无挠条件（$\nabla_A B - \nabla_B A = [A, B]$）化简的形式：
+    
+    \begin{itemize}
+        \item \textbf{第一组}（我们要的项）：
+        \begin{align*}
+            g(\nabla_X Y, Z) + g(Z, \nabla_Y X) &= g(\nabla_X Y, Z) + g(Z, \nabla_X Y - [X, Y]) \\
+                                                &= 2g(\nabla_X Y, Z) - g(Z, [X, Y]) 
+        \end{align*}
+        
+        \item \textbf{第二组}：
+        \[ g(Y, \nabla_X Z) - g(Y, \nabla_Z X) = g(Y, [X, Z]) = -g(Y, [Z, X]) \]
+        
+        \item \textbf{第三组}：
+        \[ g(\nabla_Y Z, X) - g(X, \nabla_Z Y) = g(X, [Y, Z]) \]
+    \end{itemize}
+    
+    整理方程，将所有李括号项移到等式一边，即得证：
+    \[
+    2g(\nabla_X Y, Z) = X g(Y, Z) + Y g(Z, X) - Z g(X, Y) - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
+    \]
+\end{proof}
+
+\begin{derivationnote}[推论：标架联络的直接计算]
+    将上述定理应用到活动标架 $\{e_I\}$ 上。令 $X=e_i, Y=e_j, Z=e_k$。
+    由于活动标架是正交归一的，$g(e_I, e_J) = \eta_{IJ}$ 是常数。常数的方向导数为零：
+    \[ e_k g(e_i, e_j) = 0 \quad (\text{前三项全部消失}) \]
+    于是公式瞬间简化为笔记中提到的形式（注意指标对应关系）：
+    \begin{equation}
+        \omega_{kij} \equiv g(e_k, \nabla_{e_i} e_j) = \frac{1}{2} \left( g(e_k, [e_i, e_j]) - g(e_i, [e_j, e_k]) + g(e_j, [e_k, e_i]) \right)
+    \end{equation}
+    这表明：\textbf{标架联络完全来源于基底的非对易性（换位子）。}
+\end{derivationnote}
+
+
+\begin{definition}[标架联络系数]
+    给定适配于度规的协变导数 $\nabla_a$，标架联络系数定义为：
+    \begin{equation}
+        \tensor{\omega}{^I_{K J}} := (\theta^I)_\mu (e_K)^\nu \nabla_\nu (e_J)^\mu = \langle \theta^I, \nabla_{e_K} e_J \rangle
+    \end{equation}
+\end{definition}
+
+该系数的物理含义是：当沿 $e_K$ 方向平移时，基向量 $e_J$ 向 $e_I$ 方向偏转的分量。
+
+\begin{derivationnote}[联络的反对称性]
+    对归一化条件 $g(e_I, e_J) = \eta_{IJ}$ 求协变导数，可得：
+    \[ \omega_{IJK} + \omega_{JIK} = 0 \]
+    这意味着 $\omega_{IJK}$ 关于前两个指标是反对称的。这种反对称性不仅减少了独立分量的个数，也深刻反映了其作为洛伦兹群（旋转与贝斯特）生成元的代数结构。
+\end{derivationnote}
+
+在此框架下，任意张量场 $T$ 的协变导数均可投影到标架上。其标架分量 $T_{i_1 \dots i_k ; p}$ 的计算规则如下：
+\begin{equation}
+\begin{split}
+    T_{i_1 \dots i_k ; p} = \quad & e_p(T_{i_1 \dots i_k}) \quad \text{（方向导数）} \\
+    & - \sum_{m} T_{i_1 \dots c \dots i_k} \tensor{\omega}{^c_{p i_m}} \quad \text{（对协变指标的修正）} \\
+    & + \sum_{m} T_{i_1 \dots c \dots i_k} \tensor{\omega}{^{i_m}_{p c}} \quad \text{（对逆变指标的修正）}
+\end{split}
+\end{equation}
+注：上式中所有指标均为标架指标。
+
+\subsubsection{联络与曲率的直接计算}
+
+\n{计算技巧：\\
+相比于先计算Christoffel符号再投影，利用标架基底的非对易性（Non-holonomic）直接计算联络往往更加高效。}
+
+我们定义标架基底的换位子系数（结构常数）为 $\tensor{C}{^K_{IJ}}$，即 $[e_I, e_J] = \tensor{C}{^K_{IJ}} e_K$。则标架联络可通过以下显式（Koszul公式）直接计算：
+
+\begin{equation}
+    \omega_{ikj} = \frac{1}{2} \left( g(e_k, [e_i, e_j]) - g(e_i, [e_j, e_k]) - g(e_j, [e_k, e_i]) \right)
+\end{equation}
+其中 $\omega_{ikj} \equiv \eta_{il} \tensor{\omega}{^l_{kj}}$。
+
+进一步地，黎曼曲率张量的标架分量可以通过Cartan第二结构方程的坐标无关形式给出：
+\begin{equation}
+    \hat{R}^l{}_{ijk} = \langle \theta^l, (\nabla_{e_i}\nabla_{e_j} - \nabla_{e_j}\nabla_{e_i} - \nabla_{[e_i, e_j]}) e_k \rangle
+\end{equation}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, title=小结]
+    \textbf{为什么这么做？} \\
+    我们把难以处理的“时空弯曲”拆解成了两部分：
+    \begin{itemize}
+        \item \textbf{局部平直部分} ($\eta_{IJ}$)：由活动标架承担，物理定律在这里最简单。
+        \item \textbf{整体拓扑/弯曲部分} ($\omega, R$)：被打包进了标架之间的旋转关系中。
+    \end{itemize}
+    下一节我们将利用这个工具，把时空切成一片片的面包（超曲面），并定义描述切片弯曲的\textbf{外曲率} $K_{ij}$。
+\end{tcolorbox}

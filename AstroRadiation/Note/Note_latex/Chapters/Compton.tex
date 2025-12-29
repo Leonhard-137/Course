@@ -1,197 +1,651 @@
-\section{电子-光子散射}
-\subsection{逆康普顿散射}
 
-\begin{definition}[逆康普顿散射]
-逆康普顿散射指相对论电子与低频光子碰撞时，电子将部分动能转移给光子，使光子能量（频率）显著升高的过程。
-\end{definition}
+% \subsection{逆康普顿散射}
 
-为避免在实验室系 $K$ 中同时处理入射角与出射角带来的多参数复杂性，我们采用“两步法”：先在随电子运动的电子静止系 $\widetilde{K}$ 中描述散射动力学，再通过洛伦兹变换回到 $K$。设入射/出射光子在 $K$ 中频率分别为 $\nu_i,\nu_f$，其传播方向与电子速度方向夹角分别为 $\alpha_i,\alpha_f$。
+% \begin{definition}[逆康普顿散射]
+% 逆康普顿散射指相对论电子与低频光子碰撞时，电子将部分动能转移给光子，使光子能量（频率）显著升高的过程。
+% \end{definition}
 
-\n{核心思想：在 $\widetilde{K}$ 中散射关系最简单，而在 $K$ 中的“增能”主要来自两次相对论多普勒变换。}
+% 为避免在实验室系 $K$ 中同时处理入射角与出射角带来的多参数复杂性，我们采用“两步法”：先在随电子运动的电子静止系 $\widetilde{K}$ 中描述散射动力学，再通过洛伦兹变换回到 $K$。设入射/出射光子在 $K$ 中频率分别为 $\nu_i,\nu_f$，其传播方向与电子速度方向夹角分别为 $\alpha_i,\alpha_f$。
 
-\subsubsection{一般逆康普顿频率比}
-在电子静止系 $\widetilde{K}$ 中，散射满足标准康普顿关系。令 $\widetilde{\theta}$ 为 $\widetilde{K}$ 中入射与出射光子夹角，则
-\begin{align}
-\widetilde{\nu}_f
-=
-\frac{\widetilde{\nu}_i}{1+\dfrac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)} .
-\label{eq:compton-in-tilde}
-\end{align}
+% \n{核心思想：在 $\widetilde{K}$ 中散射关系最简单，而在 $K$ 中的“增能”主要来自两次相对论多普勒变换。}
 
-\begin{theorem}[逆康普顿散射的频率比]
-对逆康普顿过程，频率比满足
-\begin{align}
-\frac{\nu_f}{\nu_i}
-=
-\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)} .
-\label{eq:general-ics-theorem}
-\end{align}
+% \subsubsection{一般逆康普顿频率比}
+% 在电子静止系 $\widetilde{K}$ 中，散射满足标准康普顿关系。令 $\widetilde{\theta}$ 为 $\widetilde{K}$ 中入射与出射光子夹角，则
+% \begin{align}
+% \widetilde{\nu}_f
+% =
+% \frac{\widetilde{\nu}_i}{1+\dfrac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)} .
+% \label{eq:compton-in-tilde}
+% \end{align}
+
+% \begin{theorem}[逆康普顿散射的频率比]
+% 对逆康普顿过程，频率比满足
+% \begin{align}
+% \frac{\nu_f}{\nu_i}
+% =
+% \frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)} .
+% \label{eq:general-ics-theorem}
+% \end{align}
+% \end{theorem}
+% \begin{proof}
+% 将 \eqref{eq:doppler-to-tilde} 应用于入射与出射光子，得
+% \begin{align}
+% \widetilde{\nu}_i
+% =
+% \gamma\nu_i\left(1-\beta\cos\alpha_i\right),
+% \label{eq:nu_i_to_tilde}
+% \\
+% \widetilde{\nu}_f
+% =
+% \gamma\nu_f\left(1-\beta\cos\alpha_f\right).
+% \label{eq:nu_f_to_tilde}
+% \end{align}
+% 把 \eqref{eq:nu_i_to_tilde} 代入康普顿关系 \eqref{eq:compton-in-tilde}，并用 \eqref{eq:nu_f_to_tilde} 替换左边 $\widetilde{\nu}_f$，得到
+% \begin{align}
+% \gamma\nu_f\left(1-\beta\cos\alpha_f\right)
+% =
+% \frac{\gamma\nu_i\left(1-\beta\cos\alpha_i\right)}{1+\dfrac{h}{mc^2}\,\gamma\nu_i\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)} .
+% \label{eq:substitute-step}
+% \end{align}
+% 两边同除以 $\gamma$，并将分母移到左侧：
+% \begin{align}
+% \nu_f\left(1-\beta\cos\alpha_f\right)
+% \left[
+% 1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+% \right]
+% =
+% \nu_i\left(1-\beta\cos\alpha_i\right).
+% \label{eq:expand-step}
+% \end{align}
+% 对 \eqref{eq:expand-step} 展开并除以 $\nu_i$：
+% \begin{align}
+% \frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
+% +
+% \frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
+% \dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+% =
+% \left(1-\beta\cos\alpha_i\right).
+% \label{eq:collect-step}
+% \end{align}
+% 将 \eqref{eq:collect-step} 中的 $\nu_f/\nu_i$ 提取出来：
+% \begin{align}
+% \frac{\nu_f}{\nu_i}
+% \left[
+% \left(1-\beta\cos\alpha_f\right)
+% +
+% \left(1-\beta\cos\alpha_f\right)\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
+% \right]
+% =
+% \left(1-\beta\cos\alpha_i\right).
+% \label{eq:factor-step}
+% \end{align}
+% 因此
+% \begin{align}
+% \frac{\nu_f}{\nu_i}
+% =
+% \frac{1-\beta\cos\alpha_i}{\left(1-\beta\cos\alpha_f\right)\left[1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)\right]} .
+% \label{eq:intermediate-result}
+% \end{align}
+% 利用 \eqref{eq:doppler-to-tilde} 可把修正项写成以 $K$ 系频率为参量的等价形式。因为
+% \begin{align}
+% \frac{h\widetilde{\nu}_i}{mc^2}
+% =
+% \frac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right),
+% \label{eq:tilde-xi}
+% \end{align}
+% 将 \eqref{eq:tilde-xi} 代入 \eqref{eq:intermediate-result}，并把括号展开为“$1-\beta\cos\alpha_f$ 加上修正项”的形式：
+% \begin{align}
+% \left(1-\beta\cos\alpha_f\right)\left[1+\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)\right]
+% =
+% \left(1-\beta\cos\alpha_f\right)
+% +
+% \left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right).
+% \label{eq:denom-expand}
+% \end{align}
+% 将 $\widetilde{\nu}_i$ 用 \eqref{eq:nu_i_to_tilde} 表示并整理，便得到常用写法
+% \begin{align}
+% \left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)
+% =
+% \frac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right),
+% \label{eq:recoil-term}
+% \end{align}
+% 代回 \eqref{eq:intermediate-result} 即得
+% \begin{align}
+%     \boxed{
+% \frac{\nu_f}{\nu_i}
+% =
+% \frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)}
+% }
+% \end{align}
+% 与 \eqref{eq:general-ics-theorem} 一致。\n{分母最后一项体现康普顿回冲：当 $h\widetilde{\nu}_i\ll mc^2$ 时可忽略，便回到汤姆逊极限。}
+% \end{proof}
+
+% 电子静止系下如果光子满足低频条件：
+% \begin{align}
+% h\widetilde{\nu}_i \ll mc^2,
+% \label{eq:thomson-condition}
+% \end{align}
+% 此时 \eqref{eq:compton-in-tilde} 近似给出
+% \begin{align}
+% \widetilde{\nu}_f \approx \widetilde{\nu}_i .
+% \label{eq:thomson-elastic-tilde}
+% \end{align}
+% 由 \eqref{eq:doppler-to-tilde} 与 \eqref{eq:thomson-elastic-tilde} 得到实验室系频率比
+% \begin{align}
+% \boxed{
+% \nu_f
+% \approx
+% \nu_i\,\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}
+% }
+% \label{eq:ics-thomson-ratio}
+% \end{align}
+
+% \paragraph{能量范围与上界}
+% 光子能量的增益源自于电子的能量，所以光子的能量增益不应大于电子能量，
+% \begin{theorem}[汤姆逊极限下的能量上界]
+% 在满足 \eqref{eq:thomson-condition} 的汤姆逊极限中，
+% \begin{align}
+% 0\le h\nu_f \le 4\gamma^2\,h\nu_i,
+% \label{eq:range-theorem}
+% \end{align}
+% 上界在 $\alpha_i=\pi$ 且 $\alpha_f=0$ 时取到。
+% \end{theorem}
+% \begin{proof}
+% 由 \eqref{eq:ics-thomson-ratio}，
+% \begin{align}
+% \frac{\nu_f}{\nu_i}\approx \frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}.
+% \label{eq:ratio-start-proof}
+% \end{align}
+% 因 $\cos\alpha\in[-1,1]$，有
+% \begin{align}
+% 1-\beta\cos\alpha_i \le 1+\beta,
+% \label{eq:numerator-bound}
+% \\
+% 1-\beta\cos\alpha_f \ge 1-\beta.
+% \label{eq:denominator-bound}
+% \end{align}
+% 故
+% \begin{align}
+% \frac{\nu_f}{\nu_i}\lesssim \frac{1+\beta}{1-\beta}
+% =
+% \frac{(1+\beta)^2}{1-\beta^2}
+% =
+% \gamma^2(1+\beta)^2.
+% \label{eq:ratio-upper}
+% \end{align}
+% 当 $\gamma\gg 1$ 时 $\beta\to 1$，从而 $(1+\beta)^2\to 4$，得
+% \begin{align}
+% \frac{\nu_f}{\nu_i}\lesssim 4\gamma^2,
+% \label{eq:4g2}
+% \end{align}
+% 即
+% \begin{align}
+% \nu_f \lesssim 4\gamma^2\nu_i.
+% \end{align}
+% 取等要求分子最大且分母最小，即 $\cos\alpha_i=-1$（$\alpha_i=\pi$）与 $\cos\alpha_f=1$（$\alpha_f=0$）。此时
+% \begin{align}
+% \nu_{f,\max}\approx \nu_i\frac{1+\beta}{1-\beta}\approx 4\gamma^2\nu_i,
+% \label{eq:max-frequency}
+% \end{align}
+% 与 \eqref{eq:range-theorem} 一致。
+% \end{proof}
+% 一般考虑电子系下满足低频条件的情况，此时对于极端相对论电子，每次与光子作用都会使其增加$\gamma^2$倍。
+% 逆康普顿散射最重要的两个特征：
+% \begin{enumerate}[label=(\arabic*)]
+%     \item 方向性强
+%     \item 作用后光子能量为之前的$\gamma^2$倍
+% \end{enumerate}
+
+\chapter{逆康普顿散射}
+
+
+散射过程的物理本质是光子与电子的碰撞，而区分不同散射机制的核心判据在于两者能量的相对大小以及能量传递的流向。经典的汤姆逊散射对应于低能光子（$h\nu \ll m_e c^2$）与静止或非相对论电子的相互作用。在经典电动力学图景下，电子在入射光电磁场的驱动下做受迫振动，进而辐射出同频率的电磁波。这是一个弹性散射过程，光子在散射前后频率保持不变，因此辐射场的总功率守恒，仅光子的传播路径发生了改变（这在宏观上增加了光子的穿行路径从而增加了真吸收的概率）。其微分散射截面呈现前后对称的偶极分布，且总截面为常数（$\sigma_T$），不随入射光子能量变化。
+
+当光子或电子的能量提升，必须引入量子效应与相对论修正时，能量交换便成为主导因素。如果高能光子撞击静止电子，光子会将部分能量传递给电子，导致自身频率降低，这便是通常所说的康普顿散射，其宏观效果是辐射场能量的损失（吸收）。反之，当天体物理环境中存在大量高速运动的相对论电子时，高能电子会撞击低能光子并将动能转移给后者，使光子能量显著增加，这即是逆康普顿散射。与普通康普顿散射相反，逆康普顿散射是一个净辐射过程，它能有效地从电子“提取”能量并转化为高能辐射。
+\n{不过可以证明，需要使用到QED修正的情况是极为罕见的。}
+
+当入射光子能量极高时，简单的汤姆逊截面不再适用，我们需要通过量子电动力学推导出的Klein-Nishina公式来描述。该效应表明，随着入射光子能量的增加，微分散射截面会迅速减小，意味着高能光子发生散射的概率显著降低。同时，高能下的散射角分布不再像汤姆逊散射那样前后对称，而是表现出强烈的前向性，即散射光子更倾向于沿着原入射方向继续传播。
+\section{逆康普顿散射的辐射谱}
+理想汤姆逊散射中电子静止，散射后光子几乎不改变频率，即使考虑电子有一定程度的热运动，也仅仅是给线状的频率谱做一些细微的展宽。而对于康普顿散射，散射后光子频率完全取决于散射角。但是对于逆康普顿散射，我们需要同时考虑光子和电子的运动，光子频率的分布需要同时取决于入射角$\alpha_i$(入射光子和电子运动的夹角)和散射角$\alpha_f$(出射光子和电子运动的夹角)，并且这种出射光子频率会被相对论效应剧烈放大，使得逆康普顿散射的散射谱非单色性尤为明显。
+所以我们有必要讨论这种非单色性对光谱带来的影响，这一节会先讨论各向同性光子场被单一电子单次散射，而后是电子系的单次散射，在下一节我们会讨论更具有现实意义的多次散射过程。
+\subsection{单电子辐射谱}
+
+\n{核心方法：量子方法考虑碰撞 + 相对论坐标变换。}
+单电子逆康普顿散射（IC）的光谱计算不仅要考虑光子与电子的碰撞能量交换，还必须处理频率在不同坐标系下的相对论变换。
+
+\begin{theorem}[逆康普顿散射频率变换]
+设入射光子在实验室系（$K$ 系）中的频率为 $\nu_i$，入射角为 $\alpha_i$。散射后光子在实验室系中的频率 $\nu$ 由下式决定：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    \nu = \gamma^2 \nu_i (1 - \beta \cos \alpha_i)(1 + \beta \cos \alpha'_f)
+\end{equation}
+\end{tcolorbox}
+其中 $\alpha'_f$ 为电子静止系（$K'$ 系）中的散射光子与电子运动方向的夹角。
 \end{theorem}
-\begin{proof}
-将 \eqref{eq:doppler-to-tilde} 应用于入射与出射光子，得
-\begin{align}
-\widetilde{\nu}_i
-=
-\gamma\nu_i\left(1-\beta\cos\alpha_i\right),
-\label{eq:nu_i_to_tilde}
-\\
-\widetilde{\nu}_f
-=
-\gamma\nu_f\left(1-\beta\cos\alpha_f\right).
-\label{eq:nu_f_to_tilde}
-\end{align}
-把 \eqref{eq:nu_i_to_tilde} 代入康普顿关系 \eqref{eq:compton-in-tilde}，并用 \eqref{eq:nu_f_to_tilde} 替换左边 $\widetilde{\nu}_f$，得到
-\begin{align}
-\gamma\nu_f\left(1-\beta\cos\alpha_f\right)
-=
-\frac{\gamma\nu_i\left(1-\beta\cos\alpha_i\right)}{1+\dfrac{h}{mc^2}\,\gamma\nu_i\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)} .
-\label{eq:substitute-step}
-\end{align}
-两边同除以 $\gamma$，并将分母移到左侧：
-\begin{align}
-\nu_f\left(1-\beta\cos\alpha_f\right)
-\left[
-1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
-\right]
-=
-\nu_i\left(1-\beta\cos\alpha_i\right).
-\label{eq:expand-step}
-\end{align}
-对 \eqref{eq:expand-step} 展开并除以 $\nu_i$：
-\begin{align}
-\frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
-+
-\frac{\nu_f}{\nu_i}\left(1-\beta\cos\alpha_f\right)
-\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
-=
-\left(1-\beta\cos\alpha_i\right).
-\label{eq:collect-step}
-\end{align}
-将 \eqref{eq:collect-step} 中的 $\nu_f/\nu_i$ 提取出来：
-\begin{align}
-\frac{\nu_f}{\nu_i}
-\left[
-\left(1-\beta\cos\alpha_f\right)
-+
-\left(1-\beta\cos\alpha_f\right)\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)
-\right]
-=
-\left(1-\beta\cos\alpha_i\right).
-\label{eq:factor-step}
-\end{align}
-因此
-\begin{align}
-\frac{\nu_f}{\nu_i}
-=
-\frac{1-\beta\cos\alpha_i}{\left(1-\beta\cos\alpha_f\right)\left[1+\dfrac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right)\left(1-\cos\widetilde{\theta}\right)\right]} .
-\label{eq:intermediate-result}
-\end{align}
-利用 \eqref{eq:doppler-to-tilde} 可把修正项写成以 $K$ 系频率为参量的等价形式。因为
-\begin{align}
-\frac{h\widetilde{\nu}_i}{mc^2}
-=
-\frac{h\gamma\nu_i}{mc^2}\left(1-\beta\cos\alpha_i\right),
-\label{eq:tilde-xi}
-\end{align}
-将 \eqref{eq:tilde-xi} 代入 \eqref{eq:intermediate-result}，并把括号展开为“$1-\beta\cos\alpha_f$ 加上修正项”的形式：
-\begin{align}
-\left(1-\beta\cos\alpha_f\right)\left[1+\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)\right]
-=
-\left(1-\beta\cos\alpha_f\right)
-+
-\left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right).
-\label{eq:denom-expand}
-\end{align}
-将 $\widetilde{\nu}_i$ 用 \eqref{eq:nu_i_to_tilde} 表示并整理，便得到常用写法
-\begin{align}
-\left(1-\beta\cos\alpha_f\right)\frac{h\widetilde{\nu}_i}{mc^2}\left(1-\cos\widetilde{\theta}\right)
-=
-\frac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right),
-\label{eq:recoil-term}
-\end{align}
-代回 \eqref{eq:intermediate-result} 即得
-\begin{align}
-    \boxed{
-\frac{\nu_f}{\nu_i}
-=
-\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f+\dfrac{h\nu_i}{\gamma mc^2}\left(1-\cos\widetilde{\theta}\right)}
-}
-\end{align}
-与 \eqref{eq:general-ics-theorem} 一致。\n{分母最后一项体现康普顿回冲：当 $h\widetilde{\nu}_i\ll mc^2$ 时可忽略，便回到汤姆逊极限。}
-\end{proof}
 
-电子静止系下如果光子满足低频条件：
-\begin{align}
-h\widetilde{\nu}_i \ll mc^2,
-\label{eq:thomson-condition}
-\end{align}
-此时 \eqref{eq:compton-in-tilde} 近似给出
-\begin{align}
-\widetilde{\nu}_f \approx \widetilde{\nu}_i .
-\label{eq:thomson-elastic-tilde}
-\end{align}
-由 \eqref{eq:doppler-to-tilde} 与 \eqref{eq:thomson-elastic-tilde} 得到实验室系频率比
-\begin{align}
-\boxed{
-\nu_f
-\approx
-\nu_i\,\frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}
-}
-\label{eq:ics-thomson-ratio}
-\end{align}
-
-\paragraph{能量范围与上界}
-光子能量的增益源自于电子的能量，所以光子的能量增益不应大于电子能量，
-\begin{theorem}[汤姆逊极限下的能量上界]
-在满足 \eqref{eq:thomson-condition} 的汤姆逊极限中，
-\begin{align}
-0\le h\nu_f \le 4\gamma^2\,h\nu_i,
-\label{eq:range-theorem}
-\end{align}
-上界在 $\alpha_i=\pi$ 且 $\alpha_f=0$ 时取到。
-\end{theorem}
 \begin{proof}
-由 \eqref{eq:ics-thomson-ratio}，
-\begin{align}
-\frac{\nu_f}{\nu_i}\approx \frac{1-\beta\cos\alpha_i}{1-\beta\cos\alpha_f}.
-\label{eq:ratio-start-proof}
-\end{align}
-因 $\cos\alpha\in[-1,1]$，有
-\begin{align}
-1-\beta\cos\alpha_i \le 1+\beta,
-\label{eq:numerator-bound}
-\\
-1-\beta\cos\alpha_f \ge 1-\beta.
-\label{eq:denominator-bound}
-\end{align}
-故
-\begin{align}
-\frac{\nu_f}{\nu_i}\lesssim \frac{1+\beta}{1-\beta}
-=
-\frac{(1+\beta)^2}{1-\beta^2}
-=
-\gamma^2(1+\beta)^2.
-\label{eq:ratio-upper}
-\end{align}
-当 $\gamma\gg 1$ 时 $\beta\to 1$，从而 $(1+\beta)^2\to 4$，得
-\begin{align}
-\frac{\nu_f}{\nu_i}\lesssim 4\gamma^2,
-\label{eq:4g2}
-\end{align}
-即
-\begin{align}
-\nu_f \lesssim 4\gamma^2\nu_i.
-\end{align}
-取等要求分子最大且分母最小，即 $\cos\alpha_i=-1$（$\alpha_i=\pi$）与 $\cos\alpha_f=1$（$\alpha_f=0$）。此时
-\begin{align}
-\nu_{f,\max}\approx \nu_i\frac{1+\beta}{1-\beta}\approx 4\gamma^2\nu_i,
-\label{eq:max-frequency}
-\end{align}
-与 \eqref{eq:range-theorem} 一致。
+根据狭义相对论多普勒效应与量子碰撞理论，推导分为三步：
+首先变换到电子静止系，根据多普勒频率变换，电子感受到的入射频率 $\nu'_i$ 为：
+    \begin{equation}
+        \nu'_i = \gamma \nu_i (1 - \beta \cos \alpha_i)
+    \end{equation}
+    在汤姆逊极限（$\gamma h\nu_i \ll m_e c^2$）下，电子在 $K'$ 系中满足汤姆逊条件，散射前后能量近似守恒，即 $\nu'_f \approx \nu'_i$。
+    将散射光子变换回实验室系。注意此时角度需用 $K'$ 系中的 $\alpha'_f$ 表示：
+    \begin{equation}
+        \nu = \gamma \nu'_f (1 + \beta \cos \alpha'_f)
+    \end{equation}
+将 (1) 与 (2) 代入 (3)，并利用 $\nu'_f = \nu'_i$，即证。
 \end{proof}
-一般考虑电子系下满足低频条件的情况，此时对于极端相对论电子，每次与光子作用都会使其增加$\gamma^2$倍。
-逆康普顿散射最重要的两个特征：
-\begin{enumerate}[label=(\arabic*)]
-    \item 方向性强
-    \item 作用后光子能量为之前的$\gamma^2$倍
+\n{入射角和出射角的关系源自于四维动量守恒。}
+在天体物理环境中，入射光子场往往具有一定的能谱分布 $n_{ph}(\nu_i)$，假设这种能谱具有各向同性。那么，考虑最普适的非单色光子场
+给定频率$\nu$的辐射功率，是来自所有方向$\alpha_i$、所有频率$\nu_i$的入射光，对满足特定散射角$\alpha'_i$的积分。
+考虑单色入射场（频率为 $\nu_i$）和$\gamma \geq 1$的相对论电子，电子对入射场散射后的谱功率为：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    P(\nu) = 8\pi r_0^2 c h f(x) n_{ph}
+\end{equation}
+\end{tcolorbox}
+其中 $x = \nu / 4\gamma^2 \nu_i$，谱形函数 $f(x)$ 定义为：
+\begin{equation}
+    f(x) = \begin{cases} x + 2x^2 \ln x + x^2 - 2x^3 & 0 < x < 1 \\ 0 & x > 1 \end{cases}
+\end{equation}
+\n{源自Blumenthal \& Gold 1970, Rev. Mod Phys. 42,237}
+若入射场具有能谱分布 $n_{ph}(\nu_i)$，则需要对入射频率进行积分，得到总辐射谱分布：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    P(\nu) = 8\pi r_0^2 c h \int f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) n_{ph}(\nu_i) d\nu_i
+\end{equation}
+\end{tcolorbox}
+电子对各向同性的单色光子场的逆康普顿散射谱有以下特征。
+\n{最大光子数频率？}
+\begin{itemize}
+    \item \textbf{最大频率}：在 $x>1$ 时 $f(x)=0$，源于散射频率最大不超过 $4\gamma^2 \nu_i$。
+    \item \textbf{最大辐射功率频率}：功率峰值位于 $x=0.61$ 处，$\nu_{P_{max}} = 2.4 \gamma^2 \nu_i$
+    \item \textbf{低频行为}：当 $\nu \ll \gamma^2 \nu_i$ 时，$P(\nu) \propto \nu$，谱分布相当弥散。
+\end{itemize}
+\n{逆康普顿散射和同步辐射的特征频率都正比于$\gamma^2$，区别是逆康普顿散射的基准频率是入射频率$\nu_i$而同步辐射的基准频率是拉莫频率$\nu_L = eB/2\pi mc$。
+进行多电子的电子系分析可以使用特征频率进行单色近似。}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{figs/scatterVSgamma.png}
+    \caption{散射谱对电子能标$\gamma$的依赖}
+\end{figure}
+\section{电子系的逆康普顿散射谱}
+在已知单电子对单色场的微观散射谱 $f(x)$ 后，求解电子系辐射谱的核心逻辑是：将单电子辐射作为基本微元，通过对电子数密度分布 $N(\gamma)$ 或入射光子数密度分布 $n_{ph}(\nu_i)$ 进行加权积分。
+
+根据研究对象的复杂度，通常存在以下四个递进的层次：
+\begin{enumerate}
+    \item \textbf{单电子对单色场}（全退化情况）：
+    \begin{equation}
+        P(\nu) = 8\pi r_0^2 ch f(x) n_{ph}
+    \end{equation}
+    \item \textbf{电子系对单色场}（对电子分布积分）：
+    \begin{equation}
+        P(\nu) = 8\pi r_0^2 ch \int N(\gamma) f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) n_{ph} d\gamma
+    \end{equation}
+    \item \textbf{单电子对非单色场}（对光子场分布积分）：
+    \begin{equation}
+        P(\nu) = 8\pi r_0^2 ch \int f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) n_{ph}(\nu_i) d\nu_i
+    \end{equation}
+    \item \textbf{电子系对非单色场}（普适双重积分形式）：
+    \begin{equation}
+        P(\nu) = 8\pi r_0^2 ch \iint N(\gamma) f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) n_{ph}(\nu_i) d\nu_i d\gamma
+    \end{equation}
 \end{enumerate}
+
+在数学上，只需将 $N(\gamma)$ 或 $n_{ph}(\nu_i)$ 取为对应的 $\delta$ 函数（如 $N(\gamma) = N_0 \delta(\gamma - \gamma_0)$），普适的积分公式（4）即可退化为特定的低维积分形式（2）或（3），直至最基础的单色场公式（1）。
+
+\subsection{幂律数密度分布谱的逆康普顿散射谱}
+天体物理中存在大量的幂律分布，这使得逆康普顿辐射在极宽的频段内呈现出整齐的幂律特征。
+
+\n{$\nu / 4\gamma_2^2 \nu_i \to 0$ 意味着所关注的光子能量远小于电子 IC 化的能量上限；而 $\nu / 4\gamma_1^2 \nu_i \ge 1$ 保证了观测频率大于逆康普顿化后的光子能量下限。}
+\begin{example}[幂律分布电子系对单色场的散射]
+假设电子能谱满足 $N(\gamma) = N_0 \gamma^{-p}$ ($\gamma_1 < \gamma < \gamma_2$)，入射光子为单色 $\nu_i$。此时仅需对电子分布积分：
+\begin{equation}
+    P(\nu) = 8\pi r_0^2 ch N_0 n_{ph} \int_{\gamma_1}^{\gamma_2} \gamma^{-p} f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) d\gamma
+\end{equation}
+当电子能量的上下限足够宽时，上述积分的上下限可以近似视为 $0$ 到 $1$（即 $x$ 的全定义域），使得积分项变为一个与观测频率 $\nu$ 无关的常数。在此极限下，辐射谱功率呈现幂律特征：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    P(\nu) \propto \nu^{-\frac{p-1}{2}}
+\end{equation}
+\end{tcolorbox}
+\n{若不满足上述能量波段极限（如靠近截止频率），则积分限对 $\nu$ 敏感，辐射谱将偏离幂律。}
+\end{example}
+
+\begin{example}[单电子对多色幂律光子场的散射]
+考虑单一能量 $\gamma$ 的电子散射一个幂律分布的软光子场 $n_{ph}(\nu_i) = n_0 \nu_i^{-q}$ ($\nu_1 < \nu_i < \nu_2$)。利用变量替换 $x = \nu / (4\gamma^2 \nu_i)$，推导过程如下：
+\begin{equation}
+    \begin{aligned}
+        P(\nu) &= 8\pi r_0^2 ch \int f(x) n_{ph}\left(\frac{\nu}{4\gamma^2 x}\right) \left| \frac{d\nu_i}{dx} \right| dx \\
+        &= 8\pi r_0^2 ch \int f(x) n_0 \left( \frac{\nu}{4\gamma^2 x} \right)^{-q} \left( \frac{\nu}{4\gamma^2 x^2} \right) dx \\
+        &= 8\pi r_0^2 ch n_0 \left( \frac{\nu}{4\gamma^2} \right)^{-q+1} \int f(x) x^{q-2} dx \propto \nu^{-q+1}
+    \end{aligned}
+\end{equation}
+在 $4\gamma^2 \nu_1 \le \nu \ll 4\gamma^2 \nu_2$ 波段，幂律分布的辐射场的逆康普顿散射谱仍保持原来的幂律形式。注意这里结果与光子光谱指数 $q$ 的关系。
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    P(\nu) \propto \nu^{-q+1}
+\end{equation}
+\end{tcolorbox}
+\end{example}
+
+上述极限波段（如 $4\gamma_1^2 \nu_1 \le \nu \ll 4\gamma_2^2 \nu_2$）在物理上意味着我们关注的光子是那些在逆康普顿化过程中通过高速电子获得了显著的能量提升，但尚未达到由电子能量上限所决定的“硬截断”的部分。
+第一个例子中的另一个极限——$4\gamma_1^2 \nu_i\leq \nu \ll 4\gamma_2^2\nu_i$的含义类似，这种极限下谱线呈现出平滑的幂律特征，是天体物理观测中最应该关注的一般情况。
+
+\paragraph{幂律分布电子系对幂律分布各向同性入射光子场的逆康普顿散射谱} 
+当电子能谱 $N(\gamma)$ 与入射光子场 $n_{ph}(\nu_i)$ 同时呈现幂律分布时，总辐射谱的计算涉及对两组分布函数的双重积分。根据前文的启示，我们关注的焦点应当是那些在逆康普顿化过程中获得了显著能量增益、且频率远未触及能量截断的光子。在双重分布的情况下，系统的演化特征由四个关键能标决定：
+\begin{equation}
+    \nu_{11} = 4\gamma_1^2\nu_1, \quad \nu_{12} = 4\gamma_1^2\nu_2, \quad \nu_{21} = 4\gamma_2^2\nu_1, \quad \nu_{22} = 4\gamma_2^2\nu_2
+\end{equation}
+这四个能标分别代表了初始能量为 $\nu_1$ 和 $\nu_2$ 的光子在逆康普顿散射中所能达到的能量上下限。为了解析复杂的积分行为，我们必须分析系统所处的能标波段。
+
+\subparagraph{情况一：电子能谱极宽，逆康普顿效应占主导}
+
+在天体物理最普遍的情形中，相对论电子的能量跨度往往远大于入射光子场的频率跨度，即满足条件 $\nu_2/\nu_1 \ll (\gamma_2/\gamma_1)^2$。
+\begin{proof}
+电子系对非单色各向同性场的总功率公式：
+\begin{equation}
+    P(\nu) = 8\pi r_0^2 ch \int_{\nu_{i,1}}^{\nu_{i,2}} n_{ph}(\nu_i) d\nu_i \int_{\gamma_1}^{\gamma_2} N_0 \gamma^{-p} f\left( \frac{\nu}{4\gamma^2 \nu_i} \right) d\gamma
+\end{equation}
+针对内层关于 $\gamma$ 的积分，进行变量替换。令 $x = \nu / (4\gamma^2 \nu_i)$，则：
+\begin{equation}
+    \gamma = \left( \frac{\nu}{4\nu_i} \right)^{1/2} x^{-1/2}, \quad d\gamma = -\frac{1}{2} \left( \frac{\nu}{4\nu_i} \right)^{1/2} x^{-3/2} dx
+\end{equation}
+代入原式，并将积分限变换为 $x$（在核心波段下，对应电子能量范围涵盖了 $x$ 从 $0$ 到 $1$ 的完整定义域）：
+\begin{equation}
+    \begin{aligned}
+        \int_{\gamma_1}^{\gamma_2} \gamma^{-p} f(x) d\gamma &= \int_0^1 \left( \frac{\nu}{4\nu_i} \right)^{-p/2} x^{p/2} \cdot f(x) \cdot \left[ \frac{1}{2} \left( \frac{\nu}{4\nu_i} \right)^{1/2} x^{-3/2} \right] dx \\
+        &= \frac{1}{2} \left( \frac{\nu}{4\nu_i} \right)^{-\frac{p-1}{2}} \int_0^1 f(x) x^{\frac{p-3}{2}} dx
+    \end{aligned}
+\end{equation}
+最后将此结果代回总功率公式，提取频率项 $\nu$，并将常数项积分合并，即得最终解析式。
+\end{proof}
+
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+对于极宽的幂律电子系（$\gamma_2 \to \infty$），逆康普顿辐射谱表现为幂律形式：
+\begin{equation}
+    P(\nu) = \pi r_0^2 ch N_0 2^{p+3} \frac{p^2+4p+11}{(p+3)^2(p+1)(p+5)} \nu^{-\frac{p-1}{2}} \int \nu_i^{\frac{p-1}{2}} n_{ph}(\nu_i) d\nu_i
+\end{equation}
+\end{tcolorbox}
+
+\n{只要幂律电子的能量覆盖足够广，就足以“抹平”入射光子场的原始辐射规律。}
+在这种情况下由于逆康普顿散射具有极高的能量增益（$\propto \gamma^2$），辐射出的高能光子能量绝大部分源自电子的动能，而非初始光子的内能。入射场 $n_{ph}(\nu_i)$ 的具体分布细节被消解，而仅作为一个总能量权重的常数项（即公式末尾的积分项）进入结果。最终观测到的辐射谱指数 $\alpha = (p-1)/2$ 只依赖于电子的统计分布。
+逆康普顿散射与同步辐射在观测特征一致，因为二者都把入射光子频率提升$\gamma^2$倍，
+\begin{itemize}
+    \item \textbf{同步辐射}：$\nu \sim \gamma^2 \nu_L$（拉莫频率，由磁场决定）；
+    \item \textbf{逆康普顿散射}：$\nu \sim \gamma^2 \nu_i$（入射频率，由光场决定）。
+\end{itemize}
+
+\begin{example}[幂律电子系对黑体辐射场的散射]
+在很多宇宙环境中（如活动星系核或宇宙线传播），入射的光子场往往具有黑体谱（Blackbody Spectrum）特征。根据黑体辐射公式，能量密度满足 $U_{ph}(\nu_i) = 4\pi B(\nu_i)/c$，对应的入射光子数密度分布为：
+\begin{equation}
+    n_{ph}(\nu_i) d\nu_i = \frac{8\pi \nu_i^2}{c^3} \frac{1}{e^{h\nu_i/kT} - 1} d\nu_i
+\end{equation}
+将此分布代入情况一的普适辐射功率公式，可以发现结果不依赖于黑体谱，它只影响入射场频率的加权积分 $\int \nu_i^{(p-1)/2} n_{ph}(\nu_i) d\nu_i$。
+
+\begin{proof}
+利用变量代换 $\xi = h\nu_i / kT$，积分项可以改写为：
+\begin{equation}
+    \int_0^{\infty} \nu_i^{\frac{p-1}{2}} \frac{8\pi \nu_i^2}{c^3} \frac{1}{e^{h\nu_i/kT}-1} d\nu_i \propto T^{\frac{p+5}{2}} \int_0^{\infty} \frac{\xi^{\frac{p+3}{2}}}{e^\xi - 1} d\xi
+\end{equation}
+上式中的定积分与黎曼 $\zeta$ 函数及 $\Gamma$ 函数相关，对于确定的电子能谱指数 $p$，该积分是一个常数。
+\end{proof}
+
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+幂律高能电子系对黑体谱散射后的辐射功率为：
+\begin{equation}
+    P(\nu) \approx 4.2 \times 10^{-40} N_0 b(p) T^3 \left( \frac{\nu}{2.1 \times 10^{10} T} \right)^{-\frac{p-1}{2}} \, \text{erg s}^{-1} \text{cm}^{-3} \text{Hz}^{-1}
+\end{equation}
+其中 $b(p)$ 是由 $p$ 决定的系数，包含了对黑体分布积分的常数项贡献。黎曼$\zeta$函数表示为$\zeta(s) = \sum_{n=1}^{\infty} n^{-s}$
+\end{tcolorbox}
+
+\n{可见黑体辐射经幂律电子散射后，仍保持幂律谱特征。}
+通过该实例可以看出，“抹平”效应再次发挥了主导作用。尽管原始入射场是极其弯曲、具有特定峰值的普朗克分布，但在核心频段内，散射后的辐射谱完全丢失了黑体谱的指数截止特征，转而变成由电子能谱决定的幂律谱，其谱指数依然严格遵循 $\alpha = (p-1)/2$。
+\n{但是这个积分过程中辐射谱获取了黑体谱的一个特征——与温度相关。}
+\end{example}
+
+\subparagraph{情况二：光子场能谱极宽或电子能量较窄（$\nu_2/\nu_1 \gg \left(\gamma_2/\gamma_1\right)^2$）}
+当光子初始能量跨度极大，逆康普顿化效应不足以远超高能入射光子能量时，系统的四个特征能标排序变为：
+\begin{equation}
+    4\gamma_1^2\nu_1 < 4\gamma_2^2\nu_1 < 4\gamma_1^2\nu_2 < 4\gamma_2^2\nu_2
+\end{equation}
+
+
+在此排序下，不存在一个理想区间能让所有光子同时满足“完全增益且不被截断”。然而，若满足条件 $4\gamma_2^2\nu_1 \leq \nu \ll 4\gamma_1^2\nu_2$，该区间内低能入射光子已被逆康普顿化上限截断，而高能入射光子尚未获取显著增益甚至会被相对低能的电子损耗能量。
+此时，在这两种力量的平衡下出射辐射场也能达到幂律谱分布。
+
+\begin{proof}
+在上述波段内，我们先对光子场分布进行积分。设 $n_{ph}(\nu_i) = n_0 \nu_i^{-q}$，$N(\gamma) = N_0 \gamma^{-p}$。总谱功率为：
+\begin{equation}
+    P(\nu) \propto \int_{\gamma_1}^{\gamma_2} N(\gamma) d\gamma \int_{\nu_1}^{\nu_2} n_0 \nu_i^{-q} f\left(\frac{\nu}{4\gamma^2 \nu_i}\right) d\nu_i
+\end{equation}
+利用变量替换 $x = \nu / (4\gamma^2 \nu_i)$，内层关于 $\nu_i$ 的积分变形为：
+\begin{equation}
+    \int n_0 \left( \frac{\nu}{4\gamma^2 x} \right)^{-q} f(x) \left( \frac{\nu}{4\gamma^2 x^2} \right) dx = n_0 \left( \frac{\nu}{4\gamma^2} \right)^{-q+1} \int_0^1 f(x) x^{q-2} dx
+\end{equation}
+将此结果带入外层关于 $\gamma$ 的积分：
+\begin{equation}
+    P(\nu) \propto \nu^{-q+1} \int_{\gamma_1}^{\gamma_2} N(\gamma) (\gamma^2)^{q-1} d\gamma \propto \nu^{-q+1} \int_{\gamma_1}^{\gamma_2} \gamma^{2q-2-p} d\gamma
+\end{equation}
+后项积分为常数，所以\textcolor{red}{散射光子场的频率谱取决于入射光子的幂律！}
+\end{proof}
+\n{但 $\nu_2/\nu_1 \gg (\gamma_2/\gamma_1)^2$在天体物理中通常不容易满足，因为相对论电子的 $\gamma$ 跨度往往极大。}
+
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+在 $4\gamma_2^2\nu_1 \leq \nu \ll 4\gamma_1^2\nu_2$ 极限下，幂律入射场的逆康普顿散射谱仍保持幂律形式：
+\begin{equation}
+    P(\nu) \propto \nu^{-q+1}
+\end{equation}
+\end{tcolorbox}
+\n{当频率不在上述特定区间时，积分上下限将成为频率 $\nu$ 的函数，导致总辐射谱偏离幂律形式，呈现出复杂的非热演化特征。}
+
+总结而言，能标区间 $4\gamma_1^2\nu_2 \le \nu \ll 4\gamma_2^2\nu_1$ 的存在是天体物理中最值得关注的情况，它容易满足且反映了光子在逆康普顿化过程中有效获取了电子动能，但又不至于因为触及电子能量上限（$\gamma_2$）而产生硬截断。这种“中间态”是观测中幂律谱形成的最普遍物理根源。
+\section{多次散射的情况}
+\n{比如软光子场穿过极为稀薄的高能电子云}
+除非是分布极为稀薄、散射光深$\tau_s \ll 1$致使散射概率极低，否则逆康普顿散射只作用一次这种情况并没有什么现实意义。所以，我们需要讨论多种散射的情况。
+\subsection{康普顿 y 参数和能量放大率}
+
+\subsubsection{康普顿 y 参数}
+
+多次散射的辐射在原则上是各单次散射结果通过辐射转移过程后的叠加。而多次散射是否能显著改变光子的出射能谱，主要取决于两个核心因素：一是每次散射中光子能量的平均相对改变量，二是光子逃逸出介质前所遭受的非弹性散射的平均次数 $N$。
+
+为了衡量多次散射效应的重要性，我们定义康普顿 $y$ 参数（Compton $y$-parameter）：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    y \equiv \frac{\Delta \varepsilon}{\varepsilon} \cdot N
+\end{equation}
+\end{tcolorbox}
+\n{该公式适用于单次散射能量变化率较低的情形。}
+
+根据 $y$ 参数的大小，我们可以将多次散射的影响分为以下两种情况：
+\begin{itemize}
+    \item 当 $y \gtrsim 1$ 时：康普顿散射将显著改变入射光子的能量和光谱，此时多次散射效应变得至关重要。
+    \item 当 $y \ll 1$ 时：光子穿过介质后的出射能谱改变较小，在非主导情况下通常可以忽略。
+\end{itemize}
+
+\paragraph{光子单次散射的平均能量变化}
+光子穿行介质时，每散射一次所获得的能量增益或损失，取决于电子的动力学状态。我们分为以下三种情况讨论：
+
+\begin{enumerate}[label = (\arabic*)]
+    \item \textbf{光子与静止电子的散射}
+    在此情况下，光子始终损失能量给电子（康普顿冷却）。
+    \begin{proof}
+    已知静止电子的康普顿散射公式为 $\varepsilon_1 = \varepsilon / [1 + \frac{\varepsilon}{mc^2}(1-\cos\theta)]$。在低能极限 $\varepsilon \ll mc^2$ 下，利用泰勒级数展开：
+    \begin{equation}
+        \varepsilon_1 \approx \varepsilon \left[ 1 - \frac{\varepsilon}{mc^2}(1-\cos\theta) \right] \implies \Delta \varepsilon \approx -\frac{\varepsilon^2}{mc^2}(1-\cos\theta)
+    \end{equation}
+    对散射角 $\theta$ 取平均，由于汤姆逊微分散射截面前后对称，$\langle \cos\theta \rangle = 0$，故平均能量变化率为：
+    \begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+    \begin{equation}
+        \frac{\Delta \varepsilon}{\varepsilon} = -\frac{\varepsilon}{mc^2}
+    \end{equation}
+    \end{tcolorbox}
+    \end{proof}
+\n{这说明电子开始运动，且在电子静止系中可以看作汤姆逊散射。}
+    \item \textbf{光子与非相对论热电子的散射}
+    此时系统满足 $kT \ll mc^2$ 且 $\gamma h\nu \ll mc^2$。在电子共动系中，散射可视为汤姆逊散射（频率不变），
+    但在实验室系中需考虑多普勒频移带来的热增益。其能量变化率可粗略的设为形式：$\frac{\Delta \varepsilon}{\varepsilon} = -\frac{\varepsilon}{mc^2} + \alpha \frac{kT}{mc^2}$，可以证明$\alpha = 4$。
+    \n{光子被热电子散射的平均能量变化取决于入射光子能量 $\varepsilon$ 和电子平均热运动动能 $4kT$ 的相对大小。}
+    \begin{proof}
+    当光子场与电子达到完全热平衡时，光子服从维恩分布（其实是玻色分布，但是取低温极限）$n(\varepsilon) \propto \varepsilon^2 e^{-\varepsilon/kT}$。因为系统平衡，光子统计意义上不再改变能量$\langle \Delta \varepsilon \rangle = 0$。在该分布下：
+    \begin{equation}
+        \langle \varepsilon \rangle = \frac{\int_0^\infty \varepsilon^3 e^{-\varepsilon/kT} d\varepsilon}{\int_0^\infty \varepsilon^2 e^{-\varepsilon/kT} d\varepsilon} = 3kT, \quad \langle \varepsilon^2 \rangle = \frac{\int_0^\infty \varepsilon^4 e^{-\varepsilon/kT} d\varepsilon}{\int_0^\infty \varepsilon^2 e^{-\varepsilon/kT} d\varepsilon} = 12(kT)^2
+    \end{equation}
+    代入平衡条件 $0 = -\langle \varepsilon^2 \rangle / mc^2 + \alpha kT \langle \varepsilon \rangle / mc^2$，得：
+    \begin{equation}
+        -12(kT)^2 + \alpha kT (3kT) = 0 \implies 3\alpha = 12 \implies \alpha = 4
+    \end{equation}
+    由此得到非相对论热散射的相对能量变化率：
+    \begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+    \begin{equation}
+        \left( \frac{\Delta \varepsilon}{\varepsilon} \right)_{NR} = \frac{4kT - \varepsilon}{mc^2}
+    \end{equation}
+    \end{tcolorbox}
+    \end{proof}
+
+    \begin{itemize}
+        \item 若 $4kT > \varepsilon$：光子从电子获得能量，表现为逆康普顿加热。
+        \item 若 $4kT < \varepsilon$：光子损失能量给电子，表现为电子热运动导致的康普顿冷却。
+    \end{itemize}
+
+\item \textbf{光子与极端相对论热电子的散射}
+    当电子温度极高，进入极端相对论极限（$\gamma \gg 1$ 或 $kT \gg mc^2$）时，逆康普顿增益将占据绝对主导。在此极限下，单次散射的能量增益可以通过统计平均进行估算。
+\n{这不是什么严格的推导，而且它假设截面始终为 $\sigma_T$，没有考虑高能情况下的Klein-Nishima修正。}
+    \begin{proof}
+        首先，利用单电子辐射功率与碰撞率的比值估算单次碰撞的平均能量增益。已知单电子逆康普顿辐射功率为 $P_{com} = \frac{4}{3}\sigma_T c \gamma^2 U_{ph}$，碰撞率为 $\dot{N} = \sigma_T c n_{ph}$。则单次碰撞的平均能量增益 $\Delta \varepsilon$ 为：
+        \begin{equation}
+            \Delta \varepsilon \approx \frac{P_{com}}{\dot{N}} = \frac{4}{3}\gamma^2 \frac{U_{ph}}{n_{ph}} = \frac{4}{3}\gamma^2 \langle \varepsilon \rangle \implies \frac{\Delta \varepsilon}{\varepsilon} \approx \frac{4}{3}\gamma^2
+        \end{equation}
+
+        为了获得系统整体的平均效应，需对电子的能量分布进行统计平均。在极端相对论极限下，电子服从麦克斯韦-朱特纳分布，其简化的超相对论形式为：
+        \begin{equation}
+            N(\gamma) d\gamma = \frac{1}{2\Theta^3} \gamma^2 e^{-\gamma/\Theta} d\gamma, \quad (\text{其中 } \Theta = \frac{kT}{mc^2})
+        \end{equation}
+        利用该分布计算洛伦兹因子的平方平均值 $\langle \gamma^2 \rangle$：
+        \begin{equation}
+            \langle \gamma^2 \rangle = \frac{\int_0^\infty \gamma^2 \cdot \gamma^2 e^{-\gamma/\Theta} d\gamma}{\int_0^\infty \gamma^2 e^{-\gamma/\Theta} d\gamma} = \frac{\int_0^\infty \gamma^4 e^{-\gamma/\Theta} d\gamma}{\int_0^\infty \gamma^2 e^{-\gamma/\Theta} d\gamma}
+        \end{equation}
+        利用积分公式 $\int_0^\infty x^n e^{-ax} dx = n!/a^{n+1}$，可得：
+        \begin{equation}
+            \langle \gamma^2 \rangle = \frac{4! \Theta^5}{2! \Theta^3} = 12 \Theta^2 = 12 \left( \frac{kT}{mc^2} \right)^2
+        \end{equation}
+        将 $\langle \gamma^2 \rangle$ 代入增益率公式，最终得到每次碰撞光子的平均相对能量变化：
+        \begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+        \begin{equation}
+            \left( \frac{\Delta \varepsilon}{\varepsilon} \right)_{R} = \frac{4}{3} \langle \gamma^2 \rangle = 16 \left( \frac{kT}{mc^2} \right)^2
+        \end{equation}
+        \end{tcolorbox}
+    \end{proof}
+\end{enumerate}
+
+\paragraph{光子的平均散射次数 $N$}
+决定康普顿 $y$ 参数的另一个核心物理量是光子在介质中发生非弹性散射的平均次数 $N$。该数值主要由介质的散射光深 $\tau_{es}$ 决定。
+
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    N = \max\{\tau_{es}, \tau_{es}^2\}
+\end{equation}
+\end{tcolorbox}
+\n{在光学薄 ($\tau_{es} < 1$) 时，$N \approx \tau_{es}$；在光学厚 ($\tau_{es} > 1$) 时，光子通过扩散过程逃逸，$N \approx \tau_{es}^2$。}
+
+其中，$\tau_{es}$ 为电子的散射光深，定义为：
+\begin{equation}
+    \tau_{es} = n_e \sigma_T R = \rho K_{es} R
+\end{equation}
+此处 $\rho$ 为质量密度，$R$ 为散射介质的尺度，$K_{es} = \sigma_T / m_p \approx 0.4 \, \text{cm}^2 \text{g}^{-1}$ 为质量吸收系数（对于纯氢电离气体）。
+\paragraph{康普顿 $y$ 参数的一般表示}
+综合前述对单次散射能量增益与平均散射次数 $N$ 的讨论，康普顿 $y$ 参数在不同动力学极限下的具体表达式如下：
+
+\begin{enumerate}
+    \item \textbf{非相对论热电子} ($\varepsilon \ll 4kT \ll mc^2$):
+    \begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+    \begin{equation}
+        y_{NR} = \frac{4kT}{mc^2} \max\{\tau_{es}, \tau_{es}^2\}
+    \end{equation}
+    \end{tcolorbox}
+
+    \item \textbf{相对论热电子} ($\gamma \gg 1$):
+    \begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+    \begin{equation}
+        y_{R} = 16 \left( \frac{kT}{mc^2} \right)^2 \max\{\tau_{es}, \tau_{es}^2\}
+    \end{equation}
+    \end{tcolorbox}
+\end{enumerate}
+
+在实际计算中，为了平滑地连接非相对论与相对论波段，有些文献会将上述两种极限情况综合在一起，给出如下近似表示：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    y \approx (\tau_{es} + \tau_{es}^2) \left[ 16 \left( \frac{kT}{mc^2} \right)^2 + \frac{4kT}{mc^2} - \frac{\varepsilon}{mc^2} \right]
+\end{equation}
+\end{tcolorbox}
+$y$ 参数是衡量光子流穿过介质后能量变化显著性的核心判据。它不仅取决于介质的几何性质（通过光深 $\tau_{es}$ 反映），还取决于介质的特征温度。
+\begin{derivationnote}[有吸收介质对散射次数的影响]
+在既有散射又有吸收的实际介质中，光子在被吸收前所能经历的散射次数会受到显著限制。此时光子的运动不再仅由散射决定，而受限于“有效位移”。
+\begin{enumerate}
+    \item \textbf{有效平均自由程}：若有效平均自由程 $l_*$ 小于介质尺度，其表达式为：
+    \begin{equation}
+        l_* = [\alpha_\nu (\alpha_\nu + \sigma_\nu)]^{-1/2}
+    \end{equation}
+    其中 $\alpha_\nu$ 和 $\sigma_\nu$ 分别为吸收系数和散射系数。
+    \item \textbf{有效散射光深修正}：考虑吸收后，电子的有效散射光深减少为：
+    \begin{equation}
+        \tau_{es}(\nu) = \rho k_{es} l_*(\nu) = \frac{k_{es} / k_a(\nu)}{\sqrt{1 + k_{es}(\nu) / k_a}}
+    \end{equation}
+    \item \textbf{$y$ 参数的频率依赖性}：由于自由-自由吸收（Free-free absorption）等机制与频率 $\nu$ 密切相关，这导致表征散射次数的 $\tau_{es}$ 也变为频率的函数。因此，在吸收不可忽略的情况下，康普顿 $y$ 参数将具有频率依赖性，从而导致出射能谱在低频端（吸收强处）发生复杂的形变。
+\end{enumerate}
+\end{derivationnote}
+
+\subsubsection{能量放大率}
+
+光子每经历一次散射，其能量都会发生改变。散射后的能量与散射前的能量之比被定义为光子的平均能量放大率 $A$。
+
+\paragraph{单次散射放大率}
+对于热电子系统，根据电子的动力学状态，单次散射放大率可表示为：
+\begin{itemize}
+    \item \textbf{非相对论极限}：$A_{NR} \equiv \frac{\varepsilon_1}{\varepsilon} \approx 1 + \frac{4kT - \varepsilon}{mc^2}$
+    \item \textbf{极端相对论极限}：$A_{R} \equiv \frac{\varepsilon_1}{\varepsilon} \approx 16 \left( \frac{kT}{mc^2} \right)^2$
+\end{itemize}
+
+为了方便计算，通常采用如下合并后的近似表达式描述单次散射的平均能量放大率：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    A \equiv \frac{\varepsilon_1}{\varepsilon} \approx 1 + \frac{4kT}{mc^2} - \frac{\varepsilon}{mc^2} + \left( \frac{4kT}{mc^2} \right)^2
+\end{equation}
+\end{tcolorbox}
+
+\paragraph{多次散射的累积效应}
+若一个光子在逃逸出介质前经历了 $k$ 次散射，其能量演化遵循指数增长规律。
+经历 $k$ 次散射后的能量 $\varepsilon_k$ 为：
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5pt, arc=0pt]
+\begin{equation}
+    \varepsilon_k = A^k \varepsilon_i \approx \left[ 1 + \frac{4kT}{mc^2} - \frac{\varepsilon}{mc^2} + \left( \frac{4kT}{mc^2} \right)^2 \right]^k \varepsilon_i
+\end{equation}
+\end{tcolorbox}
+\n{在某些文献中，$A^k$ 也被称为“有限介质的能量放大率”，表示光子穿过散射气体逃逸后总的能量放大倍数。}
+
+\paragraph{放大率与 $y$ 参数的关联}
+当单次散射的能量变化较小（即 $|\Delta \varepsilon| / \varepsilon \ll 1$）时，利用级数展开 $(1+x)^k \approx 1+kx$，可以将累积放大效果与康普顿 $y$ 参数建立直接联系：
+\n{所以能量放大率刻画了能量放大倍数，而康普顿y参数刻画了对原始能量的偏移。}
+\begin{equation}
+    \varepsilon_k \approx \left( 1 + k \frac{4kT - \varepsilon}{mc^2} \right) \varepsilon_i = (1 + y) \varepsilon_i
+\end{equation}
+
+\section{光子在电子云中的演化：康普顿化}
+
+前文已经系统论述了单次逆康普顿散射的微观物理图景，并引入了康普顿 $y$ 参数来刻画多次散射对系统能量增益的显著性。在宏观尺度上，光子在电子云中的演化（康普顿化过程）取决于两个核心维度的竞争：一是光子发生碰撞概率的高低（由散射光深 $\tau_{es}$ 决定的光学薄与光学厚情况），二是单次逆康普顿散射效率的高低（由电子热动能决定的非相对论性与相对论性情况）。
+
+根据这两个维度的组合，我们可以将康普顿化过程分为四种物理模型进行论述，其基本特征总结如下表：
+
+\begin{table}[H]
+\centering
+\caption{不同物理极限下的康普顿化特征总结}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|m{2.5cm}|m{5.5cm}|m{5.5cm}|}
+\hline
+\textbf{能标 / 几率} & \textbf{光学薄 ($\tau_{es} < 1$)} & \textbf{光学厚 ($\tau_{es} \gtrsim 1$)} \\ \hline
+\textbf{非相对论 ($kT \ll mc^2$)} & \textbf{[微扰区]} $y$ 参数极小。光子能量增益微弱，能谱基本保持入射场形状。 & \textbf{[扩散区]} $y$ 可达 1 级。通过大量微小增益累积实现“热化”，遵循 Kompaneets 扩散方程。 \\ \hline
+\textbf{相对论 ($kT \gtrsim mc^2$)} & \textbf{[爆发区]} $y$ 可很大。通过几何级数概率叠加产生反直觉的幂律谱，指数 $\alpha \approx -\ln \tau_{es} / \ln A$。 & \textbf{[不稳定区]} 效率极高但演化极快。电子动能瞬间抽干，常伴随正负电子对产生，迅速转化为非相对论厚介质。 \\ \hline
+\end{tabular}
+\end{table}
+在实际的辐射源（如吸积盘日冕、活动星系核喷流）中，这四种情况往往对应于不同的演化波段或空间区域。下文将重点针对具有显著观测特征的情况进行深入讨论。
