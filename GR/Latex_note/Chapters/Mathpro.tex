@@ -61,11 +61,12 @@ $a, b$ 或 $\mu, \nu$ 为坐标指标，使用 $g_{ab}$ 升降。}
 \begin{equation}
     \nabla_{e_K} e_J = \tensor{\omega}{^I_{K J}} e_I
 \end{equation}
+\n{YZ都是向量场，所以g(Y, Z)是一个流形上的函数，Xg(Y, Z)表示X向量作用在这个函数上，几何含义是沿X方向的方向导数。}
 \begin{theorem}[Koszul 公式与联络的唯一性]
     在伪黎曼流形 $(M, g)$ 上，若仿射联络 $\nabla$ 满足以下两个条件：
     \begin{enumerate}
-        \item \textbf{度规适配} (Metric Compatibility)：$\nabla g = 0$，即 $X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)$；
-        \item \textbf{无挠性} (Torsion-free)：$T(X, Y) = 0$，即 $\nabla_X Y - \nabla_Y X = [X, Y]$；
+        \item \textbf{度规适配} ：$\nabla g = 0$，即 $X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)$；
+        \item \textbf{无挠性} ：$T(X, Y) = 0$，即 $\nabla_X Y - \nabla_Y X = [X, Y]$；
     \end{enumerate}
     则对于任意矢量场 $X, Y, Z$，联络由度规 $g$ 和李括号 $[\cdot, \cdot]$ 唯一确定，满足以下公式（Koszul 公式）：
     \begin{equation}
