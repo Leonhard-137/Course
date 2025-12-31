@@ -1,75 +1,103 @@
-\section{引力塌缩与黑洞形成：数学基础}
+\section{数学基础：仿射联络与黎曼几何}
 
+\subsection{协变导数与仿射联络}
+弯曲时空中的矢量场没有全局平行的性质，即沿着不同路径移动一个矢量，最终得到的结果可能不同。为了量化这种变化，我们需要引入仿射联络的概念。
 
-\subsection{活动标架视角*}
-\subsubsection{活动标架的定义}
-坐标基底下，弯曲时空的度规往往是复杂且相互耦合的，这对计算极为不利。但是引入对时空间两点距离的另一种解读观点——活动标架，把度规张量的弯曲信息转移到基底上。考虑三维欧几里得空间的两点距离：
-\begin{equation}
-    ds^2 = dr^2 + r^2 d\theta^2 + r^2 \sin^2\theta d\phi^2
-\end{equation}
-这个线元给定了一个几何对象——度规张量 $g$，作为一个双线性映射，度规可以根据我们选择的基底不同，写成不同的张量积展开形式。
-\paragraph{坐标基底视角}
-首先看最熟悉的自然坐标基底。我们选取自然坐标的对偶基底 $\{dr, d\theta, d\phi\}$，此时度规张量 $g$ 展开为：
-\begin{equation}
-    g = 1 (dr \otimes dr) + r^2 (d\theta \otimes d\theta) + r^2\sin^2\theta (d\phi \otimes d\phi)
-\end{equation}
-\n{虽然这里解释活动标架利用了坐标系，但是活动标架就是一个满足特殊性质的矢量场集合（切空间的正交归一基），与坐标系的选取无关。}
-所以在这个视角下，时空的弯曲特性被完全体现在度规张量的分量$g_{\mu\nu}$中。
-\paragraph{活动标架视角}
-现在我们换一种思路。如果我们根据当前的几何特性，人为构造一组归一化的 1-形式基底（定义为余标架）$\{\theta^1, \theta^2, \theta^3\}$，其中 $\theta^1 = dr, \theta^2 = r d\theta, \theta^3 = r\sin\theta d\phi$。此时，度规张量 $g$ 的展开形式为：
-\begin{equation}
-    g = (\theta^1 \otimes \theta^1) + (\theta^2 \otimes \theta^2) + (\theta^3 \otimes \theta^3) = \delta_{ij} \theta^i \otimes \theta^j
-\end{equation}
-所以在这种视角下，度规于平直时空中的度规无异，时空的弯曲性质被体现在向量的基底上。
-\n{指标约定：\\
-$I, J$ 为标架指标（0-3），使用 $\eta_{IJ}$ 升降；\\
-$a, b$ 或 $\mu, \nu$ 为坐标指标，使用 $g_{ab}$ 升降。}
-
-\begin{definition}[正交标架与余标架]
-    取一个四维洛伦兹流形，若该流形上存在4个矢量场 $\{e_I\}_{I=0,1,2,3}$，在时空中处处满足：
-    \begin{equation}
-        g(e_I, e_J) = \eta_{IJ} = \text{diag}(-1, 1, 1, 1)
-    \end{equation}
-    则称 $\{e_I\}$ 为一组\textbf{正交标架}。
+\begin{definition}[仿射联络]
+    在光滑流形 $M$ 上，\textbf{仿射联络} $\nabla$ 是一个映射 $\nabla: \mathfrak{\chi}(M) \times \mathfrak{\chi}(M) \to \mathfrak{\chi}(M)$，其中 $\mathfrak{\chi}(M)$ 表示流形上的矢量场。$\nabla(X, Y)$ 记作 $\nabla_X Y$，称为 $Y$ 沿 $X$ 方向的\textbf{协变导数}。
     
-    其对应的对偶矢量场——余标架 $\{\theta^I\}$ 定义为满足下式的1-形式场：
+    对于任意光滑函数 $f, g \in C^\infty(M)$ 和任意矢量场 $X, Y, Z \in \mathfrak{\chi}(M)$，$\nabla$ 需满足以下三条公理：
+    \begin{enumerate}
+        \item \textbf{方向的代数性}：$\nabla_{fX + gY} Z = f\nabla_X Z + g\nabla_Y Z $。这表明导数只依赖于 $X$ 在该点的局部方向。
+        \item \textbf{对象的线性性}：$ \nabla_X (aY + bZ) = a\nabla_X Y + b\nabla_X Z \quad (a, b \in \mathbb{R}) $。
+        \item \textbf{莱布尼兹律}：$ \nabla_X (fY) = (Xf)Y + f\nabla_X Y $。
+    \end{enumerate}
+\end{definition}
+
+在定义了对矢量的作用后，我们需要将协变导数算子 $\nabla_X$ 推广到流形上所有的几何对象。
+
+\paragraph{标量与形式}
+对于标量函数 $f \in C^\infty(M)$（即 $(0,0)$ 型张量），协变导数定义为普通的方向导数：
+\begin{equation}
+    \nabla_X f \equiv Xf
+\end{equation}
+
+对 1-形式，利用莱布尼兹律和标量导数的定义，我们可以唯一地确定 $\nabla_X$ 对 1-形式的作用。
+
+\begin{theorem}[1-形式的协变导数]
+    给定流形 $M$ 上的 1-形式 $\omega$，其沿矢量场 $X$ 的协变导数 $\nabla_X \omega$ 满足：
     \begin{equation}
-        \theta^I(e_J) = \delta^I_J
+        (\nabla_X \omega)(Y) = X(\omega(Y)) - \omega(\nabla_X Y)
+    \end{equation}
+    其中 $Y$ 是任意矢量场。
+\end{theorem}
+
+\begin{proof}
+    考虑标量函数 $f = \omega(Y)$（1-形式与矢量的缩并）。根据协变导数对张量积/缩并需满足莱布尼兹律的要求：
+    \begin{equation}
+        \nabla_X (\omega(Y)) = (\nabla_X \omega)(Y) + \omega(\nabla_X Y)
+    \end{equation}
+    由于左边项 $\nabla_X (\omega(Y))$ 等于标量导数 $X(\omega(Y))$，我们通过移项即可得到：
+    \begin{equation*}
+        (\nabla_X \omega)(Y) = X(\omega(Y)) - \omega(\nabla_X Y)
+    \end{equation*}
+    由于此式对任意 $Y$ 都成立，它唯一地定义了 1-形式的协变导数 $\nabla_X \omega$。
+\end{proof}
+
+\paragraph{任意张量场}
+可以将协变导数推广到任意 $(k, l)$ 型张量场。
+
+\begin{definition}[张量场的协变导数]
+    对于任意 $(k, l)$ 型张量场 $S$，其沿矢量 $X$ 的协变导数 $\nabla_X S$ 是唯一的 $(k, l)$ 型张量，定义为：
+    \begin{equation}
+    \begin{split}
+        (\nabla_X S)(\omega, \dots, Y) = \quad & \underbrace{X(S(\omega, \dots, Y))}_{\text{整体标量的导数}} \\
+        & - \underbrace{S(\nabla_X \omega, \dots, Y)}_{\text{减去形式(对偶)部分的修正}} - \dots \\
+        & - \underbrace{S(\omega, \dots, \nabla_X Y)}_{\text{减去矢量部分的修正}}
+    \end{split}
+    \end{equation}
+\end{definition}
+\subsection{曲率和挠率}
+
+\begin{definition}[挠率张量]
+    给定流形上的仿射联络 $\nabla$，定义\textbf{挠率张量} $T$ 为一个 $(1, 2)$ 型张量场。它接受两个矢量场 $X, Y \in \chi(M)$ 并输出一个矢量场，定义如下：
+    \begin{equation}
+        T(X, Y) := \nabla_X Y - \nabla_Y X - [X, Y]
     \end{equation}
 \end{definition}
 
-利用这组基底，时空度规 $g_{ab}$ 可以被分解为平直度规 $\eta_{IJ}$ 与余标架的组合。这在数学上等价于将切空间局部平直化：
-\begin{equation}
-    g_{ab} = \eta_{IJ} \theta^I_a \theta^J_b = -\theta^0_a \theta^0_b + \theta^1_a \theta^1_b + \theta^2_a \theta^2_b + \theta^3_a \theta^3_b
-\end{equation}
-
-\n{协变导数的求和用了爱因斯坦求和约定。}
-\subsubsection{协变导数、联络和曲率张量}
-\n{比起之前的定义，这里更加抽象，可以说前面的是一种特殊形式，更容易理解。}
-\paragraph{活动标架的非交换性} 原本选取的坐标基底，基向量是对易的，即 $[\partial_\mu, \partial_\nu] = 0$，或者说：
-\begin{align*}
-    \partial_\mu \partial_\nu f - \partial_\nu \partial_\mu f = 0
-\end{align*}
-但是对活动标架而言并非如此，活动标架是“带着系数的坐标基底”，还是以球坐标为例子，取其中两个基向量 $e_2 = \frac{1}{r} \partial_\theta, e_3 = \frac{1}{r\sin\theta} \partial_\phi$，则它们的对易子为：
-\begin{align*}
-    [e_2, e_3] = -\frac{\cot\theta}{r} e_3 \neq 0
-\end{align*}
-因为系数的存在，“偏导”不再具备可交换性，这也是时空弯曲特性被纳入基底的体现。
-
-\paragraph{协变导数与标架联络} 弯曲时空中的矢量场，没有全局平行的性质，就是说我们沿着不同路径移动一个矢量，最终得到的结果可能不同。这一点对标架也不例外，因此，需要了解标架在流形上移动时的变化。
-定义\textbf{协变导数}$\nabla_{e_K}e_J$，表示沿着标架方向 $e_K$ 平移基向量 $e_J$ 时的变化率。由于标架具备正交归一性，所以协变导数可以展开为：
-\begin{equation}
-    \nabla_{e_K} e_J = \tensor{\omega}{^I_{K J}} e_I
-\end{equation}
-\n{YZ都是向量场，所以g(Y, Z)是一个流形上的函数，Xg(Y, Z)表示X向量作用在这个函数上，几何含义是沿X方向的方向导数。}
-\begin{theorem}[Koszul 公式与联络的唯一性]
-    在伪黎曼流形 $(M, g)$ 上，若仿射联络 $\nabla$ 满足以下两个条件：
-    \begin{enumerate}
-        \item \textbf{度规适配} ：$\nabla g = 0$，即 $X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)$；
-        \item \textbf{无挠性} ：$T(X, Y) = 0$，即 $\nabla_X Y - \nabla_Y X = [X, Y]$；
-    \end{enumerate}
-    则对于任意矢量场 $X, Y, Z$，联络由度规 $g$ 和李括号 $[\cdot, \cdot]$ 唯一确定，满足以下公式（Koszul 公式）：
+\begin{definition}[曲率张量]
+    黎曼曲率张量 $R$ 是一个从 $\chi(M) \times \chi(M) \times \chi(M) \to \chi(M)$ 的三线性映射。对于任意三个矢量场 $X, Y, Z \in \chi(M)$，曲率算子的作用定义为：
     \begin{equation}
+        R(X, Y)Z := (\nabla_X \nabla_Y  - \nabla_Y \nabla_X  - \nabla_{[X, Y]} )Z
+    \end{equation}
+\end{definition}
+
+曲率算子 $R(X, Y)$ 本质上是一个线性算子，当我们将三个具体的基底矢量塞入该映射时，结果仍然是一个矢量。黎曼曲率的数值分量，需要使用1-形式对其输出结果进行投影提取。
+
+根据上述映射定义，选定矢量 $\{e_I\}$ 及其对偶矢量 $\{\theta^L\}$，曲率的具体分量可以通过配对得到：
+\begin{equation}
+    \tensor{R}{^L_{I J K}} = \langle \theta^L, R(e_I, e_J) e_K \rangle
+\end{equation}
+\n{该分量定量描述了在由标架方向 $e_I$ 和 $e_J$ 确定的无穷小回路内，测试矢量 $e_K$ 沿该回路平移一圈后在 $e_L$ 方向上的偏转量。}
+将其展开为具体的算子作用形式：
+\begin{equation}
+    \tensor{R}{^L_{I J K}} = \langle \theta^L, (\nabla_{e_I} \nabla_{e_J} - \nabla_{e_J} \nabla_{e_I} - \nabla_{[e_I, e_J]}) e_K \rangle
+\end{equation}
+
+\subsection{基本定理：Levi-Civita 联络}
+如果我们对联络施加两个自然的物理限制，那么联络就是唯一的。
+
+\begin{theorem}[Koszul公式]
+    在伪黎曼流形 $(M, g)$ 上，存在唯一的仿射联络 $\nabla$ 同时满足以下两个条件：
+    \begin{enumerate}
+        \item \textbf{度规适配性}：$\nabla g = 0$，即 $X(g(Y, Z)) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)$；
+        \item \textbf{无挠性}：挠率张量在流形上处处为零，即对于任意矢量场 $X, Y$，有：
+        \[ T(X, Y) = 0 \implies \nabla_X Y - \nabla_Y X = [X, Y] \]
+    \end{enumerate}
+    
+    满足上述条件的联络称为 \textbf{Levi-Civita 联络}，其显式表达式为：
+    \begin{equation} \label{eq:general_koszul}
     \begin{aligned}
         2g(\nabla_X Y, Z) &= X g(Y, Z) + Y g(Z, X) - Z g(X, Y) \\
         &\quad - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
@@ -78,97 +106,365 @@ $a, b$ 或 $\mu, \nu$ 为坐标指标，使用 $g_{ab}$ 升降。}
 \end{theorem}
 
 \begin{proof}
-    利用度规适配性，我们将 $X g(Y, Z)$ 的指标进行三次轮换（Permutation）：
+    对 $X g(Y, Z)$ 的展开式，循环轮换指标得到：
     \begin{align}
-        X g(Y, Z) &= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) \label{eq:koszul1} \\
-        Y g(Z, X) &= g(\nabla_Y Z, X) + g(Z, \nabla_Y X) \label{eq:koszul2} \\
-        -Z g(X, Y) &= -g(\nabla_Z X, Y) - g(X, \nabla_Z Y) \label{eq:koszul3}
+        X g(Y, Z) &= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) \label{eq:k1} \\
+        Y g(Z, X) &= g(\nabla_Y Z, X) + g(Z, \nabla_Y X) \label{eq:k2} \\
+        -Z g(X, Y) &= -g(\nabla_Z X, Y) - g(X, \nabla_Z Y) \label{eq:k3}
     \end{align}
-    
-    将上述三式相加：$\eqref{eq:koszul1} + \eqref{eq:koszul2} + \eqref{eq:koszul3}$。
-    利用度规的对称性 $g(A, B) = g(B, A)$，我们将右边的项重新分组，配对成可以用无挠条件（$\nabla_A B - \nabla_B A = [A, B]$）化简的形式：
-    
-    \begin{itemize}
-        \item \textbf{第一组}（我们要的项）：
-        \begin{align*}
-            g(\nabla_X Y, Z) + g(Z, \nabla_Y X) &= g(\nabla_X Y, Z) + g(Z, \nabla_X Y - [X, Y]) \\
-                                                &= 2g(\nabla_X Y, Z) - g(Z, [X, Y]) 
-        \end{align*}
-        
-        \item \textbf{第二组}：
-        \[ g(Y, \nabla_X Z) - g(Y, \nabla_Z X) = g(Y, [X, Z]) = -g(Y, [Z, X]) \]
-        
-        \item \textbf{第三组}：
-        \[ g(\nabla_Y Z, X) - g(X, \nabla_Z Y) = g(X, [Y, Z]) \]
-    \end{itemize}
-    
-    整理方程，将所有李括号项移到等式一边，即得证：
-    \[
-    2g(\nabla_X Y, Z) = X g(Y, Z) + Y g(Z, X) - Z g(X, Y) - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
-    \]
+    三者相加，得到：
+    \begin{equation}
+    \begin{aligned}
+        \text{LHS} &= X g(Y, Z) + Y g(Z, X) - Z g(X, Y) \\
+        \text{RHS} &= \underbrace{g(\nabla_X Y, Z) + g(Z, \nabla_Y X)}_{\text{第一组}} \\
+                    &\quad + \underbrace{g(Y, \nabla_X Z) - g(Y, \nabla_Z X)}_{\text{第二组}} \\
+                    &\quad + \underbrace{g(X, \nabla_Y Z) - g(X, \nabla_Z Y)}_{\text{第三组}}
+    \end{aligned}
+    \end{equation}
+
+    现在我们逐组处理这些项：
+    \begin{enumerate}
+        \item \textbf{第一组}：利用无挠性有：
+        \[ g(\nabla_X Y, Z) + g(Z, \nabla_X Y - [X, Y]) = 2g(\nabla_X Y, Z) - g(Z, [X, Y]) \]
+        \item \textbf{第二组}：提取公因子 $Y$ 并利用无挠性：
+        \[ g(Y, \nabla_X Z - \nabla_Z X) = g(Y, [X, Z]) \]
+        \item \textbf{第三组}：同理：
+        \[ g(X, \nabla_Y Z - \nabla_Z Y) = g(X, [Y, Z]) \]
+    \end{enumerate}
+
+    将处理后的三组结果代回原方程，并将所有李括号项移至等式右边，即得到：
+    \begin{equation}
+    \begin{split}
+        2g(\nabla_X Y, Z) &= X g(Y, Z) + Y g(Z, X) - Z g(X, Y) \\
+        &\quad - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
+    \end{split}
+    \end{equation}
 \end{proof}
 
-\begin{derivationnote}[推论：标架联络的直接计算]
-    将上述定理应用到活动标架 $\{e_I\}$ 上。令 $X=e_i, Y=e_j, Z=e_k$。
-    由于活动标架是正交归一的，$g(e_I, e_J) = \eta_{IJ}$ 是常数。常数的方向导数为零：
-    \[ e_k g(e_i, e_j) = 0 \quad (\text{前三项全部消失}) \]
-    于是公式瞬间简化为笔记中提到的形式（注意指标对应关系）：
+\newpage
+
+\section{活动标架视角}
+
+\subsection{活动标架的定义与度规分解}
+坐标基底下，弯曲时空的度规往往是复杂且相互耦合的，这对计算极为不利。但是引入对时空间两点距离的另一种解读观点——活动标架，把度规张量的弯曲信息转移到基底上。
+
+先以欧几里得空间为例，然后过渡到广义相对论更为关心的洛伦兹流形上。考虑三维欧几里得空间的两点距离：
+\begin{equation}
+    ds^2 = dr^2 + r^2 d\theta^2 + r^2 \sin^2\theta d\phi^2
+\end{equation}
+这个线元给定了一个几何对象——度规张量 $g$，作为一个双线性映射，度规可以根据我们选择的基底不同，写成不同的张量积展开形式。
+
+\paragraph{坐标基底视角}
+首先看最熟悉的自然坐标基底。我们选取自然坐标的对偶基底 $\{dr, d\theta, d\phi\}$，此时度规张量 $g$ 展开为：
+\begin{equation}
+    g = 1 (dr \otimes dr) + r^2 (d\theta \otimes d\theta) + r^2\sin^2\theta (d\phi \otimes d\phi)
+\end{equation}
+在这个视角下，时空的弯曲特性被完全体现在度规张量的分量 $g_{\mu\nu}$ 中。
+
+\paragraph{活动标架视角}
+现在我们换一种思路。如果我们根据当前的几何特性，人为构造一组归一化的 1-形式基底（定义为余标架）$\{\theta^1, \theta^2, \theta^3\}$，其中 $\theta^1 = dr, \theta^2 = r d\theta, \theta^3 = r\sin\theta d\phi$。此时，度规张量 $g$ 的展开形式为：
+\begin{equation}
+    g = (\theta^1 \otimes \theta^1) + (\theta^2 \otimes \theta^2) + (\theta^3 \otimes \theta^3) = \delta_{ij} \theta^i \otimes \theta^j
+\end{equation}
+在这种视角下，度规展现出局部的闵氏形式，时空的弯曲性质被体现在向量的基底上。
+
+\begin{definition}[正交标架与余标架]
+    取一个四维洛伦兹流形，若该流形上存在4个矢量场 $\{e_I\}_{I=0,1,2,3}$，在时空中处处满足：
     \begin{equation}
-        \omega_{kij} \equiv g(e_k, \nabla_{e_i} e_j) = \frac{1}{2} \left( g(e_k, [e_i, e_j]) - g(e_i, [e_j, e_k]) + g(e_j, [e_k, e_i]) \right)
+        g(e_I, e_J) = \eta_{IJ} = \text{diag}(-1, 1, 1, 1)
     \end{equation}
-    这表明：\textbf{标架联络完全来源于基底的非对易性（换位子）。}
-\end{derivationnote}
-
-
-\begin{definition}[标架联络系数]
-    给定适配于度规的协变导数 $\nabla_a$，标架联络系数定义为：
+    则称 $\{e_I\}$ 为一组\textbf{正交标架}。
+    
+    其对应的对偶矢量场——余标架 $\{\theta^I\}$ 定义为满足下式的 1-形式场：
     \begin{equation}
-        \tensor{\omega}{^I_{K J}} := (\theta^I)_\mu (e_K)^\nu \nabla_\nu (e_J)^\mu = \langle \theta^I, \nabla_{e_K} e_J \rangle
+        \langle \theta^I, e_J \rangle = \delta^I_J
+    \end{equation}
+    \n{注：$\langle \theta, e \rangle$ 表示 1-形式作用于矢量的自然配对，即 $\theta(e)$。}
+\end{definition}
+
+利用这组基底，时空度规 $g_{ab}$ 可以被分解为平直度规 $\eta_{IJ}$ 与余标架的组合。这在数学上等价于将切空间局部平直化：
+\begin{equation}
+    g_{ab} = \eta_{IJ} \theta^I_a \theta^J_b = -\theta^0_a \theta^0_b + \theta^1_a \theta^1_b + \theta^2_a \theta^2_b + \theta^3_a \theta^3_b
+\end{equation}
+
+\subsection{标架联络}
+
+\paragraph{活动标架的非交换性} 
+原本选取的坐标基底，基向量是对易的，即 $[\partial_\mu, \partial_\nu] = 0$。但是对活动标架而言并非如此，活动标架是“带着系数的坐标基底”，其对易子往往不为零：
+\begin{align*}
+    [e_I, e_J] \neq 0
+\end{align*}
+因为系数的存在，“偏导”不再具备可交换性，这也是时空弯曲特性被纳入基底的体现。这也意味着我们需要了解标架在流形上移动时的变化。
+\paragraph{标架联络系数}
+$\{e_I\}$ 构成了切空间的完备基底，任意基向量 $e_J$ 沿 $e_K$ 方向的协变导数 $\nabla_{e_K} e_J$ 可展开为：
+\begin{equation}
+    \nabla_{e_K} e_J = \tensor{\omega}{_K^I_J} e_I
+\end{equation}
+利用对偶配对 $\langle \theta^I, \cdot \rangle$ 作用于上式两边，即可提取展开系数。
+
+\begin{definition}[标架联络系数的分量表示]
+    标架联络 $\tensor{\omega}{_K^I_J}$ 是协变导数在活动标架下的分量表示。我们将\textbf{求导方向指标 $K$ 固定在最前面}：
+    \begin{equation}
+        \tensor{\omega}{_K^I_J} := \langle \theta^I, \nabla_{e_K} e_J \rangle
+    \end{equation}
+    若引入局部坐标系 $\{x^\mu\}$，利用标架场分量 $e_K^\nu$ 与余标架分量 $\theta^I_\mu$，上式可展开为显式计算形式：
+    \begin{equation}
+        \tensor{\omega}{_K^I_J} = e_K^\nu \theta^I_\mu \nabla_\nu e_J^\mu 
     \end{equation}
 \end{definition}
 
-该系数的物理含义是：当沿 $e_K$ 方向平移时，基向量 $e_J$ 向 $e_I$ 方向偏转的分量。
+\begin{theorem}[Levi-Civita联络下的标架联络系数]
+    在满足度规适配性（$\nabla g = 0$）与无挠性（$\tau = 0$）的条件下，标架联络系数 $\tensor{\omega}{_K^I_J}$ 与全下指标形式 $\omega_{KIJ}$ 完全由标架基底的李括号确定。
+\end{theorem}
 
-\begin{derivationnote}[联络的反对称性]
-    对归一化条件 $g(e_I, e_J) = \eta_{IJ}$ 求协变导数，可得：
-    \[ \omega_{IJK} + \omega_{JIK} = 0 \]
-    这意味着 $\omega_{IJK}$ 关于前两个指标是反对称的。这种反对称性不仅减少了独立分量的个数，也深刻反映了其作为洛伦兹群（旋转与贝斯特）生成元的代数结构。
-\end{derivationnote}
+\begin{proof}
+    根据 Levi-Civita 联络满足的 Koszul 公式：
+    \begin{equation}
+    \begin{aligned}
+        2g(\nabla_X Y, Z) &= X g(Y, Z) + Y g(Z, X) - Z g(X, Y) \\
+        &\quad - g(X, [Y, Z]) + g(Y, [Z, X]) + g(Z, [X, Y])
+    \end{aligned}
+    \end{equation}
+    令 $X=e_K, Y=e_J, Z=e_I$。由于活动标架场满足正交归一性，度规分量 $g(e_I, e_J) = \eta_{IJ}$ 为常数，因此其方向导数项消失：
+    \begin{equation}
+        e_K g(e_J, e_I) = 0, \quad e_J g(e_I, e_K) = 0, \quad e_I g(e_K, e_J) = 0
+    \end{equation}
+    定义全下指标形式的联络系数为 $\omega_{KIJ} \equiv g(e_I, \nabla_{e_K} e_J)$。代入 Koszul 公式后得到：
+    \begin{equation}
+        2\omega_{KIJ} = - g(e_K, [e_J, e_I]) + g(e_J, [e_I, e_K]) + g(e_I, [e_K, e_J])
+    \end{equation}
+    整理各项顺序，得到全下指标形式的显式表达式：
+    \begin{equation}
+        \omega_{KIJ} = \frac{1}{2} \left( g(e_I, [e_K, e_J]) - g(e_K, [e_J, e_I]) + g(e_J, [e_I, e_K]) \right)
+    \end{equation}
+    利用平直度规 $\eta^{IL}$ 提升第一个指标，即可得到作为基底展开系数的标架联络：
+    \begin{align}
+        \tensor{\omega}{_K^I_J} &= \eta^{IL} \omega_{KLJ} \nonumber \\
+        &= \frac{1}{2} \eta^{IL} \left( g(e_L, [e_K, e_J]) - g(e_K, [e_J, e_L]) + g(e_J, [e_L, e_K]) \right)
+    \end{align}
+    在此条件下，由 $\nabla g = 0$ 可直接推导出标架联络关于后两个指标具有反对称性：
+    \begin{equation}
+        \omega_{KIJ} = - \omega_{KJI} \implies \omega_{K(IJ)} = 0
+    \end{equation}
+    这证明了在正交标架场中，联络的几何效应体现为基底在切空间内的局部旋转。
+\end{proof}
 
-在此框架下，任意张量场 $T$ 的协变导数均可投影到标架上。其标架分量 $T_{i_1 \dots i_k ; p}$ 的计算规则如下：
+\subsection{标架下的协变导数、曲率}
+\n{分量就是沿该方向的协变导数算子作用后在标架下的投影。}
+在选定标架 $\{e_I\}$ 及其对偶余标架 $\{\theta^J\}$ 后，张量的协变导数便有了具体的分量计算公式。
+
+\begin{theorem}[张量协变导数的标架分量公式]
+    对于任意 $(k, l)$ 型张量场 $T$，其沿标架方向 $e_P$ 的全协变导数分量 $T^{J_1 \dots J_l}_{I_1 \dots I_k ; P}$ 显式计算公式为：
+    \n{给张量选定具体标架和余标架后，本质上是为张量提供了具体的切向量和 1-形式输入，使映射整体变为从流形到实数集的映射。因此，分量本身是标量函数，协变导数对其作用退化为普通的方向导数。}
+    \begin{equation}
+    \begin{aligned}
+        \nabla_P T^{J_1 \dots J_l}_{I_1 \dots I_k} = \quad & e_P(T^{J_1 \dots J_l}_{I_1 \dots I_k}) \\
+        & - \tensor{\omega}{_P^C_{I_1}} T^{J_1 \dots J_l}_{C \dots I_k} - \dots - \tensor{\omega}{_P^C_{I_k}} T^{J_1 \dots J_l}_{I_1 \dots C} \\
+        & + \tensor{\omega}{_P^{J_1}_C} T^{C \dots J_l}_{I_1 \dots I_k} + \dots + \tensor{\omega}{_P^{J_l}_C} T^{J_1 \dots C}_{I_1 \dots I_k}
+    \end{aligned}
+    \end{equation}
+    其中第一个下标 $P$ 始终为求导方向指标。
+\end{theorem}
+
+
+\begin{proof}
+    张量的标架分量定义为张量作为多重线性映射作用于基底的结果：
+    \begin{equation}
+        T^{J_1 \dots J_l}_{I_1 \dots I_k} = T(\theta^{J_1}, \dots, \theta^{J_l}, e_{I_1}, \dots, e_{I_k})
+    \end{equation}
+    由协变导数的莱布尼兹律：
+    \begin{equation} \label{eq:tensor_derivation_leibniz}
+    \begin{aligned}
+        \nabla_{e_P} \left[ T(\theta^{J_1}, \dots, e_{I_k}) \right] = \quad & (\nabla_{e_P} T)(\theta^{J_1}, \dots, e_{I_k}) \\
+        & + \sum_{n=1}^l T(\dots, \nabla_{e_P} \theta^{J_n}, \dots) \\
+        & + \sum_{m=1}^k T(\dots, \nabla_{e_P} e_{I_m}, \dots)
+    \end{aligned}
+    \end{equation}
+    其中：
+    \begin{enumerate}
+        \item $\nabla_{e_P} [ T(\dots) ] = e_P(T^{J_1 \dots J_l}_{I_1 \dots I_k})$，括号内的张量在给定所有的切矢量和1形式后成为标量函数。
+        \item 此为标架联络定义 $\nabla_{e_P} e_{I_m} = \tensor{\omega}{_P^C_{I_m}} e_C$。
+        \n{1形式对切矢量的作用其实就是缩并，满足莱布尼兹律。}
+        \item 利用 $\langle \theta^{J}, e_I \rangle = \delta^{J}_I$，把协变导数作用其上：
+        \[ \langle \nabla_{e_P} \theta^{J}, e_I \rangle + \langle \theta^{J}, \nabla_{e_P} e_I \rangle = 0 \]
+        由此推导出余标架的变化规律为 $\nabla_{e_P} \theta^{J} = - \tensor{\omega}{_P^J_C} \theta^C$。
+    \end{enumerate}
+    整理上述各项即证。
+\end{proof}
+
+选定标架后的曲率是：
 \begin{equation}
-\begin{split}
-    T_{i_1 \dots i_k ; p} = \quad & e_p(T_{i_1 \dots i_k}) \quad \text{（方向导数）} \\
-    & - \sum_{m} T_{i_1 \dots c \dots i_k} \tensor{\omega}{^c_{p i_m}} \quad \text{（对协变指标的修正）} \\
-    & + \sum_{m} T_{i_1 \dots c \dots i_k} \tensor{\omega}{^{i_m}_{p c}} \quad \text{（对逆变指标的修正）}
-\end{split}
+    \tensor{R}{^L_{I J K}} = \langle \theta^L, (\nabla_{e_I} \nabla_{e_J} - \nabla_{e_J} \nabla_{e_I} - \nabla_{[e_I, e_J]}) e_K \rangle
 \end{equation}
-注：上式中所有指标均为标架指标。
 
-\subsubsection{联络与曲率的直接计算}
+\section{子流形}
+\subsection{子流形和超曲面}
+\n{此处定义为描述性说明，详见参考文献。}
+\begin{definition}[子流形]
+    若 $N$ 为 $M$ 的子集，且 $N$ 本身也存在流形结构，则称 $N$ 为 $M$ 的一个子流形。
+\end{definition}
 
-\n{计算技巧：\\
-相比于先计算Christoffel符号再投影，利用标架基底的非对易性（Non-holonomic）直接计算联络往往更加高效。}
+\begin{definition}[超曲面与法矢量]
+    维数为 $(n-1)$ 的子流形称为超曲面。局部而言，一个超曲面总能写成某个函数取常数值的点集。若 $N$ 为一个超曲面，则 $N$ 的切空间是 $(n-1)$ 维，其垂直补空间为 $1$ 维，其中单位长的向量称为法矢量。
+\end{definition}
+\n{基本只讨论类时和类空的情况，类光情况比较复杂。}
+\begin{definition}[超曲面的分类]
+    对于洛伦兹号差的度规，根据法矢量的性质，超曲面可分为以下三类：
+    \begin{enumerate}
+        \item \textbf{类空超曲面}：若法矢量为类时向量，则称为类空超曲面。
+        \item \textbf{类时超曲面}：若法矢量为类空矢量，则称为类时超曲面。
+        \item \textbf{类光超曲面}：若法矢量为类光向量，则称为类光超曲面。
+    \end{enumerate}
+\end{definition}
 
-我们定义标架基底的换位子系数（结构常数）为 $\tensor{C}{^K_{IJ}}$，即 $[e_I, e_J] = \tensor{C}{^K_{IJ}} e_K$。则标架联络可通过以下显式（Koszul公式）直接计算：
+\subsection{诱导度规与投影理论}
 
+子流形 $N$ 不能直接使用大流形 $M$ 上定义的矢量、度规、联络和曲率等张量场。这是因为在子流形上讨论问题属于更低维度的范畴，而流形上的几何工具维数高于子流形，直接应用（如求导）可能会产生不属于子流形切空间的法向分量。
+
+\begin{definition}[诱导度规]
+    时空流形 $M$ 上给定度规 $g_{ab}$，若 $N$ 为其一个子流形，将 $g_{ab}$ 限制于 $N$ 上，即仅考虑属于 $N$ 的切向量 $u, v \in T_p N$，可以定义 $N$ 上的张量场 $h$ 为：
+    \begin{equation}
+        h(u, v) := g(u, v), \quad \forall u, v \in T_p N
+    \end{equation}
+    称为 $N$ 上的\textbf{诱导度规}（Induced Metric），数学上也称为第一基本形式。
+\end{definition}
+
+\begin{example}[特定坐标下的诱导度规]
+    若我们取特定坐标 $\{x^0, x^i\}$，其中 $\{x^i\}$ 为子流形 $N$ 的局部坐标。以三维欧氏空间中的球面 $S^2$ 为例，度规表达式为：
+    \begin{equation}
+        ds^2 = dr^2 + r^2(d\theta^2 + \sin^2 \theta d\phi^2)
+    \end{equation}
+    对于单位球面 $r=R$，其上的诱导度规直接退化为：
+    \begin{equation}
+        ds^2 = R^2(d\theta^2 + \sin^2 \theta d\phi^2)
+    \end{equation}
+\end{example}
+
+为了计算方便，我们希望将诱导度规扩张为 $M$ 上的张量场。这种扩张旨在使度规的作用对象不仅局限于切空间 $T_p N$，而是能够作用于定义在超曲面上且属于全空间切空间 $T_p M$ 的任意矢量。
+
+\begin{definition}[投影算子]
+    若 $n^a$ 为 $N$ 的单位法矢量，且存在相应的对偶基底 $(\theta^0)_a$ 满足 $\langle \theta^0, n \rangle = 1$。对于任意 $M$ 上的矢量 $v \in T_p M$，可以定义\textbf{投影算子}为：
+    \begin{equation}
+        \tensor{P}{^a_b} := \tensor{\delta}{^a_b} - n^a (\theta^0)_b
+    \end{equation}
+    该算子能够提取出矢量 $v$ 沿着超曲面切空间 $T_p N$ 分量的部分，即 $\bar{v}^a = \tensor{P}{^a_b} v^b$。
+\end{definition}
+
+为了方便计算，我们希望将诱导度规的作用范围进行扩展。原始的诱导度规仅定义在超曲面切空间 $T_p N$ 上。现在的目标是使其能够作用于定义在 $N$ 上、但属于全空间切空间 $T_p M$ 的任意矢量。
+
+自然的扩展思路是：先利用投影算子将任意矢量 $X, Y$ 投影回超曲面切空间，再利用原始度规（在大流形上即为 $g$）进行测量。
+
+\begin{definition}[扩张的诱导度规]
+    对于定义在超曲面 $N$ 上的任意两个矢量场 $X, Y \in T_p M |_N$，定义扩张后的诱导度规 $h$ 为：
+    \begin{equation}
+        h(X, Y) := g(P(X), P(Y))
+    \end{equation}
+    其中 $P$ 为前述定义的将 $T_p M$ 映射到 $T_p N$ 的投影算子。
+\end{definition}
+
+\begin{theorem}[诱导度规的分量形式]
+    利用投影算子的具体表达式展开上述定义，扩张后的诱导度规的张量分量形式为：
+    \begin{equation}
+        \tensor{h}{_{ab}} = \tensor{g}{_{ab}} - g(n, n) n_a n_b
+    \end{equation}
+    该公式通过 $g(n,n)$ 项自动适配了超曲面为类时（$g(n,n)=1$）或类空（$g(n,n)=-1$）的情形。
+\end{theorem}
+\n{在洛伦兹号差情况下，符号取值取决于超曲面的性质：若 $n^a$ 为类时矢量（类空超曲面），则 $g(n, n) = -1$，有 $(\theta^0)_a = -g_{ab} n^b$；若 $n^a$ 为类空矢量（类时超曲面），则 $g(n, n) = 1$，有 $(\theta^0)_a = g_{ab} n^b$。}
+
+\begin{proof}
+    根据定义，对于任意矢量 $X^a, Y^b$，有 $h(X, Y) = g_{cd} (P^c_a X^a) (P^d_b Y^b)$。提取分量可得：
+    \begin{equation}
+        h_{ab} = g_{cd} \tensor{P}{^c_a} \tensor{P}{^d_b}
+    \end{equation}
+    代入投影算子定义 $\tensor{P}{^a_b} = \tensor{\delta}{^a_b} - n^a (\theta^0)_b$，其中 $(\theta^0)_b$ 为满足 $\langle \theta^0, n \rangle = 1$ 的余法矢量。
+    \begin{align*}
+        h_{ab} &= g_{cd} (\delta^c_a - n^c (\theta^0)_a) (\delta^d_b - n^d (\theta^0)_b) \\
+        &= g_{cd} (\delta^c_a \delta^d_b - \delta^c_a n^d (\theta^0)_b - n^c (\theta^0)_a \delta^d_b + n^c n^d (\theta^0)_a (\theta^0)_b) \\
+        &= g_{ab} - n_b (\theta^0)_a - n_a (\theta^0)_b + g(n, n) (\theta^0)_a (\theta^0)_b
+    \end{align*}
+    考虑到余法矢量与法矢量的关系为 $(\theta^0)_a = g(n, n) n_a$（因为 $g(n,n)^2 = 1$），将其代入上式：
+    \begin{align*}
+        h_{ab} &= g_{ab} - n_b (g(n,n) n_a) - n_a (g(n,n) n_b) + g(n,n) (g(n,n) n_a) (g(n,n) n_b) \\
+        &= g_{ab} - 2g(n,n) n_a n_b + g(n,n)^3 n_a n_b
+    \end{align*}
+    由于 $n$ 为单位矢量，$g(n,n) = \pm 1$，故 $g(n,n)^3 = g(n,n)$。最终整理得：
+    \begin{equation*}
+        h_{ab} = g_{ab} - g(n,n) n_a n_b
+    \end{equation*}
+    证毕。
+\end{proof}
+
+
+得到诱导度规后，可以定义子流形上的积分测度。设 $h$ 为诱导度规矩阵的行列式，则子流形上的函数 $f(x)$ 积分为：
 \begin{equation}
-    \omega_{ikj} = \frac{1}{2} \left( g(e_k, [e_i, e_j]) - g(e_i, [e_j, e_k]) - g(e_j, [e_k, e_i]) \right)
-\end{equation}
-其中 $\omega_{ikj} \equiv \eta_{il} \tensor{\omega}{^l_{kj}}$。
-
-进一步地，黎曼曲率张量的标架分量可以通过Cartan第二结构方程的坐标无关形式给出：
-\begin{equation}
-    \hat{R}^l{}_{ijk} = \langle \theta^l, (\nabla_{e_i}\nabla_{e_j} - \nabla_{e_j}\nabla_{e_i} - \nabla_{[e_i, e_j]}) e_k \rangle
+    \int_N f(x) dV := \int_N f(x) \sqrt{|h|} dx
 \end{equation}
 
-\vspace{1em}
-\begin{tcolorbox}[colback=gray!10, colframe=gray!50, title=小结]
-    \textbf{为什么这么做？} \\
-    我们把难以处理的“时空弯曲”拆解成了两部分：
-    \begin{itemize}
-        \item \textbf{局部平直部分} ($\eta_{IJ}$)：由活动标架承担，物理定律在这里最简单。
-        \item \textbf{整体拓扑/弯曲部分} ($\omega, R$)：被打包进了标架之间的旋转关系中。
-    \end{itemize}
-    下一节我们将利用这个工具，把时空切成一片片的面包（超曲面），并定义描述切片弯曲的\textbf{外曲率} $K_{ij}$。
-\end{tcolorbox}
+\subsection{诱导联络与标架分解}
+
+类似于诱导度规的构造逻辑，对于子流形上的张量场，我们不能直接应用大流形的协变导数 $\nabla$，因为其结果往往包含法向分量。因此，我们需要利用投影算子 $P$ 提取出在大流形协变导数作用后，依然沿着超曲面切空间的分量。
+
+\begin{definition}[诱导联络]
+    设 $T$ 为子流形 $N$ 上的张量场，定义子流形上的\textbf{诱导联络} $D$ 为全空间协变导数 $\nabla$ 在 $N$ 切空间上的投影：
+    \begin{equation}
+        D T := P(\nabla T)
+    \end{equation}
+\end{definition}
+
+\begin{theorem}[度规适配性与唯一性]
+    若大流形的联络 $\nabla$ 与度规 $g$ 适配（即 $\nabla g = 0$），则诱导联络 $D$ 与诱导度规 $h$ 同样适配，即满足 $D_a h_{bc} = 0$。此外，若 $h$ 非退化，由该匹配条件可唯一确定协变导数 $D_a$。
+\end{theorem}
+
+\begin{proof}
+    利用扩张度规的表达式 $h_{bc} = g_{bc} - g(n,n)n_b n_c$，直接计算其诱导协变导数：
+    \begin{align*}
+        D_a h_{bc} &= P(\nabla_a (g_{bc} - g(n,n)n_b n_c)) \\
+        &= P(\nabla_a g_{bc}) - g(n,n) P(\nabla_a (n_b n_c))
+    \end{align*}
+    由于 $\nabla_a g_{bc} = 0$，第一项为 0。对于第二项，根据莱布尼茨法则：
+    \begin{equation*}
+        P(\nabla_a (n_b n_c)) = P((\nabla_a n_b) n_c + n_b (\nabla_a n_c))
+    \end{equation*}
+    由于投影算子 $P$ 的作用是将矢量投影到切空间，而 $n_b$ 和 $n_c$ 分别是法向分量，任何与 $n$ 缩并的部分在投影后必然为 0（即 $P^b_i n_b = 0$）。因此：
+    \begin{equation}
+        D_a h_{bc} = \pm P[\nabla_a (n_b n_c)] = 0
+    \end{equation}
+    证毕。
+\end{proof}
+
+接下来，我们取活动标架 $\{n, e_i\}$ 并计算具体的\textbf{诱导标架联络系数}。
+
+\begin{theorem}[法向联络分量与李导数关系]
+    标架联络系数中的法向分量 $\omega^0_{kj}$（亦对应外曲率系数）满足以下等式：
+    \begin{equation}
+        \omega^0_{kj} = \frac{1}{2} (\mathcal{L}_n h)(e_k, e_j)
+    \end{equation}
+\end{theorem}
+
+\n{虽然标架联络系数通常可以使用 Koszul 公式通过计算基底矢量的李括号得到，但更简单的方法是直接利用活动标架的正交性提取分量。}
+
+\begin{proof}
+    在正交归一标架下，利用内积直接提取联络系数。由于 $\nabla_{e_k} e_j$ 是一个矢量，其在法向 $n$ 上的分量 $\omega^0_{kj}$ 可由下式给出：
+    \begin{equation*}
+        \omega^0_{kj} = -g(n, \nabla_{e_k} e_j)
+    \end{equation*}
+    （此处负号源于洛伦兹号差下的归一化要求）。由于切矢量 $e_j$ 始终与法矢量 $n$ 正交，即 $g(n, e_j) = 0$，对该式求导得：
+    \begin{equation*}
+        e_k [g(n, e_j)] = g(\nabla_{e_k} n, e_j) + g(n, \nabla_{e_k} e_j) = 0
+    \end{equation*}
+    由此可见，$\omega^0_{kj}$ 可以转化为法矢量的变化率：$\omega^0_{kj} = g(e_j, \nabla_{e_k} n)$。考虑到李导数 $\mathcal{L}_n g$ 的定义及标架的正交性质：
+    \begin{align*}
+        (\mathcal{L}_n g)(e_k, e_j) &= n[g(e_k, e_j)] - g(\mathcal{L}_n e_k, e_j) - g(e_k, \mathcal{L}_n e_j) \\
+        &= 0 - g([n, e_k], e_j) - g(e_k, [n, e_j])
+    \end{align*}
+    由于无挠条件 $\nabla_a b - \nabla_b a = [a, b]$，代入上式并利用 $g(n, e_i)=0$ 简化可得：
+    \begin{align*}
+        (\mathcal{L}_n g)(e_k, e_j) &= g(\nabla_{e_k} n, e_j) + g(\nabla_{e_j} n, e_k) \\
+        &= \omega^0_{kj} + \omega^0_{jk}
+    \end{align*}
+    由于 $K_{ij}$ 的对称性，最终得到 $\omega^0_{kj} = \frac{1}{2} (\mathcal{L}_n g)(e_k, e_j)$。再利用 $g_{ab} = h_{ab} \pm n_a n_b$ 的分解，在切空间作用下 $n_a$ 项消失，故有：
+    \begin{equation*}
+        \omega^0_{kj} = \frac{1}{2} (\mathcal{L}_n h)(e_k, e_j)
+    \end{equation*}
+    证毕。
+\end{proof}
