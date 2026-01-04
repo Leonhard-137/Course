@@ -1,48 +1,89 @@
 \chapter{等离子体效应}
-
-本节主要讨论电磁波在冷等离子体（Cold Plasma）中的传播效应。所谓的“冷”等离子体，是指等离子体粒子的热运动速度远小于波的相速度，因此可以忽略热压力项，且介质自身的辐射和吸收相对于入射场可忽略，主要关注波的传播特性（如色散、折射、法拉第旋转等）。
+\
+本节主要讨论电磁波在冷等离子体中的传播效应。
+所谓的“冷”等离子体，是指等离子体粒子的热运动速度远小于波的相速度，且介质自身的辐射和吸收相对于入射场可忽略，主要关注波的传播特性（如色散、折射、法拉第旋转等）。
+\n{好比正弦函数与一个幅度远低于它的正弦函数叠加，幅值不太变但是相位改变（好吧，我还是没很懂）}
+没有散射和吸收，冷等离子气体与入射光子场的相互作用与之前有很大不同。之前的辐射是对运动电荷辐射的计算（如韧致辐射、同步辐射），而现在是考察冷等离子体在入射场作用下所导致的电荷与电流对传播的影响，其中等离子体的发射和吸收相对入射场是可以忽略的，电子运动只是一种次级效应。
 
 \section{各向同性冷等离子体中的色散关系}
-
-在无外部磁场的情况下，等离子体是各向同性的。我们从微观粒子的运动出发，推导宏观的介电常数。
+\n{金属就是致密的等离子气体。}
+在无外部磁场的情况下，等离子体是各向同性的，这里把冷等离子体受入射场影响产生的次级效应归于介电常数中去。
 
 \subsection{介电常数与等离子体频率}
-
+\paragraph{冷等离子体的等效介电常数}
 \n{假设离子质量远大于电子，忽略离子的运动，仅考虑电子对电流的贡献。}
-考虑一个电子在入射电磁场 $\vb{E} \propto e^{-i\omega t}$ 作用下的运动方程（忽略洛伦兹力中的磁场项，因为非相对论下 $v \ll c$）：
+首先考察单个电子在时谐电磁场 $\vb{E}(\vb{r}, t) = \vb{E}_0 e^{i(\vb{k}\cdot\vb{r} - \omega t)}$ 作用下的运动。
+忽略非相对论情况下的洛伦兹力磁场项 ($v/c \ll 1$)，运动方程为：
 \begin{equation}
-    m \dot{\vb{v}} = -e \vb{E} \implies \vb{v} = \frac{e}{i\omega m} \vb{E}
+    m \frac{d\vb{v}}{dt} = -e \vb{E} \implies -i\omega m \vb{v} = -e \vb{E}
 \end{equation}
-由此得到电流密度 $\vb{j} = -n e \vb{v} = \sigma \vb{E}$，其中电导率 $\sigma$ 为纯虚数：
+解得电子速度 $\vb{v} = \frac{e}{i\omega m}\vb{E}$。由此得到电流密度 $\vb{j}$ 与电导率 $\sigma$ 的关系：
 \begin{equation}
-    \sigma = \frac{i n e^2}{\omega m}
+    \vb{j} = -n e \vb{v} = \frac{i n e^2}{\omega m} \vb{E} \equiv \sigma \vb{E}
 \end{equation}
+其中电导率 $\sigma = \frac{i n e^2}{\omega m}$ 为纯虚数。
 
-将 $\vb{j}$ 代入麦克斯韦方程组 $\nabla \times \vb{B} = \frac{4\pi}{c}\vb{j} + \frac{1}{c}\pdv{\vb{E}}{t}$，可以将电流项归并入位移电流项，从而定义等效介电常数 $\epsilon$：
-\begin{equation}
-    \epsilon(\omega) = 1 - \frac{4\pi \sigma}{i\omega} = 1 - \frac{\omega_p^2}{\omega^2}
-\end{equation}
-其中 $\omega_p$ 定义为\textbf{等离子体频率}（Plasma Frequency）：
-\begin{equation}
-    \omega_p \equiv \sqrt{\frac{4\pi n e^2}{m}} \approx 5.63 \times 10^4 \sqrt{n} \, \text{s}^{-1}
-\end{equation}
+\paragraph{色散关系}
 
-\subsection{色散关系与截止频率}
+\n{在傅里叶空间中，$\nabla \to i\vb{k}$，$\partial_t \to -i\omega$。}
+考虑源项为感生电流 $\vb{j} = \sigma \vb{E}$ 的麦克斯韦方程组。在 $(k, \omega)$ 空间中，两个旋度方程写为：
+\begin{align}
+    i\vb{k} \times \vb{E} &= \frac{i\omega}{c} \vb{B} \label{eq:maxwell_k_E} \\
+    i\vb{k} \times \vb{B} &= \frac{4\pi}{c} \vb{j} - \frac{i\omega}{c} \vb{E} = \frac{4\pi \sigma}{c} \vb{E} - \frac{i\omega}{c} \vb{E} \label{eq:maxwell_k_B}
+\end{align}
 
-利用平面波解 $\nabla^2 \vb{E} + \epsilon \frac{\omega^2}{c^2}\vb{E} = 0$，可得色散关系：
+为了得到关于 $\vb{E}$ 的波动方程，我们将 \eqref{eq:maxwell_k_E} 式中的 $\vb{B}$ 代入 \eqref{eq:maxwell_k_B} 式：
 \begin{equation}
-    c^2 k^2 = \epsilon \omega^2 = \omega^2 - \omega_p^2
+    i\vb{k} \times \left( \frac{c}{\omega} \vb{k} \times \vb{E} \right) = - \frac{i\omega}{c} \left( 1 + \frac{4\pi i \sigma}{\omega} \right) \vb{E}
 \end{equation}
+整理上式，引入\textbf{介电常数} $\epsilon(\omega)$：
+\begin{equation}
+    \vb{k} \times (\vb{k} \times \vb{E}) = - \frac{\omega^2}{c^2} \epsilon(\omega) \vb{E}
+\end{equation}
+其中介电常数定义为：
+\begin{equation}
+    \epsilon(\omega) \equiv 1 + \frac{4\pi i \sigma}{\omega} = 1 - \frac{4\pi n e^2}{m \omega^2} = 1 - \frac{\omega_p^2}{\omega^2}
+\end{equation}
+此处 $\omega_p = \sqrt{4\pi n e^2 / m}$ 为等离子体频率。
 
-\begin{derivationnote}[物理意义讨论]
+应用横波条件 $\vb{k} \cdot \vb{E} = 0$，波动方程简化为：
+\begin{equation}
+    -k^2 \vb{E} = - \frac{\omega^2}{c^2} \epsilon(\omega) \vb{E}
+\end{equation}
+消去 $\vb{E}$，即得到最终的\textbf{色散关系}：
+\begin{equation}
+    k^2 = \frac{\omega^2}{c^2} \epsilon(\omega) = \frac{\omega^2}{c^2} \left( 1 - \frac{\omega_p^2}{\omega^2} \right)
+\end{equation}
+或者写作：
+\begin{equation}
+    \omega^2 = \omega_p^2 + c^2 k^2
+\end{equation}
+在不同的频率下，电磁波传播有两种模式：
     \begin{itemize}
         \item \textbf{传播模式 ($\omega > \omega_p$)}: $k$ 为实数，波可以在介质中传播。此时相速度 $v_{ph} = \omega/k = c/\sqrt{\epsilon} > c$，群速度 $v_g = d\omega/dk = c\sqrt{\epsilon} < c$。
         \item \textbf{截止模式 ($\omega < \omega_p$)}: $\epsilon < 0$，$k$ 为纯虚数。波幅随距离指数衰减（趋肤效应），能量无法传入介质深处，发生全反射。
         \n{电离层反射无线电波即基于此原理。}
     \end{itemize}
-\end{derivationnote}
 
-\section{脉冲星色散测量 (Dispersion Measure)}
+\paragraph{相速度与群速度}
+色散关系导致了波的相速度与群速度分离。首先定义等离子体的\textbf{折射率} $n_r$ 为介电常数的平方根：
+\begin{equation}
+    n_r(\omega) \equiv \sqrt{\epsilon(\omega)} = \sqrt{1 - \frac{\omega_p^2}{\omega^2}}
+\end{equation}
+\textbf{相速度}（Phase Velocity）描述单色波等相面的推进速度。由于在传播模式下 $n_r < 1$，相速度表现出“超光速”特性：
+\begin{equation}
+    v_{ph} \equiv \frac{\omega}{k} = \frac{c}{n_r} > c
+\end{equation}
+这并不违反相对论，因为纯单色波不携带起始信息。能量与信号的传播速度由\textbf{群速度}（Group Velocity）描述，通过对色散关系 $\omega^2 = \omega_p^2 + c^2k^2$ 微分可得：
+\begin{equation}
+    v_g \equiv \frac{d\omega}{dk} = c^2 \frac{k}{\omega} = c n_r
+\end{equation}
+由此可见，在冷等离子体中，相速度与群速度始终满足以下互补关系：
+\begin{equation}
+    v_{ph} v_g = c^2
+\end{equation}
+当入射频率接近等离子体频率（$\omega \to \omega_p$）时，$n_r \to 0$，导致 $v_{ph} \to \infty$ 而 $v_g \to 0$，波包能量停止传播并发生全反射。
+\section{脉冲星色散测量}
 
 由于群速度 $v_g(\omega)$ 依赖于频率，宽带脉冲信号（如脉冲星辐射）在星际介质中传播时，高频成分比低频成分先到达地球。
 
