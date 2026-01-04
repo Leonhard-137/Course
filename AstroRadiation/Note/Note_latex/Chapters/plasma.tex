@@ -1,0 +1,121 @@
+\chapter{等离子体效应}
+
+本节主要讨论电磁波在冷等离子体（Cold Plasma）中的传播效应。所谓的“冷”等离子体，是指等离子体粒子的热运动速度远小于波的相速度，因此可以忽略热压力项，且介质自身的辐射和吸收相对于入射场可忽略，主要关注波的传播特性（如色散、折射、法拉第旋转等）。
+
+\section{各向同性冷等离子体中的色散关系}
+
+在无外部磁场的情况下，等离子体是各向同性的。我们从微观粒子的运动出发，推导宏观的介电常数。
+
+\subsection{介电常数与等离子体频率}
+
+\n{假设离子质量远大于电子，忽略离子的运动，仅考虑电子对电流的贡献。}
+考虑一个电子在入射电磁场 $\vb{E} \propto e^{-i\omega t}$ 作用下的运动方程（忽略洛伦兹力中的磁场项，因为非相对论下 $v \ll c$）：
+\begin{equation}
+    m \dot{\vb{v}} = -e \vb{E} \implies \vb{v} = \frac{e}{i\omega m} \vb{E}
+\end{equation}
+由此得到电流密度 $\vb{j} = -n e \vb{v} = \sigma \vb{E}$，其中电导率 $\sigma$ 为纯虚数：
+\begin{equation}
+    \sigma = \frac{i n e^2}{\omega m}
+\end{equation}
+
+将 $\vb{j}$ 代入麦克斯韦方程组 $\nabla \times \vb{B} = \frac{4\pi}{c}\vb{j} + \frac{1}{c}\pdv{\vb{E}}{t}$，可以将电流项归并入位移电流项，从而定义等效介电常数 $\epsilon$：
+\begin{equation}
+    \epsilon(\omega) = 1 - \frac{4\pi \sigma}{i\omega} = 1 - \frac{\omega_p^2}{\omega^2}
+\end{equation}
+其中 $\omega_p$ 定义为\textbf{等离子体频率}（Plasma Frequency）：
+\begin{equation}
+    \omega_p \equiv \sqrt{\frac{4\pi n e^2}{m}} \approx 5.63 \times 10^4 \sqrt{n} \, \text{s}^{-1}
+\end{equation}
+
+\subsection{色散关系与截止频率}
+
+利用平面波解 $\nabla^2 \vb{E} + \epsilon \frac{\omega^2}{c^2}\vb{E} = 0$，可得色散关系：
+\begin{equation}
+    c^2 k^2 = \epsilon \omega^2 = \omega^2 - \omega_p^2
+\end{equation}
+
+\begin{derivationnote}[物理意义讨论]
+    \begin{itemize}
+        \item \textbf{传播模式 ($\omega > \omega_p$)}: $k$ 为实数，波可以在介质中传播。此时相速度 $v_{ph} = \omega/k = c/\sqrt{\epsilon} > c$，群速度 $v_g = d\omega/dk = c\sqrt{\epsilon} < c$。
+        \item \textbf{截止模式 ($\omega < \omega_p$)}: $\epsilon < 0$，$k$ 为纯虚数。波幅随距离指数衰减（趋肤效应），能量无法传入介质深处，发生全反射。
+        \n{电离层反射无线电波即基于此原理。}
+    \end{itemize}
+\end{derivationnote}
+
+\section{脉冲星色散测量 (Dispersion Measure)}
+
+由于群速度 $v_g(\omega)$ 依赖于频率，宽带脉冲信号（如脉冲星辐射）在星际介质中传播时，高频成分比低频成分先到达地球。
+
+到达时间 $t_p$ 为路径积分：
+\begin{equation}
+    t_p(\omega) = \int_0^d \frac{ds}{v_g} = \frac{1}{c} \int_0^d \left( 1 - \frac{\omega_p^2}{\omega^2} \right)^{-1/2} ds
+\end{equation}
+在射电波段通常满足 $\omega \gg \omega_p$，利用泰勒展开 $(1-x)^{-1/2} \approx 1 + x/2$：
+\begin{equation}
+    t_p \approx \frac{d}{c} + \frac{1}{2c\omega^2} \int_0^d \omega_p^2 ds = \frac{d}{c} + \frac{2\pi e^2}{mc\omega^2} \underbrace{\int_0^d n_e ds}_{\text{DM}}
+\end{equation}
+定义\textbf{色散量}（Dispersion Measure, DM）为视线方向上的电子柱密度：
+\begin{equation}
+    \text{DM} \equiv \int_0^d n_e ds
+\end{equation}
+通过测量不同频率到达的时间延迟 $\Delta t$，可以求得 DM，进而估算脉冲星距离。
+
+\section{折射介质中的辐射转移}
+
+当辐射在折射率不均匀的介质中传播时（尤其是 $\omega \sim \omega_p$ 时），光线会发生弯曲，传统的辐射转移方程需要修正。
+
+\n{利用几何光学中的辛路定律推广。}
+考虑能量守恒和光束立体角的变化，可以证明沿光线的守恒量为 $I_\nu / n_\nu^2$。修正后的辐射转移方程为：
+\begin{equation}
+    n_\nu^2 \dv{s} \left( \frac{I_\nu}{n_\nu^2} \right) = -\alpha_\nu I_\nu + j_\nu
+\end{equation}
+对于热平衡介质，源函数变为 $S_\nu = j_\nu/\alpha_\nu = n_\nu^2 B_\nu(T)$。这意味着介质折射率的存在改变了黑体辐射的强度分布。
+
+\subsection{各向异性等离子体：法拉第旋转}
+
+当存在大尺度背景磁场 $\vb{B}_0$ 时，洛伦兹力项 $-e(\vb{v} \times \vb{B}_0)/c$ 不可忽略，等离子体变为各向异性（双折射介质）。
+
+\subsection{介电张量与本征模}
+
+引入电子的回旋频率（Larmor Frequency）：
+\begin{equation}
+    \omega_B = \frac{e B_0}{mc}
+\end{equation}
+考虑沿磁场方向传播的波（$\vb{k} \parallel \vb{B}_0$），线偏振波并非本征模。本征模为左旋（L）和右旋（R）圆偏振波，其对应的介电常数为：
+\begin{equation}
+    \epsilon_{R,L} = 1 - \frac{\omega_p^2}{\omega(\omega \pm \omega_B)}
+\end{equation}
+这导致两种偏振模式具有不同的相速度。
+
+\subsection{法拉第旋转 (Faraday Rotation)}
+
+线偏振波可分解为等幅的 L 波和 R 波。由于两者相速度不同，传播一段距离后，合成的偏振面会发生旋转。旋转角 $\Delta \theta$ 为两分量相位差的一半：
+\begin{equation}
+    \Delta \theta = \frac{1}{2} \int_0^d (k_R - k_L) ds
+\end{equation}
+\n[1em]{此公式假设 $\omega \gg \omega_B$ 且 $\omega \gg \omega_p$。}
+将 $k_{R,L} \approx \frac{\omega}{c}(1 - \frac{\omega_p^2}{2\omega^2}(1 \mp \frac{\omega_B}{\omega}))$ 代入，可得：
+\begin{equation}
+    \Delta \theta = \frac{2\pi e^3}{m^2 c^2 \omega^2} \int_0^d n_e B_{\parallel} ds
+\end{equation}
+通过测量偏振角随波长平方（$\lambda^2$）的变化率，可以测定星际磁场 $B_{\parallel}$。
+
+\section{高能辐射过程中的等离子体效应}
+
+当高能粒子在介质中运动时，介质的折射特性会产生特殊的辐射效应。
+
+\subsection{切伦科夫辐射 (Cherenkov Radiation)}
+
+当带电粒子在介质中的运动速度 $v$ 超过介质中的光相速度 $c/n$ 时（即 $v > c/\sqrt{\epsilon}$），会产生切伦科夫辐射。
+\begin{itemize}
+    \item \textbf{物理图像}: 类似于声爆，粒子运动速度快于其产生的场扰动的传播速度，形成锥状激波波前。
+    \item \textbf{辐射锥角}: $\cos \theta_c = \frac{c/n}{v} = \frac{1}{\beta n}$。
+    \item \textbf{特点}: 辐射主要集中在紫外波段（蓝色辉光），且与粒子质量无关（这一点区别于轫致辐射）。
+\end{itemize}
+
+\subsection{Razin 效应 (Razin-Tsytovich Effect)}
+
+\n{主要针对同步辐射。}
+在真空中，相对论性电子的辐射具有强烈的集束效应（Beaming），半张角 $\sim 1/\gamma$。但在等离子体中，折射率 $n < 1$ 使得相速度变大，这会抑制集束效应。
+
+当 $\omega < \gamma \omega_p$ 时，等离子体引起的散角超过了相对论集束角，导致同步辐射在低频段被显著抑制（Cutoff）。这被称为 Razin 效应。

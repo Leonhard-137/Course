@@ -1,6 +1,47 @@
-\section{数学基础：仿射联络与黎曼几何}
+\section{流形和流形上的张量场}
+    \subsection{微分流形和局部坐标卡}
+    \n{第一点是说时空是连续的，第二点是等效原理，在弯曲的时空中也可以找到一个局域平直的坐标系，并且这些坐标系有效的覆盖范围叠加在一起是整时空，第三点是说不同的坐标系之间可以进行转换。}
+        \begin{definition}[光滑流形]
+        一个 $N$ 维光滑（$C^\infty$ 可微）流形 $M$ 由以下条件定义：
+            \begin{enumerate}[label=(\arabic*)]
+                \item $M$ 是一个拓扑流形
+                \item 存在一族坐标卡 $\{(U_i, \varphi_i)\}$ 满足：
+                \begin{itemize}
+                    \item $U_i$是开集且$\bigcup_i U_i = M$（覆盖条件）
+                    \item 对每个 $U_i$，$\varphi_i: U_i \to U_i' \subset \mathbb{R}^n$ 是同胚映射
+                \end{itemize}
+                \item 对任意非空交集 $U_i \cap U_j \neq \emptyset$，坐标变换映射
+                \begin{align}
+                    \psi_{ij} = \varphi_i \circ \varphi_j^{-1}: \varphi_j(U_i \cap U_j) \to \varphi_i(U_i \cap U_j)
+                \end{align}
+                及其逆映射都是光滑的（$C^\infty$）
+            \end{enumerate}
+        \end{definition}
+坐标卡族 $\{(U_i, \varphi_i)\}$ 称为$M$的\textbf{图册}，每个$U_i$称为\textbf{坐标邻域}，
+$\varphi_i$称为\textbf{坐标函数}。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = .8\linewidth]{figs/manifold.pdf}
+    \caption{流形和其坐标卡之间的映射}
+    \label{minifoldandchart}
+\end{figure}
+\n{不过并不强制要求流形不能只用一张坐标卡覆盖，$\mathbb{R}^n$自己就是一个流形。}
+由于流形的局域欧几里得性质，在描述流形上的某个点的时候，可以利用坐标卡转而使用n个实数对来描述（无论是直角坐标、球坐标、柱坐标或者其他坐标）。比如一个一维圆环，采取夹角$\theta$来描述就是找到了这个流形到欧几里得空间的映射$\varphi:M\rightarrow \mathbb{R}$。但是$\theta = 0$和$\theta = 2\pi$指的是同一个点，
+不能想象在同一个坐标系中，同一个时空点有两个坐标描述。所以可以选取两个角度坐标$\theta_1 \in \left(0, 2\pi\right)$和$\theta_2 \in \left(0, 2\pi\right)$共同覆盖圆环。
 
-\subsection{协变导数与仿射联络}
+如图 \ref{minifoldandchart} 所示，对重叠区域 $U_\alpha \cap U_\beta$ 内的任一点 $p$，两套坐标卡分别赋予其坐标分量 $\alpha = \{\alpha^\nu\}$ 与 $\beta = \{\beta^\mu\}$。通过过渡映射 $\varphi_\beta \circ \varphi_\alpha^{-1}$，我们得到坐标间的函数关系：$$\beta^\mu = \beta^\mu(\alpha^1, \alpha^2, \dots, \alpha^n)$$
+\subsection{切空间和余切空间}
+在广义相对论中，流形是时空本身，更重要的是时空中的物理量。根据其在坐标变换下的表现，物理量可以被归类为标量、矢量以及具有多个分量的张量。
+\begin{definition}[标量场]
+设 $M$ 是一个 $N$ 维光滑流形。$M$ 上的一个标量场是指一个映射：
+$$ \phi: M \to \mathbb{R} $$
+它将流形上的每一个点 $p \in M$ 映射为一个实数 $\phi(p)$。
+\end{definition}
+\subsection{张量场}
+\newpage
+
+\section{几何结构——度规、联络和活动标架}
+\subsection{联络流形}
 弯曲时空中的矢量场没有全局平行的性质，即沿着不同路径移动一个矢量，最终得到的结果可能不同。为了量化这种变化，我们需要引入仿射联络的概念。
 
 \begin{definition}[仿射联络]
@@ -57,6 +98,7 @@
     \end{split}
     \end{equation}
 \end{definition}
+\subsection{度规流形}
 \subsection{曲率和挠率}
 
 \begin{definition}[挠率张量]
@@ -84,8 +126,7 @@
 \begin{equation}
     \tensor{R}{^L_{I J K}} = \langle \theta^L, (\nabla_{e_I} \nabla_{e_J} - \nabla_{e_J} \nabla_{e_I} - \nabla_{[e_I, e_J]}) e_K \rangle
 \end{equation}
-
-\subsection{基本定理：Levi-Civita 联络}
+\subsection{Levi-Civita 联络}
 如果我们对联络施加两个自然的物理限制，那么联络就是唯一的。
 
 \begin{theorem}[Koszul公式]
@@ -142,10 +183,7 @@
 \end{proof}
 
 \newpage
-
-\section{活动标架视角}
-
-\subsection{活动标架的定义与度规分解}
+\subsection{活动标架视角}
 坐标基底下，弯曲时空的度规往往是复杂且相互耦合的，这对计算极为不利。但是引入对时空间两点距离的另一种解读观点——活动标架，把度规张量的弯曲信息转移到基底上。
 
 先以欧几里得空间为例，然后过渡到广义相对论更为关心的洛伦兹流形上。考虑三维欧几里得空间的两点距离：
@@ -186,9 +224,6 @@
 \begin{equation}
     g_{ab} = \eta_{IJ} \theta^I_a \theta^J_b = -\theta^0_a \theta^0_b + \theta^1_a \theta^1_b + \theta^2_a \theta^2_b + \theta^3_a \theta^3_b
 \end{equation}
-
-\subsection{标架联络}
-
 \paragraph{活动标架的非交换性} 
 原本选取的坐标基底，基向量是对易的，即 $[\partial_\mu, \partial_\nu] = 0$。但是对活动标架而言并非如此，活动标架是“带着系数的坐标基底”，其对易子往往不为零：
 \begin{align*}
@@ -249,7 +284,7 @@ $\{e_I\}$ 构成了切空间的完备基底，任意基向量 $e_J$ 沿 $e_K$ �
     这证明了在正交标架场中，联络的几何效应体现为基底在切空间内的局部旋转。
 \end{proof}
 
-\subsection{标架下的协变导数、曲率}
+\paragraph{标架下的协变导数、曲率}
 \n{分量就是沿该方向的协变导数算子作用后在标架下的投影。}
 在选定标架 $\{e_I\}$ 及其对偶余标架 $\{\theta^J\}$ 后，张量的协变导数便有了具体的分量计算公式。
 
@@ -296,8 +331,14 @@ $\{e_I\}$ 构成了切空间的完备基底，任意基向量 $e_J$ 沿 $e_K$ �
 \begin{equation}
     \tensor{R}{^L_{I J K}} = \langle \theta^L, (\nabla_{e_I} \nabla_{e_J} - \nabla_{e_J} \nabla_{e_I} - \nabla_{[e_I, e_J]}) e_K \rangle
 \end{equation}
+\newpage
 
-\section{子流形}
+\section{李导数和时空对称性}
+\subsection{李导数}
+\subsection{Killing矢量}
+\subsection{守恒律和对称性}
+
+\section{子流形与1+3分解}
 \subsection{子流形和超曲面}
 \n{此处定义为描述性说明，详见参考文献。}
 \begin{definition}[子流形]
@@ -443,28 +484,3 @@ $\{e_I\}$ 构成了切空间的完备基底，任意基向量 $e_J$ 沿 $e_K$ �
 
 \n{虽然标架联络系数通常可以使用 Koszul 公式通过计算基底矢量的李括号得到，但更简单的方法是直接利用活动标架的正交性提取分量。}
 
-\begin{proof}
-    在正交归一标架下，利用内积直接提取联络系数。由于 $\nabla_{e_k} e_j$ 是一个矢量，其在法向 $n$ 上的分量 $\omega^0_{kj}$ 可由下式给出：
-    \begin{equation*}
-        \omega^0_{kj} = -g(n, \nabla_{e_k} e_j)
-    \end{equation*}
-    （此处负号源于洛伦兹号差下的归一化要求）。由于切矢量 $e_j$ 始终与法矢量 $n$ 正交，即 $g(n, e_j) = 0$，对该式求导得：
-    \begin{equation*}
-        e_k [g(n, e_j)] = g(\nabla_{e_k} n, e_j) + g(n, \nabla_{e_k} e_j) = 0
-    \end{equation*}
-    由此可见，$\omega^0_{kj}$ 可以转化为法矢量的变化率：$\omega^0_{kj} = g(e_j, \nabla_{e_k} n)$。考虑到李导数 $\mathcal{L}_n g$ 的定义及标架的正交性质：
-    \begin{align*}
-        (\mathcal{L}_n g)(e_k, e_j) &= n[g(e_k, e_j)] - g(\mathcal{L}_n e_k, e_j) - g(e_k, \mathcal{L}_n e_j) \\
-        &= 0 - g([n, e_k], e_j) - g(e_k, [n, e_j])
-    \end{align*}
-    由于无挠条件 $\nabla_a b - \nabla_b a = [a, b]$，代入上式并利用 $g(n, e_i)=0$ 简化可得：
-    \begin{align*}
-        (\mathcal{L}_n g)(e_k, e_j) &= g(\nabla_{e_k} n, e_j) + g(\nabla_{e_j} n, e_k) \\
-        &= \omega^0_{kj} + \omega^0_{jk}
-    \end{align*}
-    由于 $K_{ij}$ 的对称性，最终得到 $\omega^0_{kj} = \frac{1}{2} (\mathcal{L}_n g)(e_k, e_j)$。再利用 $g_{ab} = h_{ab} \pm n_a n_b$ 的分解，在切空间作用下 $n_a$ 项消失，故有：
-    \begin{equation*}
-        \omega^0_{kj} = \frac{1}{2} (\mathcal{L}_n h)(e_k, e_j)
-    \end{equation*}
-    证毕。
-\end{proof}
