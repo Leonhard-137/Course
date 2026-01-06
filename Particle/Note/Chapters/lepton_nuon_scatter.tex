@@ -1,0 +1,203 @@
+\section{轻子-核子散射}
+卢瑟福通过$\alpha$粒子轰击核子证实了原子的核式结构，探究强子内部结构同样可以使用类似的方法。$\alpha$粒子散射实验本质上是弹性散射，散射前后质子保持完整，
+如果入射粒子能量极高，以至于让质子成为激发态甚至被“打碎”，就可以进一步探究质子的内部组分，这就是深度非弹性散射(Deep Inelastic Scattering, DIS)。
+
+\subsection{弹性散射}
+
+早期的卢瑟福散射公式是在入射电子具有非相对论性、靶核（如质子）质量无穷大且不考虑其内部结构的理想条件下得到的。然而，真实的质子不仅具有有限的质量和自旋，更重要的是它具有内部结构。
+
+为了描述这种非点状的内部结构，我们需要引入\textbf{形状因子（Form Factor）}的概念。
+
+\subsubsection{形状因子}
+
+\n{这里是波恩近似下的描述，而非相对论量子场论中的普适计算公式。}
+我们首先在非相对论量子力学的框架下，利用波恩近似（First Born Approximation）来引入形状因子。假设质子质量 $M \to \infty$（静止不动），且不考虑自旋。此时，电子在质子产生的静电势场 $V(\bm{r})$ 中散射。
+
+散射截面的本质是跃迁几率，根据费米黄金定则，它与跃迁矩阵元 $M_{fi}$ 的模方成正比。考虑电子从初态动量 $\bm{p}_1$ 跃迁到末态动量 $\bm{p}_3$，动量转移为 $\bm{q} = \bm{p}_1 - \bm{p}_3$。
+
+假设质子内的电荷并非集中在一点，而是以密度 $\rho(\bm{r})$ 分布，则势能函数为库伦势的叠加：
+\begin{equation}
+    V(\bm{r}) = \int \frac{Z e^2 \rho(\bm{r}')}{4\pi \abs{\bm{r} - \bm{r}'}} \dd[3]{\bm{r}'}, \quad \text{其中} \int \rho(\bm{r}) \dd[3]{\bm{r}} = 1
+\end{equation}
+散射矩阵元 $M_{fi}$ 为：
+\begin{equation}
+    M_{fi} = \mel{\psi_f}{V(\bm{r})}{\psi_i} = \int e^{-i\bm{p}_3\cdot\bm{r}} V(\bm{r}) e^{i\bm{p}_1\cdot\bm{r}} \dd[3]{\bm{r}}
+\end{equation}
+令 $\bm{R} = \bm{r} - \bm{r}'$，利用变量代换，积分可以分解为两部分：
+\begin{align}
+    M_{fi} &= \iint e^{i\bm{q}\cdot(\bm{R} + \bm{r}')} \frac{Z e^2 \rho(\bm{r}')}{4\pi R} \dd[3]{\bm{R}} \dd[3]{\bm{r}'} \notag \\
+    &= \underbrace{\left( \int e^{i\bm{q}\cdot\bm{R}} \frac{Z e^2}{4\pi R} \dd[3]{\bm{R}} \right)}_{(M_{fi})_{\text{point}}} \cdot \underbrace{\left( \int \rho(\bm{r}') e^{i\bm{q}\cdot\bm{r}'} \dd[3]{\bm{r}'} \right)}_{F(\bm{q}^2)}
+\end{align}
+由此可见，非点状粒子的散射矩阵元等于点粒子的矩阵元乘以一个形状因子 $F(\bm{q}^2)$。
+\begin{itemize}
+    \item $(M_{fi})_{\text{point}}$：对应于莫特（Mott）散射（考虑了电子自旋的相对论性点粒子散射）。
+    \item $F(\bm{q}^2)$：\textbf{形状因子}，它是电荷密度分布 $\rho(\bm{r})$ 的傅里叶变换。它描述了质子内部结构的效应。
+\end{itemize}
+
+\subsubsection{弹性散射的散射截面}
+
+当我们将上述模型推广到相对论情况，并考虑质子的有限质量（反冲效应）和自旋磁矩时，轻子-核子的弹性散射截面由 Rosenbluth 公式给出。
+
+\begin{theorem}[Rosenbluth 公式]
+    电子与质子弹性散射的微分散射截面为：
+    \begin{equation}
+        \frac{\dd\sigma}{\dd\Omega} = \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \left[ \frac{G_E^2 + \tau G_M^2}{1+\tau} + 2\tau G_M^2 \tan^2\frac{\theta}{2} \right]
+        \label{eq:rosenbluth}
+    \end{equation}
+    其中 $\left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} = \frac{\alpha^2 \cos^2\frac{\theta}{2}}{4E_1^2 \sin^4\frac{\theta}{2}} \frac{E_3}{E_1}$ 是包含反冲修正的莫特截面。
+\end{theorem}
+
+\noindent\textbf{物理含义分析：}
+\begin{enumerate}
+    \item \textbf{运动学因子}：$E_3/E_1$ 项来源于质子的反冲效应（Recoil）。质子被撞飞带走了能量，导致出射电子能量 $E_3 < E_1$。
+    \item \textbf{结构函数}：
+    \begin{itemize}
+        \item $G_E(Q^2)$：\textbf{电形状因子}，描述电荷分布。
+        \item $G_M(Q^2)$：\textbf{磁形状因子}，描述磁矩分布。
+    \end{itemize}
+    \item \textbf{磁矩贡献的增强}：公式中 $\tau G_M^2 \tan^2\frac{\theta}{2}$ 这一项表明，当散射角 $\theta$ 很大或动量转移很大时，磁矩的相互作用占主导地位。
+    \n{撞得越猛（$Q^2$大），电子越能“看”到质子内部自旋产生的磁效应，就像高速旋转的陀螺更难被偏转一样，自旋磁矩效应在高能下显著。}
+    \item \textbf{变量依赖性}：\n{注意：相对论下的结构函数依赖于四维动量转移 $Q^2$ 而不是三维动量 $\bm{q}^2$。}
+    \begin{itemize}
+        \item $Q^2 = -q^2 > 0$ 是洛伦兹不变量。
+        \item $\bm{q}^2$ 是三维动量转移的平方。
+        \item 关系：$Q^2 = \bm{q}^2 - \nu^2$。在非相对论极限或小动量转移（$Q^2 \ll M^2$）下，能量转移 $\nu \to 0$，此时 $Q^2 \approx \bm{q}^2$。
+        \item \textbf{结论}：只有在小动量转移下，结构函数 $G(Q^2)$ 才能直观地理解为电荷/磁矩空间分布的傅里叶变换。
+    \end{itemize}
+\end{enumerate}
+
+\begin{example}[弹性散射运动学与截面极限]
+    考虑电子（$p_1$）撞击静止质子（$p_2$），出射为电子（$p_3$）和质子（$p_4$）。
+    
+    \textbf{1. 运动学证明：$E_3/E_1$ 与 $Q^2$ 由 $\theta$ 决定}
+    
+    根据四动量守恒 $p_1 + p_2 = p_3 + p_4$，有 $p_4 = p_1 + p_2 - p_3$。对 $p_4$ 平方利用质子质量不变条件 $p_4^2 = M^2$：
+    \begin{equation}
+        (p_1 + p_2 - p_3)^2 = M^2 \implies p_1^2 + p_2^2 + p_3^2 + 2p_1 p_2 - 2p_1 p_3 - 2p_2 p_3 = M^2
+    \end{equation}
+    忽略电子质量 ($m_e \approx 0$)，则 $p_1^2=p_3^2=0$, $p_2^2=M^2$。代入实验室系坐标 $p_1=(E_1, \bm{k}_1), p_2=(M, \bm{0}), p_3=(E_3, \bm{k}_3)$：
+    \begin{gather}
+        M^2 + 2E_1 M - 2E_1 E_3 (1 - \cos\theta) - 2M E_3 = M^2 \notag \\
+        M(E_1 - E_3) = E_1 E_3 (1 - \cos\theta) \notag \\
+        \implies \frac{E_3}{E_1} = \frac{M}{M + E_1(1-\cos\theta)}
+    \end{gather}
+    动量转移 $Q^2 = -(p_1-p_3)^2 = 2p_1 p_3 = 2E_1 E_3 (1-\cos\theta) = 4E_1 E_3 \sin^2\frac{\theta}{2}$。
+    由此可见，在弹性散射中，一旦确定散射角 $\theta$，能量比和动量转移即被唯一确定。
+    
+    \textbf{2. 有限质量质子的点粒子极限}
+    
+    如果在 Rosenbluth 公式中假设质子是点粒子（Point-like），即没有内部结构，则形状因子退化为：
+    \begin{equation}
+        G_E(Q^2) = 1, \quad G_M(Q^2) = 1 \quad (\text{忽略反常磁矩})
+    \end{equation}
+    代入 Eq.\eqref{eq:rosenbluth} 可得有限质量点粒子的Dirac截面：
+    \begin{equation}
+        \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Dirac}} = \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \left[ \frac{1+\tau}{1+\tau} + 2\tau \tan^2\frac{\theta}{2} \right] = \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \left[ 1 + 2\tau \tan^2\frac{\theta}{2} \right]
+    \end{equation}
+    这即是考虑了质子反冲的修正版莫特散射公式。
+\end{example}
+
+\subsubsection{形状因子的测量}
+
+形状因子 $G_E$ 和 $G_M$ 包含强子内部动力学信息（非微扰QCD），目前没有普适的解析计算公式，主要依赖实验测量。
+
+注意到在极限情况下，Rosenbluth 公式会发生退化，使得散射截面主要依赖于某一个形状因子。
+当处于\textbf{低动量转移}（$\tau \ll 1$ 即 $Q^2 \to 0$）时，磁相互作用项被 $\tau$ 因子抑制，微分散射截面退化为主要由电形状因子决定：
+\begin{equation}
+    \frac{\dd\sigma}{\dd\Omega} \approx \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} G_E^2(Q^2)
+\end{equation}
+而当处于\textbf{高动量转移}（$\tau \gg 1$）时，公式中的 $\tau$ 因子使得磁形状因子项占主导地位，电形状因子的贡献相对被压低，截面近似为：
+\begin{equation}
+    \frac{\dd\sigma}{\dd\Omega} \approx \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \tau G_M^2(Q^2) \left( 1 + 2\tan^2\frac{\theta}{2} \right)
+\end{equation}
+
+为了在一般的 $Q^2$ 下同时测定 $G_E$ 和 $G_M$，常用\textbf{Rosenbluth 分离法}。我们将 Rosenbluth 公式重写为线性形式，定义\textbf{约化截面}（reduced cross section）$\sigma_R$：
+\begin{equation}
+    \sigma_R \equiv \frac{\dd\sigma}{\dd\Omega} \bigg/ \left[ \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \frac{\epsilon(1+\tau)}{\tau} \right] = G_M^2(Q^2) + \frac{\epsilon}{\tau} G_E^2(Q^2)
+\end{equation}
+其中 $\epsilon = [1+2(1+\tau)\tan^2(\theta/2)]^{-1}$ 与虚光子的横向极化度有关。
+\n{实验上通过调节入射能量 $E_1$ 和散射角 $\theta$，保持 $Q^2$ 不变而改变 $\epsilon$（或 $\tan^2\frac{\theta}{2}$），此时 $\sigma_R$ 对 $\epsilon$ 的图像是一条直线。}
+通过对实验数据进行线性拟合即可分离出两个因子：直线的\textbf{截距}给出了磁形状因子 $G_M^2$，而\textbf{斜率}则由电形状因子相关项决定。
+
+实验测量发现，在较宽的 $Q^2$ 范围内，质子的磁形状因子和电形状因子近似满足比例关系 $G_M(Q^2) \approx \mu_p G_E(Q^2)$（其中 $\mu_p \approx 2.79$ 为质子磁矩），这表明质子内部的电荷分布和磁矩分布在空间上具有相似的结构。这种分布可以用一个经验性的\textbf{偶极矩公式（Dipole Fit）}来描述：
+\begin{equation}
+    G_E(Q^2) \approx \frac{G_M(Q^2)}{\mu_p} \approx \left( 1 + \frac{Q^2}{0.71 \text{ GeV}^2} \right)^{-2}
+\end{equation}
+对该形状因子进行傅里叶逆变换，对应的电荷密度表现为指数衰减形式，由此可估算出质子的电荷均方根半径约为 $0.8 \text{ fm}$。
+
+\subsection{非弹性散射}
+
+当入射电子的能量进一步提高，动量转移 $Q^2$ 增大到一定程度时，电子不仅会推动质子（弹性散射），甚至会将质子激发成共振态（如 $\Delta$ 粒子）或者直接将质子“打碎”，产生大量的强子末态。这种过程称为\textbf{非弹性散射}（Inelastic Scattering）。
+
+\subsubsection{运动学变量与相空间}
+
+在弹性散射中，由于末态质子质量不变（$W=M$），由能量动量守恒可知，出射电子的能量 $E'$ 和散射角 $\theta$ 是由单一变量决定的（自由度为 1）。
+但在非弹性散射中，末态强子系统 $X$ 的不变质量 $W$ 是一个变量（$W > M$），因此描述该过程需要两个独立的运动学变量。
+
+\begin{definition}[关键运动学不变量]
+    为了描述深度非弹性散射（DIS），我们引入以下洛伦兹不变量：
+    \begin{itemize}
+        \item \textbf{能量转移} $\nu$：在实验室系中代表虚光子传递给质子的能量。
+        \begin{equation}
+            \nu \equiv \frac{P \cdot q}{M} \xrightarrow{\text{Lab}} E - E'
+        \end{equation}
+        \item \textbf{Bjorken 标度变量} $x$：衡量部分子携带质子动量的比例。
+        \begin{equation}
+            x \equiv \frac{Q^2}{2P \cdot q} = \frac{Q^2}{2M\nu} \quad (0 < x \le 1)
+        \end{equation}
+        \n{弹性散射对应 $x=1$，非弹性散射对应 $x < 1$。$x$ 越小，代表电子撞击的是携带动量越小的部分子。}
+        \item \textbf{非弹性度} $y$：电子损失的能量份额。
+        \begin{equation}
+            y \equiv \frac{P \cdot q}{P \cdot k} \xrightarrow{\text{Lab}} \frac{E - E'}{E}
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+此时，末态强子系统的不变质量 $W$ 与这些变量的关系为：
+\begin{equation}
+    W^2 = (P+q)^2 = M^2 + 2M\nu - Q^2 = M^2 + Q^2(\frac{1}{x} - 1)
+\end{equation}
+
+\subsubsection{非弹性散射截面与结构函数}
+
+类似于弹性散射中的 Rosenbluth 公式，我们可以写出非弹性散射的最一般形式。此时，描述质子电磁结构的不再是简单的“形状因子”（Form Factor），而是更加复杂的\textbf{结构函数（Structure Function）} $F_1(x, Q^2)$ 和 $F_2(x, Q^2)$。
+
+实验室系下的双微分散射截面为：
+\begin{equation}
+    \frac{\dd[2]\sigma}{\dd\Omega \dd E'} = \left(\frac{\dd\sigma}{\dd\Omega}\right)_{\text{Mott}} \left[ \frac{1}{\nu} F_2(x, Q^2) + \frac{2}{M} F_1(x, Q^2) \tan^2\frac{\theta}{2} \right]
+\end{equation}
+或者写成洛伦兹不变的形式（忽略质子质量项 $M^2 \ll Q^2$）：
+\begin{equation}
+    \frac{\dd[2]\sigma}{\dd x \dd Q^2} = \frac{4\pi \alpha^2}{Q^4} \left[ (1-y) \frac{F_2(x, Q^2)}{x} + y^2 F_1(x, Q^2) \right]
+\end{equation}
+
+\noindent\textbf{物理含义：}
+\begin{itemize}
+    \item $F_2(x, Q^2)$：\textbf{电磁结构函数}，类比于弹性散射中的电形状因子与磁形状因子的组合，描述部分子的动量分布。
+    \item $F_1(x, Q^2)$：\textbf{磁结构函数}，主要由磁相互作用贡献，与自旋密切相关。
+\end{itemize}
+
+\subsubsection{深度非弹性散射 (DIS) 与部分子模型}
+
+当动量转移 $Q^2 \to \infty$ 且能量转移 $\nu \to \infty$（保持 $x$ 固定）时，我们进入了\textbf{深度非弹性散射（Deep Inelastic Scattering, DIS）}区域。在此区域，实验观测到了两个极其重要的现象，直接揭示了夸克的存在。
+
+\textbf{1. 比约肯标度无关性 (Bjorken Scaling)}
+
+实验发现，在高能极限下，结构函数 $F_1, F_2$ 几乎不再依赖于 $Q^2$，而只依赖于无量纲变量 $x$：
+\begin{equation}
+    F_1(x, Q^2) \to F_1(x), \quad F_2(x, Q^2) \to F_2(x)
+\end{equation}
+\n{这表明质子内部的组分是点状的（point-like）。如果组分有大小，随着 $Q^2$ 增大（波长变短），电子会看到更精细的结构，导致结构函数随 $Q^2$ 变化（如弹性散射中的形状因子迅速衰减）。标度无关性意味着无论分辨率多高，看到的都是同一个点。}
+
+\textbf{2. Callan-Gross 关系}
+
+实验进一步证实，$F_1$ 和 $F_2$ 之间满足如下关系：
+\begin{equation}
+    2x F_1(x) = F_2(x)
+\end{equation}
+这一关系是部分子自旋性质的直接判据。
+\begin{itemize}
+    \item 若部分子自旋为 0（标量），则没有磁相互作用，预言 $F_1 = 0$。
+    \item 若部分子自旋为 1/2（费米子），则预言 $2x F_1 = F_2$。
+\end{itemize}
+\n{实验数据完美符合 Callan-Gross 关系，确凿地证明了质子内部的点状组分（夸克）是自旋为 1/2 的费米子。}
