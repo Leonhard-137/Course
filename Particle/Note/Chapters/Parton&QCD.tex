@@ -5,197 +5,201 @@
 
 \subsection{量子色动力学和强相互作用}
 
-\subsection{部分子分布函数和拟合}
-部分子实际上是包含了夸克和相互作用的模型，最开始的夸克模型被认为是自由而没考虑相互作用的，夸克的分布函数是一个简单的$\delta$函数。随着夸克禁闭效应和量子色动力学的发展，人们逐渐发现强子真实的物理图像更加复杂，
-除了三个价夸克以外，还有由于QCD辐射效应而不断产生湮灭的胶子和正反夸克对（海夸克）。
+\subsection{部分子分布函数：定义与基本性质}
+
+最初的部分子模型将强子视为由若干\emph{自由}夸克组成，因而夸克的动量分布可被理想化为 $\delta$ 函数。
+随着 QCD 的建立与禁闭图像的完善，人们认识到真实的强子内部结构更加复杂：除了价夸克之外，还存在由 QCD 辐射不断产生与湮灭的胶子以及正反夸克对（海夸克）。
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = .8\linewidth]{figs/fig_pdf.png}
-    \caption{对部分子模型的认识的不断改进。分布函数的横轴是部分子携带总动量的比例，纵轴是概率。}
+    \caption{对部分子模型认识的逐步改进。横轴为部分子携带母体强子纵向动量的比例 $x$，纵轴为概率密度。}
 \end{figure}
 
-部分子分布函数(Parton Distribution Function, PDF)被记作
-\n{有时候简写为$f_i(x)$}
-\begin{align}
-    f_{i/H}(x, \mu_F)
-\end{align}
-其含义是在给定因子化能标$\mu_F$下，在强子H中找到携带动量分数为x的种类为i的部分子的概率密度。因子化能标区分了强相互作用的高能和低能部分，由于渐近自由效应，高能部分耦合常数$\alpha_s$小，可以用微扰论计算；低能部分是非微扰效应，这部分物理通过PDF体现。
-\n{课堂ppt7.2有举例}
-在实际的高能物理实验中，以外低能区QCD的复杂，PDF的不确定性（尤其在高x区域）会对实验的分析产生诸多干扰，
-伪造“新物理信号”，同时也制约着对标准模型的进一步精确检验。
+部分子分布函数（Parton Distribution Function, PDF）记作
+\n{有时简写为 $f_i(x)$}
+\begin{equation}
+    f_{i/H}(x,\mu_F),
+\end{equation}
+其物理含义是：在因子化尺度 $\mu_F$ 下，强子 $H$ 中找到一种类为 $i$ 的部分子携带动量分数 $x$ 的概率密度。
+$\mu_F$ 用于区分短距离（高能）与长距离（低能）物理：由于渐近自由，高能硬散射部分的耦合 $\alpha_s(\mu)$ 较小，可用微扰 QCD 计算；而低能非微扰结构被吸收到 PDF 中。
 
-根据部分子函数的定义，某个部分子所携带动量的期望是：
-\begin{align}
-    \int_0^1 dx \underbrace{xP}_{\text{部分子携带动量}}f_i(x)
-\end{align}
+\n{课堂 PPT 7.2 有相关例子。}
+在实际高能物理分析中，由于低能区 QCD 的复杂性，PDF 的不确定度（尤其在高 $x$ 区域）会显著影响截面与分布的理论预言，
+从而可能伪造“新物理信号”，也限制了对标准模型的精密检验。
 
-那么期望之和就是强子的总动量：
-\begin{align}
-    \sum_i \int_0^1 dx \, xPf_i(x) = P
-\end{align}
-消去常数P可以得到：
-\begin{align}
-    \sum_i \int_0^1 dx \, xf_i(x) = 1
-\end{align}
-对于真实的夸克束缚态，夸克的分布实际上由价夸克和海夸克共同构成，通过夸克和反夸克分布的组合，可以表示出价夸克的分布。
-\begin{example}[质子和中子]
-    对质子(uud)，质子中的u除了价夸克还有胶子辐射所产生的海夸克，而$\bar{u}$只有海夸克部分：
-    \begin{align}
-        u(x) &= u_{val}(x) + u_{sea}(x) \\
-        \bar{u}(x) &= \bar{u}_{val}(x)
-    \end{align}
-    由此可以组合出价夸克的分布：
-    \begin{align}
-        u_{val} = u(x)-\bar{u}(x)
-    \end{align}
-    因为质子含有两个价夸克，所以分布函数满足：
-    \begin{align}
-        \int_0^1dx[u(x)-\bar{u}(x)] = 2
-    \end{align}
-    同理有：
-    \begin{align}
-        \int_0^1dx[d(x)-\bar{d}(x)] = 1
-    \end{align}
-    做一个同位旋变换就可以得到中子价夸克的结论：
-    \begin{align}
-        \int_0^1dx[u(x)-\bar{u}(x)] &= 1 \\
-        \int_0^1dx[d(x)-\bar{d}(x)] &= 2
-    \end{align}
+\paragraph{动量和式（momentum sum rule）}
+将 $xf_i(x)$ 理解为“部分子携带动量分数 $x$ 的概率密度”，则所有部分子携带的动量分数之和必须为 $1$：
+\begin{equation}
+    \sum_i \int_0^1 dx \, x f_i(x,\mu_F) = 1.
+\end{equation}
+
+\paragraph{价夸克与海夸克}
+对给定味道 $q$，通常将 PDF 分解为价夸克与海夸克之和：
+\begin{equation}
+    q(x)=q_{\mathrm{val}}(x)+q_{\mathrm{sea}}(x),\qquad 
+    \bar q(x)=\bar q_{\mathrm{sea}}(x),
+\end{equation}
+因此
+\begin{equation}
+    q_{\mathrm{val}}(x)=q(x)-\bar q(x).
+\end{equation}
+
+\begin{example}[质子与中子的价夸克数守恒]
+    对质子 $p(uud)$，价夸克数守恒给出
+    \begin{equation}
+        \int_0^1 dx\,[u(x)-\bar u(x)]=2,\qquad
+        \int_0^1 dx\,[d(x)-\bar d(x)]=1.
+    \end{equation}
+    对中子 $n(ddu)$，在同位旋近似下可得到
+    \begin{equation}
+        \int_0^1 dx\,[u(x)-\bar u(x)]=1,\qquad
+        \int_0^1 dx\,[d(x)-\bar d(x)]=2.
+    \end{equation}
 \end{example}
 
-\subsection{部分子分布函数的性质}
-
-部分子分布函数受到强相互作用内禀对称性的严格约束，利用这些对称性可以显著减少独立参数的数量。
-
-\subsubsection{对称性变换}
-在强相互作用中，物理规律在特定变换下保持不变：
-
+上述关系中常用到 PDF/强相互作用的两个近似对称性：
 \begin{enumerate}
-    \item \textbf{电荷共轭不变性}：
-    粒子中夸克的分布等于其反粒子中反夸克的分布。
+    \item \textbf{电荷共轭不变性（C 对称）}：粒子中夸克分布等于其反粒子中反夸克分布，
     \begin{equation}
-        f_{q/H}(x) = f_{\bar{q}/\bar{H}}(x)
+        f_{q/H}(x) = f_{\bar q/\bar H}(x).
     \end{equation}
-    这意味着如果我们知道质子内的夸克分布，也就知道了反质子内的反夸克分布。
-
-    \item \textbf{同位旋对称性}：
-    在忽略电磁相互作用和夸克质量差异的近似下，质子和中子互为同位旋二重态。通过同位旋旋转操作，可以将质子转换为中子，同时将上夸克转换为下夸克。因此存在如下对应关系：
-    \begin{align}
-        u^p(x) &= d^n(x), \quad d^p(x) = u^n(x) \\
-        \bar{u}^p(x) &= \bar{d}^n(x), \quad \bar{d}^p(x) = \bar{u}^n(x)
-    \end{align}
+    \item \textbf{同位旋对称性（isospin symmetry）}：
+    \begin{equation}
+        u^p(x)=d^n(x),\quad d^p(x)=u^n(x),\qquad
+        \bar u^p(x)=\bar d^n(x),\quad \bar d^p(x)=\bar u^n(x).
+    \end{equation}
 \end{enumerate}
 
-\subsubsection{求和规则}
-分布函数必须满足量子数守恒和动量守恒，这构成了对拟合参数的强约束：
-
-\begin{itemize}
-    \item \textbf{价夸克数守恒}：
-    质子含有两个价上夸克和一个价下夸克。积分减去海夸克（总是成对产生）的贡献后，必须还原出价夸克的数量：
-    \begin{equation}
-        \int_0^1 [u^p(x) - \bar{u}^p(x)] dx = 2, \quad \int_0^1 [d^p(x) - \bar{d}^p(x)] dx = 1
-    \end{equation}
-    
-    \item \textbf{动量求和规则}：
-    强子内所有组分携带的动量之和必须等于强子的总动量。实验测量表明带电夸克仅携带约一半动量，这间接证实了电中性胶子的存在：
-    \begin{equation}
-        \sum_{i=q,\bar{q},g} \int_0^1 x f_i(x) dx = 1
-    \end{equation}
-\end{itemize}
 
 \subsection{因子化定理与截面计算}
 
-在微扰量子色动力学中，强子参与的高能散射截面可以通过因子化定理分离。
+在包含强子的散射过程中，理论计算的主要困难来自强子内部的长程强相互作用结构（禁闭效应），这部分处于强耦合区，无法像 QED 那样完全依靠微扰费曼图从第一性原理计算得到。
+然而，当散射过程涉及足够大的硬尺度（例如 DIS 的 $Q^2$，或强子对撞中高 $p_T$ 末态/大质量体系）时，由于 QCD 的渐近自由特性，短距离硬散射对应的 $\alpha_s(\mu)$ 变小，从而可以使用微扰 QCD 系统计算。
 
-\subsubsection{深度非弹性散射截面计算实例}
-对于电子-质子散射，总截面是各部分子贡献的加权和：
+\paragraph{DIS 因子化（单卷积）}
+对于深度非弹性散射（DIS），总截面可写成 PDF 与轻子--部分子硬散射截面的卷积：
 \begin{equation}
-    \sigma(P, k) = \sum_{i} \int_0^1 dx_i f_i(x_i) \hat{\sigma}_i(\hat{s})
+\sigma_{\mathrm{DIS}}(P,k)
+= \sum_{i}\int_0^1 dx\; f_{i/H}(x,\mu_F)\;
+\hat{\sigma}_{\ell i}(xP,k;\mu_F,\mu_R),
 \end{equation}
-其中 $\hat{s} = x_i S$ 是部分子与电子的质心系能量平方。
+其中 $\hat{\sigma}_{\ell i}$ 是短距离硬过程，可按微扰展开计算；$\mu_F$ 为因子化尺度，$\mu_R$ 为重整化尺度。
 
+\paragraph{强子--强子因子化（双卷积）}
+对于强子--强子对撞过程 $h_1 h_2\to X$，截面具有双卷积结构：
+\begin{equation}
+\sigma_{h_1 h_2\to X}
+=\sum_{a,b}\int_0^1 dx_1\,dx_2\;
+f_{a/h_1}(x_1,\mu_F)\,
+f_{b/h_2}(x_2,\mu_F)\,
+\hat{\sigma}_{ab\to X}(x_1,x_2;\mu_F,\mu_R).
+\end{equation}
+硬散射 $\hat{\sigma}_{ab\to X}$ 因涉及短距离物理而可微扰计算；所有与强子内部长程结构相关的非微扰效应被吸收到通用的 PDF 中。
+
+
+\subsubsection{DIS 散射截面：一个 toy model 练习}
+
+在部分子模型下，DIS 可视为入射轻子与强子内部某一部分子的散射，因此总截面是对部分子动量分数 $x$ 的加权平均：
+\begin{equation}
+    \sigma(P,k)=\sum_i\int_0^1 dx\; f_i(x)\,\hat{\sigma}_i(\hat s).
+\end{equation}
+在高能近似下，强子--轻子体系的质心能量平方
+\begin{equation}
+    s=(P+k)^2\simeq 2P\cdot k,
+\end{equation}
+而部分子--轻子体系的质心能量平方为
+\begin{equation}
+    \hat s=(xP+k)^2\simeq 2x\,P\cdot k = x s.
+\end{equation}
+
+\n{下面只是 toy model：真实 PDF 与完整理论更复杂。}
 \begin{example}[截面计算练习]
-    假设电子与夸克的微扰截面形式为 $\hat{\sigma}_{eu} = A \hat{s}$ 和 $\hat{\sigma}_{ed} = B \hat{s}^2$。
-    假设质子内的夸克分布函数为 $f_u^p(x) = x^2(1-x)^2$ 和 $f_d^p(x) = x^2(1-x)^3$。
-    
-    \textbf{1. 电子-质子散射截面}：
-    将分布函数代入积分公式：
-    \begin{align}
-        \sigma_{ep} &= \int_0^1 dx \left[ f_u^p(x) A(xS) + f_d^p(x) B(xS)^2 \right] \nonumber \\
-        &= AS \int_0^1 x^3(1-x)^2 dx + BS^2 \int_0^1 x^4(1-x)^3 dx
-    \end{align}
-    利用欧拉积分公式 $\int_0^1 x^m(1-x)^n dx = \frac{m!n!}{(m+n+1)!}$，各项积分结果为：
+    假设硬散射截面满足 $\hat{\sigma}_{eu}=A\hat s$、$\hat{\sigma}_{ed}=B\hat s^2$，
+    且质子内 PDF 取
     \begin{equation}
-        \int_0^1 x^3(1-x)^2 dx = \frac{3!2!}{6!} = \frac{1}{60}, \quad \int_0^1 x^4(1-x)^3 dx = \frac{4!3!}{8!} = \frac{1}{280}
+        f_u^p(x)=x^2(1-x)^2,\qquad f_d^p(x)=x^2(1-x)^3.
     \end{equation}
-    代入得最终结果：
+    \n{相关积分可用 Beta 函数 $\mathrm{B}(a,b)=\int_0^1 x^{a-1}(1-x)^{b-1}dx$ 化简。}
+
+    \textbf{1. 电子--质子截面}
+    \begin{align}
+        \sigma_{ep}
+        &= \int_0^1 dx\left[f_u^p(x)\,A(xs)+f_d^p(x)\,B(xs)^2\right] \nonumber\\
+        &= As\int_0^1 x^3(1-x)^2dx + Bs^2\int_0^1 x^4(1-x)^3dx.
+    \end{align}
+    用 Beta 函数（或阶乘形式）可得
     \begin{equation}
-        \sigma_{ep} = \frac{AS}{60} + \frac{BS^2}{280}
+        \int_0^1 x^3(1-x)^2 dx=\mathrm{B}(4,3)=\frac{3!\,2!}{6!}=\frac{1}{60},\qquad
+        \int_0^1 x^4(1-x)^3 dx=\mathrm{B}(5,4)=\frac{4!\,3!}{8!}=\frac{1}{280},
+    \end{equation}
+    因而
+    \begin{equation}
+        \sigma_{ep}=\frac{As}{60}+\frac{Bs^2}{280}.
     \end{equation}
 
-    \textbf{2. 电子-中子散射截面}：
-    利用同位旋关系 $f_u^n = f_d^p$ 和 $f_d^n = f_u^p$，交换系数后积分：
+    \textbf{2. 电子--中子截面}
+    在同位旋近似下 $f_u^n=f_d^p$、$f_d^n=f_u^p$，因此
     \begin{align}
-        \sigma_{en} &= \int_0^1 dx \left[ f_d^p(x) A(xS) + f_u^p(x) B(xS)^2 \right] \nonumber \\
-        &= AS \frac{3!3!}{7!} + BS^2 \frac{4!2!}{7!} = \frac{AS}{140} + \frac{BS^2}{105}
+        \sigma_{en}
+        &= \int_0^1 dx\left[f_d^p(x)\,A(xs)+f_u^p(x)\,B(xs)^2\right]\nonumber\\
+        &= As\int_0^1 x^3(1-x)^3dx + Bs^2\int_0^1 x^4(1-x)^2dx \nonumber\\
+        &= As\,\mathrm{B}(4,4)+Bs^2\,\mathrm{B}(5,3)
+        =\frac{As}{140}+\frac{Bs^2}{105}.
     \end{align}
 \end{example}
 
-\subsubsection{强子-强子散射与DGLAP方程}
-对于强子对撞过程，截面写为双重积分形式：
+
+\subsubsection{PDF 的演化与全局拟合（DGLAP 思想）}
+
+PDF 本身是非微扰对象，但其随因子化尺度的变化 obey DGLAP 演化方程。
+这使得我们可以将在较低能标下由实验数据约束得到的 PDF 演化到更高能标，从而应用于对撞机过程的理论预言。
+\n{全局拟合流程：在初始尺度 $Q_0$ 参数化 PDF，DGLAP 演化到任意 $Q$，与多过程数据做 $\chi^2$ 拟合优化。}
+
+（如需可在此处补上 DGLAP 的标准形式）
 \begin{equation}
-    \sigma_{h_1 h_2 \to X} = \sum_{a,b} \int dx_1 dx_2 f_{a/h_1}(x_1, \mu_F) f_{b/h_2}(x_2, \mu_F) \hat{\sigma}_{ab \to X}
+    \frac{\partial f_i(x,\mu_F)}{\partial \ln\mu_F^2}
+    =\sum_j \int_x^1 \frac{dz}{z}\; P_{ij}(z,\alpha_s(\mu_F))\;
+    f_j\!\left(\frac{x}{z},\mu_F\right),
 \end{equation}
-虽然分布函数是非微扰的，但其随能标的变化服从 DGLAP方程。这使得我们可以将在低能实验测得的分布函数演化到高能对撞机的能标下使用。
+其中 $P_{ij}$ 为分裂函数（可按微扰展开）。
 
-\subsection{对撞机物理初步}
 
-\subsubsection{部分子分布函数不确定度}
-分布函数通过拟合全球实验数据得到，数据误差会传递给分布函数。在计算物理量时，通常使用 Hessian方法 估计由分布函数引起的不确定度。假设参数空间由一组正交的本征向量描述，其对应的不确定度公式为：
+\subsubsection{PDF 不确定度（Hessian 误差传播）}
+
+PDF 由全球实验数据拟合得到，因此实验误差与理论系统误差会传递到 PDF。
+在 Hessian 方法中，拟合会给出中心 PDF 以及沿参数空间本征向量方向的误差集合 $S_i^\pm$。
+对任意观测量（如截面）$\sigma$，由 PDF 引起的不确定度常用
 \begin{equation}
-    (\Delta\sigma)^{2} \approx \frac{1}{4}\sum_{i}^{N_{p}}(\sigma(S_{i}^{+}) - \sigma(S_{i}^{-}))^{2}
+    (\Delta\sigma)^2 \approx \frac{1}{4}\sum_{i=1}^{N_p}\left[\sigma(S_i^+)-\sigma(S_i^-)\right]^2,
 \end{equation}
-其中 $N_p$ 为拟合参数的数量，$S_i^{\pm}$ 代表沿第 $i$ 个本征向量方向拉伸或压缩参数后计算得到的截面值。这一公式反映了分布函数参数空间在极小值附近的二次型近似。
+其中 $N_p$ 为误差方向数。
 
-\subsubsection{有效x的估计}
-在强子对撞机设计与物理分析中，估算产生特定质量粒子所需的部分子动量分数至关重要。
 
-\begin{derivationnote}[有效x的推导]
-    考虑两个强子 $h_1, h_2$ 以质心系能量 $\sqrt{S}$ 对撞。
-    设两个参与硬散射的部分子携带的四动量分别为 $p_1$ 和 $p_2$。
-    
-    根据部分子模型假设，部分子动量与其母体强子动量 $P_{1,2}$ 成正比（忽略横向动量）：
-    \begin{equation}
-        p_1 \approx x_1 P_1, \quad p_2 \approx x_2 P_2
-    \end{equation}
-    
-    部分子系统的质心系能量平方 $\hat{s}$ 定义为：
-    \begin{align}
-        \hat{s} &= (p_1 + p_2)^2 \approx (x_1 P_1 + x_2 P_2)^2 \nonumber \\
-                &= x_1^2 P_1^2 + x_2^2 P_2^2 + 2x_1 x_2 P_1 \cdot P_2
-    \end{align}
-    
-    在高能极限下，忽略强子静止质量 ($P_1^2 \approx 0, P_2^2 \approx 0$)，且利用强子对撞机总能量定义 $S \approx 2 P_1 \cdot P_2$，我们得到：
-    \begin{equation}
-        \hat{s} \approx x_1 x_2 S
-    \end{equation}
-    
-    若要产生质量为 $M$ 的粒子（如希格斯玻色子、顶夸克对等），需要满足阈值条件 $\hat{s} \ge M^2$。假设两个部分子携带的动量分数近似相等，即 $x_1 \approx x_2 \approx x$，则有：
-    \begin{equation}
-        x^2 S \approx M^2 \quad \Rightarrow \quad x \approx \frac{M}{\sqrt{S}}
-    \end{equation}
-\end{derivationnote}
+\subsubsection{有效 $x$ 的估计}
 
-该推导揭示了一个重要结论：对撞机总能量 $\sqrt{S}$ 越高，探测同样质量 $M$ 的物理过程所需的部分子动量分数 $x$ 就越小。
+在强子对撞机分析中，估算产生某一质量尺度 $M$ 的过程所对应的部分子动量分数范围十分重要。
+对 $h_1h_2$ 以质心能量 $\sqrt{S}$ 对撞，若两部分子动量分数为 $x_1,x_2$，则硬过程满足
+\begin{equation}
+    \hat s \simeq x_1x_2 S.
+\end{equation}
+在阈值附近产生质量为 $M$ 的体系可近似取 $\hat s\simeq M^2$，若进一步假设 $x_1\simeq x_2\simeq x$，则
+\begin{equation}
+    x \simeq \frac{M}{\sqrt{S}}.
+\end{equation}
+\n{更一般地，若末态体系的快度为 $y$，则 $x_{1,2}\simeq \frac{M}{\sqrt{S}}e^{\pm y}$。}
+
+因此 $\sqrt{S}$ 越高，探测同样质量尺度 $M$ 的过程所需的典型 $x$ 越小：
 \begin{itemize}
-    \item 在 Tevatron ($1.96$ TeV)，产生顶夸克对 ($M \approx 350$ GeV) 需要 $x \approx 0.18$，此区域由价夸克主导。
-    \item 在 LHC ($14$ TeV)，产生同样的过程仅需 $x \approx 0.025$，此区域由胶子主导。
+    \item Tevatron ($1.96~\mathrm{TeV}$)：产生顶夸克对（$M\approx 350~\mathrm{GeV}$）需 $x\sim 0.18$，常由价夸克贡献显著；
+    \item LHC ($14~\mathrm{TeV}$)：同过程仅需 $x\sim 0.025$，常由胶子主导。
 \end{itemize}
 
+\subsection{对撞机物理简述}
 \subsubsection{亮度与事例率}
-对撞机的性能由瞬时亮度 $\mathcal{L}$ 描述。对于截面为 $\sigma$ 的物理过程，其单位时间产生的事例数为：
+
+对撞机性能由瞬时亮度 $\mathcal{L}$ 描述。对截面为 $\sigma$ 的过程，其单位时间产生事例数为
 \begin{equation}
-    \frac{dN}{dt} = \mathcal{L} \sigma
+    \frac{dN}{dt}=\mathcal{L}\,\sigma.
 \end{equation}
-实验累积的数据量由积分亮度 $\int \mathcal{L} dt$ 衡量，单位通常为 $\text{fb}^{-1}$。
+实验累积数据量由积分亮度 $\int \mathcal{L}dt$ 衡量，常用单位为 $\mathrm{fb}^{-1}$。
