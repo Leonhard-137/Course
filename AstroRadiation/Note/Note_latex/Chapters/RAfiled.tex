@@ -1,0 +1,465 @@
+\section{辐射场基本理论概述}
+\subsection{电磁辐射谱}
+
+\n{观测量与理论量：望远镜测的是\emph{能量/功率在频率上的分布}，理论上我们从电磁场强度出发建立联系。}
+\paragraph{(1) 观测量与基本定义}
+天文观测在给定时间间隔 $\Delta t$ 与空间观测点，记录某一频率带宽 $\Delta\omega$ 内的辐射能量（或功率）。为将之与电磁场联系，需要从\emph{电场随时间的变化} $E(t)$ 出发来定义“谱”。由于真空中 $\mathbf{E}$ 与 $\mathbf{B}$ 的地位对称、信息等价，以下以 $E(t)$ 为代表。
+
+\medskip
+\noindent
+\textbf{傅里叶表示：}任意\emph{方差有限}的时间信号 $E(t)$ 都可以写作不同频率与相位的波的叠加，称其\emph{傅里叶频谱}
+\begin{equation}
+  E(t) = \int_{-\infty}^{+\infty} E(\omega)\,e^{-i\omega t}\,d\omega ,
+  \qquad
+  E(\omega) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} E(t)\,e^{+i\omega t}\,dt .
+\end{equation}
+$E(\omega)$ 一般为\emph{复数}，幅度给出该频率成分强度，相位承载不同成分的相对位相信息；若 $E(t)$ 为实函数，则 $E(-\omega)=E^*(\omega)$。
+
+\begin{derivationnote}[为何可以用傅里叶积分展开？]
+在 $L^2(\mathbb{R})$（可平方可积）意义下，复指数 $e^{-i\omega t}$ 构成完备正交基，任意 $E(t)$ 都可在该基底上展开；逆变换式由正交关系
+$\int e^{-i\omega t}e^{+i\omega' t}dt=2\pi\,\delta(\omega-\omega')$ 给出。
+\end{derivationnote}
+
+\paragraph{(2) 能量与谱：从坡印廷矢量到\;谱能量密度}
+\n{单位时间单位面积通量 $S$ 与 $E^2$ 成正比；把 $E^2(t)$ 的时间积分换到频域用 Parseval 定理。}
+在真空中，瞬时辐射能流密度（坡印廷矢量的模）为
+\begin{equation}
+  S(t)=\frac{c}{4\pi}\,E^2(t)\qquad(\text{cgs 制}).
+\end{equation}
+于是通过单位面积 $A$、在时间区间 $dt$ 内的辐射能量增量为
+\begin{equation}
+  \frac{dW}{dA\,dt}=S(t)=\frac{c}{4\pi}E^2(t).
+\end{equation}
+对时间积分得到总能量（单位面积）：
+\begin{equation}
+  \frac{dW}{dA}=\frac{c}{4\pi}\int_{-\infty}^{+\infty} E^2(t)\,dt .
+\end{equation}
+由 Parseval 定理（能量守恒在时域/频域的等价）
+\begin{equation}
+  \int_{-\infty}^{+\infty}E^2(t)\,dt
+  = 2\pi\int_{-\infty}^{+\infty}\!\!\! |E(\omega)|^2\,d\omega ,
+\end{equation}
+可得
+\begin{equation}
+  \frac{dW}{dA} = c \int_{-\infty}^{+\infty} |E(\omega)|^2\,d\omega .
+\end{equation}
+\emph{因此}，\textbf{单位面积的单色谱能量密度}（每单位频率间隔的能量）为
+\begin{equation}
+  \boxed{\;\frac{dW}{dA\,d\omega}=c\,|E(\omega)|^2\;}
+\end{equation}
+它正是观测上“谱能量”（或功率谱）的基本理论对应量。若更关心\emph{平均功率谱}，可在足够长时间上取平均（稳态情况下等价）。
+
+\begin{derivationnote}[Parseval 的一个一行证明模板]
+代入 $E(t)=\int E(\omega)e^{-i\omega t}d\omega$，
+\(
+\int E^2(t)dt=\int\!\!\int\!\!\int
+E(\omega)E^*(\omega')e^{-i(\omega-\omega')t}\,d\omega\,d\omega'\,dt
+=2\pi\int |E(\omega)|^2 d\omega .
+\)
+\end{derivationnote}
+
+\paragraph{(3) 周期脉冲的谱：傅里叶级数与离散谱}
+\n{周期 $T$ 的信号 $\Rightarrow$ 谱在 $\omega_n=n\omega_0$ 处为离散线；能量/功率以系数模方之和度量。}
+若 $E(t)$ 为周期 $T$ 的脉冲列（每周期出现一次），其傅里叶展开为
+\begin{equation}
+  E(t)=\sum_{n=-\infty}^{+\infty} E_n\,e^{-in\omega_0 t},
+  \qquad
+  \omega_0=\frac{2\pi}{T},
+  \qquad
+  E_n=\frac{1}{T}\int_0^T E(t)\,e^{+in\omega_0 t}\,dt .
+\end{equation}
+相应 Parseval 定理在一周期上的形式为
+\begin{equation}
+  \int_0^T E^2(t)\,dt
+  = 2\pi \sum_{n=-\infty}^{+\infty} |E_n|^2 .
+\end{equation}
+于是\emph{一周期内的单位面积能量}为
+\begin{equation}
+  \left(\frac{dW}{dA}\right)_{\!\text{1 周期}}
+  = \frac{c}{4\pi}\int_0^T E^2(t)\,dt
+  = \frac{cT}{2}\sum_{n=-\infty}^{+\infty}|E_n|^2 ,
+\end{equation}
+而\emph{周期平均功率}（除以 $T$）为
+\begin{equation}
+  \boxed{\;
+  \left\langle \frac{dW}{dA\,dt}\right\rangle
+  = \frac{c}{2} \sum_{n=-\infty}^{+\infty}|E_n|^2 \;}
+\end{equation}
+这说明离散谱线上每个谐波 $n$ 的“线强”正比于 $|E_n|^2$。当 $T$ 很大（$\omega_0\!\to\!0$）时，相邻谱线间隔变得极小，离散谱趋于\emph{准连续}，对应地回到傅里叶积分的连续谱情形。
+
+\paragraph{(4) 物理解释与使用要点（精炼版）}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{谱的本质：}$E(\omega)$ 给出各频率成分的\emph{复幅}；观测到的“能量/功率谱”与 $|E(\omega)|^2$ 成正比，\emph{相位}则在不同频率分量的干涉、调制与成像中起作用。
+  \item \textbf{从场到通量：}通过 $S(t)=\frac{c}{4\pi}E^2(t)$ 把场强与能流联系，再用 Parseval 把\emph{时间平均}转换为\emph{频率积分/求和}，得到可直接比较的谱量。
+  \item \textbf{周期与非周期统一：}周期信号 $\Rightarrow$ 离散谱（傅里叶级数系数 $E_n$）；非周期/单脉冲 $\Rightarrow$ 连续谱（傅里叶积分 $E(\omega)$）。$T\!\uparrow$ 时离散谱 $\to$ 连续谱是两者的桥梁。
+  \item \textbf{单位与制式：}以上常用 cgs；若改用 SI，$S(t)=\frac{1}{\mu_0}\mathbf{E}\times\mathbf{B}$，相应常数需要替换，但\emph{谱 $\propto |E(\omega)|^2$ 的结论不变}。
+\end{itemize}
+
+\begin{derivationnote}[单色波的检查]
+若 $E(t)=\Re\{ \tilde{E}\,e^{-i\omega t}\}$，则 $E(\omega)=\tilde{E}\,\delta(\omega-\omega_0)$，
+从而 $\frac{dW}{dA\,d\omega}=c\,|\tilde{E}|^2\,\delta(\omega-\omega_0)$，
+与“所有能量集中在 $\omega_0$ 处”的直觉一致。
+\end{derivationnote}
+
+\subsection{偏振（Polarization）}
+
+\n{偏振描述电磁波的电场矢量随时间的取向规律。}
+\paragraph{(1) 基本定义与表示}
+偏振指电磁波的电场（或磁场）矢量在传播过程中随时间的变化规律。
+若电场仅沿一个方向振荡，称为\emph{线偏振}（linear polarization）。
+
+设平面单色波
+\begin{equation}
+  \mathbf{E} = \hat{\mathbf{a}}_1 E_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)}, \qquad
+  \mathbf{B} = \hat{\mathbf{a}}_2 B_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)} .
+\end{equation}
+若电场具有两个互相垂直的分量（如沿 $x$ 与 $y$ 方向），并且它们的振幅与相位不同，则波的电矢量端点随时间描绘出椭圆轨迹，称为\emph{椭圆偏振波}（elliptically polarized wave）：
+\begin{equation}
+  E_x(t,z) = A_1 e^{i(\phi_1 - kz + \omega t)},\qquad
+  E_y(t,z) = A_2 e^{i(\phi_2 - kz + \omega t)} .
+\end{equation}
+取其实部表示真实电场（$z=0$）：
+\begin{equation}
+  \mathbf{E}(t)
+  = A_1 \cos(\omega t - \phi_1)\,\hat{\mathbf{e}}_1
+  + A_2 \cos(\omega t - \phi_2)\,\hat{\mathbf{e}}_2 .
+\end{equation}
+
+\paragraph{(2) 椭圆轨迹方程与几何特征}
+\n{电场分量幅度与相位差决定椭圆的长短轴和方向。}
+电矢量的大小与方向随时间变化，其端点形成椭圆：
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1 .
+\]
+图形中的椭圆由两个参数确定：
+\begin{itemize}[leftmargin=2em]
+  \item 长短轴长度 $a,b$；
+  \item 椭圆长轴与坐标轴夹角 $\chi$。
+\end{itemize}
+
+为使坐标系与椭圆长短轴对齐，将坐标轴旋转 $\chi$：
+\begin{equation}
+\begin{aligned}
+  \hat{\mathbf{e}}'_1 &= \cos\chi\,\hat{\mathbf{e}}_1 + \sin\chi\,\hat{\mathbf{e}}_2,\\
+  \hat{\mathbf{e}}'_2 &= -\sin\chi\,\hat{\mathbf{e}}_1 + \cos\chi\,\hat{\mathbf{e}}_2.
+\end{aligned}
+\end{equation}
+
+在该旋转坐标系下，电场具有标准形式：
+\begin{equation}
+  \mathbf{E}(t,0)
+  = E_0\cos\beta\cos(\omega t)\,\hat{\mathbf{e}}'_1
+  - E_0\sin\beta\sin(\omega t)\,\hat{\mathbf{e}}'_2,
+  \qquad -\frac{\pi}{2}\le \beta\le \frac{\pi}{2}.
+\end{equation}
+其中 $E_0\cos\beta$ 与 $E_0\sin\beta$ 为椭圆长、短轴幅度，$\tan\beta$ 表示椭圆的偏率（椭圆率）。
+
+\paragraph{(3) 参数与原始电场关系}
+由原式
+\[
+E_1 = A_1\cos(\omega t-\phi_1), \quad E_2 = A_2\cos(\omega t-\phi_2)
+\]
+与上式等价比较可得
+\begin{align*}
+A_1\cos\phi_1 &= E_0\cos\beta\cos\chi, & A_1\sin\phi_1 &= E_0\sin\beta\sin\chi,\\
+A_2\cos\phi_2 &= E_0\cos\beta\sin\chi, & A_2\sin\phi_2 &= E_0\sin\beta\cos\chi.
+\end{align*}
+给定 $A_1, A_2, \phi_1, \phi_2$，即可反算出 $E_0, \beta, \chi$。
+
+\begin{derivationnote}[从两分量到椭圆参数的确定]
+将 $E_1, E_2$ 同时平方并消去时间项 $\omega t$，得椭圆的一般方程。
+进一步化简可求出长轴方向 $\tan(2\chi)$ 与相位差 $\delta=\phi_2-\phi_1$ 的关系：
+\[
+\tan(2\chi) = \frac{2A_1A_2\cos\delta}{A_1^2 - A_2^2},\quad
+\tan(2\beta) = \frac{2A_1A_2\sin\delta}{A_1^2 + A_2^2}.
+\]
+\end{derivationnote}
+
+\paragraph{(4) 平均能流与偏振能量密度}
+\n{平均能流正比于 $E_0^2$，偏振态不影响能量守恒。}
+时间平均的坡印廷矢量模量
+\begin{equation}
+\langle E^2(t,0)\rangle = \frac{1}{2}(E_0^2\cos^2\beta + E_0^2\sin^2\beta)
+= \frac{E_0^2}{2}.
+\end{equation}
+因此偏振仅改变电场方向随时间的变化，而不改变平均辐射能流大小。定义辐射能流（或辐射强度）$I\propto E_0^2$。
+
+\paragraph{(5) 特殊情形与旋转方向}
+\n{线偏振、圆偏振、右旋与左旋。}
+\begin{itemize}[leftmargin=2em]
+  \item 当 $\beta=0$ 或 $\pi/2$ 时，电场沿单一方向振荡，为\emph{线偏振波}。
+  \item 当 $\beta=\pm\pi/4$ 时，$|E_x|=|E_y|$，椭圆退化为圆，称\emph{圆偏振波}。
+\end{itemize}
+
+一般情况下，$\beta$ 同时决定：
+\begin{enumerate}[leftmargin=2em]
+  \item 椭圆的偏率；
+  \item 电矢量随时间旋转方向：
+  \begin{itemize}
+    \item 若 $0<\beta<\pi/2$，随时间增加电矢量沿椭圆\emph{顺时针}旋转，称\textbf{右旋（右圆偏振）}；
+    \item 若 $-\pi/2<\beta<0$，则电矢量\emph{逆时针}旋转，称\textbf{左旋（左圆偏振）}。
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{(6) 物理解释与总结}
+\begin{itemize}[leftmargin=2em]
+  \item 偏振反映了电场矢量的\emph{几何演化}特征，与能量强度无关；
+  \item 线偏振、圆偏振、椭圆偏振是同一物理量连续变化的不同极限；
+  \item 在天体物理中，偏振度与偏振方向常用于推断磁场方向、散射几何与辐射机制。
+\end{itemize}
+
+\subsection{偏振（Polarization）}
+
+\n{偏振描述电磁波的电场矢量随时间的取向规律。}
+\paragraph{(1) 基本定义与表示}
+偏振指电磁波的电场（或磁场）矢量在传播过程中随时间的变化规律。
+若电场仅沿一个方向振荡，称为\emph{线偏振}（linear polarization）。
+
+设平面单色波
+\begin{equation}
+  \mathbf{E} = \hat{\mathbf{a}}_1 E_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)}, \qquad
+  \mathbf{B} = \hat{\mathbf{a}}_2 B_0 e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)} .
+\end{equation}
+若电场具有两个互相垂直的分量（如沿 $x$ 与 $y$ 方向），并且它们的振幅与相位不同，则波的电矢量端点随时间描绘出椭圆轨迹，称为\emph{椭圆偏振波}（elliptically polarized wave）：
+\begin{equation}
+  E_x(t,z) = A_1 e^{i(\phi_1 - kz + \omega t)},\qquad
+  E_y(t,z) = A_2 e^{i(\phi_2 - kz + \omega t)} .
+\end{equation}
+取其实部表示真实电场（$z=0$）：
+\begin{equation}
+  \mathbf{E}(t)
+  = A_1 \cos(\omega t - \phi_1)\,\hat{\mathbf{e}}_1
+  + A_2 \cos(\omega t - \phi_2)\,\hat{\mathbf{e}}_2 .
+\end{equation}
+
+\paragraph{(2) 椭圆轨迹方程与几何特征}
+\n{电场分量幅度与相位差决定椭圆的长短轴和方向。}
+电矢量的大小与方向随时间变化，其端点形成椭圆：
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1 .
+\]
+图形中的椭圆由两个参数确定：
+\begin{itemize}[leftmargin=2em]
+  \item 长短轴长度 $a,b$；
+  \item 椭圆长轴与坐标轴夹角 $\chi$。
+\end{itemize}
+
+为使坐标系与椭圆长短轴对齐，将坐标轴旋转 $\chi$：
+\begin{equation}
+\begin{aligned}
+  \hat{\mathbf{e}}'_1 &= \cos\chi\,\hat{\mathbf{e}}_1 + \sin\chi\,\hat{\mathbf{e}}_2,\\
+  \hat{\mathbf{e}}'_2 &= -\sin\chi\,\hat{\mathbf{e}}_1 + \cos\chi\,\hat{\mathbf{e}}_2.
+\end{aligned}
+\end{equation}
+
+在该旋转坐标系下，电场具有标准形式：
+\begin{equation}
+  \mathbf{E}(t,0)
+  = E_0\cos\beta\cos(\omega t)\,\hat{\mathbf{e}}'_1
+  - E_0\sin\beta\sin(\omega t)\,\hat{\mathbf{e}}'_2,
+  \qquad -\frac{\pi}{2}\le \beta\le \frac{\pi}{2}.
+\end{equation}
+其中 $E_0\cos\beta$ 与 $E_0\sin\beta$ 为椭圆长、短轴幅度，$\tan\beta$ 表示椭圆的偏率（椭圆率）。
+
+\paragraph{(3) 参数与原始电场关系}
+由原式
+\[
+E_1 = A_1\cos(\omega t-\phi_1), \quad E_2 = A_2\cos(\omega t-\phi_2)
+\]
+与上式等价比较可得
+\begin{align*}
+A_1\cos\phi_1 &= E_0\cos\beta\cos\chi, & A_1\sin\phi_1 &= E_0\sin\beta\sin\chi,\\
+A_2\cos\phi_2 &= E_0\cos\beta\sin\chi, & A_2\sin\phi_2 &= E_0\sin\beta\cos\chi.
+\end{align*}
+给定 $A_1, A_2, \phi_1, \phi_2$，即可反算出 $E_0, \beta, \chi$。
+
+\begin{derivationnote}[从两分量到椭圆参数的确定]
+将 $E_1, E_2$ 同时平方并消去时间项 $\omega t$，得椭圆的一般方程。
+进一步化简可求出长轴方向 $\tan(2\chi)$ 与相位差 $\delta=\phi_2-\phi_1$ 的关系：
+\[
+\tan(2\chi) = \frac{2A_1A_2\cos\delta}{A_1^2 - A_2^2},\quad
+\tan(2\beta) = \frac{2A_1A_2\sin\delta}{A_1^2 + A_2^2}.
+\]
+\end{derivationnote}
+
+\paragraph{(4) 平均能流与偏振能量密度}
+\n{平均能流正比于 $E_0^2$，偏振态不影响能量守恒。}
+时间平均的坡印廷矢量模量
+\begin{equation}
+\langle E^2(t,0)\rangle = \frac{1}{2}(E_0^2\cos^2\beta + E_0^2\sin^2\beta)
+= \frac{E_0^2}{2}.
+\end{equation}
+因此偏振仅改变电场方向随时间的变化，而不改变平均辐射能流大小。定义辐射能流（或辐射强度）$I\propto E_0^2$。
+
+\paragraph{(5) 特殊情形与旋转方向}
+\n{线偏振、圆偏振、右旋与左旋。}
+\begin{itemize}[leftmargin=2em]
+  \item 当 $\beta=0$ 或 $\pi/2$ 时，电场沿单一方向振荡，为\emph{线偏振波}。
+  \item 当 $\beta=\pm\pi/4$ 时，$|E_x|=|E_y|$，椭圆退化为圆，称\emph{圆偏振波}。
+\end{itemize}
+
+一般情况下，$\beta$ 同时决定：
+\begin{enumerate}[leftmargin=2em]
+  \item 椭圆的偏率；
+  \item 电矢量随时间旋转方向：
+  \begin{itemize}
+    \item 若 $0<\beta<\pi/2$，随时间增加电矢量沿椭圆\emph{顺时针}旋转，称\textbf{右旋（右圆偏振）}；
+    \item 若 $-\pi/2<\beta<0$，则电矢量\emph{逆时针}旋转，称\textbf{左旋（左圆偏振）}。
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{(6) 物理解释与总结}
+\begin{itemize}[leftmargin=2em]
+  \item 偏振反映了电场矢量的\emph{几何演化}特征，与能量强度无关；
+  \item 线偏振、圆偏振、椭圆偏振是同一物理量连续变化的不同极限；
+  \item 在天体物理中，偏振度与偏振方向常用于推断磁场方向、散射几何与辐射机制。
+\end{itemize}
+
+\subsection{斯托克斯参数与偏振概述}\label{subsec:stokes}
+
+\n{Stokes 四参量：用可测强度刻画偏振。}
+\paragraph{（1）}在实际光学与射电观测中，直接测量电场振幅与相位通常困难；更便利的是测量\emph{辐射能流（强度）}。因此引入\textbf{斯托克斯参数} $\{I,Q,U,V\}$ 来替代对电场的刻画，它们均为\emph{可观测、实数}并具有能流量纲。
+
+设在某一正交基 $\{\mathbf e_1,\mathbf e_2\}$ 上，复电场分量为
+\[
+E_1(t,z)=A_1 e^{i(\phi_1 - \omega t + kz)},\qquad
+E_2(t,z)=A_2 e^{i(\phi_2 - \omega t + kz)} .
+\]
+时间平均 $\langle\cdot\rangle$ 记作在多个波周期上的平均，则 Stokes 量定义为
+\begin{align}
+I &= \langle E_1 E_1^\ast\rangle + \langle E_2 E_2^\ast\rangle = A_1^2 + A_2^2, \\
+Q &= \langle E_1 E_1^\ast\rangle - \langle E_2 E_2^\ast\rangle = A_1^2 - A_2^2, \\
+U &= \langle E_1 E_2^\ast\rangle + \langle E_2 E_1^\ast\rangle = 2A_1A_2\cos(\phi_2-\phi_1),\\
+V &= -i\!\left(\langle E_1 E_2^\ast\rangle - \langle E_2 E_1^\ast\rangle\right)=2A_1A_2\sin(\phi_2-\phi_1).
+\end{align}
+
+\begin{derivationnote}[与椭圆偏振参数的联系]
+设偏振椭圆的偏振面取为 $x$–$y$ 平面。用\emph{椭圆倾角} $\chi\in[-\pi/4,\pi/4]$（圆偏振 $\chi=\pm\pi/4$，线偏振 $\chi=0$）与\emph{主轴方位角} $\psi\in[0,\pi)$ 参数化，则在旋转至主轴的坐标系后有
+\[
+I=E_0^2,\quad Q=E_0^2\cos2\beta\cos2\chi,\quad U=E_0^2\cos2\beta\sin2\chi,\quad V=E_0^2\sin2\beta,
+\]
+其中 $E_0$ 为总振幅，$2\beta$ 表示\emph{圆偏振分量权重角}（等价于椭圆离心率参数化）。常用的几何关系是
+\[
+\tan 2\chi = \frac{U}{Q},\qquad \frac{V}{I}=\sin 2\beta,\qquad I^2=Q^2+U^2+V^2\; (\text{完全偏振}).
+\]
+\end{derivationnote}
+
+\paragraph{（2）物理意义与符号约定}
+\n{Q/U：线偏振的方向与相位；V：旋向。}
+\begin{itemize}[leftmargin=2em]
+  \item $I$：与辐射能流（或强度）正比。
+  \item $Q$：表示相对于参考轴（通常取 $x$ 轴）\emph{线偏振}的取向差异：$Q>0$ 表示偏振主轴更接近 $x$ 轴，$Q<0$ 更接近 $y$ 轴。
+  \item $U$：相当于将参考轴旋转 $45^\circ$ 后的线偏振取向信息。$\tan 2\psi = U/Q$ 给出\emph{线偏振角} $\psi$。
+  \item $V$：表示\emph{圆偏振}的旋向与强度；$V>0$ 常规取右旋（$0<\beta<\pi/2$），$V<0$ 左旋。
+\end{itemize}
+
+\paragraph{（3）坐标轴旋转下的变换规律}
+\n{围绕传播方向转轴 $\theta$：$Q+iU$ 取相位 $e^{-i2\theta}$.}
+若将参考轴在传播方向上旋转角 $\theta$，则
+\begin{align}
+I'&=I,\qquad V'=V,\\
+Q'&=Q\cos2\theta+U\sin2\theta,\qquad
+U'=-Q\sin2\theta+U\cos2\theta.
+\end{align}
+\begin{derivationnote}[群表示法简证]
+记 $P\equiv Q+iU$，则旋转作用为 $P'\!=\!P\,e^{-i2\theta}$，这反映了 $Q,U$ 组成自旋权数 $s=\pm2$ 的二分量。$I,V$ 为旋转不变标量。
+\end{derivationnote}
+
+\paragraph{（4）任意（部分偏振）波的 Stokes 量}
+\n{非相干叠加：强度相加，交叉项平均为零。}
+辐射场常由多列（部分/完全）偏振波的\emph{非相干叠加}构成。设第 $k$ 列波的电场为 $\mathbf E^{(k)}$，则
+\[
+\mathbf E_{\rm tot}=\sum_k \mathbf E^{(k)},\qquad
+\langle E_i E_j^\ast\rangle=\sum_k \langle E_i^{(k)} E_j^{(k)\ast}\rangle,
+\]
+不同列之间的交叉项因随机相位平均为 $0$。因此 Stokes 参数对非相干叠加\emph{线性}：
+\[
+I=\sum_k I_k,\quad Q=\sum_k Q_k,\quad U=\sum_k U_k,\quad V=\sum_k V_k.
+\]
+对完全偏振的各列波成立 $I_k^2=Q_k^2+U_k^2+V_k^2$，进而可证
+\[
+I^2\ge Q^2+U^2+V^2,
+\]
+等号当且仅当合成波为完全偏振。
+
+\paragraph{（5）分解：自然波 + 椭圆偏振波}
+\n{最简两项分解：一项各向等概率，另一项携带全部偏振。}
+任何\emph{部分偏振波}都可作如下分解（强度矩阵表述）：
+\[
+\begin{bmatrix} I\\ Q\\ U\\ V\end{bmatrix}
+=
+\underbrace{\begin{bmatrix} I-\sqrt{Q^2+U^2+V^2}\\ 0\\ 0\\ 0\end{bmatrix}}_{\text{自然（非偏振）}}
++
+\underbrace{\begin{bmatrix} \sqrt{Q^2+U^2+V^2}\\ Q\\ U\\ V\end{bmatrix}}_{\text{椭圆偏振（完全偏振）}} .
+\]
+等式左第一项表示\emph{非偏振}（各方向等概率，无优选方向）；第二项为与 $\{Q,U,V\}$ 同向的\emph{完全偏振}分量。
+
+\paragraph{（6）偏振度（总、线、圆）}
+\n{偏振度 $\Pi$ 是偏振强度与总强度之比。}
+\[
+\Pi \equiv \frac{\sqrt{Q^2+U^2+V^2}}{I},\qquad
+\Pi_L \equiv \frac{\sqrt{Q^2+U^2}}{I},\qquad
+\Pi_C \equiv \frac{|V|}{I}.
+\]
+\begin{itemize}[leftmargin=2em]
+  \item $0\le \Pi \le 1$；完全偏振波 $\Pi=1$，自然波 $\Pi=0$。
+  \item 偏振面由电矢量与传播方向构成的平面（通常取 $V=0$ 时对应线偏振，位于 $x$ 轴方向）。方向由 $\tan 2\psi=U/Q$ 给出。
+\end{itemize}
+
+\begin{derivationnote}[从电场到 $\Pi$ 的不等式]
+对完全偏振波，$Q=E_0^2\cos2\beta\cos2\psi$，$U=E_0^2\cos2\beta\sin2\psi$，$V=E_0^2\sin2\beta$，于是
+$\sqrt{Q^2+U^2+V^2}=E_0^2=I$；对非相干叠加应用 Minkowski 不等式得到 $I\ge\sqrt{Q^2+U^2+V^2}$。
+\end{derivationnote}
+
+\paragraph{（7）另一种三项分解：自然 + 线偏振 + 圆偏振}
+\n{将偏振强度拆为线与圆：便于观测分离。}
+\[
+\begin{bmatrix} I\\ Q\\ U\\ V\end{bmatrix}
+=
+\underbrace{\begin{bmatrix} I-\sqrt{Q^2+U^2}-|V|\\ 0\\ 0\\ 0\end{bmatrix}}_{\text{自然}}
++
+\underbrace{\begin{bmatrix} \sqrt{Q^2+U^2}\\ Q\\ U\\ 0\end{bmatrix}}_{\text{线偏振}}
++
+\underbrace{\begin{bmatrix} |V|\\ 0\\ 0\\ \operatorname{sgn}(V)|V|\end{bmatrix}}_{\text{圆偏振}} .
+\]
+
+\paragraph{（8）部分\;线偏振（$V=0$）的观测与公式}
+\n{线偏振片法：$I_{\max}$ 与 $I_{\min}$.}
+当 $V=0$（无圆分量）时，有
+\[
+\begin{bmatrix} I\\ Q\\ U\\ 0\end{bmatrix}
+=
+\begin{bmatrix} I-\sqrt{Q^2+U^2}\\ 0\\ 0\\ 0\end{bmatrix}
++
+\begin{bmatrix} \sqrt{Q^2+U^2}\\ Q\\ U\\ 0\end{bmatrix}.
+\]
+用理想\emph{线偏振片}测量：调节偏振片方位角，使透过强度出现最小与最大值
+\[
+I_{\min} = I_{\rm unpol},\qquad
+I_{\max} = I_{\rm unpol} + I_{\rm pol},
+\]
+其中 $I_{\rm pol}=\frac12(I_{\max}-I_{\min})$，$I_{\rm unpol}=\frac12(I_{\max}+I_{\min})$，并有
+\[
+I=I_{\rm unpol}+I_{\rm pol}=I_{\max}+I_{\min}\over 2 + {I_{\max}-I_{\min}\over 2}.
+\]
+由此得到\textbf{总偏振度}与\textbf{线偏振度}的等价观测公式
+\[
+\Pi=\frac{I_{\rm pol}}{I}
+=\frac{I_{\max}-I_{\min}}{I_{\max}+I_{\min}},\qquad
+\Pi_L=\Pi,\quad (V=0).
+\]
+\begin{derivationnote}[马吕斯定律与 $I_{\max/\min}$]
+对纯线偏振入射，透过强度 $I(\theta)=I_0\cos^2(\theta-\psi)$（马吕斯定律）。对\emph{部分线偏振}而言，相当于在同一方向上的完全偏振强度 $I_{\rm pol}$ 与各向无偏的 $I_{\rm unpol}$ 叠加，于是
+$ I_{\max}= I_{\rm unpol} + I_{\rm pol}$（当 $\theta=\psi$），
+$ I_{\min}= I_{\rm unpol}$（当 $\theta=\psi+\pi/2$），
+从而导出上式。
+\end{derivationnote}
+
+\paragraph{（9）实验与表述要点（实践提示）}
+\begin{itemize}[leftmargin=2em]
+  \item 设定参考轴与右手系；说明 $V>0$ 的旋向约定（天体物理通常取\emph{右旋为正}）。
+  \item 报告结果时给出 $(I,\Pi,\psi,\operatorname{sgn}V)$ 或等价的 $(I,Q,U,V)$；在多频段观测中，注意 $Q,U$ 的\emph{旋转}带来的 Faraday 旋转校正。
+  \item 对谱线偏振，需区分辐射传输与 Zeeman 分裂贡献；对连续谱偏振，常由散射、磁场取向与辐射几何共同决定（此处略）。
+\end{itemize}
+
+

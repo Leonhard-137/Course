@@ -1,0 +1,238 @@
+\section{辐射扩散}
+
+\n{在光学厚介质中，辐射在局域热平衡条件下以扩散形式传输。
+不同近似描述了光场在不同尺度或边界条件下的平均行为。}
+
+辐射扩散研究的是热平衡系统中由于温度梯度导致的辐射能量输运问题，
+典型情形包括恒星内部或吸积盘深层。
+在局域热平衡下，源函数可写为：
+\[
+S_\nu = \epsilon_\nu B_\nu + (1 - \epsilon_\nu) J_\nu, 
+\quad \epsilon_\nu = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}.
+\]
+辐射能流由温度梯度驱动，满足扩散形式的能量传输方程。
+
+% 在 \subsection{罗斯兰近似（Rosseland Approximation）} 之后添加以下内容
+
+\subsection{扩散过程的普适理论}
+
+\n{扩散是自然界中最普遍的输运现象之一，描述了由随机运动导致的梯度消失过程。
+从微观的随机游走到宏观的扩散方程，体现了统计物理的强大预测能力。}
+
+扩散过程描述了由于微观粒子的随机运动导致的宏观量的均质化过程。这种过程在自然界中无处不在，从分子在液体中的扩散到热量在固体中的传导，再到光子在天体物理介质中的能量传输，都遵循着相似的数学规律。
+
+\subsubsection*{微观基础：随机游走模型}
+
+扩散的微观本质是大量粒子的无规则随机运动。考虑一维随机游走模型：
+\begin{itemize}
+  \item 粒子每步随机向左或向右移动 $\Delta x$，概率各为 $1/2$
+  \item 每步时间间隔为 $\Delta t$
+  \item 经过 $N$ 步后，时间 $t = N\Delta t$
+\end{itemize}
+
+统计性质为：
+\begin{align*}
+\text{平均位移} &\quad \langle x \rangle = 0 \\
+\text{均方位移} &\quad \langle x^2 \rangle = N(\Delta x)^2 = \frac{(\Delta x)^2}{\Delta t} t
+\end{align*}
+
+定义\textbf{扩散系数}：
+\[
+D = \frac{(\Delta x)^2}{2\Delta t}
+\]
+则扩散的特征标度律为：
+\[
+\boxed{x_{\text{rms}} = \sqrt{\langle x^2 \rangle} = \sqrt{2Dt}}
+\]
+
+$\delta x$是平均自由程，而$\Delta t$就是平均自由时间，这两个系数是有介质决定的，藏在扩散系数中。这个 $\sqrt{t}$ 的标度关系是扩散过程的标志性特征，与波动传播的线性关系 $x \propto t$ 形成鲜明对比。
+
+
+
+这个公式的物理意义清晰：扩散效率正比于运动速度和能够自由运动的距离，反比于空间维度（高维空间中随机游走更"低效"）。
+
+\paragraph{不同物理过程中的扩散系数}
+
+\begin{table}[h]
+\centering
+\caption{不同物理过程中的扩散系数对比}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{过程} & \textbf{载流子} & \textbf{扩散系数} & \textbf{物理意义} \\
+\hline
+分子扩散 & 分子 & $D = \frac{1}{3} v_m l_m$ & $v_m$: 分子热速度，$l_m$: 分子平均自由程 \\
+热传导 & 声子/分子 & $\alpha = \frac{\kappa}{\rho c_p}$ & 热扩散系数，描述温度均匀化 \\
+电导率 & 电子 & $D = \frac{1}{3} v_F l_e$ & $v_F$: 费米速度，$l_e$: 电子平均自由程 \\
+辐射扩散 & 光子 & $D_{\text{rad}} = \frac{c}{3\alpha_R}$ & 光速 $c$，罗斯兰平均不透明度 $\alpha_R$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\n{广义扩散系数 $D = \frac{1}{3} v l$ 中的 $1/3$ 因子来源于三维空间各向同性散射的统计平均。
+在一维和二维情况下，这个因子分别变为 $1$ 和 $1/2$。}
+
+\paragraph{特征时间尺度}
+对于系统尺度 $L$，扩散的特征时间为：
+\[
+\tau_{\text{diff}} \sim \frac{L^2}{D}
+\]
+这个标度关系解释了为什么：
+- 糖在水中扩散需要几分钟（$L \sim \text{cm}$）
+- 热量在地球内部扩散需要百万年（$L \sim 10^3 \text{km}$）
+- 光子从太阳中心扩散需要数百万年（$L \sim R_\odot$）
+
+\begin{derivationnote}[量纲分析推导]
+从扩散方程 $\partial u/\partial t = D\nabla^2 u$ 的量纲分析：
+\[
+[u]/[t] = [D][u]/[L]^2 \Rightarrow [D] = [L]^2/[T]
+\]
+因此特征时间 $\tau \sim L^2/D$，与详细推导一致。
+\end{derivationnote}
+
+% ------------------------------------------------------------
+\subsection{罗斯兰近似（Rosseland Approximation）}
+
+\n{物理思想：在\textbf{光学厚}、\textbf{近似 LTE} 的介质深处，$I_\nu$ 在一个平均自由程上变化很小，
+可把辐射场看作对局域黑体场 $B_\nu(T)$ 的\textbf{微小扰动}。能流来自 $T$ 的缓慢空间梯度，
+其频率加权由“越透明的频段贡献越大”决定。}
+
+\subsubsection*{物理思想与物理图像}
+
+罗斯兰近似的核心物理思想是，在光学极厚的介质中，辐射能量的传输本质上是一种扩散过程。这种扩散行为的物理根源在于光子的随机游走特性。在恒星内部这样的光学厚环境中，光子的平均自由程远远小于系统的特征尺度，每个光子都会经历无数次的吸收、再发射和散射过程。虽然单个光子以光速运动，但由于运动方向的不断随机化，能量的净传输速度远远低于光速，整体上表现为缓慢的扩散过程。
+
+这种扩散图像与分子热传导有着深刻的相似性。在气体热传导中，能量通过分子的随机碰撞传递；在辐射扩散中，能量通过光子的随机游走传递。两者都满足相同形式的扩散方程，只是其中的输运系数不同。辐射热导率由光子的平均自由程和辐射能容对温度的导数共同决定，而特征性的1/3因子则来源于三维空间中随机游走的几何统计。
+
+罗斯兰近似的精妙之处在于它同时处理了两个看似矛盾的要求：一方面，在光学厚介质深处，频繁的相互作用使得辐射场在能量密度层面接近局域黑体分布；另一方面，温度梯度的存在又要求有净的能量流动。这个看似矛盾的要求通过将辐射强度分解为各向同性的黑体部分和微小的各向异性修正来同时满足。各向同性部分维持了辐射能量密度接近黑体值，而各向异性部分则承担了能量输运的任务。这种分解在数学上是自洽的，在物理上对应着“在维持近热平衡的前提下实现能量输运的最经济方式”。
+
+\subsubsection*{设定与基本方程（平行层、含散射）}
+
+考虑平行层介质，物理量仅随 $z$ 变化。把路径方向用
+$\mu=\cos\theta$ 表示，转移方程写作
+\[
+\mu \frac{\partial I_\nu}{\partial z}
+= -(\alpha_\nu+\sigma_\nu)\, (I_\nu - S_\nu),
+\qquad
+S_\nu = \epsilon_\nu B_\nu + (1-\epsilon_\nu)J_\nu,
+\quad \epsilon_\nu\equiv\frac{\alpha_\nu}{\alpha_\nu+\sigma_\nu}.
+\]
+其中 $\alpha_\nu$、$\sigma_\nu$ 分别为吸收与散射系数，$S_\nu$ 为源函数。
+
+\subsubsection*{深层近似与一阶展开}
+
+\n{深层（$\tau_\ast\gg1$）$I_\nu$ 近似各向同性且与 $B_\nu(T)$ 仅差一个小量。令
+$I_\nu = B_\nu + \delta I_\nu$，并在一平均自由程 $l=(\alpha_\nu+\sigma_\nu)^{-1}$ 上对 $z$ 作一阶展开。}
+
+在 LTE 深层，$J_\nu\simeq B_\nu$，进而 $S_\nu\simeq B_\nu$。把 $I_\nu=B_\nu+\delta I_\nu$ 代回：
+\[
+\mu \frac{\partial (B_\nu+\delta I_\nu)}{\partial z}
+= -(\alpha_\nu+\sigma_\nu)\big[(B_\nu+\delta I_\nu)-B_\nu \big]
+= -(\alpha_\nu+\sigma_\nu)\,\delta I_\nu .
+\]
+忽略高阶项并解得微小各向异性部分
+\[
+\boxed{
+\delta I_\nu \;\simeq\; -\,\frac{\mu}{\alpha_\nu+\sigma_\nu}\,\frac{\partial B_\nu}{\partial z}
+}
+\qquad\Rightarrow\qquad
+\boxed{
+I_\nu \;\simeq\; B_\nu(T) \;-\; \frac{\mu}{\alpha_\nu+\sigma_\nu}\,\frac{\partial B_\nu}{\partial z}
+}
+\]
+这体现了：$I_\nu$ 对 $z$ 的变化主要来自 $T(z)$ 的渐变。
+
+\begin{derivationnote}[近似的两条关键假设]
+深层近似的成立依赖于两个基本假设：首先是光学厚度足够大以保证辐射场近似各向同性，这使得平均辐射场 $J_\nu$ 接近黑体函数 $B_\nu(T)$；其次是温度梯度足够缓慢，使得黑体函数在一个平均自由程尺度上的变化很小，可以进行一阶泰勒展开。这两个假设共同保证了我们可以将复杂的角各向异性压缩进简单的线性修正项中。
+\end{derivationnote}
+
+\subsubsection*{单色能流与扩散形式}
+
+\n{能流是角动量一阶矩：$F_\nu \!=\!2\pi\!\int_{-1}^{1}\!\mu I_\nu d\mu$，零阶的 $B_\nu$ 项因奇偶性给零。}
+
+\[
+F_\nu(z)
+= 2\pi \int_{-1}^1 \mu \left[B_\nu - \frac{\mu}{\alpha_\nu+\sigma_\nu}\frac{\partial B_\nu}{\partial z}\right] d\mu
+= -\,\frac{4\pi}{3(\alpha_\nu+\sigma_\nu)}\,\frac{\partial B_\nu}{\partial z}.
+\]
+把 $\partial B_\nu/\partial z$ 换成温度梯度：
+\[
+\boxed{
+F_\nu(z) = -\,\frac{4\pi}{3(\alpha_\nu+\sigma_\nu)}\,
+\frac{\partial B_\nu}{\partial T}\,\frac{dT}{dz}
+}
+\]
+
+此时我们已经可以清晰地看到扩散方程的形式。能流与温度梯度成正比，比例系数中包含了介质的吸收和散射特性。特别值得注意的是其中的1/3因子，这个因子来源于三维随机游走的几何统计，是扩散过程的一个特征性标志。
+
+\subsubsection*{对频率积分与罗斯兰平均}
+
+\n{频率积分时，越透明的频段（$1/(\alpha_\nu+\sigma_\nu)$ 大）贡献越大；
+权重不是 $B_\nu$，而是 $\partial B_\nu/\partial T$。这正是“罗斯兰权重”。}
+
+\[
+F(z) \equiv \int_0^\infty F_\nu\, d\nu
+= -\frac{4\pi}{3}\left[
+\frac{\displaystyle \int_0^\infty 
+\frac{1}{\alpha_\nu+\sigma_\nu}\frac{\partial B_\nu}{\partial T}\, d\nu}
+{\displaystyle 1}
+\right]\frac{dT}{dz}.
+\]
+定义\textbf{罗斯兰平均吸收系数}
+\[
+\boxed{
+\frac{1}{\alpha_R} \;\equiv\;
+\frac{\displaystyle \int_0^\infty \frac{1}{\alpha_\nu+\sigma_\nu}
+\frac{\partial B_\nu}{\partial T} \, d\nu}
+{\displaystyle \int_0^\infty \frac{\partial B_\nu}{\partial T} \, d\nu}
+}
+\]
+并利用恒等式
+\(
+\displaystyle \int_0^\infty \frac{\partial B_\nu}{\partial T}\, d\nu
+= \frac{4\sigma_\mathrm{SB}}{\pi} T^3
+\)
+（$\sigma_\mathrm{SB}$ 为斯特藩–玻尔兹曼常数），得到
+\[
+\boxed{
+F(z) \;=\; -\,\frac{16\,\sigma_\mathrm{SB}\, T^3}{3\,\alpha_R}\,\frac{dT}{dz}
+}
+\]
+这就是\textbf{罗斯兰扩散方程}，它在形式上与傅里叶热传导定律完全一致，清晰地表明了辐射扩散过程的本质。
+
+\begin{derivationnote}[罗斯兰权重的物理直觉]
+罗斯兰权重的选择体现了深刻的物理洞察。在扩散近似下，能流主要由黑体辐射对温度变化的线性响应主导，因此权重与 $\partial B_\nu/\partial T$ 成正比，这反映了不同频段对温度变化的敏感程度。同时，越透明的频段（即 $1/(\alpha_\nu+\sigma_\nu)$ 越大）对能流的贡献越大，因为光子在这些频段能够更自由地传播。这两种效应的结合就构成了罗斯兰权重，确保了辐射扩散由最透明的频段主导，即使这些频段在总的黑体辐射中只占很小的比例。
+\end{derivationnote}
+
+\subsubsection*{与扩散过程的深刻联系}
+
+罗斯兰近似最深刻的洞见在于揭示了辐射在光学厚介质中的传输本质上是扩散过程。这一认识来源于对辐射输运方程在光学厚极限下的渐近分析。
+
+
+\n{关键对比：分子热导率 $\kappa = \frac{1}{3} \bar{v} \lambda \rho c_v$，辐射热导率 $\kappa_{\text{rad}} = \frac{1}{3} c l \frac{du}{dT}$，其中 $l = 1/\alpha_R$，$\frac{du}{dT} = 16\sigma T^3$。}
+
+从数学形式上看，罗斯兰扩散方程：
+\[
+F = -\frac{16\sigma T^3}{3\alpha_R} \frac{dT}{dz}
+\]
+与经典的傅里叶热传导定律：
+\[
+q = -\kappa \frac{dT}{dz}
+\]
+具有完全相同的结构。这种相似性不是巧合，而是反映了能量输运的普适规律。
+
+将罗斯兰结果与分子热传导系数 $\kappa = \frac{1}{3} \bar{v} \lambda \rho c_v$ 对比，可以识别出：
+- $\bar{v} \rightarrow c$：分子热运动速度变为光速
+- $\lambda \rightarrow 1/\alpha_R$：分子平均自由程变为光子平均自由程  
+- $\rho c_v \rightarrow 16\sigma T^3$：物质热容变为辐射能容对温度的导数
+
+这种对应关系表明，罗斯兰近似描述的是**辐射能量的扩散**。光子虽然以光速运动，但由于频繁的散射和吸收，其净能量传输表现为缓慢的扩散过程。
+
+辐射扩散的典型特征是时间尺度与距离的平方成正比：$\tau \propto R^2$。这正是扩散过程的标志性行为，解释了为什么太阳内部光子需要数百万年才能"扩散"到表面，而不是以光速瞬间逃逸。
+
+\n{扩散时间尺度：$\tau_{\text{diff}} \sim R^2/D$，其中扩散系数 $D = \kappa/(\rho c_v)$ 对分子热传导，$D = \kappa_{\text{rad}}/(du/dT)$ 对辐射扩散。}
+\subsubsection*{适用条件与局限性}
+
+罗斯兰近似的成立需要满足几个关键条件。首先是光学厚度足够大，通常要求有效光深远大于1，这样才能保证辐射场有足够的时间与物质达到局域热平衡。其次是温度梯度要足够缓慢，使得黑体函数在一个平均自由程内的变化很小，这样才能保证微扰展开的有效性。此外，还需要介质近似满足局域热平衡条件，以及几何上的对称性以保证角分布的各向同性近似成立。
+
+在实际的天体物理环境中，罗斯兰近似在恒星内部和吸积盘深层等光学厚区域表现良好，但在表层区域（光学厚度接近或小于1）、存在强外部辐射源、或者温度梯度极大的情况下会失效。在这些情况下，需要采用更精确的辐射转移方法，如双流近似或完整的数值转移方程求解。
+
+特别需要指出的是，经典的罗斯兰近似没有显式包含外部辐射源项，这基于一个重要的物理假设：在光学厚介质深处，任何外部辐射在经过多次散射和吸收后都会被完全热化，从而融入局域辐射场中。只有在表层区域或者当外部辐射极强时，才需要显式考虑外部源的影响。

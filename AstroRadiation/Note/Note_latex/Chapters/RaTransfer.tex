@@ -1,0 +1,574 @@
+\section{辐射和辐射转移的基本知识}
+
+\n{
+\textbf{光的波粒二象性}：
+光既表现为波动性，又表现为粒子性。
+\\[0.5em]
+\textbf{波动性参数：} 频率 $\nu$、波长 $\lambda$；
+\\[0.3em]
+\textbf{粒子性参数：} 能量 $\varepsilon$、动量 $p$。
+\\[0.5em]
+二者关系：
+\[
+\varepsilon = h\nu,\quad p = \frac{\varepsilon}{c}
+\]
+}
+
+光具有波粒二象性，其波动性可用特征参数 $\nu,\lambda$ 描述；
+粒子性可用能量 $\varepsilon$ 与动量 $p$ 描述。二者的联系如下：
+\[
+\varepsilon = h\nu,\qquad p = \frac{\varepsilon}{c}.
+\]
+由此可得：
+\[
+m = \frac{h\nu}{c^2},\quad m_0=0,\qquad 
+p = \frac{h\nu}{c} = \frac{h}{\lambda}.
+\]
+这反映了光子作为无静质量粒子的能量与动量关系。
+
+\subsection{本课程对辐射的处理方法}
+
+本课程中关于辐射的理论处理方式，大体可分为以下几类：
+
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item \textbf{经典辐射理论}：
+  用电磁场来描述辐射，适用于光子能量较低、辐射行为可视为连续波动的情形。
+  \begin{itemize}
+    \item 原子辐射可见光时，电子能量约为 $10\,\mathrm{eV}$；
+    \item 对应波长为紫外或可见光，此时经典电磁理论可较好地描述。
+  \end{itemize}
+
+  \item \textbf{半经典辐射理论}：
+  在此理论中，带电粒子的运动仍采用量子力学处理，
+  而辐射场则视为经典电磁场。
+  常用于计算电子运动所产生的辐射，如同步辐射与轫致辐射。
+
+  \item \textbf{经典与量子理论的适用范围}：
+  \begin{itemize}
+    \item 经典电磁辐射理论：用麦克斯韦方程描述电磁场的强度（$E, B$），
+          适用于粒子数多、辐射能量较低的情况；
+    \item 量子辐射理论：当光子的能量与带电粒子动能相当时，
+          必须引入光子概念，使用量子电动力学（QED）进行处理。
+  \end{itemize}
+
+  \item \textbf{常量电子理论的作用}：
+  在辐射理论中常采用“常量电子理论”近似，
+  即认为电子动能远大于辐射能量，从而忽略辐射反作用。
+  该近似在研究高能天体物理辐射（如同步辐射、康普顿散射）时非常有用。
+\end{enumerate}
+
+\subsection{Einstein的AB系数}
+Einstein用A、B系数描述粒子与辐射场相互作用的微观过程，其中，相互作用被大致分为三类：
+\begin{itemize}
+  \item \textbf{自发辐射}：粒子从高能态跃迁到低能态，释放出光子，过程与外界辐射场无关。
+  \item \textbf{受激辐射}：粒子在外界辐射场的作用下，从高能态跃迁到低能态，释放出光子。
+  \item \textbf{吸收}：粒子从低能态跃迁到高能态，吸收外界辐射场中的光子。
+\end{itemize}
+由此，Einstein定义了描述粒子发射与吸收性质的AB系数：
+\begin{itemize}
+    \item \textbf{自发发射系数$A_{21}$}: 描述单位时间内，粒子从能级2跃迁到能级1并发射一个光子的概率。
+    \item \textbf{受激发射系数$B_{21}$}: 单位时间内，粒子受辐射场$J_\nu$影响，从能级2跃迁到能级1并发射一个光子的概率为$B_{21} J_\nu$。
+    \item \textbf{吸收系数$B_{12}$}: 单位时间内，粒子吸收辐射场$J_\nu$中的光子，从能级1跃迁到能级2的概率为$B_{12} J_\nu$。
+\end{itemize}
+
+\subsubsection{Einstein系数之间的关系}
+\n{严格证明要使用量子力学的方法，参考李德民ppt，这里仅使用热力学方法给出结果。}
+设在热平衡状态下，能级 1 和 2 上的原子数分别为 $n_1$ 与 $n_2$。
+系统中辐射能量密度为 $J_\nu$。  
+则单位时间内：
+\begin{itemize}
+  \item 吸收跃迁数：$n_1 B_{12} J_\nu$；
+  \item 受激辐射数：$n_2 B_{21} J_\nu$；
+  \item 自发辐射数：$n_2 A_{21}$。
+\end{itemize}
+
+\n{
+\textbf{结论概要：}\par
+三者关系：\par $A_{21} = \dfrac{8\pi h\nu^3}{c^3} B_{21}$ \par
+$g_1 B_{12} = g_2 B_{21}$\par
+这些关系保证了热平衡下的辐射满足 Planck 分布。
+}
+
+
+
+在热平衡状态下，吸收与辐射过程达到平衡，即
+\[
+n_1 B_{12} J_\nu = n_2 A_{21} + n_2 B_{21} J_\nu.
+\]
+由此解得辐射能量密度：
+\[
+J_\nu = \frac{A_{21}/B_{21}}{(n_1/n_2)(B_{12}/B_{21}) - 1}.
+\]
+
+
+在热平衡时，能级粒子数遵循 Maxwell–Boltzmann 分布：
+\[
+\frac{n_2}{n_1} = \frac{g_2}{g_1} \exp\!\left(-\frac{h\nu}{kT}\right),
+\]
+其中 $g_i$ 为能级简并度。  
+代入上式得：
+\[
+J_\nu = 
+\frac{A_{21}/B_{21}}
+{(g_1 B_{12}/g_2 B_{21}) \exp(h\nu/kT) - 1}.
+\]
+\n{
+\textbf{麦克斯韦–玻尔兹曼分布：}\par
+描述处于热平衡的粒子在各能级上的分布规律。\par
+能级 $i$ 的粒子数比例为
+$\,n_i \propto g_i e^{-E_i/kT}\,$，
+其中 $g_i$ 为简并度，$E_i$ 为能量。\par
+反映高能粒子数随温度升高而增加的趋势。
+}
+由于在热平衡时辐射能量密度应满足 Planck 定律：
+\[
+J_\nu = \frac{2h\nu^3}{c^2} \frac{1}{e^{h\nu/kT} - 1}.
+\]
+对比两式可得爱因斯坦系数的比例关系：
+
+\[
+\boxed{
+g_1 B_{12} = g_2 B_{21}, \qquad 
+A_{21} = \frac{8\pi h\nu^3}{c^3} B_{21}.
+}
+\]
+这表明：
+\begin{itemize}
+  \item 吸收与受激辐射的几率之比仅由能级简并度决定；
+  \item 自发辐射系数与受激辐射系数成 $\nu^3$ 比例；
+\end{itemize}
+
+\subsubsection{发射吸收系数和爱因斯坦系数的关系}
+前文中构建的发射系数和吸收系数是一个相当唯象的描述，Einstein系数从微观角度出发给出了粒子发射吸收之间的关系，不难想到，两者之间是有关系的。
+
+\n{
+\textbf{要点：}
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21}\phi(\nu),
+\]
+其中 $\phi(\nu)$ 为归一化谱线分布函数。
+}
+
+发射系数（Emission Coefficient）是衡量辐射强度的重要物理量，其单位为 $\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}$。它表示在单位时间、单位体积内、沿单位立体角方向、频率在 $\nu$ 到 $\nu + d\nu$ 之间的辐射能量。对于能级跃迁 $2 \to 1$ 的辐射过程，若能级 2 上的粒子数密度为 $n_2$，则每个粒子在单位时间内以概率 $A_{21}$ 发生自发辐射，产生能量 $h\nu$。因此单位时间、单位体积内释放的总能量为 $n_2 A_{21} h\nu$。由于辐射在各个方向上是各向同性分布的，所以每个方向上辐射的能量密度仅占全部的 $1/4\pi$，由此得到
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21}.
+\]
+\n{这个部分和MICA的卷积有关系，后面要仔细研究研究。}
+在实际情况下，能级间的跃迁辐射并非严格单色，而是在中心频率 $\nu_0 = (E_2 - E_1)/h$ 附近存在一定的展宽 $\Delta \nu$。这种展宽可能来源于多普勒效应、碰撞展宽等物理机制。为了描述这种非单色性，引入谱线的分布函数 $\phi(\nu)$，它刻画了辐射能量在不同频率间的分布，并满足归一化条件
+\[
+\int \phi(\nu)\, d\nu = 1.
+\]
+因此，发射系数的实际表达式应写为
+\[
+j_\nu = \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu),
+\]
+这便是发射系数与爱因斯坦自发辐射系数之间的关系式。它表明辐射强度不仅取决于跃迁几率 $A_{21}$ 和上能级的粒子数 $n_2$，还与谱线展宽函数 $\phi(\nu)$ 有关。该式在辐射传输方程中起着关键作用，是描述热辐射和非热辐射过程的基础。
+
+
+\n{
+\textbf{要点：}\par
+吸收系数 $\alpha_\nu$ 表示辐射在传播中单位长度内被吸收的相对能量损失。\par
+利用爱因斯坦吸收系数 $B_{12}$，有
+\[
+\alpha_\nu = \frac{h\nu}{4\pi} n_1 B_{12}\phi(\nu),
+\]
+其中 $\phi(\nu)$ 为归一化谱线分布函数。
+}
+
+吸收系数（Absorption Coefficient）用于描述辐射强度在介质中传播时的衰减规律。设辐射强度为 $I_\nu$，沿传播方向 $s$ 的变化率定义为
+\[
+\alpha_\nu I_\nu = -\frac{dI_\nu}{ds},
+\]
+其中 $\alpha_\nu$ 的量纲为 $\mathrm{cm^{-1}}$，表示单位路径长度内被吸收的辐射能量比例。
+
+根据爱因斯坦的吸收系数定义，单位时间内单位体积中的粒子从能级 1 吸收频率为 $\nu$ 的辐射能量为
+\[
+\frac{h\nu}{4\pi} n_1 B_{12} J_\nu \phi(\nu),
+\]
+其中 $n_1$ 是处于能级 1 的粒子数密度，$J_\nu$ 为平均辐射能量密度。由于吸收过程导致辐射强度沿路径减弱，因此吸收系数可表示为
+\[
+\alpha_\nu = \frac{h\nu}{4\pi} n_1 B_{12}\phi(\nu).
+\]
+
+同理，对于受激辐射过程，能级 2 上的粒子以概率 $B_{21}$ 发生受激跃迁，释放与吸收相同频率的辐射。相应的“受激发射系数”可写为
+\[
+\alpha_{\mathrm{em}} = -\,\frac{h\nu}{4\pi} n_2 B_{21}\phi(\nu),
+\]
+其中负号表示受激辐射会使辐射强度增加。
+
+在推导中假设发射、吸收与受激辐射的谱线展宽相同，其轮廓函数均为 $\phi(\nu)$。  
+这使得不同辐射过程在频谱上具有一致的分布形式，从而便于在辐射传输方程中统一描述。
+
+\begin{derivationnote}[吸收系数和单位体积内能量损失的关系]
+比强度 $I_\nu(\Omega)$ 的定义是：沿方向 $\Omega$，每单位时间、单位投影面积、单位频率、
+单位立体角通过的能量。沿光线方向的传输方程为
+\[
+\frac{d I_\nu}{ds}=-\alpha_\nu I_\nu + \cdots .
+\]
+取一薄层，厚度 $ds$、截面积 $dA$，体积 $dV=dA\,ds$。在时间 $dt$、频带 $d\nu$、方向元
+$d\Omega$ 内，强度减少 $-dI_\nu=\alpha_\nu I_\nu\,ds$，相应能量损失为
+\[
+dE_{\mathrm{loss}} = (-dI_\nu)\,(dA\cos\theta)\,dt\,d\nu\,d\Omega
+= \alpha_\nu I_\nu\,ds\,dA\cos\theta\,dt\,d\nu\,d\Omega .
+\]
+两边除以 $dV\,dt\,d\nu$，得到\emph{每单位体积、单位时间、单位频率}的损失：
+\[
+\frac{1}{dV}\frac{dE_{\mathrm{loss}}}{dt\,d\nu}
+= \alpha_\nu I_\nu \cos\theta\, d\Omega .
+\]
+对所有方向求和（积分）便得总损失
+\[
+\frac{1}{dV}\frac{dE_{\mathrm{loss}}}{dt\,d\nu}
+= \alpha_\nu \int I_\nu(\Omega)\, d\Omega
+= 4\pi\,\alpha_\nu\,J_\nu,
+\qquad
+J_\nu \equiv \frac{1}{4\pi}\int I_\nu(\Omega)\,d\Omega .
+\]
+这一步把“沿光线的微分衰减”转换为“单位体积的能量损失”，从而可与微观的
+$h\nu\,n_1B_{12}J_\nu\phi(\nu)$ 匹配，解出 $\alpha_\nu$。
+\end{derivationnote}
+
+\subsubsection{净吸收系数与爱因斯坦系数；辐射转移方程的表示}
+
+
+吸收通常指光在介质中传播时的净减少，其中既包含真实吸收（由 $B_{12}$ 引起）也包含受激辐射对强度的“负吸收”（由 $B_{21}$ 引起）。因此净吸收系数写成
+\[
+\alpha_\nu=\frac{h\nu}{4\pi}\,\phi(\nu)\,[\,n_1B_{12}-n_2B_{21}\,],
+\]
+这里 $\phi(\nu)$ 为归一化线型函数，默认发射、吸收与受激发射使用相同的线型。利用爱因斯坦关系
+\[
+g_1B_{12}=g_2B_{21},\qquad A_{21}=\frac{2h\nu^3}{c^2}B_{21},
+\]
+可将上式改写为
+\[
+\alpha_\nu=\frac{h\nu}{4\pi}\,\phi(\nu)\left(\frac{n_1g_2}{g_1}-n_2\right)\frac{c^2}{2h\nu^3}A_{21}.
+\]
+另一方面，自发发射系数由
+\[
+j_\nu=\frac{h\nu}{4\pi}\,n_2A_{21}\phi(\nu)
+\]
+给出。把 $\alpha_\nu$ 与 $j_\nu$ 代入辐射转移方程，就得到由爱因斯坦系数直接表出的形式
+\[
+\boxed{\;
+\frac{dI_\nu}{ds}
+= -\,\frac{h\nu}{4\pi}\,(n_1B_{12}-n_2B_{21})\,I_\nu\,\phi(\nu)
++ \frac{h\nu}{4\pi}\,n_2A_{21}\phi(\nu)\; }.
+\]
+这说明只要知道三种爱因斯坦系数中的任意两个并给定粒子数分布，就能确定谱线附近的吸收与发射，从而唯一确定该频段的辐射传输。
+
+\subsubsection{总结}
+
+% 三种过程与系数定义
+\vspace{0.5em}
+\noindent\textbf{① 三种过程与系数定义}
+\begin{itemize}
+  \item \textbf{自发辐射}：$A_{21}$ —— 单位时间内从能级 2 到能级 1 的自发跃迁概率。
+  \item \textbf{受激辐射}：$B_{21} J_\nu$ —— 受辐射场激发的跃迁概率。
+  \item \textbf{吸收}：$B_{12} J_\nu$ —— 吸收光子从能级 1 到能级 2 的概率。
+\end{itemize}
+
+% Einstein 系数关系
+\vspace{0.5em}
+\noindent\textbf{② Einstein 系数关系（热平衡推导）}
+\[
+\boxed{
+\begin{aligned}
+g_1 B_{12} &= g_2 B_{21}, \\[4pt]
+A_{21} &= \frac{8\pi h\nu^3}{c^3} B_{21}.
+\end{aligned}
+}
+\]
+
+% 宏观量联系
+\vspace{0.5em}
+\noindent\textbf{③ 与宏观量的联系}
+\begin{itemize}
+  \item \textbf{发射系数}：
+  \[
+  j_\nu = \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu)
+  \]
+  \item \textbf{吸收系数}：
+  \[
+  \alpha_\nu = \frac{h\nu}{4\pi} (n_1 B_{12} - n_2 B_{21}) \phi(\nu)
+  \]
+  \item \textbf{谱线展宽}：$\phi(\nu)$ 需归一化：
+  \[
+  \int \phi(\nu)\, d\nu = 1
+  \]
+\end{itemize}
+
+% 辐射转移方程
+\vspace{0.5em}
+\noindent\textbf{④ 辐射转移方程（Einstein 系数形式）}
+\[
+\boxed{
+\frac{dI_\nu}{ds}
+= -\frac{h\nu}{4\pi}(n_1 B_{12} - n_2 B_{21}) I_\nu \phi(\nu)
++ \frac{h\nu}{4\pi} n_2 A_{21} \phi(\nu)
+}
+\]
+
+\subsection{散射（Scattering）}
+\subsubsection{基本定义和各项同性散射}
+光的散射是指光子与介质粒子碰撞后，光子的传播方向和能量（频率）发生改变，
+但光子的数目并不减少。  
+因此，散射可以视作“吸收”和“发射”的复合过程：  
+沿原方向传播的光强减少（类比吸收），同时光被重新分配到其他方向（类比发射）。
+一般散射有以下几种类型：
+\begin{itemize}
+  \item \textbf{弹性散射（elastic scattering）}：  
+    又称单色散射（monochromatic scattering）或相干散射（coherent scattering）。  
+    散射前后光子的频率（能量）保持不变。  
+    本节讨论的主要是这种情形。
+  \item \textbf{非弹性散射（non-elastic scattering）}：  
+    亦称“康普顿化”（Comptonization），光子能量在散射中发生变化。
+\end{itemize}
+天体物理中最重要的散射过程是\textbf{自由电子对光子的散射}。
+\textbf{纯散射}是指忽略介质的纯吸收和纯发射所讨论的仅有介质对强度重新分配的过程。
+在同一方向上，散射也会引起强度的净减少或增加，所以也可以用发射系数和吸收系数来描述散射过程。
+
+\paragraph{(1) 散射吸收项}
+由于散射使沿原方向的光强减少，定义\textbf{散射系数} $\sigma_\nu$：
+\[
+\frac{dI_\nu}{ds} = -\sigma_\nu I_\nu,
+\]
+表示单位长度上、单位立体角内单色辐射强度的\textbf{相对衰减率}。
+
+\paragraph{(2) 散射发射项}
+散射同时会使其他方向的辐射强度增加。  
+定义\textbf{散射发射系数} $j_\nu(\Omega)$，表示每单位体积、每单位立体角内因散射而“发射”的辐射强度。
+对于\textbf{弹性散射}，介质单位体积内的总“发射”量与“吸收”量相等：
+\[
+\int_{4\pi} j_\nu(\Omega)\, d\Omega
+= \int_{4\pi} \sigma_\nu I_\nu(\Omega)\, d\Omega.
+\]
+
+\n{
+\textbf{$\sigma_\nu$和$j_\nu$的关系} :\par
+在各向同性关系下，某个方向上的散射增强来自于各个方向的辐射强度叠加，因为吸收系数是相对减少量，所以等于吸收系数乘以其他方向强度的叠加，
+又因为只在乎某个方向的出射强度，所以要对方向做平均除以$4\pi$，也就是乘以平均辐射流量强度。
+}
+
+上式表明散射并不产生或损失能量，只重新分配辐射方向。通过这个隐函数，可以用散射吸收系数来描述散射发射系数。
+散射发射系数和散射吸收系数的关系在各向同性的情况下可以简化，
+若假设介质对光子的散射与方向无关（$\sigma_\nu$ 不随方向变化），
+即\textbf{各向同性散射}，
+则散射发射系数可写为：
+\[
+j_\nu = \frac{\sigma_\nu}{4\pi} \int_{4\pi} I_\nu(\Omega)\, d\Omega
+      = \sigma_\nu J_\nu,
+\]
+其中
+\[
+J_\nu = \frac{1}{4\pi}\int_{4\pi} I_\nu(\Omega)\, d\Omega
+\]
+是\textbf{各方向平均的辐射强度}。此时，如果入射场同样是各向同性的，辐射场强度改变为：
+\begin{align}
+  dI_\nu &= -\sigma_\nu I_\nu ds + j_\nu ds \nonumber \\
+         &= -\sigma_\nu I_\nu ds + \sigma_\nu J_\nu ds \nonumber\\
+         &=0
+\end{align}
+即各向同性的入射场在各向同性散射介质中不会改变强度分布。对于非各向同性入射的复杂情况，就需要求解辐射转移方程了。
+不难列出纯散射情况下各向同性介质的辐射转移方程,
+\begin{align}
+  \frac{d_\nu}{ds} &= -\sigma_\nu I_\nu +j_\nu \nonumber\\
+  &= -\sigma_\nu I_\nu + \sigma_\nu J_\nu \nonumber\\
+  &= -\sigma_\nu (I_\nu - J_\nu)
+\end{align}
+这是一个积分微分方程，可以先用随机游动模型做半定量分析，再用近似方法求解。
+% ------------------------
+\subsubsection{随机游动（Random Walks）}
+
+\n{在散射光厚的介质中，光子的运动不再用概率单次描述，而需用统计意义的随机游动模型刻画整体输运行为。}
+
+前面对吸收过程的讨论表明，光强随光深呈指数衰减：
+\[
+I_\nu = I_{\nu,0} e^{-\tau_\nu}, \qquad \frac{dI_\nu}{d\tau_\nu} = -I_\nu.
+\]
+这意味着单个光子穿过光深为 $\tau$ 的介质而\textbf{不被吸收或散射}的概率为 $e^{-\tau}$。
+因此，$1-e^{-\tau}$ 表示光子被散射或吸收的概率。
+光束的整体衰减行为（如强度下降）是所有光子与介质粒子微观相互作用的统计平均结果。  
+当介质\textbf{散射光学厚}时，单次散射的概率描述失效，
+此时光子会在介质中经历大量散射，其传播路径可视为\textbf{随机游动过程}。
+
+\paragraph{(1) 光子的随机位移}
+考虑光子在\textbf{无限大均匀介质}中传播。  
+光子经历 $N$ 次散射后，其净位移矢量为：
+\[
+\mathbf{R} = \mathbf{r}_1 + \mathbf{r}_2 + \cdots + \mathbf{r}_N,
+\]
+其中每一步 $\mathbf{r}_i$ 的方向随机、长度平均为平均自由程 $l=1/\sigma_\nu$。  
+由于散射方向完全随机，所有光子的平均位移矢量 $\langle \mathbf{R} \rangle = 0$，  
+因此定义\textbf{均方位移}：
+\[
+R_*^2 \equiv \langle R^2 \rangle = 
+\langle r_1^2 + r_2^2 + \cdots + r_N^2 + 2\mathbf{r}_1\!\cdot\!\mathbf{r}_2 + \cdots \rangle.
+\]
+
+\paragraph{(2) 各向同性散射条件下的推导}
+若散射是各向同性的，则任意两步方向无关：
+\[
+\langle \mathbf{r}_i \!\cdot\! \mathbf{r}_j \rangle = 0 \quad (i\neq j),
+\qquad
+\langle r_i^2 \rangle = l^2.
+\]
+代入上式得：
+\[
+\boxed{R_*^2 = N l^2.}
+\]
+即光子经历 $N$ 次散射后的\textbf{均方根净位移}为：
+\[
+R_* = \sqrt{N}\, l.
+\]
+
+\paragraph{(3) 光子在有限介质中的散射次数}
+若介质的物理尺度为 $L$，当光子逃出介质时，其平均净位移应满足 $R_* \sim L$。  
+因此：
+\[
+L^2 \sim N l^2 \quad \Rightarrow \quad 
+\boxed{N = \left(\frac{L}{l}\right)^2 = (\sigma_\nu L)^2 = \tau^2.}
+\]
+这表明在光学厚介质中（$\tau \gg 1$），光子典型的散射次数 $N = \tau^2$。
+
+而当介质光学薄（$\tau \ll 1$）时，光子平均只发生一次或极少散射：
+\[
+N \approx \tau.
+\]
+因此对任意光深可写为经验公式：
+\[
+\boxed{N \approx \max\{\tau,\, \tau^2\}},
+\qquad
+\text{或 } N \approx \tau + \tau^2.
+\]
+
+\paragraph{(4) 光子滞留时间与能量输运}
+光子在介质中的平均滞留时间为：
+\[
+\Delta T = \frac{N l}{c} = \frac{l}{c} \max\{\tau, \tau^2\}.
+\]
+当 $\tau \gg 1$ 时，$\Delta T$ 极长，光子多次散射被“困”于介质中，
+使出射辐射强度明显减弱。
+
+\begin{derivationnote}[物理含义]
+\begin{itemize}
+  \item $l=1/\sigma_\nu$：平均自由程；
+  \item $N$：平均散射次数；
+  \item $R_*=\sqrt{N}l$：光子的均方根净位移；
+  \item $\tau = \sigma_\nu L$：散射光深；
+  \item $\Delta T$：光子在介质中滞留时间；
+  \item 光学厚时，能量通过随机扩散形式传输，为辐射扩散理论的基础。
+\end{itemize}
+\end{derivationnote}
+
+\subsubsection{吸收与散射共存的辐射转移方程}
+
+当吸收、自发发射和各向同性散射介质同时存在时，辐射转移方程推广为：
+\[
+\frac{dI_\nu}{ds}
+= -(\alpha_\nu + \sigma_\nu) I_\nu + j_\nu + \sigma_\nu J_\nu.
+\]
+
+定义微分光深：
+\[
+d\tau_\nu = (\alpha_\nu + \sigma_\nu) ds,
+\quad\Rightarrow\quad
+\frac{dI_\nu}{d\tau_\nu} = -I_\nu + S_\nu,
+\]
+其中源函数为：
+\[
+S_\nu = \frac{j_\nu + \sigma_\nu J_\nu}{\alpha_\nu + \sigma_\nu}
+      = \epsilon_\nu B_\nu + (1 - \epsilon_\nu) J_\nu,
+\]
+并定义
+\[
+\epsilon_\nu = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}
+\]
+表示光子走完一个自由程被真吸收的概率。
+
+\subsubsection*{有效光深与包含散射的热平衡系统辐射}
+
+\n{当介质中既有吸收又有散射时，光子在逃逸前会多次相互作用，
+其平均迁移长度不再由单一吸收长度决定，而应由“有效光深”表征。}
+
+\paragraph{(1) 有效光深的定义}
+
+若光子在均匀介质中平均经过 $N_a$ 个自由程后被吸收，
+则 $N_a$ 为光子在吸收消失前平均经历的散射次数。
+吸收与消光系数之比给出：
+\[
+N_a = \frac{\alpha_\nu}{\alpha_\nu + \sigma_\nu}.
+\]
+
+光子被吸收前的平均位移长度 $l_*$ 称为\textbf{有效自由程 (effective mean free path)}，
+由随机游动原理：
+\[
+l_* = \sqrt{N_a}\, l
+     = \frac{1}{\sqrt{\alpha_\nu(\alpha_\nu+\sigma_\nu)}}.
+\]
+于是定义\textbf{有效光深 (effective optical depth)}：
+\[
+\tau_* = \frac{L}{l_*}
+       = L\sqrt{\alpha_\nu(\alpha_\nu+\sigma_\nu)}
+       = \sqrt{\tau_a(\tau_a+\tau_s)}.
+\]
+
+\begin{derivationnote}[物理含义]
+$l_*$ 代表光子在介质中从发射点到被吸收前的平均净位移；
+$\tau_*$ 代表光子在吸收前所经历的“有效阻光厚度”。
+当散射主导时，$\tau_* \gg \tau_a$，光子需经过多次散射才能被吸收。
+\end{derivationnote}
+
+\paragraph{(2) 包括散射的均匀热平衡系统辐射}
+
+\n{在包含散射的热平衡系统中，辐射出射强度不再由单纯吸收决定，
+而由有效光深共同调控。}
+
+对于局域热平衡 (LTE) 系统，若 $\tau_* \ll 1$，
+介质为光学薄，其单位体积内的单色辐射功率为：
+\[
+j_\nu = \alpha_\nu B_\nu.
+\]
+因此出射通量可写为：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu V.
+\]
+\n{$j_\nu = \sigma_\nu B_\nu$是基尔霍夫定理}
+若介质光学厚 ($\tau_* \gg 1$)，
+大部分光子被困于介质内部，辐射从近表层逸出：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu A l_*,
+\]
+其中 $A$ 为介质表面积。
+
+\begin{derivationnote}[]
+$l_*$ 起到“有效厚度”的作用。
+散射越强，$l_*$ 越短，光子从更浅层逃逸；
+这就是为什么强散射介质的谱偏离黑体分布。
+\end{derivationnote}
+
+\paragraph{(3) 有效光厚时的近似估算}
+
+\n{在强散射系统中，光子多次散射后逐渐热化，
+可近似把系统视作厚度为 $l_*$ 的准黑体层。}
+
+当 $\tau_* \gg 1$ 时，表层辐射趋于黑体形式：
+\[
+L_\nu \simeq 4\pi \alpha_\nu B_\nu A l_*.
+\]
+
+若定义 $\sqrt{\epsilon_\nu} = \sqrt{\alpha_\nu / (\alpha_\nu+\sigma_\nu)}$，
+则：
+\[
+L_\nu \approx 4\pi \alpha_\nu B_\nu A l_* 
+     = 4\pi A B_\nu l \sqrt{\frac{\alpha_\nu}{\alpha_\nu+\sigma_\nu}}
+     = 4\pi A B_\nu l \sqrt{\epsilon_\nu}.
+\]
+可见：当吸收占主导 ($\epsilon_\nu\!\to\!1$)，$L_\nu\!\to\!4\pi A B_\nu l$；
+当散射占主导 ($\epsilon_\nu\!\ll\!1$)，$L_\nu$ 显著降低。
+
+\begin{derivationnote}[]
+有效光深 $\tau_*$ 综合体现了吸收与散射的双重作用。  
+散射增大光子路径但减弱出射；
+吸收控制能量热化与释放。  
+因此，强散射下的辐射既不透明也非完全黑体，而处于\textbf{“准黑体”状态}。
+\end{derivationnote}

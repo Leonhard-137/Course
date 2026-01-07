@@ -23,6 +23,9 @@
 \usepackage{gensymb}
 \usepackage{tcolorbox}
 \usepackage{float}
+\usepackage{standalone} 
+\usepackage{tikz}       % 必须加载 tikz，因为子文件是 tikz 画的
+\usetikzlibrary{positioning, arrows.meta, calc, shapes.misc, backgrounds, fit} % 必须加载子文件用到的库
 \setlist{nosep}
 
 % ---- 3. 边注设置 ----
@@ -127,11 +130,14 @@
 \fancyhfoffset[R]{0pt}
 
 \pagestyle{fancy}
-
-% \input{Chapters/Math}
+\input{Chapters/01Description of Radiation.tex}
+% \input{Chapters/RaTransfer.tex}
+% \input{Chapters/RaDiffusion.tex}
+% \input{Chapters/RAfiled.tex}
+% \input{Chapters/ParRA.tex}
+% \input{Chapters/bremsstrahlung.tex}
+% \input{Chapters/Cyclotron Synchrotron.tex}
 % \input{Chapters/Compton.tex}
 % \input{Chapters/RdAtapp.tex}
-\input{Chapters/plasma.tex}
-
-
+% \input{Chapters/plasma.tex}
 \end{document}
