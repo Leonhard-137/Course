@@ -63,3 +63,139 @@
         \int_0^1dx[d(x)-\bar{d}(x)] &= 2
     \end{align}
 \end{example}
+
+\subsection{部分子分布函数的性质}
+
+部分子分布函数受到强相互作用内禀对称性的严格约束，利用这些对称性可以显著减少独立参数的数量。
+
+\subsubsection{对称性变换}
+在强相互作用中，物理规律在特定变换下保持不变：
+
+\begin{enumerate}
+    \item \textbf{电荷共轭不变性}：
+    粒子中夸克的分布等于其反粒子中反夸克的分布。
+    \begin{equation}
+        f_{q/H}(x) = f_{\bar{q}/\bar{H}}(x)
+    \end{equation}
+    这意味着如果我们知道质子内的夸克分布，也就知道了反质子内的反夸克分布。
+
+    \item \textbf{同位旋对称性}：
+    在忽略电磁相互作用和夸克质量差异的近似下，质子和中子互为同位旋二重态。通过同位旋旋转操作，可以将质子转换为中子，同时将上夸克转换为下夸克。因此存在如下对应关系：
+    \begin{align}
+        u^p(x) &= d^n(x), \quad d^p(x) = u^n(x) \\
+        \bar{u}^p(x) &= \bar{d}^n(x), \quad \bar{d}^p(x) = \bar{u}^n(x)
+    \end{align}
+\end{enumerate}
+
+\subsubsection{求和规则}
+分布函数必须满足量子数守恒和动量守恒，这构成了对拟合参数的强约束：
+
+\begin{itemize}
+    \item \textbf{价夸克数守恒}：
+    质子含有两个价上夸克和一个价下夸克。积分减去海夸克（总是成对产生）的贡献后，必须还原出价夸克的数量：
+    \begin{equation}
+        \int_0^1 [u^p(x) - \bar{u}^p(x)] dx = 2, \quad \int_0^1 [d^p(x) - \bar{d}^p(x)] dx = 1
+    \end{equation}
+    
+    \item \textbf{动量求和规则}：
+    强子内所有组分携带的动量之和必须等于强子的总动量。实验测量表明带电夸克仅携带约一半动量，这间接证实了电中性胶子的存在：
+    \begin{equation}
+        \sum_{i=q,\bar{q},g} \int_0^1 x f_i(x) dx = 1
+    \end{equation}
+\end{itemize}
+
+\subsection{因子化定理与截面计算}
+
+在微扰量子色动力学中，强子参与的高能散射截面可以通过因子化定理分离。
+
+\subsubsection{深度非弹性散射截面计算实例}
+对于电子-质子散射，总截面是各部分子贡献的加权和：
+\begin{equation}
+    \sigma(P, k) = \sum_{i} \int_0^1 dx_i f_i(x_i) \hat{\sigma}_i(\hat{s})
+\end{equation}
+其中 $\hat{s} = x_i S$ 是部分子与电子的质心系能量平方。
+
+\begin{example}[截面计算练习]
+    假设电子与夸克的微扰截面形式为 $\hat{\sigma}_{eu} = A \hat{s}$ 和 $\hat{\sigma}_{ed} = B \hat{s}^2$。
+    假设质子内的夸克分布函数为 $f_u^p(x) = x^2(1-x)^2$ 和 $f_d^p(x) = x^2(1-x)^3$。
+    
+    \textbf{1. 电子-质子散射截面}：
+    将分布函数代入积分公式：
+    \begin{align}
+        \sigma_{ep} &= \int_0^1 dx \left[ f_u^p(x) A(xS) + f_d^p(x) B(xS)^2 \right] \nonumber \\
+        &= AS \int_0^1 x^3(1-x)^2 dx + BS^2 \int_0^1 x^4(1-x)^3 dx
+    \end{align}
+    利用欧拉积分公式 $\int_0^1 x^m(1-x)^n dx = \frac{m!n!}{(m+n+1)!}$，各项积分结果为：
+    \begin{equation}
+        \int_0^1 x^3(1-x)^2 dx = \frac{3!2!}{6!} = \frac{1}{60}, \quad \int_0^1 x^4(1-x)^3 dx = \frac{4!3!}{8!} = \frac{1}{280}
+    \end{equation}
+    代入得最终结果：
+    \begin{equation}
+        \sigma_{ep} = \frac{AS}{60} + \frac{BS^2}{280}
+    \end{equation}
+
+    \textbf{2. 电子-中子散射截面}：
+    利用同位旋关系 $f_u^n = f_d^p$ 和 $f_d^n = f_u^p$，交换系数后积分：
+    \begin{align}
+        \sigma_{en} &= \int_0^1 dx \left[ f_d^p(x) A(xS) + f_u^p(x) B(xS)^2 \right] \nonumber \\
+        &= AS \frac{3!3!}{7!} + BS^2 \frac{4!2!}{7!} = \frac{AS}{140} + \frac{BS^2}{105}
+    \end{align}
+\end{example}
+
+\subsubsection{强子-强子散射与DGLAP方程}
+对于强子对撞过程，截面写为双重积分形式：
+\begin{equation}
+    \sigma_{h_1 h_2 \to X} = \sum_{a,b} \int dx_1 dx_2 f_{a/h_1}(x_1, \mu_F) f_{b/h_2}(x_2, \mu_F) \hat{\sigma}_{ab \to X}
+\end{equation}
+虽然分布函数是非微扰的，但其随能标的变化服从 DGLAP方程。这使得我们可以将在低能实验测得的分布函数演化到高能对撞机的能标下使用。
+
+\subsection{对撞机物理初步}
+
+\subsubsection{部分子分布函数不确定度}
+分布函数通过拟合全球实验数据得到，数据误差会传递给分布函数。在计算物理量时，通常使用 Hessian方法 估计由分布函数引起的不确定度。假设参数空间由一组正交的本征向量描述，其对应的不确定度公式为：
+\begin{equation}
+    (\Delta\sigma)^{2} \approx \frac{1}{4}\sum_{i}^{N_{p}}(\sigma(S_{i}^{+}) - \sigma(S_{i}^{-}))^{2}
+\end{equation}
+其中 $N_p$ 为拟合参数的数量，$S_i^{\pm}$ 代表沿第 $i$ 个本征向量方向拉伸或压缩参数后计算得到的截面值。这一公式反映了分布函数参数空间在极小值附近的二次型近似。
+
+\subsubsection{有效x的估计}
+在强子对撞机设计与物理分析中，估算产生特定质量粒子所需的部分子动量分数至关重要。
+
+\begin{derivationnote}[有效x的推导]
+    考虑两个强子 $h_1, h_2$ 以质心系能量 $\sqrt{S}$ 对撞。
+    设两个参与硬散射的部分子携带的四动量分别为 $p_1$ 和 $p_2$。
+    
+    根据部分子模型假设，部分子动量与其母体强子动量 $P_{1,2}$ 成正比（忽略横向动量）：
+    \begin{equation}
+        p_1 \approx x_1 P_1, \quad p_2 \approx x_2 P_2
+    \end{equation}
+    
+    部分子系统的质心系能量平方 $\hat{s}$ 定义为：
+    \begin{align}
+        \hat{s} &= (p_1 + p_2)^2 \approx (x_1 P_1 + x_2 P_2)^2 \nonumber \\
+                &= x_1^2 P_1^2 + x_2^2 P_2^2 + 2x_1 x_2 P_1 \cdot P_2
+    \end{align}
+    
+    在高能极限下，忽略强子静止质量 ($P_1^2 \approx 0, P_2^2 \approx 0$)，且利用强子对撞机总能量定义 $S \approx 2 P_1 \cdot P_2$，我们得到：
+    \begin{equation}
+        \hat{s} \approx x_1 x_2 S
+    \end{equation}
+    
+    若要产生质量为 $M$ 的粒子（如希格斯玻色子、顶夸克对等），需要满足阈值条件 $\hat{s} \ge M^2$。假设两个部分子携带的动量分数近似相等，即 $x_1 \approx x_2 \approx x$，则有：
+    \begin{equation}
+        x^2 S \approx M^2 \quad \Rightarrow \quad x \approx \frac{M}{\sqrt{S}}
+    \end{equation}
+\end{derivationnote}
+
+该推导揭示了一个重要结论：对撞机总能量 $\sqrt{S}$ 越高，探测同样质量 $M$ 的物理过程所需的部分子动量分数 $x$ 就越小。
+\begin{itemize}
+    \item 在 Tevatron ($1.96$ TeV)，产生顶夸克对 ($M \approx 350$ GeV) 需要 $x \approx 0.18$，此区域由价夸克主导。
+    \item 在 LHC ($14$ TeV)，产生同样的过程仅需 $x \approx 0.025$，此区域由胶子主导。
+\end{itemize}
+
+\subsubsection{亮度与事例率}
+对撞机的性能由瞬时亮度 $\mathcal{L}$ 描述。对于截面为 $\sigma$ 的物理过程，其单位时间产生的事例数为：
+\begin{equation}
+    \frac{dN}{dt} = \mathcal{L} \sigma
+\end{equation}
+实验累积的数据量由积分亮度 $\int \mathcal{L} dt$ 衡量，单位通常为 $\text{fb}^{-1}$。
