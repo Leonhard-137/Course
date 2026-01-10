@@ -5,7 +5,7 @@
 
 \subsection{量子色动力学和强相互作用}
 
-\subsection{部分子分布函数：定义与基本性质}
+\subsection{部分子分布函数}
 
 最初的部分子模型将强子视为由若干\emph{自由}夸克组成，因而夸克的动量分布可被理想化为 $\delta$ 函数。
 随着 QCD 的建立与禁闭图像的完善，人们认识到真实的强子内部结构更加复杂：除了价夸克之外，还存在由 QCD 辐射不断产生与湮灭的胶子以及正反夸克对（海夸克）。
@@ -28,7 +28,7 @@ $\mu_F$ 用于区分短距离（高能）与长距离（低能）物理：由于
 在实际高能物理分析中，由于低能区 QCD 的复杂性，PDF 的不确定度（尤其在高 $x$ 区域）会显著影响截面与分布的理论预言，
 从而可能伪造“新物理信号”，也限制了对标准模型的精密检验。
 
-\paragraph{动量和式（momentum sum rule）}
+\paragraph{动量和式}
 将 $xf_i(x)$ 理解为“部分子携带动量分数 $x$ 的概率密度”，则所有部分子携带的动量分数之和必须为 $1$：
 \begin{equation}
     \sum_i \int_0^1 dx \, x f_i(x,\mu_F) = 1.
@@ -77,28 +77,24 @@ $\mu_F$ 用于区分短距离（高能）与长距离（低能）物理：由于
 在包含强子的散射过程中，理论计算的主要困难来自强子内部的长程强相互作用结构（禁闭效应），这部分处于强耦合区，无法像 QED 那样完全依靠微扰费曼图从第一性原理计算得到。
 然而，当散射过程涉及足够大的硬尺度（例如 DIS 的 $Q^2$，或强子对撞中高 $p_T$ 末态/大质量体系）时，由于 QCD 的渐近自由特性，短距离硬散射对应的 $\alpha_s(\mu)$ 变小，从而可以使用微扰 QCD 系统计算。
 
-\paragraph{DIS 因子化（单卷积）}
+\paragraph{DIS 因子化}
 对于深度非弹性散射（DIS），总截面可写成 PDF 与轻子--部分子硬散射截面的卷积：
 \begin{equation}
 \sigma_{\mathrm{DIS}}(P,k)
 = \sum_{i}\int_0^1 dx\; f_{i/H}(x,\mu_F)\;
-\hat{\sigma}_{\ell i}(xP,k;\mu_F,\mu_R),
+\hat{\sigma}_{\ell i}(xP,k),
 \end{equation}
-其中 $\hat{\sigma}_{\ell i}$ 是短距离硬过程，可按微扰展开计算；$\mu_F$ 为因子化尺度，$\mu_R$ 为重整化尺度。
-
-\paragraph{强子--强子因子化（双卷积）}
+其中 $\hat{\sigma}_{\ell i}$； 是短距离硬过程，可按微扰展开计算。
+\paragraph{强子--强子因子化}
 对于强子--强子对撞过程 $h_1 h_2\to X$，截面具有双卷积结构：
 \begin{equation}
 \sigma_{h_1 h_2\to X}
 =\sum_{a,b}\int_0^1 dx_1\,dx_2\;
 f_{a/h_1}(x_1,\mu_F)\,
 f_{b/h_2}(x_2,\mu_F)\,
-\hat{\sigma}_{ab\to X}(x_1,x_2;\mu_F,\mu_R).
+\hat{\sigma}_{ab\to X}(x_1,x_2).
 \end{equation}
 硬散射 $\hat{\sigma}_{ab\to X}$ 因涉及短距离物理而可微扰计算；所有与强子内部长程结构相关的非微扰效应被吸收到通用的 PDF 中。
-
-
-\subsubsection{DIS 散射截面：一个 toy model 练习}
 
 在部分子模型下，DIS 可视为入射轻子与强子内部某一部分子的散射，因此总截面是对部分子动量分数 $x$ 的加权平均：
 \begin{equation}
@@ -106,29 +102,27 @@ f_{b/h_2}(x_2,\mu_F)\,
 \end{equation}
 在高能近似下，强子--轻子体系的质心能量平方
 \begin{equation}
-    s=(P+k)^2\simeq 2P\cdot k,
+    S=(P+k)^2\simeq 2P\cdot k,
 \end{equation}
 而部分子--轻子体系的质心能量平方为
 \begin{equation}
     \hat s=(xP+k)^2\simeq 2x\,P\cdot k = x s.
 \end{equation}
 
-\n{下面只是 toy model：真实 PDF 与完整理论更复杂。}
+\n{这只是 toy model，没什么实际意义，真实 PDF 与完整理论更复杂。}
 \begin{example}[截面计算练习]
     假设硬散射截面满足 $\hat{\sigma}_{eu}=A\hat s$、$\hat{\sigma}_{ed}=B\hat s^2$，
     且质子内 PDF 取
     \begin{equation}
         f_u^p(x)=x^2(1-x)^2,\qquad f_d^p(x)=x^2(1-x)^3.
     \end{equation}
-    \n{相关积分可用 Beta 函数 $\mathrm{B}(a,b)=\int_0^1 x^{a-1}(1-x)^{b-1}dx$ 化简。}
-
     \textbf{1. 电子--质子截面}
     \begin{align}
         \sigma_{ep}
         &= \int_0^1 dx\left[f_u^p(x)\,A(xs)+f_d^p(x)\,B(xs)^2\right] \nonumber\\
         &= As\int_0^1 x^3(1-x)^2dx + Bs^2\int_0^1 x^4(1-x)^3dx.
     \end{align}
-    用 Beta 函数（或阶乘形式）可得
+    用 Beta 函数可得
     \begin{equation}
         \int_0^1 x^3(1-x)^2 dx=\mathrm{B}(4,3)=\frac{3!\,2!}{6!}=\frac{1}{60},\qquad
         \int_0^1 x^4(1-x)^3 dx=\mathrm{B}(5,4)=\frac{4!\,3!}{8!}=\frac{1}{280},
@@ -149,23 +143,40 @@ f_{b/h_2}(x_2,\mu_F)\,
     \end{align}
 \end{example}
 
+\paragraph{有效 $x$ 的估计}
+\begin{theorem}[部分子散射过程中的阈值 $x$ 估计]
+考虑强子对撞过程 $h_1 h_2 \to X$，其质心系能量为 $\sqrt{S}$，末态系统 $X$ 的不变质量为 $M_X$，且过程满足阈值产生近似（$M_x = \sum_i m_i$）且对撞对称，则参与硬散射的部分子携带的有效动量分数 $x$ 满足：
+\begin{equation}
+x \simeq \frac{M_X}{\sqrt{S}} \simeq \frac{\sum_i m_i}{\sqrt{S}}.
+\end{equation}
+\end{theorem}
+\n{阈值条件是说能量刚好足以产生粒子而没有动能，质心系静止。对撞对称意味着强子能量近似，且部分子携带动量分数相近}
+\begin{proof}
+两入射部分子的动量分别为 $p_1 \simeq x_1 P_1$ 和 $p_2 \simeq x_2 P_2$, $\hat{s}$ 满足：
+\begin{equation}
+\hat{s} = (p_1 + p_2)^2 \simeq x_1 x_2 (P_1 + P_2)^2 = x_1 x_2 S.
+\end{equation}
+由能动量守恒，末态系统 $X$ 的不变质量平方 $M_X^2$ 等于子过程能量平方 $\hat{s}$，由此得到基本运动学关系：
+\begin{equation}
+x_1 x_2 S \approx M_X^2
+\end{equation}
+在对撞机的实验条件下，近似有$x_1 = x2 =x$
+\begin{align}
+    x^2  \approx \frac{M_X^2}{S} \Rightarrow x \approx \frac{M_x}{\sqrt{S}} \approx \frac{\sum_i m_i}{\sqrt{S}}
+\end{align}
+\end{proof}
 
-\subsubsection{PDF 的演化与全局拟合（DGLAP 思想）}
+
+\subsection{PDF 的演化与全局拟合（DGLAP）}
 
 PDF 本身是非微扰对象，但其随因子化尺度的变化 obey DGLAP 演化方程。
 这使得我们可以将在较低能标下由实验数据约束得到的 PDF 演化到更高能标，从而应用于对撞机过程的理论预言。
-\n{全局拟合流程：在初始尺度 $Q_0$ 参数化 PDF，DGLAP 演化到任意 $Q$，与多过程数据做 $\chi^2$ 拟合优化。}
-
-（如需可在此处补上 DGLAP 的标准形式）
-\begin{equation}
-    \frac{\partial f_i(x,\mu_F)}{\partial \ln\mu_F^2}
-    =\sum_j \int_x^1 \frac{dz}{z}\; P_{ij}(z,\alpha_s(\mu_F))\;
-    f_j\!\left(\frac{x}{z},\mu_F\right),
-\end{equation}
-其中 $P_{ij}$ 为分裂函数（可按微扰展开）。
-
-
-\subsubsection{PDF 不确定度（Hessian 误差传播）}
+全局拟合流程大概是，在初始尺度 $Q_0$ 参数化 PDF，DGLAP 演化到任意 $Q$，与多过程数据做 $\chi^2$ 拟合优化。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{figs/DGLAP.png}
+    \caption{DGLAP流程}
+\end{figure}
 
 PDF 由全球实验数据拟合得到，因此实验误差与理论系统误差会传递到 PDF。
 在 Hessian 方法中，拟合会给出中心 PDF 以及沿参数空间本征向量方向的误差集合 $S_i^\pm$。
@@ -175,31 +186,54 @@ PDF 由全球实验数据拟合得到，因此实验误差与理论系统误差�
 \end{equation}
 其中 $N_p$ 为误差方向数。
 
-
-\subsubsection{有效 $x$ 的估计}
-
-在强子对撞机分析中，估算产生某一质量尺度 $M$ 的过程所对应的部分子动量分数范围十分重要。
-对 $h_1h_2$ 以质心能量 $\sqrt{S}$ 对撞，若两部分子动量分数为 $x_1,x_2$，则硬过程满足
+\subsection{顶夸克物理}
+\subsubsection{不对强子散射下的顶夸克对产生}
+在强子对撞机中，顶夸克对产生的主导反应是正反夸克湮灭过程和胶子聚合过程，
 \begin{equation}
-    \hat s \simeq x_1x_2 S.
+q\bar q \to t\bar t,\qquad gg\to t\bar t \nonumber
 \end{equation}
-在阈值附近产生质量为 $M$ 的体系可近似取 $\hat s\simeq M^2$，若进一步假设 $x_1\simeq x_2\simeq x$，则
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/qqbar-t.png} 
+        \caption{夸克湮灭}
+    \end{subfigure}
+    \hfill % 
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/gg-t.png} 
+        \caption{胶子聚合过程}
+    \end{subfigure}
+    \caption{顶夸克对产生的主要过程}
+\end{figure}
+如果把顶夸克囊括到部分子中，还会有更奇怪的顶夸克对产生过程。
+
+顶夸克对产生过程的典型动量分数估计为
 \begin{equation}
-    x \simeq \frac{M}{\sqrt{S}}.
+x \sim \frac{2m_t}{\sqrt{S}}.
 \end{equation}
-\n{更一般地，若末态体系的快度为 $y$，则 $x_{1,2}\simeq \frac{M}{\sqrt{S}}e^{\pm y}$。}
 
-因此 $\sqrt{S}$ 越高，探测同样质量尺度 $M$ 的过程所需的典型 $x$ 越小：
-\begin{itemize}
-    \item Tevatron ($1.96~\mathrm{TeV}$)：产生顶夸克对（$M\approx 350~\mathrm{GeV}$）需 $x\sim 0.18$，常由价夸克贡献显著；
-    \item LHC ($14~\mathrm{TeV}$)：同过程仅需 $x\sim 0.025$，常由胶子主导。
-\end{itemize}
+在 Tevatron（$p\bar p$，$\sqrt{S}=1.96~\mathrm{TeV}$），$x$ 偏大（$\sim 0.2$），价夸克贡献显著，
+且 $\bar p$ 中存在价反夸克，因此 $q\bar q\to t\bar t$ 往往占主导；在 LHC（$pp$，如 $\sqrt{S}=8~\mathrm{TeV}$ 或更高），$x$ 更小（$\sim 0.04$ 甚至更低），胶子 PDF 在小 $x$ 区域迅速增大，
+因而 $gg\to t\bar t$ 往往成为主导通道。
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.55\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/tpair.png} 
+        \caption{不同质心系能量下，顶夸克对产生的主导过程不一样。图中颜色实线是夸克的PDF，虚线是反夸克的PDF，黑线是胶子PDF。}
+    \end{subfigure}
+    \hfill % 
+    \begin{subfigure}[b]{0.43\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/tpairscat.png} 
+        \caption{随着能量提高，$t\bar{t}$截面不再区分$p\bar{p}$和$pp$。}
+    \end{subfigure}
+    \caption{顶夸克对产生的主要过程}
+\end{figure}
 
-\subsection{对撞机物理简述}
-\subsubsection{亮度与事例率}
+正反粒子中胶子的PDF相同，随着能量升高，典型 $x$ 变小，胶子的PDF迅速增大，顶夸克对产生主要源自于胶子聚合效应，$p\bar{p}$和$pp$的差异会减弱。
 
-对撞机性能由瞬时亮度 $\mathcal{L}$ 描述。对截面为 $\sigma$ 的过程，其单位时间产生事例数为
-\begin{equation}
-    \frac{dN}{dt}=\mathcal{L}\,\sigma.
-\end{equation}
-实验累积数据量由积分亮度 $\int \mathcal{L}dt$ 衡量，常用单位为 $\mathrm{fb}^{-1}$。
+\subsubsection{单顶夸克产生}
+单顶夸克的产生主要通过弱相互左右，三个channel，S、Wt和t，

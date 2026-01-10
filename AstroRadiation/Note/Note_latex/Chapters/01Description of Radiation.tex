@@ -5,10 +5,10 @@
 
 为了定量描述辐射场，我们需要引入四个核心物理量：辐射强度、辐射流量、辐射能量密度和辐射压。
 
-\subsection{辐射强度}
+\paragraph{辐射强度}
 
 辐射强度是描述辐射场最基本的量，它包含了辐射在空间位置、方向、频率上的所有信息。
-\n{补个图}
+
 \begin{definition}[单色辐射强度]
     考虑辐射场中任意一点，取一面元 $dA$，其法线方向为 $\mathbf{n}$。设在时间间隔 $dt$ 内，频率范围在 $\nu$ 到 $\nu + d\nu$ 之间，穿过该面元并限制在方向 $\mathbf{n}'$ 周围立体角 $d\Omega$ 内的辐射能量为 $dE_\nu$。则单色辐射强度 $I_\nu$ 定义为：
     \begin{equation}
@@ -31,7 +31,7 @@ $$
     I = \int I_\nu d\nu
 $$
 
-\subsection{辐射流量}
+\paragraph{辐射流量}
 
 辐射强度描述了特定方向的辐射能力，而辐射流量则关注通过某一表面的净能量流。
 
@@ -70,7 +70,7 @@ $$
     \includegraphics[width = \linewidth]{figs/fig_quantities.pdf}
     \caption{强度、流量和光度之间的关系}
 \end{figure}
-\subsection{辐射能量密度}
+\paragraph{辐射能量密度}
 
 能量密度描述了单位体积内储存的辐射能量。
 \n{单位：$\mathrm{erg \cdot cm^{-3} \cdot Hz^{-1}}$}
@@ -127,7 +127,7 @@ $$
 \end{derivationnote}
 
 
-\subsection{辐射压}
+\paragraph{辐射压}
 
 光子携带动量，因此辐射照射在物体表面会产生压强。光子的动量大小为 $p = E/c$，用牛顿方程可以计算出辐射压。
 \n{这里假设光子把全部动量都传递到接受面，比如全部吸收。}
@@ -232,3 +232,361 @@ $$
 \end{equation}
 \n{各向同性，只考虑表面辐射通量为 $F = \pi I$}
 这与平方反比律 $F = (4\pi R^2 \cdot \pi I) / (4\pi r^2)$ 的结果是一致的。
+
+\section{电磁辐射谱}
+
+\n{把场的描述转化为能量随频率的分配，才能对应观测量}
+
+电磁辐射在理论上常由辐射区的电磁场描述，例如给出某点处的电场随时间变化 $E(t)$  
+但实际探测往往难以跟踪载频振荡的瞬时波形，仪器更容易获得的是在有限时间内累积的能量，或其时间平均后的能流  
+因此需要引入谱的观点：把总能量分解为各频率分量的贡献，从而把理论的场与观测的能量量联系起来
+
+\begin{definition}[谱能量密度]
+在观测点处取辐射电场的某一分量为实函数 $E(t)$  
+定义通过单位面积、单位角频率间隔的辐射能量为
+\[
+\frac{\dd W}{\dd A\,\dd\omega}
+\]
+它描述辐射能量在频率上的分配
+\end{definition}
+
+把电场写成傅里叶表示
+\[
+E(t)=\int_{-\infty}^{+\infty}E(\omega)\,e^{-i\omega t}\,\dd\omega
+\]
+其反变换为
+\[
+E(\omega)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}E(t)\,e^{i\omega t}\,\dd t
+\]
+其中 $E(\omega)$ 一般为复数，包含相位信息，而 $E(t)$ 为实数
+
+把能量与频域分量联系起来的关键是平方积分守恒  
+它说明时域中 $E^2(t)$ 的积分可以等价地写为频域中 $\abs{E(\omega)}^2$ 的积分
+
+\begin{equation}
+\int_{-\infty}^{+\infty}E^2(t)\,\dd t
+=2\pi\int_{-\infty}^{+\infty}E(\omega)E^*(\omega)\,\dd\omega
+=4\pi\int_{0}^{+\infty}\abs{E(\omega)}^2\,\dd\omega
+\end{equation}
+
+\begin{derivationnote}[为何谱能与 $\abs{E(\omega)}^2$ 对应]
+在辐射区，能流与电场平方成正比，因此通过单位面积的总能量可写成
+\[
+\frac{W}{A}\propto \int_{-\infty}^{+\infty}E^2(t)\,\dd t
+\]
+用平方积分守恒把它改写到频域后，总能量自然成为各频率分量贡献的叠加
+\[
+\frac{W}{A}\propto \int_{0}^{+\infty}\abs{E(\omega)}^2\,\dd\omega
+\]
+据此可定义谱能量密度为与 $\abs{E(\omega)}^2$ 成正比的量  
+取一种常用的归一化，可写为
+\begin{equation}
+\frac{\dd W}{\dd A\,\dd\omega}=c\,\abs{E(\omega)}^2
+\end{equation}
+这一步完成了从场到可观测谱量的转换
+\end{derivationnote}
+
+\n{观测量是能量或能流，谱把它写成对频率的积分}
+
+
+实际仪器总是在有限带宽内选频，并在有限时间内积分  
+若某通道覆盖 $\omega\in[\omega_1,\omega_2]$，则该通道在积分时间 $\Delta\tau$ 内通过单位面积的能量为
+\[
+\frac{W_{\mathrm{band}}}{A}=\int_{\omega_1}^{\omega_2}\frac{\dd W}{\dd A\,\dd\omega}\,\dd\omega
+\]
+相应的平均能流为
+\begin{equation}
+\frac{P_{\mathrm{band}}}{A}=\frac{1}{\Delta\tau}\frac{W_{\mathrm{band}}}{A}
+\end{equation}
+
+当通道很窄时，可用近似
+\[
+\frac{W_{\mathrm{band}}}{A}\approx \frac{\dd W}{\dd A\,\dd\omega}\,\Delta\omega
+\]
+因此观测上每个通道的读数，本质上是在该频带内对 $c\abs{E(\omega)}^2$ 的积分并再做时间平均  
+理论若能给出 $E(\omega)$，就能直接预测不同带宽与不同积分时间下的观测结果
+
+
+若 $E(t)$ 严格周期为 $T$，则可写为傅里叶级数
+\[
+E(t)=\sum_{n=-\infty}^{+\infty}E_n e^{-in\omega_0 t}
+\qquad
+\omega_0=\frac{2\pi}{T}
+\]
+系数为
+\[
+E_n=\frac{1}{T}\int_{0}^{T}E(t)e^{in\omega_0 t}\,\dd t
+\]
+此时能量分布不再连续，而集中在谐波频率 $n\omega_0$ 上  
+平方积分守恒对应为
+\[
+\int_{0}^{T}E^2(t)\,\dd t=2T\sum_{n=1}^{\infty}\abs{E_n}^2
+\]
+这表明总能量等于各谐波贡献之和，且每个谐波的强弱由 $\abs{E_n}^2$ 决定
+
+
+有限持续时间的信号不可能对应严格单一频率  
+若场的显著持续时间为 $T$，则谱分布的特征宽度满足量级关系
+\[
+\Delta\omega\sim \frac{1}{T}
+\]
+持续时间越长，谱越窄，能量越集中于中心频率附近  
+持续时间越短，谱越宽，能量分散到更广的频段
+
+\section{斯托克斯参量}
+
+\n{用强度类可观测量描述偏振态，避免直接测相位与瞬时场}
+
+在辐射偏振问题中，电场的瞬时振荡频率很高，且偏振态往往由两正交分量的相对振幅与相对相位决定  
+直接测量这些相位信息并不容易，而强度与能流属于平方律量，更接近实际探测器的输出  
+因此引入一组由时间平均的二次量构成的参量，用来完整刻画偏振态并可直接与观测联系
+\begin{definition}[斯托克斯参量]
+定义四个实数参量
+\begin{equation}
+\begin{aligned}
+I &= \langle \abs{E_x}^2\rangle + \langle \abs{E_y}^2\rangle \\
+Q &= \langle \abs{E_x}^2\rangle - \langle \abs{E_y}^2\rangle \\
+U &= \langle E_x E_y^*\rangle + \langle E_x^* E_y\rangle \\
+V &= i\bigl(\langle E_x E_y^*\rangle - \langle E_x^* E_y\rangle\bigr)
+\end{aligned}
+\end{equation}
+其中 $I$ 表征总强度，$Q$ 与 $U$ 表征线偏振信息，$V$ 表征圆偏振信息
+\end{definition}
+
+\n{强度类量保留偏振信息的代价是相位细节被时间平均吸收，但可观测性显著提高}
+
+\paragraph{椭圆偏振波的斯托克斯参量}
+
+任意完全偏振的椭圆偏振波可由两正交分量叠加表示  
+取与传播方向垂直的正交基 $\vb e_1,\vb e_2$，可写为
+\[
+\vb E(t)=E_0\cos\beta\cos(\omega t-\phi_1)\,\vb e_1 - E_0\sin\beta\sin(\omega t-\phi_2)\,\vb e_2
+\]
+其中 $\beta$ 控制两正交分量的幅度配比，$\phi_1,\phi_2$ 决定相对相位，从而决定椭圆的取向与旋向
+
+将坐标系绕传播方向旋转角度 $\chi$，使新基 $\vb e_1',\vb e_2'$ 与偏振椭圆的长短轴重合  
+在主轴坐标系中，椭圆偏振波可化为标准形式
+\[
+\vb E(t)=E_0\cos\beta\cos(\omega t)\,\vb e_1' - E_0\sin\beta\sin(\omega t)\,\vb e_2'
+\]
+此时 $E_0\cos\beta$ 与 $E_0\sin\beta$ 分别表示沿长轴与短轴方向的波幅值
+
+在主轴坐标系中，斯托克斯参量取为
+\[
+I'=E_0^2
+\qquad
+Q'=E_0^2\cos2\beta
+\qquad
+U'=0
+\qquad
+V'=E_0^2\sin2\beta
+\]
+将参考轴从 $\vb e_1',\vb e_2'$ 旋转回 $\vb e_1,\vb e_2$，旋转角为 $\chi$  
+旋转只会使 $Q,U$ 发生混合而 $I,V$ 保持不变
+\[
+I=I'
+\qquad
+V=V'
+\qquad
+Q=Q'\cos2\chi
+\qquad
+U=Q'\sin2\chi
+\]
+代入 $Q',V'$ 得到椭圆偏振波在原坐标系中的表达
+\[
+I=E_0^2
+\qquad
+Q=E_0^2\cos2\beta\cos2\chi
+\qquad
+U=E_0^2\cos2\beta\sin2\chi
+\qquad
+V=E_0^2\sin2\beta
+\]
+并可立即引入
+\[
+\frac{U}{Q}=\tan2\chi
+\qquad
+\frac{V}{I}=\sin2\beta
+\]
+同时满足完全偏振约束
+\begin{equation}
+I^2=Q^2+U^2+V^2
+\end{equation}
+
+\begin{itemize}
+  \item $V/I$ 表征椭圆的扁率参数，$V=0$ 时退化为线偏振，此时 $\beta=0$ 或 $\beta=\pm\pi/2$
+  \item $V$ 的符号表征偏振旋向，$V>0$ 与 $V<0$ 分别对应相反旋向
+  \item $U/Q$ 表征椭圆主轴相对参考轴的取向角，$\chi$ 由 $\tan2\chi=U/Q$ 给出
+  \item $Q=U=0$ 表示圆偏振，此时 $\cos2\beta=0$，等价于 $\beta=\pm\pi/4$，从而 $\cos\beta=\sin\beta$
+  \item 四个斯托克斯参量只有三个是独立的，由约束式给出
+\end{itemize}
+\paragraph{任意波的 Stokes 参量}
+
+\n{辐射场通常是多列波叠加，Stokes 参量用时间平均的二次量刻画偏振态}
+
+实际辐射场往往不是单一波列，而是许多波列的叠加  
+可写为
+\[
+\vb E(t)=\sum_\alpha \vb E^{(\alpha)}(t)
+\]
+取与传播方向垂直的两正交基 $\vb e_1,\vb e_2$，记两分量为 $E_1(t),E_2(t)$  
+对远大于载频周期的时间窗口做平均，定义相关矩阵元
+\[
+\langle E_i E_j^*\rangle
+=
+\Big\langle \sum_\alpha E_i^{(\alpha)} \sum_\beta E_j^{(\beta)*}\Big\rangle
+\]
+若不同波列之间相互独立且相位无关，则交叉项在平均后消失
+\[
+\big\langle E_i^{(\alpha)}E_j^{(\beta)*}\big\rangle=0
+\qquad
+\alpha\neq\beta
+\]
+从而
+\[
+\langle E_i E_j^*\rangle=\sum_\alpha \big\langle E_i^{(\alpha)}E_j^{(\alpha)*}\big\rangle
+\]
+这表明相关矩阵元以及由其构成的 Stokes 参量对独立叠加是可加的
+
+\begin{definition}[任意波的 Stokes 参量]
+对任意电磁波场，定义
+\[
+I=\langle E_1E_1^*\rangle+\langle E_2E_2^*\rangle
+\]
+\[
+Q=\langle E_1E_1^*\rangle-\langle E_2E_2^*\rangle
+\]
+\[
+U=\langle E_1E_2^*\rangle+\langle E_2E_1^*\rangle
+\]
+\[
+V=-i\bigl(\langle E_1E_2^*\rangle-\langle E_2E_1^*\rangle\bigr)
+\]
+其中 $I$ 描述总强度，$Q,U$ 描述线偏振信息，$V$ 描述圆偏振信息
+\end{definition}
+
+记
+\[
+a=\langle E_1E_1^*\rangle
+\qquad
+b=\langle E_2E_2^*\rangle
+\qquad
+c=\langle E_1E_2^*\rangle
+\]
+则
+\[
+I=a+b
+\qquad
+Q=a-b
+\qquad
+U=2\Re c
+\qquad
+V=2\Im c
+\]
+由此可得
+\[
+I^2-(Q^2+U^2+V^2)=4\bigl(ab-|c|^2\bigr)
+\]
+根据柯西施瓦兹不等式
+\[
+|c|^2=\bigl|\langle E_1E_2^*\rangle\bigr|^2
+\le \langle E_1E_1^*\rangle\,\langle E_2E_2^*\rangle
+=ab
+\]
+不难证明
+\begin{equation}
+I^2\ge Q^2+U^2+V^2
+\end{equation}
+
+\n{柯西施瓦兹不等式的几何直观就是向量夹角余弦值不大于1}
+取等时两个波完全重合，这就是说，任意波斯托克斯参量的不等关系源于不同波之间的混合项。
+由于一般情形下不再满足等式约束，表面上看 $I,Q,U,V$ 可能都需要独立给出  
+但仍可对任意偏振波做一种有用的人为分解
+给定一组 Stokes 参量 $(I,Q,U,V)$  
+可将该辐射场分解为无偏振自然波与完全偏振椭圆波的叠加
+\[
+(I,Q,U,V)=(I_u,0,0,0)+(I_p,Q,U,V)
+\]
+其中
+\[
+I_p=\sqrt{Q^2+U^2+V^2}
+\qquad
+I_u=I-I_p
+\]
+第一项为无偏振部分，其 Stokes 参量仅有强度 $I_u$  
+第二项为完全偏振的椭圆偏振部分，满足
+\[
+I_p^2=Q^2+U^2+V^2
+\]
+
+这意味着任意偏振波都可以视为无偏振自然波与椭圆偏振波的叠加  
+偏振度可由
+\[
+\Pi=\frac{I_p}{I}=\frac{\sqrt{Q^2+U^2+V^2}}{I}
+\]
+给出。
+
+对完全偏振部分 $(I_p,Q,U,V)$，其线偏振强度定义为
+\[
+I_L=\sqrt{Q^2+U^2}
+\]
+相应的线偏振度为
+\[
+\Pi_L=\frac{I_L}{I}=\frac{\sqrt{Q^2+U^2}}{I}
+\]
+线偏振的偏振面由取向角 $\chi$ 给出
+\[
+\tan 2\chi=\frac{U}{Q}
+\]
+因此 $Q,U$ 不仅决定线偏振强弱，也决定偏振面的方向
+
+
+在上述分解
+\[
+(I,Q,U,V)=(I_u,0,0,0)+(I_p,Q,U,V)
+\]
+基础上，还可进一步把完全偏振部分分解为线偏振分量与圆偏振分量  
+定义圆偏振强度为
+\[
+I_C=\abs{V}
+\]
+圆偏振度为
+\[
+\Pi_C=\frac{V}{I}
+\]
+于是可写出一种常用的分解形式
+\[
+(I,Q,U,V)=(I_u,0,0,0)+(I_L,Q,U,0)+(I_C,0,0,V)
+\]
+其中
+\[
+I_u=I-\sqrt{Q^2+U^2+V^2}
+\qquad
+I_L=\sqrt{Q^2+U^2}
+\qquad
+I_C=\abs{V}
+\]
+第一项为无偏振自然波  
+第二项为线偏振波，其偏振面由 $\tan 2\chi=U/Q$ 给出  
+第三项为圆偏振波，其旋向由 $V$ 的符号决定
+
+\section{相对论效应}
+\paragraph{光行差效应}
+光行差效应描述的是由于观测者与光源之间存在相对运动，导致观测者测得的光子传播方向发生改变的现象。假设光源在共动参考系中以角度 $\theta'$ 发射光子，而该参考系相对于观测者参考系以速度 $v$ 沿正方向运动，则观测者测得的角度 $\theta$ 遵循以下变换关系：
+
+\begin{equation}
+\cos \theta = \frac{\cos \theta' + \frac{v}{c}}{1 + \frac{v}{c} \cos \theta'}
+\end{equation}
+
+当光源相对于观测者运动时，光子的传播方向会表现出向运动前方倾斜的特征，即观测角通常小于内禀发射角。
+在极端相对论条件下，当光源的运动速度接近光速时，洛伦兹因子急剧增大，此时即使是光源向后方发射的光子，在观测者看来也可能变为向前传播。
+这种由于高速运动导致辐射能量高度集中在运动方向前方极小圆锥内的现象被称为聚束效应，
+$$\frac{dN}{d\Omega} = \frac{dN'}{d\Omega'} \frac{1-\beta^2}{(1-\beta \cos \theta)^2}$$
+其辐射分布的圆锥半高宽约为洛伦兹因子的倒数，它解释了为何高速运动的粒子辐射在观测方向上具有极高的亮度增益。
+
+\paragraph{多普勒效应}
+多普勒效应是指观测者接收到的运动光源发出的周期性信号频率与光源内禀频率不一致的现象，它是经典多普勒效应与相对论动钟延缓效应的叠加结果。假设光源在共动参考系中的内禀频率为 $\omega'$，观测者测得的频率为 $\omega$，波矢与光源速度方向在观测者参考系中的夹角为 $\theta$，则两者满足如下变换关系：
+\begin{equation*}
+\boxed{\omega' = \omega \gamma \left( 1 - \frac{v}{c} \cos \theta \right)}
+\end{equation*}
+公式中的洛伦兹因子 $\gamma$ 代表了相对论的时间延缓修正，而括号内的项则体现了源与观测者相对运动导致的经典几何投影效应。在极端相对论条件下，当光源以接近光速运动且观测方向接近正前方时，括号内的几何项数值极小，导致观测频率 $\omega$ 远大于内禀频率 $\omega'$，这种显著的频率蓝移现象意味着光子能量的剧烈增强，它与相对论聚束效应共同构成了高速运动天体在运动方向上表现出极高辐射亮度的物理基础。

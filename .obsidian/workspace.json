@@ -11,12 +11,12 @@
             "id": "2d7524e752c42545",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "image",
               "state": {
-                "file": "AstroRadiation/PPT/第十三讲+辐射应用.pdf"
+                "file": "Pasted image 20251107223845.png"
               },
-              "icon": "lucide-file-text",
-              "title": "第十三讲+辐射应用"
+              "icon": "lucide-image",
+              "title": "Pasted image 20251107223845"
             }
           }
         ]
@@ -90,8 +90,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "ce4b8b158dcd012b",
@@ -182,8 +181,15 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "2d7524e752c42545",
+  "active": "f5aff8019914da10",
   "lastOpenFiles": [
+    "Pasted image 20251107222820.png",
+    "Pasted image 20251107214824.png",
+    "Pasted image 20251107143648.png",
+    "电动力学相对论形式笔记（高斯制，-+++度规）.md",
+    "未命名.md",
+    "3248b2da452c66dbb197a4e34ef5204.jpg",
+    "66c8035f2cd38567eb1786f1f22e636.jpg",
     "GR/Latex_note/main.synctex(busy)",
     "GR/Latex_note/xelatex13896.fls",
     "GR/Latex_note/xelatex45904.fls",
@@ -194,7 +200,6 @@
     "GR/Latex_note/xelatex39588.fls",
     "GR/Latex_note/xelatex39060.fls",
     "GR/Latex_note/xelatex40012.fls",
-    "GR/Latex_note/xelatex12936.fls",
     "AstroRadiation/Note/Note_md/辐射应用.md",
     "Particle/Note/强子结构与夸克模型.md",
     "AstroRadiation/Note/Note_md/Pasted image 20251226211712.png",
@@ -204,25 +209,19 @@
     "Pasted image 20251216201842.png",
     "Pasted image 20251216201744.png",
     "Pasted image 20251216184150.png",
-    "Pasted image 20251216183909.png",
-    "ML/PPT/Pasted image.png",
     "ML/Note/Md_note/第二章 监督学习.md",
     "第四章 非线性分类.md",
     "Particle/Note/CP变换.md",
     "Particle/Note/全同粒子交换.md",
     "Particle/Note/全同粒子与交换对称性.md",
-    "Pasted image 20251209193919.png",
     "ML/Note/未命名.md",
     "Particle/Note/正反粒子共轭变换与 CG 宇称.md",
     "Particle/Note/第三章 对称性和守恒律.md",
-    "电动力学相对论形式笔记（高斯制，-+++度规）.md",
     "Particle/Note/第五章 对称性和守恒律.md",
     "AstroRadiation/Note/Note_md/韧致辐射.md",
     "GR/Homework/HW2.md",
     "AstroRadiation/Note/Note_md/第五章 运动电子产生的电荷.md",
     "GR/Note/md_note/第一章.md",
-    "未命名.md",
-    "Pasted image 20251107143648.png",
     "AstroRadiation/Note/第六章 狭义相对论.md"
   ]
 }
