@@ -3,13 +3,14 @@
 之前讨论的辐射是自由-自由辐射，主要集中在电子和光子的相互作用而不考虑原子核。而这一章集中讨论自由-束缚效应（复合辐射）和束缚-自由效应（光致电离），也就是自由电子被离子捕获成束缚态和束缚电子因为吸收光子电离两种情况。
 过程上，复合辐射的过程和韧致辐射很相似，都是电子在离子的库伦场中产生辐射。虽然有相似之处，但是这两种辐射仍然是不同的效应，因为电子结果上一个是束缚态一个是自由态。
 
-\section{复合辐射的产生}
+\section{复合辐射（自由-束缚过程）}
+\subsection{复合辐射的产生}
 
 复合辐射是指动能为 $E_i$ 的自由电子飞过带电 $+Ze$ 的离子近旁时，被离子俘获成为净电荷为 $+(Z-1)e$ 的离子的束缚态电子，同时释放出一个光子的过程。
 \n{又称为自由-束缚跃迁 }
 
 俘获过程所释放的光子不止包含电子的动能，还要包含电子落入原子核库伦势井后释放出的电磁能。若复合后的离子处于主量子数为 $n$ 的激发态，该态的电离能（结合能）为 $I_{Z-1,n}$，根据能量守恒，辐射出的光子能量为：
-\begin{equation}
+\begin{equation}\label{eq:recomb_energy}
     h\nu = E_i + I_{Z-1,n}
 \end{equation}
 由于入射电子的动能 $E_i$ 是连续取值的，因此复合辐射产生的是连续谱。但与轫致辐射不同，该连续谱存在一个下限频率 $\nu_{min} = I_{Z-1,n}/h$。
@@ -23,18 +24,18 @@
     此外，韧致辐射辐射产生连续谱而复合辐射由于叠加了原子的发射线，同时产生连续谱和复合谱。
 \end{derivationnote}
 
-\section{复合截面与速率系数}
+\subsection{复合截面与速率系数}
 
-\subsection{类氢离子的复合截面 $\sigma_R(n)$}
+\paragraph{类氢离子的复合截面 $\sigma_R(n)$}
 首先考虑类氢离子（轨道电子全部脱离，原子核Ze裸露在外），这种情况的电离能可以用薛定谔方程精确求解，对给定的主量子数n，对于的电离能是：
 \begin{equation}
-    I_{Z-1, n} = Z^2\frac{I_H}{n^2}, \quad \text{$I_H = 13.6eV$是氢原子基态电离能} 
+    I_{Z-1, n} = Z^2\frac{I_H}{n^2}, \quad \text{$I_H = 13.6eV$是氢原子基态电离能} \nonumber
 \end{equation}
 对于类氢离子，利用“高频”轫致辐射截面到复合辐射$n\rightarrow \infty$时的过渡，可以近似估计出出电子复合到能级 $n$ 的吸收截面 $\sigma_R(n)$。
 
 \begin{theorem}[高频极限下的韧致辐射截面]
     已知速度为 $v$ 的单电子产生的韧致辐射功率谱为 $P(\nu)$，则其在高频极限（$\omega \gg v/b_0$）下的辐射截面 $\sigma_B(\nu)$ 满足：
-    \begin{equation}
+    \begin{equation}\label{eq:brems_sigma_highfreq}
         \sigma_B(\nu) = \frac{16\pi}{3\sqrt{3}} \alpha_f^3 K_e^{-2} \frac{Z^2}{\nu}
     \end{equation}
     其中 $\alpha_f = e^2 / (\hbar c)$ 为精细结构常数，$K_e^{-1} = \hbar / (mv)$ 为关联电子能量的长度标度。
@@ -43,20 +44,20 @@
 \begin{proof}
     对韧致辐射可以发生的空间尺度，电子在单位时间内扫过的体积为 $\sigma_B(\nu)v$。若单位体积内的离子数为 $N_z$，则电子单位时间内与离子作用的次数为 $\sigma_B(\nu)v N_z$，单电子产生频率为 $\nu$ 的辐射功率为 
     \begin{equation}
-        P(\nu) = \sigma_B(\nu)v N_z h \nu
+        P(\nu) = \sigma_B(\nu)v N_z h \nu \nonumber
     \end{equation}
     由此可讲吸收截面用辐射功率表示，
     \begin{equation}
-        \sigma_B(\nu)  = \frac{P(\nu)}{v N_z h \nu}
+        \sigma_B(\nu)  = \frac{P(\nu)}{v N_z h \nu} \nonumber
     \end{equation}
     在高频极限下，初速为 $v$ 的单电子产生的韧致辐射功率谱为：
     \begin{equation}
-        P(\nu) = \frac{32\pi^2}{3\sqrt{3}} N_z v^3 \frac{e^2}{c^3} b_0^2
+        P(\nu) = \frac{32\pi^2}{3\sqrt{3}} N_z v^3 \frac{e^2}{c^3} b_0^2 \nonumber
     \end{equation}
     其中 $b_0 = Ze^2 / (m v^2)$ 为最小瞄准距离，将 $P(\nu)$ 代入截面定义式，化简得：
     \begin{align}
-        \sigma_B(\nu) &= \frac{1}{N_z v (2\pi\hbar) \nu} \cdot \left( \frac{32\pi^2}{3\sqrt{3}} \frac{N_z Z^2 e^6}{m^2 v c^3} \right) = \frac{16\pi}{3\sqrt{3}} \frac{Z^2 e^6}{\hbar \nu m^2 v^2 c^3} \\
-                    &= \frac{16\pi}{3\sqrt{3}} \frac{Z^2}{\nu} \left( \frac{e^2}{\hbar c} \right)^3 \left( \frac{\hbar}{m v} \right)^2 \\
+        \sigma_B(\nu) &= \frac{1}{N_z v (2\pi\hbar) \nu} \cdot \left( \frac{32\pi^2}{3\sqrt{3}} \frac{N_z Z^2 e^6}{m^2 v c^3} \right) = \frac{16\pi}{3\sqrt{3}} \frac{Z^2 e^6}{\hbar \nu m^2 v^2 c^3} \nonumber \\
+                    &= \frac{16\pi}{3\sqrt{3}} \frac{Z^2}{\nu} \left( \frac{e^2}{\hbar c} \right)^3 \left( \frac{\hbar}{m v} \right)^2 \nonumber \\
                     &= \frac{16\pi}{3\sqrt{3}} \alpha_f^3 K_e^{-2} \frac{Z^2}{\nu}
     \end{align}
     得证。
@@ -64,7 +65,7 @@
 
 \begin{theorem}[微分复合辐射截面]
 在$n\rightarrow \infty$的极限下，对于初速度为 $v$ 的自由电子，其复合到主量子数为 $n$ 的能级上的微分复合截面（即单位主量子数间隔内的复合截面）$\sigma_R(n)$ 可表示为：
-\begin{equation}
+\begin{equation}\label{eq:diff_sigma_R}
     \sigma_R(n) = \frac{32\pi}{3\sqrt{3}} Z^2 \alpha_f^3 K_e^{-2} \frac{Z^2 I_H}{h \nu n^3} g_R(n)
 \end{equation}
 其中 $I_H$ 为氢原子基态电离能，$g_R(n)$ 为修正因子（复合冈特因子）。
@@ -75,27 +76,27 @@
 \n[0em]{$\sigma_R$ 与 $\sigma_R(n)$ 的关系类似于累积概率分布与概率密度分布。}
 由此可建立如下比例关系：
 \begin{equation}
-    \dd \sigma_R = \sigma_B(\nu) \dd \nu
+    \dd \sigma_R = \sigma_B(\nu) \dd \nu \nonumber
 \end{equation}
-由复合辐射所满足的 $h\nu = E_i + \frac{Z^2 I_H}{n^2}$ 可知，当主量子数改变 $\dd n$ 时，对应的光子频率间隔 $\dd \nu$ 满足：
+由复合辐射所满足的能量关系 \eqref{eq:recomb_energy} 可知，当主量子数改变 $\dd n$ 时，对应的光子频率间隔 $\dd \nu$ 满足：
 \begin{equation}
-    h \dd \nu = \left| \frac{\dd}{\dd n} \left( E_i + \frac{Z^2 I_H}{n^2} \right) \right| \dd n = \frac{2 Z^2 I_H}{n^3} \dd n
+    h \dd \nu = \left| \frac{\dd}{\dd n} \left( E_i + \frac{Z^2 I_H}{n^2} \right) \right| \dd n = \frac{2 Z^2 I_H}{n^3} \dd n \nonumber
 \end{equation}
 由此得到：
 \begin{equation}
-    \frac{\dd \nu}{\dd n} = \frac{2 Z^2 I_H}{h n^3}
+    \frac{\dd \nu}{\dd n} = \frac{2 Z^2 I_H}{h n^3} \nonumber
 \end{equation}
 
-将其与高频极限下的韧致辐射截面公式代入。得：
+将其与高频极限下的韧致辐射截面公式 \eqref{eq:brems_sigma_highfreq} 代入。得：
 \begin{equation}
-    \sigma_R(n) = \sigma_B(\nu) \frac{\dd \nu}{\dd n} = \left( \frac{16\pi}{3\sqrt{3}} \alpha_f^3 K_e^{-2} \frac{Z^2}{\nu} \right) \cdot \left( \frac{2 Z^2 I_H}{h n^3} \right)
+    \sigma_R(n) = \sigma_B(\nu) \frac{\dd \nu}{\dd n} = \left( \frac{16\pi}{3\sqrt{3}} \alpha_f^3 K_e^{-2} \frac{Z^2}{\nu} \right) \cdot \left( \frac{2 Z^2 I_H}{h n^3} \right) \nonumber
 \end{equation}
 整理各项系数，并引入量子力学修正因子 $g_R(n) \approx 1$（复合冈特因子），得到最终表达式：
 \begin{equation}
     \sigma_R(n) = \frac{32\pi}{3\sqrt{3}} Z^2 \alpha_f^3 K_e^{-2} \frac{Z^2 I_H}{h \nu(n) n^3} g_R(n)
 \end{equation}
 \end{proof}
-将相关参数代入前述微分截面公式，并结合类氢离子能级常数 $I_H = Rch = \frac{2\pi^2 m e^4}{h^2}$，可以得到复合截面 $\sigma_R(n)$ 的数值表达式：
+将相关参数代入前述微分截面公式 \eqref{eq:diff_sigma_R}，并结合类氢离子能级常数 $I_H = Rch = \frac{2\pi^2 m e^4}{h^2}$，可以得到复合截面 $\sigma_R(n)$ 的数值表达式：
 
 \begin{equation}
     \sigma_R(n) = \frac{128\pi^4 e^{10}}{3\sqrt{3} m c^3 h^4} \frac{Z^4 g_R(n)}{\nu n^3 v^2} \approx 3 \times 10^{10} \frac{Z^4 g_R(n)}{\nu n^3 v^2} \text{ cm}^{-2}
@@ -110,7 +111,7 @@
 \end{itemize}
 现在可以讨论复合辐射的微分吸收截面和其中物理量的关系，
 \begin{align}
-    \sigma_{R}(n) \propto Z^4 K_e^{-2} h\nu n^3
+    \sigma_{R}(n) \propto Z^4 K_e^{-2} h\nu n^3 \nonumber
 \end{align}
 \begin{enumerate}
     \item $\sigma_R$ 与电子动能有关（反比于 $K_e^2$）：电子动能越大，离子越难捕获电子。
@@ -120,7 +121,7 @@
 
 在实际分析中，可以将初动能 $E_i$ 约等于能级电离能时的 $n$ 值视为临界主量子数 $n_{\max}$：
 \begin{equation}
-    n_{\max} \approx \left( \frac{Z^2 I_H}{E_i} \right)^{1/2} \approx \left( \frac{Z^2 I_H}{kT} \right)^{1/2}
+    n_{\max} \approx \left( \frac{Z^2 I_H}{E_i} \right)^{1/2} \approx \left( \frac{Z^2 I_H}{kT} \right)^{1/2} \nonumber
 \end{equation}
 由此，对给定初动能的电子，复合截面与主量子数的关系可以近似表示为如下分段函数：
 \begin{equation}
@@ -131,7 +132,7 @@
     \end{cases}
 \end{equation}
 
-\subsection{类氢离子的复合速率系数}
+\paragraph{类氢离子的复合速率系数}
 
 之前的截面计算描述了单个自由电子被捕获到特定能级的物理概率。现在计算在给定温度 $T$ 下，具有热分布的电子系综被离子复合的统计概率。
 
@@ -147,11 +148,11 @@
 \end{equation}
 
 从微观角度看，对于一个初速为 $v$ 的电子，在 $\dd t$ 时间内能够发生复合的有效体积为 $\sigma_R v \dd t$。考虑到自由电子服从 Maxwell 速率分布 $f(v)$，则复合到能级 $n$ 的速率系数应为截面与速度乘积在分布函数上的加权平均：
-\begin{equation}
+\begin{equation}\label{eq:alpha_n_integral}
     \alpha_n(T) = \int_0^\infty \sigma_R(n, v) v f(v) \dd v
 \end{equation}
 
-将前述 $\sigma_R(n)$ 和 $f(v)$ 代入表达式，通过对速度 $v$ 进行积分，可以得到复合到氢原子第 $n$ 能级的速率系数的具体形式：
+将前述 $\sigma_R(n)$ 和 $f(v)$ 代入表达式 \eqref{eq:alpha_n_integral}，通过对速度 $v$ 进行积分，可以得到复合到氢原子第 $n$ 能级的速率系数的具体形式：
 \begin{equation}
     \alpha_n(T) = \frac{2^9 \pi^5}{(6\pi )^{3/2}} \frac{e^{10}}{m^2 c^3 h^3} \left( \frac{m}{kT} \right)^{3/2} \frac{1}{n^3} \exp\left( \frac{\chi_n}{kT} \right) K\left( \frac{\chi_n}{kT} \right)
 \end{equation}
@@ -170,12 +171,12 @@ $Y = Z^2 I_H / kT$ 表示类 H 原子的电离能与电子平均热动能之比�
 \begin{itemize}
     \item \textbf{低温极限 ($Y \gg 1$)}：此时电子平均动能远小于电离能，$kT \ll Z^2 I_H$。此时 $\phi(Y) \approx \frac{1}{2} \ln Y$，复合速率系数表现为：
     \begin{equation}
-        \alpha(T) \propto Z^2 T^{-1/2} \ln \left( \frac{Z^2 I_H}{kT} \right)
+        \alpha(T) \propto Z^2 T^{-1/2} \ln \left( \frac{Z^2 I_H}{kT} \right) \nonumber
     \end{equation}
     由此可见，在低温时 $\alpha(T) \propto T^{-1/2}$，随着温度升高，电子热运动增强导致复合速率下降。
     \item \textbf{高温极限 ($Y \ll 1$)}：此时平均动能远大于电离能，$kT \gg Z^2 I_H$。此时 $\phi(Y) \approx Y(-1.202 \ln Y - 0.298)$，复合速率系数表现为：
     \begin{equation}
-        \alpha(T) \propto Z^4 T^{-3/2} \ln \left( \frac{kT}{Z^2 I_H} \right) \propto T^{-3/2}
+        \alpha(T) \propto Z^4 T^{-3/2} \ln \left( \frac{kT}{Z^2 I_H} \right) \propto T^{-3/2} \nonumber
     \end{equation}
     也就是在高温下，复合速率会随着温度升高更为迅速的减小
 \end{itemize}
@@ -184,16 +185,16 @@ $Y = Z^2 I_H / kT$ 表示类 H 原子的电离能与电子平均热动能之比�
 
 但是有一种情况比较特殊，假设介质对复合频率是光学厚的，释放出的光子容易让别的复合离子产生光致电离效应，从而这种复合辐射对整体的复合是没有贡献的。
 
-\section{复合辐射连续谱}
+\subsection{复合辐射连续谱}
 
 计算截面的最终目的是为了推导等离子体在单位时间、单位体积、单位频率间隔内向四周辐射的谱功率，即谱发射系数 $j_R(\nu)$。对于给定的能级 $n$，其对应的谱发射系数定义为：
 \begin{equation}
-    j_R(n, \nu) \dd \nu = h\nu N_Z N_e \sigma_R(n) v f(v) \dd v
+    j_R(n, \nu) \dd \nu = h\nu N_Z N_e \sigma_R(n) v f(v) \dd v \nonumber
 \end{equation}
 利用能量守恒条件 $h\nu = \frac{1}{2}mv^2 + I_{Z-1, n}$，可以将电子速度 $v$ 表示为频率 $\nu$ 的函数，并利用微分关系 $mv \dd v = h \dd \nu$ 进行代换。代入前述截面公式及 Maxwell 分布函数，可得到单个能级的复合辐射谱发射系数：
 \n[0em]{当 $I - h\nu < 0$ 时 $j = 0$。因为要求辐射的光子能量小于该能级的电离能是不可能的。这使得单个能级的复合辐射谱在 $\nu_0 = I/h$ 处存在一个明显的“发射边” 。}
 
-\begin{equation}
+\begin{equation}\label{eq:j_R_n}
     j_R(n, \nu) = 1.8 \times 10^{-32} T^{-3/2} N_e N_Z Z^4 n^{-3} \exp \left( \frac{I_{Z-1,n} - h\nu}{kT} \right)
 \end{equation}
 单位为 $\text{erg} \cdot \text{cm}^{-3} \cdot \text{s}^{-1} \cdot \text{Hz}^{-1}$。
@@ -204,24 +205,24 @@ $Y = Z^2 I_H / kT$ 表示类 H 原子的电离能与电子平均热动能之比�
 \end{equation}
 注意求和只对满足 $I_{Z-1, n} \le h\nu$ 的能级 $n$ 进行。根据类氢离子能级关系 $I_{Z-1, n} = Z^2 I_H / n^2$，可以估计出最低的主量子数 $n_0$：
 \begin{equation}
-    n_0 = \left( \frac{Z^2 I_H}{h\nu} \right)^{1/2}
+    n_0 = \left( \frac{Z^2 I_H}{h\nu} \right)^{1/2} \nonumber
 \end{equation}
 可见临界能级 $n_0$ 与频率 $\nu$ 相关：辐射频率越大，就需要电离能更大的低能级来贡献能量，因此 $n_0$ 就越小。对于给定的频率 $\nu$，临界能级对辐射的贡献是最大的。
 
 
-\section{对于非类氢离子的近似}
+\subsection{对于非类氢离子的近似}
 
 对于 $\text{He}^+, \text{O}^{++}$ 等非类氢离子的作用。由于被俘获的电子通常处在最外层的大轨道上，从远处看，它与净电荷为 $z$ 的离子实（原子核+内层电子）共同构成了一个类氢系统。
 
 为此，将公式中的核电荷数 $Z$ 用离子的净电荷数 $z$ 替换。复杂离子在能级 $n$ 的电离能近似为 $I_{Z, z-1, n} \approx z^2 I_H / n^2$。另外根据泡利不相容原理，若能级 $n$ 上的 $2n^2$ 个能态已被占据，外来电子将无法复合，引入壳层未填满百分数 $\frac{\bar{S}}{2n^2}$（其中 $\bar{S}$ 为空位个数）。
 此时自由电子复合到能级n的有效复合截面近似为：
 \begin{equation}
-    \sigma_R^P{eff}(n) = \frac{\bar{S}}{2n^2}\sigma_R(n)
+    \sigma_R^{eff}(n) = \frac{\bar{S}}{2n^2}\sigma_R(n) \nonumber
 \end{equation}
 
 所以修正分别要称为未填满的百分比，并讲电离能替换为有效电离能，复杂离子单能级发射系数为：
 \begin{equation}
-    j_R^{Z,z}(n, \nu) = 1.8 \times 10^{-32} T^{-3/2} N_e N_{Z,z} \frac{\bar{S}}{2n^2} n \left( \frac{I_{Z, z-1, n}}{I_H} \right)^2 \exp \left( \frac{I_{Z, z-1, n} - h\nu}{kT} \right)
+    j_R^{Z,z}(n, \nu) = 1.8 \times 10^{-32} T^{-3/2} N_e N_{Z,z} \frac{\bar{S}}{2n^2} n \left( \frac{I_{Z, z-1, n}}{I_H} \right)^2 \exp \left( \frac{I_{Z, z-1, n} - h\nu}{kT} \right) \nonumber
 \end{equation}
 利用 $I_{Z, z-1, n} \approx z^2 I_H / n^2$ 代回，上式可还原为与 $z^4 n^{-3}$ 相关的形式。
 
@@ -243,14 +244,14 @@ $Y = Z^2 I_H / kT$ 表示类 H 原子的电离能与电子平均热动能之比�
 
 当等离子体中仅存在类 H 离子时，参量 $X$ 还原为：
 \begin{equation}
-    X = \sum_{n=n_0}^{\infty} n^{-3} Z^4 \exp \left( \frac{Z^2 I_H}{n^2 kT} \right)
+    X = \sum_{n=n_0}^{\infty} n^{-3} Z^4 \exp \left( \frac{Z^2 I_H}{n^2 kT} \right) \nonumber
 \end{equation}
 此时 $n_0 = (Z^2 I_H / h\nu)^{1/2}$，发射系数公式也相应地回归到了纯氢（或类氢）系统的标准形式。
 
-\begin{derivationnote}[复合辐射与韧致辐射的比较]
+\begin{derivationnote}[复合辐射与韧致辐射再次比较]
     在低温条件下，电子平均动能远小于原子的电离势，复合辐射与韧致辐射通常处于明显不同的频段；随着温度升高，二者的辐射频段开始出现重叠。通过比较二者的谱发射系数，可以得到在任意给定频率 $\nu$ 处的强度比值：
     \begin{equation}
-        \frac{j_R(\nu)}{j_B(\nu)} \approx 10^{-1} \frac{X}{T_6}
+        \frac{j_R(\nu)}{j_B(\nu)} \approx 10^{-1} \frac{X}{T_6} \nonumber
     \end{equation}
     其中 $T_6$ 是以 $10^6 \text{ K}$ 为单位的温度值。由此可以得出以下结论：
     
@@ -264,79 +265,132 @@ $Y = Z^2 I_H / kT$ 表示类 H 原子的电离能与电子平均热动能之比�
     \end{itemize}
 \end{derivationnote}
 
-\section{束缚-自由吸收（光电吸收）}
+\section{光致电离（束缚-自由吸收）}
+\subsection{光致电离的产生}
+束缚-自由吸收是复合辐射的逆过程：原子或离子吸收一个光子，使处于束缚能级上的电子获得能量并逃逸成为自由电子，这一过程即为光致电离。
 
-这是复合辐射的逆过程：原子/离子吸收光子，使束缚电子获得能量成为自由电子（光致电离）。
-
-\subsection{吸收截面 $\sigma_{bf}$}
-对于类氢系统，束缚-自由吸收截面近似为：
+对于类氢系统，束缚-自由吸收截面由量子力学推导可得：
 \begin{equation}
-    \sigma_{bf}(\nu, n) \approx 2.8 \times 10^{29} \frac{Z^4}{n^5 \nu^3} g_{bf} \quad \text{cm}^{-2}
+    \sigma_{bf}(\nu, n) = \frac{32\pi^2 e^6 R_{\infty} Z^4}{3\sqrt{3} h^3 \nu^3 n^5} g_{fb} \approx 2.8 \times 10^{29} \frac{Z^4}{\nu^3 n^5} g_{fb} \text{ cm}^{-2}
 \end{equation}
-\n{$\sigma \propto \nu^{-3}$}
-该公式揭示了三个关键物理规律：
-\begin{enumerate}
-    \item \textbf{$\nu^{-3}$ 依赖}：频率越高，吸收越弱。硬 X 射线穿透力强，而紫外/软 X 射线易被吸收。
-    \item \textbf{$Z^4$ 依赖}：重元素（高 $Z$）的吸收能力远强于氢。
-    \item \textbf{$n^{-5}$ 依赖}：基态（$n=1$）电子的吸收截面最大。
-\end{enumerate}
-
-\subsection{吸收边与天体物理应用}
+$R_{\infty} = 109733 \text{ cm}^{-1}$ 为里德伯常数；$g_{fb}$ 为自由-束缚冈特因子，在光学波段 $g_{fb} \approx 1$。
+电子无法直接吸收光子的动能，必须有“第三者”参与以维持能量与动量的守恒，在这里第三者为原子核子，由此可以解释吸收截面的规律：
 \begin{itemize}
-    \item \textbf{吸收边}：与复合连续谱类似，吸收截面在阈值频率 $\nu_n$ 处有尖锐的极大值，随后随频率迅速下降。
-    \item \textbf{不同波段的主导机制}：
-        \begin{itemize}
-            \item \textbf{紫外波段}：由\textbf{氢}（$H$）主导。尽管 $Z=1$，但氢丰度极高。
-            \item \textbf{X 射线波段}：由\textbf{重元素}（如 $Fe, O$ 等）主导。尽管丰度低，但 $Z^4$ 因子使得其内壳层（K层）电子对 X 射线的吸收截面巨大。
-        \end{itemize}
+    \item \textbf{能级}：随着主量子数 $n$ 减小，电子轨道半径缩小（$r \propto n^2$），使得原子核更容易参与动量交换。
+    \item \textbf{原子序数}：随着原子序数 $Z$ 变大，电磁相互作用增强，使原子核参与动量交换的效率变高。
 \end{itemize}
 
-\begin{derivationnote}[为什么吸收需要原子核参与？]
-    自由电子不能吸收光子，因为无法同时满足能量守恒和动量守恒。光电吸收必须有原子核（离子）在场，通过核的\textbf{反冲}来平衡动量。
-    
-    基态（$n=1$）电子离核最近，与核耦合最紧密，动量传递效率最高，因此吸收截面最大（$\propto n^{-5}$）。随着 $n$ 增大，电子趋近于自由电子，吸收能力急剧下降。
-\end{derivationnote}
-
-\section{复合线与级联跃迁}
-
-\subsection{级联过程 (Cascade)}
-当电子复合到高激发态 $n$ 后，它是不稳定的，会通过自发辐射向低能级 $n'$ 跃迁 ($n \to n'$ where $n > n'$)，产生发射线，称为\textbf{复合线}。
+光致电离过程的量子特性并未完全显性体现在上述公式中（冈特因子修正），考虑到能级 $n$ 的电离具有特定的能量门槛，截面表现出显著的频率选择性：
 \begin{itemize}
-    \item \textbf{Lyman 系}：跃迁至 $n=1$（紫外）。
-    \item \textbf{Balmer 系}：跃迁至 $n=2$（可见光）。$H\alpha (3\to2)$, $H\beta (4\to2)$ 是最重要的光学特征线。
-    \item \textbf{Paschen 系}：跃迁至 $n=3$（红外）。
+    \item 当光子频率 $\nu < \nu_n$ 时（其中 $\nu_n = Z^2 I_H / hn^2$），光子能量不足以克服束缚能，吸收截面 $\sigma_{bf} = 0$。
+    \item 当频率刚好达到阈值 $\nu = \nu_n$ 时，吸收陡增到最大。
+    \item 当 $\nu > \nu_n$ 时，随着光子能量进一步升高，电子运动速度过快导致吸收截面迅速下降。
 \end{itemize}
+对于给定的能级 $n$，此阈值频率 $\nu_n$ 对应的尖锐吸收极大值被称为\textbf{吸收边}。
 
-\subsection{谱线强度的计算：复合-级联方程}
-\n{非 LTE 系统}
-在低密度星云中，碰撞不足以维持热平衡（LTE），能级布居数 $N_n$ 不服从 Saha-Boltzmann 分布。必须通过建立\textbf{统计平衡方程}（进入率 = 离开率）来求解：
+\n{求和仅对电离能小于光子能量的能级（即 $n > n_0$）进行。}
+类似于发射过程，一个类氢离子的总光致电离吸收系数 $\alpha_{bf}(\nu)$ 是各能级贡献之和。设主量子数为 $n$ 的原子数密度为 $N_n$：
 \begin{equation}
-    \underbrace{N_e N_+ \alpha_n(T)}_{\text{直接复合}} + \underbrace{\sum_{k=n+1}^{\infty} N_k A_{kn}}_{\text{高层级联}} = \underbrace{N_n \sum_{k=1}^{n-1} A_{nk}}_{\text{自发跃迁离开}}
+    \alpha_{bf}(\nu) = \sum_{n > n_0} N_n \sigma_{bf}(\nu, n)
 \end{equation}
 
-\textbf{Case A 与 Case B 的区别：}
-\begin{itemize}
-    \item \textbf{Case A (光薄)}：星云对所有辐射透明。Lyman 光子直接逃逸。
-    \item \textbf{Case B (光厚)}：星云对 Lyman 光子（跃迁到基态）光学厚。Lyman 光子被反复吸收散射，净的一步到位复合（直接到 $n=1$）被光致电离抵消。
-    \item \textbf{结论}：实际星云（如 H II 区）通常符合 Case B。计算时忽略向 $n=1$ 的跃迁项，只统计 $n \ge 2$ 的激发态。
-\end{itemize}
 
-\subsection{巴尔末减缩 (Balmer Decrement)}
-通过求解级联方程，可以理论计算出 Balmer 线系各谱线的相对强度（如 $H\alpha/H\beta$）。
-\begin{itemize}
-    \item 理论值与观测值（如行星状星云 NGC1501）高度吻合。
-    \item \textbf{$H\beta$ 经验公式}：对于 $T \approx 10^4 \text{K}$ 的星云，
-    \begin{equation}
-        j(H_\beta) \approx 2.8 \times 10^{-22} N_e N_p T^{-0.84} \quad \text{erg s}^{-1} \text{cm}^{-3}
-    \end{equation}
-    这成为了测量星云密度（发射量 $EM \propto N_e^2$）的重要工具。
-\end{itemize}
+在局域热平衡条件下，$N_n$ 的分布由 Saha-Boltzmann 公式给出：
+\begin{equation}\label{eq:saha_boltzmann}
+    N_n = N_e N_Z \frac{h^3}{(2\pi mkT)^{3/2}} \frac{g_n}{2} \exp\left( \frac{\chi_n}{kT} \right)
+\end{equation}
+其中 $\chi_n = Z^2 I_H / n^2$ 为该能级的电离能，$g_n = 2n^2$ 为能级 $n$ 简并度。由于指数项 $\exp(\chi_n/kT)$ 的存在，低能级粒子数远大于高能级。再考虑到吸收截面随 $n$ 的增大而迅速衰减，实际计算总吸收系数时，通常只需对有限的几个低能态进行求和。
 
-\begin{derivationnote}[偏离因子 $b_n$]
-    为了方便计算，通常引入偏离因子 $b_n$ 来描述真实布居数 $N_n$ 偏离热平衡值 $N_n^*$ 的程度：
-    $$ N_n = b_n N_n^*(\text{Saha}) $$
+\begin{derivationnote}[天体环境中的吸收主导机制]
+    由于元素丰度和原子序数的差异，不同波段的吸收受不同元素主导：
     \begin{itemize}
-        \item 对于高激发态（$n \to \infty$），由于能级间隔小，碰撞占主导，系统趋于热平衡，故 $b_n \to 1$。
-        \item 对于低能级，由于强烈的辐射流失，通常 $b_n < 1$。
+        \item \textbf{氢原子（H）}：基态电离能为 13.6 eV，主宰了光学到紫外波段的吸收。尽管其 $Z=1$，但由于丰度极高，依旧可以主导该频段。
+        \item \textbf{重元素（如 Fe）}：在 X 射线波段，由于 $\sigma_{bf} \propto \nu^{-3}$，氢的吸收已几乎消失。然而，重元素的原子序数大（$Z$ 高），其内壳层（K、L 壳层）电子的电离能正好落在 X 射线能量区间。
     \end{itemize}
+    利用类氢近似可以处理重原子的内壳层吸收。在近似估计重原子内壳层电子（$n=1,2,3$）的 X 射线吸收截面时，由于内层电子离核极近，受外层电子的屏蔽作用较小，可将原子序数修正为有效电荷 $Z_{eff} = Z - m$（$m$ 为内层屏蔽电子数）。因为有效电荷极大，重元素虽然丰度极低，却仍然 X 射线波段最重要的吸收源。
 \end{derivationnote}
+
+\subsection{谱线辐射谱和复合-级联方程}
+
+现在讨论由于原子内部能级跃迁所产生的离散谱（谱线）。其对应的发射系数由爱因斯坦系数 $A, B$ 决定：
+\begin{equation}
+    j(\nu_{nk}) = N_n A_{nk} h\nu_{nk}
+\end{equation}
+\n[0em]{$A_{nk}$：自发跃迁系数；$B_{kn}$：受激吸收系数；$B_{nk}$：受激辐射系数。}
+
+如果等离子体气体处于局部热平衡（LTE），则能级 $n$ 上的原子数密度 $N_n$ 可直接由 Saha 方程 \eqref{eq:saha_boltzmann} 给出。然而，对于低密度的稀薄等离子体，由于粒子间碰撞频率极低，辐射跃迁的几率远超过碰撞跃迁，能级分布无法达到热平衡。对此，解决方法是在稳态下，通过考虑能级 $n$ 上的原子数变化率为零，求解一组\textbf{复合-级联方程}。
+\n[0em]{此处虽然 $N_n$ 待求，但在电离气体中中性原子绝大多数处于基态，$N_1$ 可近似为已知的中性成分总量，作为方程的源项。}
+对于进入能级 $n$ 的原子，存在三条主要路径：
+\begin{enumerate}
+    \item \textbf{直接复合}：自由电子直接复合到能级 $n$。
+    \item \textbf{级联进入}：高激发态（$k > n$）自发跃迁降级至能级 $n$。
+    \item \textbf{受激吸收}：低激发态吸收光子跃迁至能级 $n$。
+\end{enumerate}
+考虑到基态（$n=1$）的原子数密度 $N_1$ 远大于其他激发态，且其吸收截面也远大于高能级，实际计算中只需考虑从基态出发的跃迁。
+
+由此，进入能级 $n$ 的总速率为：$N_e N(H^+) \alpha_n(T) + \sum_{k=n+1}^{\infty} N_k A_{kn} + N_1 B_{1n} I(\nu_{1n})$。
+
+\n[0.5em]{进入项考虑受激吸收而离开项不考虑受激辐射，本质上是因为基态 $N_1$ 的规模极大，使得基态吸收项在收支中不可忽略，而离开激发态 $n$ 层的受激辐射几率远小于其自发跃迁。}
+对于离开能级 $n$ 的路径，由于所讨论的等离子体极其稀薄，粒子数密度低导致碰撞跃迁可忽略；同时，局部辐射场强度通常并不足以维持显著的受激辐射过程。因此，电子主要通过自发跃迁向更低能级（$k < n$）跳跃。离开能级 $n$ 的总速率为：$N_n \sum_{k=1}^{n-1} A_{nk}$。
+
+最终得到的复合-级联平衡方程为：
+\begin{equation}\label{eq:cascade_eq}
+    N_e N(H^+) \alpha_n(T) + \sum_{k=n+1}^{\infty} N_k A_{kn} + N_1 B_{1n} I(\nu_{1n}) = N_n \sum_{k=1}^{n-1} A_{nk}
+\end{equation}
+
+在实际天体物理环境下，根据等离子体对 Lyman 系列光子（即涉及基态的跃迁光子）的光学厚度，方程 \eqref{eq:cascade_eq} 可以做进一步简化：
+
+\begin{itemize}
+    \item \textbf{Case A (光学薄)}：等离子体极为稀薄，以至于基态吸收产生的 Lyman 系列光子可以直接逃逸，不产生二次激发。此时基态受激吸收项 $N_1 B_{1n} I(\nu_{1n})$ 可以忽略。
+    \item \textbf{Case B (Lyman 光学厚)}：等离子体仅对 Lyman 系列光子是光学厚的。如前所述，此时释放出的 Lyman 光子会快速被另一个处于基态的原子吸收并重新跃迁回能级 $n$。在这种局部平衡下，$1 \to n$ 的吸收项与 $n \to 1$ 的自发跃迁项数值相等且互相抵消：
+    \begin{equation}
+        N_1 B_{1n} I(\nu_{1n}) = N_n A_{n1} \nonumber
+    \end{equation}
+    此时级联方程简化为（求和从 $k=2$ 开始）：
+    \begin{equation}
+        N_e N(H^+) \alpha_n(T) + \sum_{k=n+1}^{\infty} N_k A_{kn} = N_n \sum_{k=2}^{n-1} A_{nk}
+    \end{equation}
+\end{itemize}
+
+而对于级联方程中的参数，复合速率参数已知，而自发跃迁系数可由理论计算得到:
+\n{其中$\bar{f}_{kn}$是氢原子在能级n和k之间的振子强度，
+\begin{align}
+    \bar{f}_{kn} &=  
+    \frac{128g_{nk}}{3\sqrt{3}\pi g_k} \frac{k^3n^3}{(n^2-k^2)^3} \nonumber \\
+    g_k &= 2k^2 \nonumber \\
+    g_{nk} &\approx 1 \nonumber
+\end{align}}
+
+\begin{align}
+    A_{nk} = \frac{g_k}{g_n} \frac{8\pi^2e^2\nu_{nk}^2}{mc^3}\bar{f}_{kn} , \quad n>k \nonumber
+\end{align}
+通过建立上述平衡方程，原则上可以联立求解该方程组得到各能级的原子数密度 $N_n$。假设复合-级联方程的解都可以表示为由 Saha 公式所得的理想原子数密度 $N_n^*$ 乘以一个偏离因子 $b_n$：
+\begin{equation}
+    N_n = b_n N_e N(H^+) \frac{h^3}{(2\pi mkT)^{3/2}} \frac{g_n}{2} \exp\left( \frac{I_H}{n^2 kT} \right)
+\end{equation}
+由此，求解原子数分布的问题被转化为求解各能级的 $b_n$ 值。
+在这个近似中，高激发态由于辐射跃迁几率小且碰撞过程相对显著，系统趋于热平衡，方程有边界条件为 $b_n \to 1$。
+
+\begin{derivationnote}[谱线发射系数的求解]
+    每条谱线的发射系数最终可由下述公式链条完整确定：
+    \begin{equation}
+        j(\nu_{nk}) = N_n A_{nk} h\nu_{nk}
+    \end{equation}
+    其中自发跃迁概率 $A_{nk}$ 由振子强度确定，而 $N_n$ 则由修正了偏离因子 $b_n$ 的 Saha 公式给出：
+    \begin{equation}
+        N_n = b_n N_e N(H^+) \frac{h^3}{(2\pi mkT)^{3/2}} n^2 \exp\left( \frac{I_H}{n^2 kT} \right)
+    \end{equation}
+    偏离因子 $b_n$ 由处于稳态条件的复合-级联方程组求解。
+\end{derivationnote}
+
+\section{巴尔末递减与 $H_\beta$ 谱线}
+
+在氢原子的复合线系中，巴尔末系处于可见光波段，是天体物理观测中最核心的诊断工具
+在众多巴尔末线中，$H_\beta$（$n=4 \to 2$）处于光谱中段，强度适中且易于观测，常被用作衡量其他谱线强度的基准。在 $T=10,000\text{ K}$ 且处于 Case B（Lyman 光学厚）的典型星云环境下，取 $b_4 \approx 0.2$ 并进行近似处理，可以得到 $H_\beta$ 的发射系数数值公式：
+\begin{equation}
+    j(H_\beta) \approx 2.8 \times 10^{-22} N_e N(H^+) T^{-0.84} \quad \text{erg} \cdot \text{s}^{-1} \cdot \text{cm}^{-3}
+\end{equation}
+
+定义巴尔末线系各谱线相对于 $H_\beta$ 的强度比值为 $J_n = j_{n2}/j_{42}$。理论计算表明，该比值随 $n$ 的增大而减小。通过对比理论计算的 $J_n$ 值与观测值，可以判断星云的消光情况以及物理条件的偏离。
+对于复合到极高激发态（如 $n \approx 100$）的电子，能级间的跃迁频率极低，落入射电波段。其频率遵循：$\nu = cR z^2 (n_1^{-2} - n_2^{-2})$。由于射电波具有极强的穿透能力，这些谱线是探测银河系中心等被尘埃遮挡区域的有力手段。
+当全波段谱经过气体时，原子过程会产生吸收（入射方向见黑色吸收带）和发射（其他方向见离散谱线）效应。对这些效应的光谱学测量，能够探索物质的化学成分及物理性质。
