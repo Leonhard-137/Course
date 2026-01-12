@@ -1,4 +1,5 @@
-\documentclass[12pt,oneside]{ctexart}
+% !!! 更改 1: 将 ctexart 改为 ctexrep (支持 chapter)，并加上 openany (允许新章节在偶数页开始)
+\documentclass[12pt,oneside,openany]{ctexrep}
 
 % ---- 1. 基础宏包 ----
 \usepackage[
@@ -14,7 +15,7 @@
 \setlength{\parindent}{2em}
 
 % ---- 2. 数学与物理绘图 ----
-\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{amsmath,amssymb,amsthm,mathtools,subcaption}
 \usepackage{bm}
 \usepackage{enumitem}
 \usepackage{physics}
@@ -22,11 +23,9 @@
 \usepackage{gensymb}
 \usepackage{tcolorbox}
 \usepackage{float}
-\usepackage{multirow}
-\usepackage{bm}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{subcaption}
+\usepackage{standalone} 
+\usepackage{tikz}       % 必须加载 tikz，因为子文件是 tikz 画的
+\usetikzlibrary{positioning, arrows.meta, calc, shapes.misc, backgrounds, fit} % 必须加载子文件用到的库
 \setlist{nosep}
 
 % ---- 3. 边注设置 ----
@@ -36,8 +35,9 @@
 \newcommand{\n}[2][0em]{\marginnote{\raggedright #2}[#1]}
 
 % ---- 4. 结构与编号 ----
-\numberwithin{equation}{section}   % 公式编号依赖于section
-\numberwithin{equation}{subsection}  % 公式编号依赖于subsection
+% !!! 更改 2: 公式编号改为依赖 chapter (效果: (3.1))。如果想要 (3.1.1)，改回 section 即可
+\numberwithin{equation}{chapter}   
+\numberwithin{equation}{section}  
 \theoremstyle{definition}
 \newtheorem{definition}{定义}[section]
 \theoremstyle{plain}
@@ -51,11 +51,27 @@
 \fancyhf{}
 % 定义页眉内容
 \lhead{\footnotesize 粒子物理笔记}
-\rhead{\footnotesize \leftmark}
+\rhead{\footnotesize \leftmark} % 显示当前章标题
 \cfoot{\thepage}
+
+% !!! 更改 3: 重定义 chaptermark，让页眉显示 "第三章 标题" 而不是 "Chapter 3. 标题"
+% \renewcommand{\chaptermark}[1]{\markboth{\thechapter\ #1}{}}
 
 % ---- 6. 章节标题与超链接 ----
 \usepackage{titlesec}
+\usepackage{array}  % 必须加载此宏包才能使用 m{...} 这种表格列格式
+
+% !!! 更改 4: 新增 chapter 的样式设置
+% [hang] 表示悬挂缩进
+% \huge\bfseries 设置字体
+% \thechapter 输出 "第三章" (ctex类默认特性)
+% 1em 是序号和标题之间的间距
+% 最后的 {} 是标题前的额外代码
+\titleformat{\chapter}[hang]{\huge\bfseries}{\thechapter}{1em}{}
+% 设置章节标题周围的间距：{左边距}{上间距}{下间距}
+\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
+
+% 原有的 section 设置保留
 \titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
 \titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
 
@@ -80,7 +96,7 @@
     arrows.meta, 
     calc, 
     decorations.pathmorphing, 
-    decorations.pathreplacing, % 用于画花括号
+    decorations.pathreplacing, 
     shapes.misc
 }
 
@@ -94,9 +110,7 @@
 % === 第一阶段：封面与目录 ===
 \newgeometry{left=30mm, right=25mm, top=30mm, bottom=30mm} 
 
-% 计算目录页的偏移：目录页左边距是 30mm，所以向左偏移 10mm
 \fancyhfoffset[L]{10mm} 
-% 目录页右边距是 25mm，不需要额外偏移
 \fancyhfoffset[R]{0pt}
 
 \maketitle
@@ -112,16 +126,13 @@
 \restoregeometry 
 \pagenumbering{arabic} 
 
-% 正文左边距是 50mm。为了让页眉横线对齐到纸张左侧 20mm 处（覆盖侧边栏）：偏移量 = 50mm - 20mm = 30mm
 \fancyhfoffset[L]{30mm}
-
-% 正文右边距是 25mm。为了对齐到纸张右侧 25mm 处：偏移量 = 25mm - 25mm = 0mm
 \fancyhfoffset[R]{0pt}
 
 \pagestyle{fancy}
 
 % \input{Chapters/Neutrino.tex}
 % \input{Chapters/Hardon.tex}
-% \input{Chapters/lepton_nuon_scatter.tex}
-\input{Chapters/Parton&QCD.tex}
+\input{Chapters/lepton_nuon_scatter.tex}
+% \input{Chapters/Parton&QCD.tex}
 \end{document}
